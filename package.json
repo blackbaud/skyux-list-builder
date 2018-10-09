@@ -26,7 +26,10 @@
   },
   "homepage": "https://github.com/blackbaud/skyux-list-builder#readme",
   "peerDependencies": {
+    "@angular/common": "^4.3.6",
     "@angular/core": "^4.3.6",
+    "@angular/http": "^4.3.6",
+    "@angular/platform-browser": "^4.3.6",
     "@skyux/animations": "^3.0.0-rc.0",
     "@skyux/core": "^3.1.0",
     "@skyux/forms": "^3.0.0-rc.0",
@@ -35,12 +38,16 @@
     "@skyux/layout": "^3.0.0-alpha.0",
     "@skyux/lists": "^3.0.0-alpha.0",
     "@skyux/lookup": "^3.0.0-rc.0",
-    "@skyux/popovers": "^3.0.0-rc.0"
+    "@skyux/popovers": "^3.0.0-rc.0",
+    "microedge-rxstate": "^2.0.2"
   },
   "dependencies": {},
   "devDependencies": {
     "@angular/animations": "4.3.6",
+    "@angular/common": "4.3.6",
     "@angular/core": "4.3.6",
+    "@angular/http": "4.3.6",
+    "@angular/platform-browser": "4.3.6",
     "@blackbaud/skyux": "2.26.0",
     "@blackbaud/skyux-builder": "1.24.0",
     "@skyux/animations": "3.0.0-rc.0",
@@ -54,6 +61,7 @@
     "@skyux/popovers": "3.0.0-rc.0",
     "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.0",
     "core-js": "2.4.1",
+    "microedge-rxstate": "2.0.2",
     "rxjs": "5.4.3",
     "ts-node": "3.0.4",
     "tslint": "5.2.0",

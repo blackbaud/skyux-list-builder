@@ -1,5 +1,5 @@
 {
-  "name": "skyux-sample",
+  "name": "skyux-list-builder",
   "mode": "easy",
   "compileMode": "aot",
   "skyuxModules": [

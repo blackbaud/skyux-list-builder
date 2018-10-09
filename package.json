@@ -1,7 +1,7 @@
 {
-  "name": "@skyux/sample",
-  "version": "3.0.0-alpha.x",
-  "description": "SKY UX Sample",
+  "name": "@skyux/list-builder",
+  "version": "3.0.0-alpha.0",
+  "description": "SKY UX List Builder",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
   "engines": {
@@ -19,27 +19,39 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blackbaud/skyux-sample.git"
+    "url": "git+https://github.com/blackbaud/skyux-list-builder.git"
   },
   "bugs": {
-    "url": "https://github.com/blackbaud/skyux-sample/issues"
+    "url": "https://github.com/blackbaud/skyux-list-builder/issues"
   },
-  "homepage": "https://github.com/blackbaud/skyux-sample#readme",
-  "peerDependencies": {},
+  "homepage": "https://github.com/blackbaud/skyux-list-builder#readme",
+  "peerDependencies": {
+    "@angular/core": "^4.3.6",
+    "@skyux/animations": "^3.0.0-rc.0",
+    "@skyux/core": "^3.1.0",
+    "@skyux/forms": "^3.0.0-rc.0",
+    "@skyux/i18n": "^3.0.1",
+    "@skyux/indicators": "^3.0.0-rc.1",
+    "@skyux/layout": "^3.0.0-alpha.0",
+    "@skyux/lists": "^3.0.0-alpha.0",
+    "@skyux/lookup": "^3.0.0-alpha.0",
+    "@skyux/popovers": "^3.0.0-rc.0"
+  },
   "dependencies": {},
   "devDependencies": {
     "@angular/animations": "4.3.6",
-    "@angular/common": "4.3.6",
-    "@angular/compiler": "4.3.6",
-    "@angular/compiler-cli": "4.3.6",
     "@angular/core": "4.3.6",
-    "@angular/forms": "4.3.6",
-    "@angular/http": "4.3.6",
-    "@angular/platform-browser": "4.3.6",
-    "@angular/platform-browser-dynamic": "4.3.6",
-    "@angular/router": "4.3.6",
     "@blackbaud/skyux": "2.26.0",
     "@blackbaud/skyux-builder": "1.24.0",
+    "@skyux/animations": "3.0.0-rc.0",
+    "@skyux/core": "3.1.0",
+    "@skyux/forms": "3.0.0-rc.0",
+    "@skyux/i18n": "3.0.1",
+    "@skyux/indicators": "3.0.0-rc.1",
+    "@skyux/layout": "3.0.0-alpha.0",
+    "@skyux/lists": "3.0.0-alpha.0",
+    "@skyux/lookup": "3.0.0-alpha.0",
+    "@skyux/popovers": "3.0.0-rc.0",
     "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.0",
     "core-js": "2.4.1",
     "rxjs": "5.4.3",

@@ -34,7 +34,7 @@
     "@skyux/indicators": "^3.0.0-rc.1",
     "@skyux/layout": "^3.0.0-alpha.0",
     "@skyux/lists": "^3.0.0-alpha.0",
-    "@skyux/lookup": "^3.0.0-alpha.0",
+    "@skyux/lookup": "^3.0.0-rc.0",
     "@skyux/popovers": "^3.0.0-rc.0"
   },
   "dependencies": {},
@@ -50,7 +50,7 @@
     "@skyux/indicators": "3.0.0-rc.1",
     "@skyux/layout": "3.0.0-alpha.0",
     "@skyux/lists": "3.0.0-alpha.0",
-    "@skyux/lookup": "3.0.0-alpha.0",
+    "@skyux/lookup": "3.0.0-rc.0",
     "@skyux/popovers": "3.0.0-rc.0",
     "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.0",
     "core-js": "2.4.1",

@@ -35,7 +35,7 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
 
     return new AsyncItem<ListSelectedModel>(
       Object.assign({}, state.item, newSelected),
-      Date.now,
+      Date.now(),
       false
     );
   }

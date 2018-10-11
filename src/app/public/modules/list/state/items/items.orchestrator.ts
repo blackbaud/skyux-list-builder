@@ -31,7 +31,7 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     let count = action.count === undefined ? resultItems.length : action.count;
     return new AsyncList<ListItemModel>(
       resultItems,
-      action.dataChanged ? Date.now : state.lastUpdate,
+      action.dataChanged ? Date.now() : state.lastUpdate,
       false,
       count
     );

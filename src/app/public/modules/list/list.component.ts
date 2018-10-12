@@ -293,7 +293,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
 
   public get lastUpdate() {
     return this.state.map(s =>
-      s.items.lastUpdate ? Date.now() : undefined
+      s.items.lastUpdate ? new Date(s.items.lastUpdate) : undefined
     );
   }
 

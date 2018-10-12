@@ -298,7 +298,7 @@ describe('List Component', () => {
           tick();
           component.list.lastUpdate.take(1).subscribe(u => {
             state.take(1).subscribe((s) => {
-              expect(u).toEqual(s.items.lastUpdate)
+              expect(u.getTime()).toEqual(s.items.lastUpdate)
             });
           });
         }));

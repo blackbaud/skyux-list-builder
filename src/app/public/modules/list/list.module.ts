@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SkyListComponent } from './list.component';
+import { SkyListToolbarModule } from '../list-toolbar';
+import { SkyListSecondaryActionsModule } from '../list-secondary-actions';
+import { SkyListFiltersModule } from '../list-filters';
 
 @NgModule({
   declarations: [
@@ -10,7 +13,10 @@ import { SkyListComponent } from './list.component';
     CommonModule
   ],
   exports: [
-    SkyListComponent
+    SkyListComponent,
+    SkyListToolbarModule,
+    SkyListSecondaryActionsModule,
+    SkyListFiltersModule
   ]
 })
 export class SkyListModule {

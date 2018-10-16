@@ -14,9 +14,9 @@ import { SkyListFiltersModule } from '../list-filters';
   ],
   exports: [
     SkyListComponent,
-    SkyListToolbarModule,
+    SkyListFiltersModule,
     SkyListSecondaryActionsModule,
-    SkyListFiltersModule
+    SkyListToolbarModule
   ]
 })
 export class SkyListModule {

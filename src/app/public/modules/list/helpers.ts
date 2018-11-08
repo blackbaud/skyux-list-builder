@@ -2,6 +2,10 @@ import { Observable } from 'rxjs/Observable';
 import {$$observable as symbolObservable} from 'rxjs/symbol/observable';
 
 export function getData(item: any, selector: string): any {
+  if (!selector) {
+    return undefined;
+  }
+
   let resultFieldParts = selector.split('.');
   if (resultFieldParts.length > 0 && resultFieldParts[0] === '') {
     resultFieldParts.shift();
@@ -21,10 +25,6 @@ export function getData(item: any, selector: string): any {
 
       result = result[part];
     }
-  }
-
-  if (result === item) {
-    return undefined;
   }
 
   return result;

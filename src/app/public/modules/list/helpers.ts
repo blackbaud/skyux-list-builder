@@ -1,5 +1,6 @@
-import { Observable } from 'rxjs/Observable';
-import {$$observable as symbolObservable} from 'rxjs/symbol/observable';
+import {
+  Observable
+} from 'rxjs/Observable';
 
 export function getData(item: any, selector: string): any {
   let resultFieldParts = selector.split('.');
@@ -58,5 +59,5 @@ export function compare(value1: any, value2: any) {
   https://github.com/angular/angular/commit/109f0d1
 */
 export function isObservable(obj: any | Observable<any>): obj is Observable<any> {
-  return !!(obj && obj[symbolObservable]);
+  return (obj instanceof Observable);
 }

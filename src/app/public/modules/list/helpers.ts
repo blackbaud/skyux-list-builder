@@ -55,9 +55,9 @@ export function compare(value1: any, value2: any) {
 }
 
 /*
-  Taken from @angular's internal library to determine whether an object is an Obserable.
-  https://github.com/angular/angular/commit/109f0d1
+  Taken directly from rxjs's internal utility to determine whether an object is an Obserable.
+  See: https://github.com/ReactiveX/rxjs/blob/master/src/internal/util/isObservable.ts
 */
-export function isObservable(obj: any | Observable<any>): obj is Observable<any> {
-  return (obj instanceof Observable);
+export function isObservable<T>(obj: any): obj is Observable<T> {
+  return !!obj && (obj instanceof Observable || (typeof obj.lift === 'function' && typeof obj.subscribe === 'function'));
 }

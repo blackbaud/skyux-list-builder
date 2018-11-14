@@ -9,8 +9,11 @@ import {
 } from '@angular/core/testing';
 
 import {
-  ListFilterModel,
   ListItemModel
+} from '@skyux/list-builder-state/list/items/item.model';
+
+import {
+  ListFilterModel
 } from '../list/state';
 
 describe('in memory data provider', () => {

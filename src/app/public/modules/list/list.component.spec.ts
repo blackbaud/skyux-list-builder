@@ -16,6 +16,14 @@ import {
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import {
+  ListItemModel
+} from '@skyux/list-builder-state/list/items/item.model';
+
+import {
+  ListSortFieldSelectorModel
+} from '@skyux/list-builder-state/list/state/sort/field-selector.model';
+
 import { ListFixturesModule } from './fixtures/list-fixtures.module';
 import { ListTestComponent } from './fixtures/list.component.fixture';
 import { ListDualTestComponent } from './fixtures/list-dual.component.fixture';
@@ -33,10 +41,8 @@ import {
   ListToolbarItemModel,
   ListToolbarItemsLoadAction,
   ListSortSetFieldSelectorsAction,
-  ListSortFieldSelectorModel,
   ListSortLabelModel,
   ListFilterModel,
-  ListItemModel,
   ListPagingModel
 } from './state';
 

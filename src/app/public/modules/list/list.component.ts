@@ -12,6 +12,10 @@ import {
 } from '@angular/core';
 
 import {
+  ListSortFieldSelectorModel
+} from '@skyux/list-builder-state/list/state/sort/field-selector.model';
+
+import {
   ListItemsLoadAction,
   ListItemsSetLoadingAction
 } from './state/items/actions';
@@ -32,10 +36,6 @@ import {
 import {
   ListSortSetFieldSelectorsAction
 } from './state/sort/actions';
-
-import {
-  ListSortFieldSelectorModel
-} from './state/sort/field-selector.model';
 
 import {
   ListFilterModel
@@ -63,6 +63,10 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/skip';
 
+import {
+  ListItemModel
+} from '@skyux/list-builder-state/list/items/item.model';
+
 import { ListViewComponent } from './list-view.component';
 
 import { ListSearchModel } from './state/search/search.model';
@@ -73,7 +77,6 @@ import {
 } from './state/views/actions';
 
 import { ListViewModel } from './state/views/view.model';
-import { ListItemModel } from './state/items/item.model';
 
 import {
   isObservable

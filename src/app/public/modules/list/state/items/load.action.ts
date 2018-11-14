@@ -1,4 +1,6 @@
-import { ListItemModel } from './item.model';
+import {
+  ListItemModel
+} from '@skyux/list-builder-state/list/items/item.model';
 
 export class ListItemsLoadAction {
   constructor(

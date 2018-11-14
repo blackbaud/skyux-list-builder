@@ -1,4 +1,6 @@
-import { ListItemModel } from '../list/state/items/item.model';
+import {
+  ListItemModel
+} from '@skyux/list-builder-state/list/items/item.model';
 
 import {
   EventEmitter,

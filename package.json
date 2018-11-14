@@ -33,6 +33,7 @@
     "@skyux/i18n": "^3.3.0",
     "@skyux/indicators": "^3.0.0-rc.2",
     "@skyux/layout": "^3.0.0-rc.1",
+    "@skyux/list-builder-state": "3.0.0-alpha.0",
     "@skyux/lists": "^3.0.0-rc.1",
     "@skyux/lookup": "^3.0.0-rc.1",
     "@skyux/popovers": "^3.0.0-rc.1",

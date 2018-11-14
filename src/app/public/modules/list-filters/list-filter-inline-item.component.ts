@@ -8,7 +8,9 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { ListItemModel } from '../list/state';
+import {
+  ListItemModel
+} from '@skyux/list-builder-state/list/items/item.model';
 
 @Component({
   selector: 'sky-list-filter-inline-item',

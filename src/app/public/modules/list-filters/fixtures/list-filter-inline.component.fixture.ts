@@ -4,7 +4,7 @@ import {
 
 import {
   ListItemModel
-} from '../../list/state';
+} from '@skyux/list-builder-state/list/items/item.model';
 
  @Component({
    selector: 'sky-test-cmp',

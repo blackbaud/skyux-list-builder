@@ -1,10 +1,10 @@
 export {
   ListItemModel
-} from '@skyux/list-builder-state/list/items/item.model';
+} from '@skyux/list-builder-state/state/items/item.model';
 
 export {
   ListSortFieldSelectorModel
-} from '@skyux/list-builder-state/list/state/sort/field-selector.model';
+} from '@skyux/list-builder-state/state/sort/field-selector.model';
 
 export { ListStateDispatcher, ListStateOrchestrator } from './list-state.rxstate';
 export { ListState } from './list-state.state-node';

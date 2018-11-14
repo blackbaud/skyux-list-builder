@@ -2,7 +2,9 @@ import {
   Observable
 } from 'rxjs/Observable';
 
-export { getData } from '@skyux/list-builder-state/helpers.ts';
+export {
+  getData
+} from '@skyux/list-builder-state/state/helpers';
 
 export function compare(value1: any, value2: any) {
   /* tslint:disable:no-null-keyword */

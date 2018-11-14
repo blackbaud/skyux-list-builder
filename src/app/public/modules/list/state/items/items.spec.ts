@@ -5,7 +5,7 @@ import {
 
 import {
   ListItemModel
-} from '@skyux/list-builder-state/list/items/item.model';
+} from '@skyux/list-builder-state/state/items/item.model';
 
 import {
   ListItemsLoadAction,

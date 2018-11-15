@@ -3,11 +3,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import {
   ListItemModel
-} from '@skyux/list-builder-state/state/items/item.model';
+} from '@skyux/list-builder-common/state/items/item.model';
 
 import {
   getData
-} from '@skyux/list-builder-state/state/helpers';
+} from '@skyux/list-builder-common/helpers';
 
 import { ListDataProvider } from '../list/list-data.provider';
 import { ListDataRequestModel } from '../list/list-data-request.model';

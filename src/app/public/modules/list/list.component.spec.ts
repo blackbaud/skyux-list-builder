@@ -18,11 +18,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import {
   ListItemModel
-} from '@skyux/list-builder-state/state/items/item.model';
+} from '@skyux/list-builder-common/state/items/item.model';
 
 import {
   ListSortFieldSelectorModel
-} from '@skyux/list-builder-state/state/sort/field-selector.model';
+} from '@skyux/list-builder-common/state/sort/field-selector.model';
 
 import { ListFixturesModule } from './fixtures/list-fixtures.module';
 import { ListTestComponent } from './fixtures/list.component.fixture';

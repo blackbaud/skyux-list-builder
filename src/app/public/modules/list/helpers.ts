@@ -4,7 +4,7 @@ import {
 
 export {
   getData
-} from '@skyux/list-builder-state/state/helpers';
+} from '@skyux/list-builder-common/helpers';
 
 export function compare(value1: any, value2: any) {
   /* tslint:disable:no-null-keyword */

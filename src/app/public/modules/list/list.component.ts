@@ -12,10 +12,6 @@ import {
 } from '@angular/core';
 
 import {
-  ListSortFieldSelectorModel
-} from '@skyux/list-builder-common/state/sort/field-selector.model';
-
-import {
   ListItemsLoadAction,
   ListItemsSetLoadingAction
 } from './state/items/actions';
@@ -64,8 +60,10 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/skip';
 
 import {
-  ListItemModel
-} from '@skyux/list-builder-common/state/items/item.model';
+  isObservable,
+  ListItemModel,
+  ListSortFieldSelectorModel
+} from '@skyux/list-builder-common';
 
 import { ListViewComponent } from './list-view.component';
 
@@ -77,10 +75,6 @@ import {
 } from './state/views/actions';
 
 import { ListViewModel } from './state/views/view.model';
-
-import {
-  isObservable
-} from '@skyux/list-builder-common/helpers';
 
 let idIndex = 0;
 

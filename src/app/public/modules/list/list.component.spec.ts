@@ -17,12 +17,9 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import {
-  ListItemModel
-} from '@skyux/list-builder-common/state/items/item.model';
-
-import {
+  ListItemModel,
   ListSortFieldSelectorModel
-} from '@skyux/list-builder-common/state/sort/field-selector.model';
+} from '@skyux/list-builder-common';
 
 import { ListFixturesModule } from './fixtures/list-fixtures.module';
 import { ListTestComponent } from './fixtures/list.component.fixture';

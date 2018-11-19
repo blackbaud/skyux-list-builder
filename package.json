@@ -33,7 +33,7 @@
     "@skyux/i18n": "^3.3.0",
     "@skyux/indicators": "^3.0.0-rc.2",
     "@skyux/layout": "^3.0.0-rc.1",
-    "@skyux/list-builder-common": "^3.0.0-rc.0",
+    "@skyux/list-builder-common": "^3.0.0-rc.1",
     "@skyux/lists": "^3.0.0-rc.1",
     "@skyux/lookup": "^3.0.0-rc.1",
     "@skyux/popovers": "^3.0.0-rc.1",
@@ -44,6 +44,6 @@
     "@blackbaud/skyux": "2.28.1",
     "@blackbaud/skyux-builder": "1.28.0",
     "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.5",
-    "@skyux/list-builder-common": "3.0.0-rc.0"
+    "@skyux/list-builder-common": "3.0.0-rc.1"
   }
 }

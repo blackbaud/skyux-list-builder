@@ -17,7 +17,7 @@ import { ListFilterModel } from '../list/state/filters/filter.model';
 
 import {
   compare
-} from '../list/helpers';
+} from '@skyux/list-builder-common/helpers';
 
 let idIndex = 0;
 

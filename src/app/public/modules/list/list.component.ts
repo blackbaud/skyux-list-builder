@@ -80,7 +80,7 @@ import { ListViewModel } from './state/views/view.model';
 
 import {
   isObservable
-} from './helpers';
+} from '@skyux/list-builder-common/helpers';
 
 let idIndex = 0;
 

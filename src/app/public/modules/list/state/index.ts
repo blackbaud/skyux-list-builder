@@ -1,8 +1,3 @@
-export {
-  ListItemModel,
-  ListSortFieldSelectorModel
-} from '@skyux/list-builder-common';
-
 export { ListStateDispatcher, ListStateOrchestrator } from './list-state.rxstate';
 export { ListState } from './list-state.state-node';
 export { ListStateModel } from './list-state.model';

@@ -12,7 +12,7 @@ import {
 
 import {
   ListItemModel
-} from '@skyux/list-builder-common/state/items/item.model';
+} from '@skyux/list-builder-common';
 
 import {
   ListState,

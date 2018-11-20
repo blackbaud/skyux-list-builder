@@ -11,7 +11,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import {
   ListItemModel
-} from '@skyux/list-builder-common/state/items/item.model';
+} from '@skyux/list-builder-common';
 
 import { getValue } from 'microedge-rxstate/dist/helpers';
 import { ListPagingComponent } from '../list/list-paging.component';

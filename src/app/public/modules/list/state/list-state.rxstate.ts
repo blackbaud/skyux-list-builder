@@ -6,7 +6,7 @@ import {
 
 import {
   ListSortFieldSelectorModel
-} from '@skyux/list-builder-common/state/sort/field-selector.model';
+} from '@skyux/list-builder-common';
 
 import { ListStateAction } from './list-state-action.type';
 

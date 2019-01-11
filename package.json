@@ -1,6 +1,6 @@
 {
   "name": "@skyux/list-builder",
-  "version": "3.0.0-rc.4",
+  "version": "3.0.0",
   "description": "SKY UX List Builder",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
@@ -27,23 +27,22 @@
     "@angular/core": ">=4.3.6",
     "@angular/http": ">=4.3.6",
     "@angular/platform-browser": ">=4.3.6",
-    "@skyux/animations": "^3.0.0-rc.0",
-    "@skyux/core": "^3.1.0",
-    "@skyux/forms": "^3.0.0-rc.1",
-    "@skyux/i18n": "^3.3.0",
-    "@skyux/indicators": "^3.0.0-rc.2",
-    "@skyux/layout": "^3.0.0-rc.1",
-    "@skyux/list-builder-common": "^3.0.0-rc.1",
-    "@skyux/lists": "^3.0.0-rc.1",
-    "@skyux/lookup": "^3.0.0-rc.1",
-    "@skyux/popovers": "^3.0.0-rc.1",
+    "@skyux/core": "^3.5.1",
+    "@skyux/i18n": "^3.5.0",
+    "@skyux/animations": "^3.0.0",
+    "@skyux/forms": "^3.0.0",
+    "@skyux/indicators": "^3.0.0",
+    "@skyux/layout": "^3.0.0",
+    "@skyux/list-builder-common": "^3.0.0",
+    "@skyux/lists": "^3.0.0",
+    "@skyux/lookup": "^3.0.0",
+    "@skyux/popovers": "^3.0.0",
     "microedge-rxstate": "^2.0.2"
   },
   "dependencies": {},
   "devDependencies": {
-    "@blackbaud/skyux": "2.30.0",
-    "@blackbaud/skyux-builder": "1.29.0",
-    "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.5",
-    "@skyux/list-builder-common": "3.0.0-rc.1"
+    "@blackbaud/skyux": "2.38.0",
+    "@blackbaud/skyux-builder": "1.30.0",
+    "@skyux-sdk/builder-plugin-skyux": "1.0.0-rc.5"
   }
 }

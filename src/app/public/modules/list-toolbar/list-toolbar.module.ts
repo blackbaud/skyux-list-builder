@@ -36,19 +36,34 @@ import {
 } from './list-toolbar-sort.component';
 
 import {
+  SkyListToolbarMultiselectActionsComponent
+} from './list-toolbar-multiselect-actions.component';
+
+import {
   SkyListToolbarViewActionsComponent
 } from './list-toolbar-view-actions.component';
+
+import {
+  SkyCheckboxModule
+} from '@skyux/forms';
+
+import {
+  SkyI18nModule
+} from '@skyux/i18n';
 
 @NgModule({
   declarations: [
     SkyListToolbarComponent,
     SkyListToolbarItemComponent,
     SkyListToolbarItemRendererComponent,
+    SkyListToolbarMultiselectActionsComponent,
     SkyListToolbarSortComponent,
     SkyListToolbarViewActionsComponent
   ],
   imports: [
     CommonModule,
+    SkyCheckboxModule,
+    SkyI18nModule,
     SkyToolbarModule,
     SkySearchModule,
     SkySortModule,
@@ -60,6 +75,7 @@ import {
     SkyListToolbarComponent,
     SkyListToolbarItemComponent,
     SkyListToolbarItemRendererComponent,
+    SkyListToolbarMultiselectActionsComponent,
     SkyListToolbarSortComponent,
     SkyListToolbarViewActionsComponent
   ]

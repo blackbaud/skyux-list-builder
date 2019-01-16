@@ -7,12 +7,18 @@ import {
 } from '@skyux/indicators';
 
 import {
+  SkyListViewGridModule
+} from '@skyux/list-builder-view-grids';
+
+import {
   SkyListModule,
   SkyListFiltersModule,
   SkyListPagingModule,
   SkyListSecondaryActionsModule,
   SkyListToolbarModule
 } from './public';
+import { BrowserModule } from '@angular/platform-browser';
+import { ListFixturesModule } from './public/modules/list/fixtures/list-fixtures.module';
 
 @NgModule({
   imports: [
@@ -21,7 +27,9 @@ import {
     SkyListFiltersModule,
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
-    SkyListToolbarModule
+    SkyListToolbarModule,
+    BrowserModule,
+    ListFixturesModule
   ],
   exports: [
     SkyIconModule,
@@ -29,9 +37,9 @@ import {
     SkyListFiltersModule,
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
-    SkyListToolbarModule
+    SkyListToolbarModule,
+    ListFixturesModule
   ],
-  providers: [],
-  entryComponents: []
+  providers: []
 })
 export class AppExtrasModule { }

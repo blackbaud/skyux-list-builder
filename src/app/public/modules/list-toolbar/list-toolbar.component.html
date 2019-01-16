@@ -87,6 +87,8 @@
     <ng-content select="sky-list-filter-inline">
     </ng-content>
   </div>
+  <sky-list-toolbar-multiselect-actions *ngIf="enableMultiselect">
+  </sky-list-toolbar-multiselect-actions>
 </div>
 
 <ng-template #search>

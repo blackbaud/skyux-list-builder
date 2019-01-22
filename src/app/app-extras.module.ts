@@ -13,7 +13,10 @@ import {
   SkyListSecondaryActionsModule,
   SkyListToolbarModule
 } from './public';
-import { BrowserModule } from '@angular/platform-browser';
+
+import {
+  BrowserModule
+} from '@angular/platform-browser';
 import { ListFixturesModule } from './public/modules/list/fixtures/list-fixtures.module';
 
 @NgModule({

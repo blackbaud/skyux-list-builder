@@ -1,20 +1,37 @@
 import {
-  Component, OnInit, Input, OnDestroy
+  Component,
+  Input,
+  OnInit,
+  OnDestroy
 } from '@angular/core';
 
 import {
-  ListState,
-  ListStateDispatcher,
-  ListSelectedSetItemsSelectedAction,
-  ListPagingSetPageNumberAction,
-  ListSelectedModel
-} from '../list/state';
+  Subject
+} from 'rxjs/Subject';
 
-import { SkyCheckboxChange } from '@skyux/forms';
-import { ListFilterModel } from '@skyux/list-builder/modules/list/state';
-import { ListItemModel } from '@skyux/list-builder-common';
-import { AsyncItem } from 'microedge-rxstate/dist';
-import { Subject } from 'rxjs/Subject';
+import {
+  AsyncItem
+} from 'microedge-rxstate/dist';
+
+import {
+  SkyCheckboxChange
+} from '@skyux/forms';
+
+import {
+  ListFilterModel
+} from '@skyux/list-builder/modules/list/state';
+
+import {
+  ListItemModel
+} from '@skyux/list-builder-common';
+
+import {
+  ListPagingSetPageNumberAction,
+  ListSelectedModel,
+  ListSelectedSetItemsSelectedAction,
+  ListState,
+  ListStateDispatcher
+} from '../list/state';
 
 @Component({
   selector: 'sky-list-toolbar-multiselect-actions',
@@ -26,7 +43,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
   @Input()
   public showOnlySelected: boolean = false;
 
-  private _selectedIdMap: Map<string, boolean> = new Map<string, boolean>();
+  private selectedIdMap: Map<string, boolean> = new Map<string, boolean>();
 
   private ngUnsubscribe = new Subject();
 
@@ -39,7 +56,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
     this.state.map(t => t.selected)
       .takeUntil(this.ngUnsubscribe)
       .subscribe((selectedItems: AsyncItem<ListSelectedModel>) => {
-        this._selectedIdMap = selectedItems.item.selectedIdMap;
+        this.selectedIdMap = selectedItems.item.selectedIdMap;
       });
   }
 
@@ -52,8 +69,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
     this.state.map(state => state.items.items)
       .take(1)
       .subscribe(items => {
-        this.dispatcher
-          .next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), true, false));
+        this.dispatcher.next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), true, false));
         if (this.showOnlySelected) {
           this.reapplyFilter(this.showOnlySelected);
         }
@@ -64,8 +80,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
     this.state.map(state => state.items.items)
       .take(1)
       .subscribe(items => {
-        this.dispatcher
-          .next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), false, false));
+        this.dispatcher.next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), false, false));
         if (this.showOnlySelected) {
           this.reapplyFilter(this.showOnlySelected);
         }
@@ -90,15 +105,16 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
 
     // If "show selected" is checked and paging is enabled, go to page one.
     if (isSelected) {
-      this.state.take(1).subscribe((currentState) => {
-        if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
-          this.dispatcher.next(
-            new ListPagingSetPageNumberAction(Number(1))
-          );
-        }
+      this.state
+        .take(1)
+        .subscribe((currentState) => {
+          if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
+            this.dispatcher.next(
+              new ListPagingSetPageNumberAction(Number(1))
+            );
+          }
       });
     }
-    // TODO: Only disable if using checklist or select field. NOT list-view-grids.
     this.dispatcher.toolbarSetDisabled(isSelected);
   }
 
@@ -108,7 +124,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
       value: isSelected.toString(),
       filterFunction: (model: ListItemModel, showOnlySelected: boolean) => {
         if (showOnlySelected.toString() !== false.toString()) {
-          return this._selectedIdMap.get(model.id);
+          return this.selectedIdMap.get(model.id);
         }
       },
       defaultValue: false.toString()

@@ -1,5 +1,6 @@
 import {
-  ListItemsSetLoadingAction, ListItemsLoadAction
+  ListItemsLoadAction,
+  ListItemsSetLoadingAction
 } from './items/actions';
 
 import {
@@ -32,9 +33,7 @@ import {
   ListSelectedSetLoadingAction,
   ListSelectedLoadAction,
   ListSelectedSetItemSelectedAction,
-  ListSelectedSetItemsSelectedAction,
-  ListClearAllAction,
-  ListSelectAllAction
+  ListSelectedSetItemsSelectedAction
 } from './selected/actions';
 
 import {
@@ -53,7 +52,6 @@ export type ListStateAction =
   ListViewsLoadAction | ListViewsSetActiveAction | ListToolbarItemsLoadAction |
   ListToolbarSetExistsAction | ListSearchSetSearchTextAction | ListSearchSetFunctionsAction |
   ListSearchSetFieldSelectorsAction | ListSearchSetOptionsAction | ListSelectedSetLoadingAction |
-  ListSelectedLoadAction | ListClearAllAction | ListSelectAllAction |
-  ListSelectedSetItemSelectedAction | ListSelectedSetItemsSelectedAction |
+  ListSelectedLoadAction | ListSelectedSetItemSelectedAction | ListSelectedSetItemsSelectedAction |
   ListToolbarSetTypeAction | ListSortSetFieldSelectorsAction | ListSortSetAvailableAction |
   ListSortSetGlobalAction | ListFiltersUpdateAction | ListToolbarItemsRemoveAction | ListToolbarItemsDisableAction;

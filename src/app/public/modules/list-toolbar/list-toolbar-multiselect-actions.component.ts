@@ -54,12 +54,6 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
       .subscribe(items => {
         this.dispatcher
           .next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), true, false));
-
-        // Update ListItemModel for grid
-        for (let i = 0; i < items.length; i++) {
-          items[i].isSelected = true;
-        }
-
         if (this.showOnlySelected) {
           this.reapplyFilter(this.showOnlySelected);
         }
@@ -72,12 +66,6 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
       .subscribe(items => {
         this.dispatcher
           .next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), false, false));
-
-        // Update ListItemModel for grid
-        for (let i = 0; i < items.length; i++) {
-          items[i].isSelected = false;
-        }
-
         if (this.showOnlySelected) {
           this.reapplyFilter(this.showOnlySelected);
         }

@@ -24,7 +24,9 @@ export {
   ListSelectedLoadAction,
   ListSelectedSetItemsSelectedAction,
   ListSelectedSetItemSelectedAction,
-  ListSelectedSetLoadingAction
+  ListSelectedSetLoadingAction,
+  ListClearAllAction,
+  ListSelectAllAction
 } from './selected/actions';
 export {
   ListSelectedModel

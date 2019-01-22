@@ -98,7 +98,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   public searchText: string | Observable<string>;
 
   @Input()
-  public enableMultiselect: boolean;
+  public showMultiselectActions: boolean;
 
   public get isFilterBarDisplayed(): boolean {
     return !this.isToolbarDisabled && this.hasInlineFilters && this.inlineFilterBarExpanded;

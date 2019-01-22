@@ -7,10 +7,6 @@ import {
 } from '@skyux/indicators';
 
 import {
-  SkyListViewGridModule
-} from '@skyux/list-builder-view-grids';
-
-import {
   SkyListModule,
   SkyListFiltersModule,
   SkyListPagingModule,

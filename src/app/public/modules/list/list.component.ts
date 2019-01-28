@@ -326,7 +326,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
   }
 
   private getItemsAndRetainSelections(newList: ListItemModel[], selectedIds: string[]): ListItemModel[] {
-    if (!selectedIds || selectedIds.length === 0) {
+    if (!selectedIds) {
       return newList;
     }
     let updatedListModel = newList.slice();

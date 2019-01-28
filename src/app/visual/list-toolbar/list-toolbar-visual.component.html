@@ -1,10 +1,71 @@
-<div id="screenshot-list-toolbar">
+<div
+  id="screenshot-list-toolbar"
+  class="sky-padding-even-default"
+>
   <sky-list
     [data]="data"
   >
-    <sky-list-toolbar
-      [showMultiselectActions]="true"
-    >
+    <sky-list-toolbar>
+      <sky-list-secondary-actions>
+        <sky-list-secondary-action>
+          <button type="button">
+            Option
+          </button>
+        </sky-list-secondary-action>
+      </sky-list-secondary-actions>
+      <sky-list-toolbar-sort
+        label="Custom"
+        field="column1"
+        type="string"
+        [descending]="false">
+      </sky-list-toolbar-sort>
+      <sky-list-toolbar-view-actions>
+        <button
+          class="sky-btn sky-btn-default"
+          title="Sort descending"
+          type="button"
+        >
+          <sky-icon icon="angle-double-down"></sky-icon>
+        </button>
+        <button
+          class="sky-btn sky-btn-default"
+          title="Sort ascending"
+          type="button"
+        >
+          <sky-icon icon="angle-double-up"></sky-icon>
+        </button>
+      </sky-list-toolbar-view-actions>
+      <sky-list-filter-inline>
+        <sky-list-filter-inline-item
+          name="fruitType"
+          [filter]="fruitTypeFilterFunction"
+          value="any"
+          defaultValue="any">
+          <ng-template let-filter="filter">
+            <label for="sky-demo-select-type">Fruit type</label>
+            <select
+              id="sky-demo-select-type"
+              [ngModel]="filter.value"
+              (ngModelChange)="filter.changed($event)">
+              <option value="any">Any fruit</option>
+              <option value="citrus">Citrus</option>
+              <option value="berry">Berry</option>
+            </select>
+          </ng-template>
+        </sky-list-filter-inline-item>
+      </sky-list-filter-inline>
+    </sky-list-toolbar>
+  </sky-list>
+</div>
+
+<div
+  id="screenshot-list-toolbar-with-multiselect"
+  class="sky-padding-even-default"
+>
+  <sky-list
+    [data]="data"
+  >
+    <sky-list-toolbar>
       <sky-list-secondary-actions>
         <sky-list-secondary-action>
           <button type="button">
@@ -55,7 +116,7 @@
       </sky-list-filter-inline>
     </sky-list-toolbar>
 
-    <sky-list-view-test></sky-list-view-test>
+    <list-toolbar-internal-visual></list-toolbar-internal-visual>
 
   </sky-list>
 </div>

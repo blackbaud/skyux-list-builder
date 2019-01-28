@@ -335,6 +335,36 @@ describe('List Toolbar Component', () => {
     }));
   });
 
+  describe('multiselect action bar', () => {
+    it('should be hidden by default', async(() => {
+      initializeToolbar();
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        expect(element.query(By.css('#sky-list-toolbar-multiselect-actions'))).toBeNull();
+      });
+    }));
+
+    it('should toggle visibility when list state is updated', async(() => {
+      initializeToolbar();
+      fixture.whenStable().then(() => {
+        fixture.detectChanges();
+        dispatcher.toolbarShowMultiselectActionBar(true);
+
+        fixture.whenStable().then(() => {
+          fixture.detectChanges();
+          expect(element.query(By.css('#sky-list-toolbar-multiselect-actions'))).not.toBeNull();
+
+          dispatcher.toolbarShowMultiselectActionBar(false);
+
+          fixture.whenStable().then(() => {
+            fixture.detectChanges();
+            expect(element.query(By.css('#sky-list-toolbar-multiselect-actions'))).toBeNull();
+          });
+        });
+      });
+    }));
+  });
+
   it('should not display items not in the current view', async(() => {
     initializeToolbar();
     fixture.whenStable().then(() => {

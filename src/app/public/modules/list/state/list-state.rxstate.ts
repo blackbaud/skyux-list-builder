@@ -13,10 +13,11 @@ import { ListStateAction } from './list-state-action.type';
 import { ListViewsSetActiveAction } from './views/actions';
 
 import {
+  ListToolbarItemsDisableAction,
   ListToolbarItemsLoadAction,
   ListToolbarItemsRemoveAction,
   ListToolbarSetExistsAction,
-  ListToolbarItemsDisableAction
+  ListToolbarShowMultiselectActionBarAction
 } from './toolbar/actions';
 
 import { ListToolbarItemModel } from './toolbar/toolbar-item.model';
@@ -39,6 +40,8 @@ import { ListSearchModel } from './search/search.model';
 import {
   ListFiltersUpdateAction
 } from './filters/actions';
+import { ListSelectedSetItemsSelectedTrueAction } from './selected/actions';
+import { ListItemsSetSelectedItemsTrueAction } from './items/actions';
 
 export class ListStateOrchestrator<T> extends StateOrchestrator<T, ListStateAction> {
 }
@@ -64,6 +67,10 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
 
   public toolbarRemoveItems(ids: string[]): void {
     this.next(new ListToolbarItemsRemoveAction(ids));
+  }
+
+  public toolbarShowMultiselectActionBar(show: boolean): void {
+    this.next(new ListToolbarShowMultiselectActionBarAction(show));
   }
 
   public searchSetFunctions(sortFunctions: ((data: any, searchText: string) => boolean)[]): void {
@@ -100,5 +107,12 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
 
   public filtersUpdate(filters: ListFilterModel[]): void {
     this.next(new ListFiltersUpdateAction(filters));
+  }
+
+  public setSelected(selectedIds: string[]) {
+    // Update ListSelectedModel (checklist / select field).
+    this.next(new ListItemsSetSelectedItemsTrueAction(selectedIds, false));
+    // Update ListItemModel (grid).
+    this.next(new ListSelectedSetItemsSelectedTrueAction(selectedIds, false));
   }
 }

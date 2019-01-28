@@ -10,10 +10,6 @@ import {
 } from 'rxjs/Subject';
 
 import {
-  AsyncItem
-} from 'microedge-rxstate/dist';
-
-import {
   SkyCheckboxChange
 } from '@skyux/forms';
 
@@ -28,7 +24,6 @@ import {
 import {
   ListPagingSetPageNumberAction,
   ListSelectedModel,
-  ListSelectedSetItemsSelectedAction,
   ListState,
   ListStateDispatcher
 } from '../list/state';
@@ -53,10 +48,15 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
   ) {}
 
   public ngOnInit() {
-    this.state.map(t => t.selected)
+    this.state.map(t => t.selected.item)
       .takeUntil(this.ngUnsubscribe)
-      .subscribe((selectedItems: AsyncItem<ListSelectedModel>) => {
-        this.selectedIdMap = selectedItems.item.selectedIdMap;
+      .distinctUntilChanged() // TODO: Make this check for model changes
+      .subscribe((model: ListSelectedModel) => {
+        this.selectedIdMap = model.selectedIdMap;
+
+        if (this.showOnlySelected) {
+          this.reapplyFilter(true);
+        }
       });
   }
 
@@ -69,7 +69,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
     this.state.map(state => state.items.items)
       .take(1)
       .subscribe(items => {
-        this.dispatcher.next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), true, false));
+        this.dispatcher.setSelected(items.map(item => item.id));
         if (this.showOnlySelected) {
           this.reapplyFilter(this.showOnlySelected);
         }
@@ -80,7 +80,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
     this.state.map(state => state.items.items)
       .take(1)
       .subscribe(items => {
-        this.dispatcher.next(new ListSelectedSetItemsSelectedAction(items.map(item => item.id), false, false));
+        this.dispatcher.setSelected([]);
         if (this.showOnlySelected) {
           this.reapplyFilter(this.showOnlySelected);
         }
@@ -130,5 +130,9 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
       defaultValue: false.toString()
     });
   }
+
+  // private compareJsonOutput(a: any, b: any) {
+  //   return JSON.stringify(a) === JSON.stringify(b);
+  // }
 
 }

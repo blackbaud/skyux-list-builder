@@ -6,7 +6,8 @@ import {
   ListSelectedLoadAction,
   ListSelectedSetLoadingAction,
   ListSelectedSetItemSelectedAction,
-  ListSelectedSetItemsSelectedAction
+  ListSelectedSetItemsSelectedAction,
+  ListSelectedSetItemsSelectedTrueAction
 } from './actions';
 
 export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<ListSelectedModel>> {
@@ -18,6 +19,7 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
       .register(ListSelectedSetLoadingAction, this.setLoading)
       .register(ListSelectedSetItemSelectedAction, this.setItemSelected)
       .register(ListSelectedSetItemsSelectedAction, this.setItemsSelected)
+      .register(ListSelectedSetItemsSelectedTrueAction, this.setItemsSelectedTrue)
       .register(ListSelectedLoadAction, this.load);
   }
 
@@ -57,5 +59,18 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
     action.items.map(s => newSelected.selectedIdMap.set(s, action.selected));
 
     return new AsyncItem<ListSelectedModel>(newSelected, state.lastUpdate, state.loading);
+  }
+
+  private setItemsSelectedTrue(
+    state: AsyncItem<ListSelectedModel>,
+    action: ListSelectedSetItemsSelectedTrueAction) {
+      const newSelected = action.refresh ? new ListSelectedModel() : Object.assign({}, state.item);
+
+      newSelected.selectedIdMap.forEach((value, key, map) => {
+        newSelected.selectedIdMap.set(key, action.items.indexOf(key) > -1 ? true : false);
+      });
+      action.items.map(s => newSelected.selectedIdMap.set(s, true));
+
+      return new AsyncItem<ListSelectedModel>(newSelected, state.lastUpdate, state.loading);
   }
 }

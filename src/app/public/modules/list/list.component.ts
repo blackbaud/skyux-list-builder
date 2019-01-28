@@ -126,6 +126,8 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
   @ContentChildren(ListViewComponent)
   private listViews: QueryList<ListViewComponent>;
 
+  private lastSelectedIds: string[];
+
   constructor(
     private state: ListState,
     private dispatcher: ListStateDispatcher
@@ -167,15 +169,26 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
       this.dispatcher.next(new ListItemsLoadAction(result.items, true, true, result.count));
     });
 
-    // Emit new selected items when they change if there is an observer.
-    if (this.selectedIdsChange.observers.length > 0) {
+    // Watch for selection changes.
+    this.state.map(current => current.selected)
+      .distinctUntilChanged()
+      .skip(1)
+      .subscribe((selected) => {
 
-      this.state.map(current => current.selected).distinctUntilChanged()
-        .skip(1)
-        .subscribe((selected: any) => {
-          this.selectedIdsChange.emit(selected.item.selectedIdMap);
+        // Update lastSelectedIds to help us retain user selections.
+        let selectedIdsList: string[] = [];
+        selected.item.selectedIdMap.forEach((value, key, map) => {
+          if (value === true) {
+            selectedIdsList.push(key);
+          }
         });
-    }
+        this.lastSelectedIds = selectedIdsList;
+
+        // Emit new selected items if there is an observer.
+        if (this.selectedIdsChange.observers.length > 0) {
+          this.selectedIdsChange.emit(selected.item.selectedIdMap);
+        }
+      });
 
     if (this.appliedFiltersChange.observers.length > 0) {
       this.state.map(current => current.filters).distinctUntilChanged()
@@ -273,7 +286,17 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
         }
 
         return response;
-      }).flatMap((value: Observable<ListDataResponseModel>, index: number) => {
+      })
+      .map(response => {
+        // Retain user selections from previous state.
+        return response.map(listDataResponseModel => {
+          return new ListDataResponseModel({
+            count: listDataResponseModel.count,
+            items: this.getItemsAndRetainSelections(listDataResponseModel.items, this.lastSelectedIds)
+          });
+        });
+      })
+      .flatMap((value: Observable<ListDataResponseModel>, index: number) => {
         return value;
       });
   }
@@ -300,5 +323,16 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
 
   public get itemCount() {
     return this.dataProvider.count();
+  }
+
+  private getItemsAndRetainSelections(newList: ListItemModel[], selectedIds: string[]): ListItemModel[] {
+    if (!selectedIds || selectedIds.length === 0) {
+      return newList;
+    }
+    let updatedListModel = newList.slice();
+    updatedListModel.forEach(item => {
+      item.isSelected = selectedIds.indexOf(item.id) > -1 ? true : false;
+    });
+    return updatedListModel;
   }
 }

@@ -97,9 +97,6 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @Input()
   public searchText: string | Observable<string>;
 
-  @Input()
-  public showMultiselectActions: boolean;
-
   public get isFilterBarDisplayed(): boolean {
     return !this.isToolbarDisabled && this.hasInlineFilters && this.inlineFilterBarExpanded;
   }
@@ -117,6 +114,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   public type: Observable<string>;
   public isSearchEnabled: Observable<boolean>;
   public isToolbarDisabled: boolean = false;
+  public isMultiselectEnabled: Observable<boolean>;
   public isSortSelectorEnabled: Observable<boolean>;
   public appliedFilters: Observable<Array<ListFilterModel>>;
   public hasAppliedFilters: Observable<boolean>;
@@ -249,6 +247,9 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
 
     this.isSortSelectorEnabled = this.toolbarState.map(s => s.config)
       .distinctUntilChanged().map(c => c.sortSelectorEnabled);
+
+    this.isMultiselectEnabled = this.state.map(s => s.toolbar)
+      .distinctUntilChanged().map(t => t.showMultiselectActionBar);
 
     this.hasAppliedFilters = this.state
       .map(s => s.filters)

@@ -5,6 +5,7 @@ export class ListToolbarModel {
   public disabled: boolean;
   public items: ListToolbarItemModel[] = [];
   public type: string;
+  public showMultiselectActionBar: boolean;
 
   constructor(data?: any) {
     if (data) {
@@ -12,6 +13,7 @@ export class ListToolbarModel {
       this.disabled = data.disabled;
       this.items = data.items;
       this.type = data.type;
+      this.showMultiselectActionBar = data.showMultiselectActionBar;
     }
   }
 }

@@ -6,7 +6,8 @@ import {
   ListToolbarItemsRemoveAction,
   ListToolbarSetExistsAction,
   ListToolbarSetTypeAction,
-  ListToolbarItemsDisableAction
+  ListToolbarItemsDisableAction,
+  ListToolbarShowMultiselectActionBarAction
 } from './actions';
 
 export class ListToolbarOrchestrator
@@ -20,7 +21,8 @@ export class ListToolbarOrchestrator
       .register(ListToolbarItemsDisableAction, this.setDisabled)
       .register(ListToolbarItemsLoadAction, this.load)
       .register(ListToolbarSetTypeAction, this.setType)
-      .register(ListToolbarItemsRemoveAction, this.remove);
+      .register(ListToolbarItemsRemoveAction, this.remove)
+      .register(ListToolbarShowMultiselectActionBarAction, this.showMultiselectActionBar);
   }
 
   private setExists(
@@ -81,6 +83,15 @@ export class ListToolbarOrchestrator
       return action.ids.indexOf(item.id) === -1;
     });
 
+    return newModel;
+  }
+
+  private showMultiselectActionBar(
+    state: ListToolbarModel,
+    action: ListToolbarShowMultiselectActionBarAction
+  ): ListToolbarModel {
+    const newModel = new ListToolbarModel(state);
+    newModel.showMultiselectActionBar = action.exists;
     return newModel;
   }
 }

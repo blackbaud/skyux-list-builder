@@ -22,26 +22,38 @@
         [descending]="false">
       </sky-list-toolbar-sort>
       <sky-list-toolbar-view-actions>
-        <button
-          class="sky-btn sky-btn-default"
-          title="Sort descending"
-          type="button"
+        <div
+          class="sky-switch-icon-group"
         >
-          <sky-icon
-            icon="angle-double-down"
+          <sky-radio
+            icon="table"
+            name="iconradiogrouptest"
+            value="table"
+            [(ngModel)]="iconGroupSelectedValue"
           >
-          </sky-icon>
-        </button>
-        <button
-          class="sky-btn sky-btn-default"
-          title="Sort ascending"
-          type="button"
-        >
-          <sky-icon
-            icon="angle-double-up"
+          </sky-radio>
+          <sky-radio
+            icon="list"
+            name="iconradiogrouptest"
+            value="list"
+            [(ngModel)]="iconGroupSelectedValue"
           >
-          </sky-icon>
-        </button>
+          </sky-radio>
+          <sky-radio
+            icon="th-large"
+            name="iconradiogrouptest"
+            value="cards"
+            [(ngModel)]="iconGroupSelectedValue"
+          >
+          </sky-radio>
+          <sky-radio
+            icon="map-marker"
+            name="iconradiogrouptest"
+            value="map"
+            [(ngModel)]="iconGroupSelectedValue"
+          >
+          </sky-radio>
+        </div>
       </sky-list-toolbar-view-actions>
       <sky-list-filter-inline>
         <sky-list-filter-inline-item
@@ -109,26 +121,38 @@
         [descending]="false">
       </sky-list-toolbar-sort>
       <sky-list-toolbar-view-actions>
-        <button
-          class="sky-btn sky-btn-default"
-          title="Sort descending"
-          type="button"
+        <div
+          class="sky-switch-icon-group"
         >
-          <sky-icon
-            icon="angle-double-down"
+          <sky-radio
+            icon="table"
+            name="iconradiogrouptest"
+            value="table"
+            [(ngModel)]="iconGroupSelectedValue"
           >
-          </sky-icon>
-        </button>
-        <button
-          class="sky-btn sky-btn-default"
-          title="Sort ascending"
-          type="button"
-        >
-          <sky-icon
-            icon="angle-double-up"
+          </sky-radio>
+          <sky-radio
+            icon="list"
+            name="iconradiogrouptest"
+            value="list"
+            [(ngModel)]="iconGroupSelectedValue"
           >
-          </sky-icon>
-        </button>
+          </sky-radio>
+          <sky-radio
+            icon="th-large"
+            name="iconradiogrouptest"
+            value="cards"
+            [(ngModel)]="iconGroupSelectedValue"
+          >
+          </sky-radio>
+          <sky-radio
+            icon="map-marker"
+            name="iconradiogrouptest"
+            value="map"
+            [(ngModel)]="iconGroupSelectedValue"
+          >
+          </sky-radio>
+        </div>
       </sky-list-toolbar-view-actions>
       <sky-list-filter-inline>
         <sky-list-filter-inline-item

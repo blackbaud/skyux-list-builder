@@ -6,10 +6,10 @@ import { ListStateOrchestrator } from '../list-state.rxstate';
 import { AsyncList } from 'microedge-rxstate/dist';
 
 import {
-  ListItemsSetLoadingAction, ListItemsLoadAction
+  ListItemsLoadAction,
+  ListItemsSetLoadingAction,
+  ListItemsSetSelectedItemsTrueAction
 } from './actions';
-import { ListItemsSetSelectedItemsAction } from './set-items-selected.action';
-import { ListItemsSetSelectedItemsTrueAction } from './set-items-selected-true.action';
 
 export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListItemModel>> {
   /* istanbul ignore next */
@@ -19,7 +19,6 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     this
       .register(ListItemsSetLoadingAction, this.setLoading)
       .register(ListItemsLoadAction, this.load)
-      .register(ListItemsSetSelectedItemsAction, this.setItemsSelected)
       .register(ListItemsSetSelectedItemsTrueAction, this.setItemsSelectedTrue);
   }
 
@@ -42,18 +41,6 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
       false,
       count
     );
-  }
-
-  private setItemsSelected(
-    state: AsyncList<ListItemModel>,
-    action: ListItemsSetSelectedItemsAction): AsyncList<ListItemModel> {
-
-    const newListItems = state.items.map(g => {
-      const newSelectedValue = action.selected && action.items.indexOf(g.id) > -1;
-      return new ListItemModel(g.id, g.data, newSelectedValue);
-    });
-
-    return new AsyncList<ListItemModel>(newListItems, state.lastUpdate, state.loading, state.count);
   }
 
   private setItemsSelectedTrue(

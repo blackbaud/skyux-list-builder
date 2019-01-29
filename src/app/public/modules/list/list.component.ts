@@ -1,13 +1,14 @@
 import {
-  Component,
-  ContentChildren,
-  QueryList,
   AfterContentInit,
   ChangeDetectionStrategy,
+  Component,
+  ContentChildren,
+  EventEmitter,
   Input,
   Output,
-  EventEmitter,
   OnChanges,
+  OnDestroy,
+  QueryList,
   SimpleChanges
 } from '@angular/core';
 
@@ -45,18 +46,45 @@ import {
   getValue
 } from 'microedge-rxstate/dist/helpers';
 
-import { ListDataRequestModel } from './list-data-request.model';
-import { ListDataResponseModel } from './list-data-response.model';
-import { ListDataProvider } from './list-data.provider';
-import { SkyListInMemoryDataProvider } from '../list-data-provider-in-memory';
-import { ListState, ListStateDispatcher } from './state';
+import {
+  ListDataRequestModel
+} from './list-data-request.model';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  ListDataResponseModel
+} from './list-data-response.model';
+
+import {
+  ListDataProvider
+} from './list-data.provider';
+
+import {
+  SkyListInMemoryDataProvider
+} from '../list-data-provider-in-memory';
+
+import {
+  ListState,
+  ListStateDispatcher
+} from './state';
+
+import {
+  Observable
+} from 'rxjs/Observable';
+
+import {
+  Subject
+} from 'rxjs/Subject';
+
 import 'rxjs/add/observable/combineLatest';
+
 import 'rxjs/add/observable/of';
+
 import 'rxjs/add/operator/distinctUntilChanged';
+
 import 'rxjs/add/operator/mergeMap';
+
 import 'rxjs/add/operator/take';
+
 import 'rxjs/add/operator/skip';
 
 import {
@@ -65,16 +93,22 @@ import {
   ListSortFieldSelectorModel
 } from '@skyux/list-builder-common';
 
-import { ListViewComponent } from './list-view.component';
+import {
+  ListViewComponent
+} from './list-view.component';
 
-import { ListSearchModel } from './state/search/search.model';
+import {
+  ListSearchModel
+} from './state/search/search.model';
 
 import {
   ListViewsLoadAction,
   ListViewsSetActiveAction
 } from './state/views/actions';
 
-import { ListViewModel } from './state/views/view.model';
+import {
+  ListViewModel
+} from './state/views/view.model';
 
 let idIndex = 0;
 
@@ -84,7 +118,7 @@ let idIndex = 0;
   providers: [ListState, ListStateDispatcher],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SkyListComponent implements AfterContentInit, OnChanges {
+export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy {
   public id: string = `sky-list-cmp-${++idIndex}`;
   @Input()
   public data?: Array<any> | Observable<Array<any>> = [];
@@ -127,6 +161,8 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
   private listViews: QueryList<ListViewComponent>;
 
   private lastSelectedIds: string[];
+
+  private ngUnsubscribe = new Subject();
 
   constructor(
     private state: ListState,
@@ -171,6 +207,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
 
     // Watch for selection changes.
     this.state.map(current => current.selected)
+      .takeUntil(this.ngUnsubscribe)
       .distinctUntilChanged()
       .skip(1)
       .subscribe((selected) => {
@@ -191,7 +228,9 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
       });
 
     if (this.appliedFiltersChange.observers.length > 0) {
-      this.state.map(current => current.filters).distinctUntilChanged()
+      this.state.map(current => current.filters)
+        .takeUntil(this.ngUnsubscribe)
+        .distinctUntilChanged()
         .skip(1)
         .subscribe((filters: any) => {
           this.appliedFiltersChange.emit(filters);
@@ -205,6 +244,11 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
       changes['appliedFilters'].currentValue !== changes['appliedFilters'].previousValue) {
       this.dispatcher.filtersUpdate(this.appliedFilters);
     }
+  }
+
+  public ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   public refreshDisplayedItems(): void {
@@ -287,6 +331,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
 
         return response;
       })
+      .takeUntil(this.ngUnsubscribe)
       .map(response => {
         // Retain user selections from previous state.
         return response.map(listDataResponseModel => {
@@ -308,13 +353,15 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
       (items: Array<ListItemModel>, selected: AsyncItem<ListSelectedModel>) => {
         return items.filter(i => selected.item.selectedIdMap.get(i.id));
       }
-    );
+    ).takeUntil(this.ngUnsubscribe);
   }
 
   public get lastUpdate() {
-    return this.state.map(s =>
-      s.items.lastUpdate ? new Date(s.items.lastUpdate) : undefined
-    );
+    return this.state
+      .takeUntil(this.ngUnsubscribe)
+      .map(s =>
+        s.items.lastUpdate ? new Date(s.items.lastUpdate) : undefined
+      );
   }
 
   public get views() {

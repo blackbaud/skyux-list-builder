@@ -1,34 +1,45 @@
 import {
-  TestBed,
   async,
+  ComponentFixture,
   fakeAsync,
-  tick,
-  ComponentFixture
+  TestBed,
+  tick
 } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
+
 import {
-  ListState,
-  ListStateDispatcher
-} from '../list/state';
-import { SkyListToolbarModule } from './';
+  DebugElement
+} from '@angular/core';
+
 import {
-  ListToolbarTestComponent
-} from './fixtures/list-toolbar.component.fixture';
+  By
+} from '@angular/platform-browser';
 
 import {
   expect
 } from '@blackbaud/skyux-builder/runtime/testing/browser';
 
 import {
-  ListViewsLoadAction,
-  ListViewsSetActiveAction,
-  ListViewModel,
+  ListState,
+  ListStateDispatcher
+} from '../list/state';
+
+import {
+  SkyListToolbarModule
+} from './';
+
+import {
+  ListToolbarTestComponent
+} from './fixtures/list-toolbar.component.fixture';
+
+import {
+  ListPagingSetPageNumberAction,
+  ListSortLabelModel,
   ListToolbarItemModel,
   ListToolbarItemsLoadAction,
   ListToolbarSetTypeAction,
-  ListSortLabelModel,
-  ListPagingSetPageNumberAction
+  ListViewModel,
+  ListViewsLoadAction,
+  ListViewsSetActiveAction
 } from '../list/state';
 
 describe('List Toolbar Component', () => {
@@ -67,6 +78,46 @@ describe('List Toolbar Component', () => {
     // always skip the first update to ListState, when state is ready
     // run detectChanges once more then begin tests
     state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+  }
+
+  function getMultiselectActionToolbar() {
+    return element.query(By.css('#sky-list-toolbar-multiselect-actions'));
+  }
+
+  function getSelectAllButton() {
+    return element.query(By.css('#sky-list-toolbar-multiselect-action-select-all'));
+  }
+
+  function getClearAllButton() {
+    return element.query(By.css('#sky-list-toolbar-multiselect-action-clear-all'));
+  }
+
+  function getOnlyShowSelectedCheckbox() {
+    return element.query(By.css('#sky-list-toolbar-multiselect-action-show-selected input'));
+  }
+
+  function clickSelectAllButton() {
+    const selectAllButton = getSelectAllButton();
+    selectAllButton.nativeElement.click();
+    fixture.detectChanges();
+  }
+
+  function clickClearAllButton() {
+    const clearAllButton = getClearAllButton();
+    clearAllButton.nativeElement.click();
+    fixture.detectChanges();
+  }
+
+  function clickShowOnlySelectedCheckbox() {
+    const showOnlySelectedCheckbox = getOnlyShowSelectedCheckbox();
+    showOnlySelectedCheckbox.nativeElement.click();
+    fixture.detectChanges();
+  }
+
+  function initializeToolbarWithMultiselect() {
+    initializeToolbar();
+    dispatcher.toolbarShowMultiselectActionBar(true);
+    fixture.detectChanges();
   }
 
   function verifySearchTypeToolbar() {
@@ -336,33 +387,93 @@ describe('List Toolbar Component', () => {
   });
 
   describe('multiselect action bar', () => {
-    it('should be hidden by default', async(() => {
+    it('should be hidden by default', () => {
       initializeToolbar();
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        expect(element.query(By.css('#sky-list-toolbar-multiselect-actions'))).toBeNull();
-      });
-    }));
+      expect(getMultiselectActionToolbar()).toBeNull();
+    });
 
-    it('should toggle visibility when list state is updated', async(() => {
+    it('should toggle visibility when toolbarShowMultiselectActionBar is updated', () => {
       initializeToolbar();
-      fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        dispatcher.toolbarShowMultiselectActionBar(true);
 
-        fixture.whenStable().then(() => {
-          fixture.detectChanges();
-          expect(element.query(By.css('#sky-list-toolbar-multiselect-actions'))).not.toBeNull();
+      // Call dispatcher. Expect action bar is visible.
+      dispatcher.toolbarShowMultiselectActionBar(true);
+      fixture.detectChanges();
+      expect(getMultiselectActionToolbar()).not.toBeNull();
 
-          dispatcher.toolbarShowMultiselectActionBar(false);
+      // Call dispatcher. Expect action bar is hidden.
+      dispatcher.toolbarShowMultiselectActionBar(false);
+      fixture.detectChanges();
+      expect(getMultiselectActionToolbar()).toBeNull();
+    });
 
-          fixture.whenStable().then(() => {
-            fixture.detectChanges();
-            expect(element.query(By.css('#sky-list-toolbar-multiselect-actions'))).toBeNull();
-          });
-        });
-      });
-    }));
+    it('should call the dispatcher when select all is clicked', () => {
+      initializeToolbarWithMultiselect();
+      const setSelectedSpy = spyOn(dispatcher, 'setSelected').and.callThrough();
+
+      clickSelectAllButton();
+
+      expect(setSelectedSpy).toHaveBeenCalled();
+    });
+
+    it('should only reapply the filter when select all is clicked while "show only selected" is checked', () => {
+      initializeToolbarWithMultiselect();
+      const filtersUpdateSpy = spyOn(dispatcher, 'filtersUpdate').and.callThrough();
+
+      // Click "Select all" and expect filters are NOT updated.
+      clickSelectAllButton();
+      expect(filtersUpdateSpy).not.toHaveBeenCalled();
+
+      // Now, check "Only show selected" and click "Select all". Expect filters to be updated.
+      clickShowOnlySelectedCheckbox();
+      filtersUpdateSpy.calls.reset();
+      clickSelectAllButton();
+
+      expect(filtersUpdateSpy).toHaveBeenCalled();
+    });
+
+    it('should call the dispatcher when clear all is clicked', () => {
+      initializeToolbarWithMultiselect();
+      const setSelectedSpy = spyOn(dispatcher, 'setSelected').and.callThrough();
+
+      clickClearAllButton();
+
+      expect(setSelectedSpy).toHaveBeenCalled();
+    });
+
+    it('should only reapply the filter when clear all is clicked while "Show only selected" is checked', () => {
+      initializeToolbarWithMultiselect();
+      const filtersUpdateSpy = spyOn(dispatcher, 'filtersUpdate').and.callThrough();
+
+      // Click "Clear all" and expect filters are NOT updated.
+      clickClearAllButton();
+      expect(filtersUpdateSpy).not.toHaveBeenCalled();
+
+      // Now, check "Only show selected" and click "Clear all". Expect filters to be updated.
+      clickShowOnlySelectedCheckbox();
+      filtersUpdateSpy.calls.reset();
+      clickClearAllButton();
+
+      expect(filtersUpdateSpy).toHaveBeenCalled();
+    });
+
+    it('should reapply filter only when state.items are changed AND "Show only selected" is checked', () => {
+      initializeToolbarWithMultiselect();
+      const filtersUpdateSpy = spyOn(dispatcher, 'filtersUpdate').and.callThrough();
+
+      expect(filtersUpdateSpy).not.toHaveBeenCalled();
+
+      // Send selection to dispatcher and expect filter update to have NOT been called.
+      dispatcher.setSelected(['1']);
+      fixture.detectChanges();
+      expect(filtersUpdateSpy).not.toHaveBeenCalled();
+
+      // Click "Show only selected" and send new selection to dispatcher. Expect filter update to have been called.
+      clickShowOnlySelectedCheckbox();
+      filtersUpdateSpy.calls.reset();
+      dispatcher.setSelected(['1', '2']);
+      fixture.detectChanges();
+      expect(filtersUpdateSpy).toHaveBeenCalled();
+    });
   });
 
   it('should not display items not in the current view', async(() => {

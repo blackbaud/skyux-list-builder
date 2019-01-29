@@ -33,7 +33,8 @@ import {
 
 import {
   ListState,
-  ListStateDispatcher
+  ListStateDispatcher,
+  ListToolbarShowMultiselectActionBarAction
 } from '../list/state';
 
 import {
@@ -530,24 +531,37 @@ describe('List Component', () => {
         expect(selectedIds[1]).toBe('2');
       }));
 
-      it('should not show multiselect action bar by default', () => {
-        // TODO
-      });
+      it('should retain selections after applying/removing filters', fakeAsync(() => {
+        const filters = [
+          new ListFilterModel({
+            name: 'show-selected'
+          })
+        ];
 
-      it('should show multiselect action bar when multiselect is enabled', () => {
-        // TODO
-      });
+        // Select rows and apply "Show only selected" filter.
+        dispatcher.next(new ListSelectedSetItemsSelectedAction(['1', '2'], true));
+        dispatcher.filtersUpdate(filters);
+        fixture.detectChanges();
 
-      it('should dispatch actions when select all is clicked', () => {
-        // TODO
-      });
+        // Expect rows to still be selected.
+        component.list.selectedItems.take(1).subscribe((items)=> {
+          expect(items.length === 2);
+          expect(items[0].data.column2).toBe('Apple');
+          expect(items[1].data.column2).toBe('Banana');
+        });
 
-      it('should dispatch actions when clear all is clicked', () => {
-        // TODO
-      });
+        // Change selections and disable the "Show only selected" filter.
+        dispatcher.setSelected(['1','4']);
+        dispatcher.filtersUpdate([]);
+        fixture.detectChanges();
 
-      it('should filter when "show only selected" is checked', fakeAsync(() => {
-        // TODO
+        // Expect new rows to be selected.
+        component.list.selectedItems.take(1).subscribe((items)=> {
+          expect(items.length === 2);
+          expect(items[0].data.column2).toBe('Apple');
+          expect(items[1].data.column2).toBe('Carrot');
+        });
+
       }));
     });
 
@@ -1270,6 +1284,11 @@ describe('List Component', () => {
 
     it('should construct ListItemsSetSelectedItemsTrueAction', () => {
       let action = new ListItemsSetSelectedItemsTrueAction(['1']);
+      expect(action).not.toBeUndefined();
+    });
+
+    it('should construct ListToolbarShowMultiselectActionBarAction', () => {
+      let action = new ListToolbarShowMultiselectActionBarAction(true);
       expect(action).not.toBeUndefined();
     });
 

@@ -19,6 +19,8 @@ export class ListToolbarVisualComponent {
     { id: '7', column1: 707, column2: 'Strawberry', column3: 'Sally eats strawberries' }
   ]);
 
+  public iconGroupSelectedValue = 'table';
+
   public fruitTypeFilterFunction(): boolean {
     return true;
   }

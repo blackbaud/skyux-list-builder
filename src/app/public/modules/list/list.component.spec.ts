@@ -1,50 +1,80 @@
 import {
+  DebugElement
+} from '@angular/core';
+
+import {
   TestBed,
   async,
   fakeAsync,
   tick,
   ComponentFixture
 } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import {
-  ListState,
-  ListStateDispatcher
-} from '../list/state';
 
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {
+  FormsModule
+} from '@angular/forms';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  BehaviorSubject
+} from 'rxjs/BehaviorSubject';
+
+import {
+  Observable
+} from 'rxjs/Observable';
 
 import {
   ListItemModel,
   ListSortFieldSelectorModel
 } from '@skyux/list-builder-common';
 
-import { ListFixturesModule } from './fixtures/list-fixtures.module';
-import { ListTestComponent } from './fixtures/list.component.fixture';
-import { ListDualTestComponent } from './fixtures/list-dual.component.fixture';
-import { ListEmptyTestComponent } from './fixtures/list-empty.component.fixture';
-import { ListSelectedTestComponent } from './fixtures/list-selected.component.fixture';
-import { ListFilteredTestComponent } from './fixtures/list-filtered.component.fixture';
-import { SkyListComponent, SkyListModule, ListDataRequestModel, ListDataResponseModel } from './';
-import { SkyListToolbarModule } from '../list-toolbar';
 import {
+  ListState,
+  ListStateDispatcher
+} from '../list/state';
+
+import {
+  ListDualTestComponent,
+  ListEmptyTestComponent,
+  ListFilteredTestComponent,
+  ListFixturesModule,
+  ListSelectedTestComponent,
+  ListTestComponent,
+  ListViewTestComponent
+} from './fixtures';
+
+import {
+  ListDataRequestModel,
+  ListDataResponseModel,
+  SkyListComponent,
+  SkyListModule
+} from './';
+
+import {
+  SkyListToolbarModule
+} from '../list-toolbar';
+
+import {
+  ListFilterModel,
+  ListItemsSetSelectedItemsTrueAction,
+  ListPagingModel,
   ListSearchModel,
   ListSearchSetFunctionsAction,
   ListSearchSetFieldSelectorsAction,
   ListSelectedSetItemsSelectedAction,
   ListSelectedSetItemSelectedAction,
-  ListToolbarItemModel,
-  ListToolbarItemsLoadAction,
   ListSortSetFieldSelectorsAction,
   ListSortLabelModel,
-  ListFilterModel,
-  ListPagingModel
+  ListToolbarItemModel,
+  ListToolbarItemsLoadAction
 } from './state';
 
-import { SkyListInMemoryDataProvider } from '../list-data-provider-in-memory';
-import { ListViewTestComponent } from './fixtures/list-view-test.component.fixture';
+import {
+  SkyListInMemoryDataProvider
+} from '../list-data-provider-in-memory';
 
 describe('List Component', () => {
   describe('List Fixture', () => {
@@ -498,6 +528,26 @@ describe('List Component', () => {
 
         expect(selectedIds[0]).toBe('1');
         expect(selectedIds[1]).toBe('2');
+      }));
+
+      it('should not show multiselect action bar by default', () => {
+        // TODO
+      });
+
+      it('should show multiselect action bar when multiselect is enabled', () => {
+        // TODO
+      });
+
+      it('should dispatch actions when select all is clicked', () => {
+        // TODO
+      });
+
+      it('should dispatch actions when clear all is clicked', () => {
+        // TODO
+      });
+
+      it('should filter when "show only selected" is checked', fakeAsync(() => {
+        // TODO
       }));
     });
 
@@ -1215,6 +1265,11 @@ describe('List Component', () => {
 
     it('should construct ListSelectedSetItemsSelectedAction', () => {
       let action = new ListSelectedSetItemsSelectedAction(['1']);
+      expect(action).not.toBeUndefined();
+    });
+
+    it('should construct ListItemsSetSelectedItemsTrueAction', () => {
+      let action = new ListItemsSetSelectedItemsTrueAction(['1']);
       expect(action).not.toBeUndefined();
     });
 

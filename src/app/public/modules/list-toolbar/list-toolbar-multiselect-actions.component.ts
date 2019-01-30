@@ -104,6 +104,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
       });
 
     // If "show selected" is checked and paging is enabled, go to page one.
+    /* istanbul ignore else */
     if (isSelected) {
       this.state
         .take(1)

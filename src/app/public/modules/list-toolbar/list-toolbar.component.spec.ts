@@ -19,6 +19,10 @@ import {
 } from '@blackbaud/skyux-builder/runtime/testing/browser';
 
 import {
+  ListItemModel
+} from '@skyux/list-builder-common';
+
+import {
   ListState,
   ListStateDispatcher
 } from '../list/state';
@@ -32,6 +36,7 @@ import {
 } from './fixtures/list-toolbar.component.fixture';
 
 import {
+  ListItemsLoadAction,
   ListPagingSetPageNumberAction,
   ListSortLabelModel,
   ListToolbarItemModel,
@@ -387,6 +392,21 @@ describe('List Toolbar Component', () => {
   });
 
   describe('multiselect action bar', () => {
+    beforeEach(() => {
+      // Add some base items to be selected.
+      dispatcher.next(new ListItemsLoadAction([
+        new ListItemModel('1', {}),
+        new ListItemModel('2', {}),
+        new ListItemModel('3', {}),
+        new ListItemModel('4', {}),
+        new ListItemModel('5', {}),
+        new ListItemModel('6', {}),
+        new ListItemModel('7', {})
+      ], true));
+
+      fixture.detectChanges();
+    });
+
     it('should be hidden by default', () => {
       initializeToolbar();
       expect(getMultiselectActionToolbar()).toBeNull();
@@ -415,7 +435,7 @@ describe('List Toolbar Component', () => {
       expect(setSelectedSpy).toHaveBeenCalled();
     });
 
-    it('should only reapply the filter when select all is clicked while "show only selected" is checked', () => {
+    it('should only reapply the filter when select all is clicked while "Show only selected" is checked', () => {
       initializeToolbarWithMultiselect();
       const filtersUpdateSpy = spyOn(dispatcher, 'filtersUpdate').and.callThrough();
 
@@ -473,6 +493,65 @@ describe('List Toolbar Component', () => {
       dispatcher.setSelected(['1', '2']);
       fixture.detectChanges();
       expect(filtersUpdateSpy).toHaveBeenCalled();
+    });
+
+    it('should only return selected items when "Show only selected" is checked', () => {
+      initializeToolbarWithMultiselect();
+
+      // Send selection to dispatcher and click "Show only selected".
+      dispatcher.setSelected(['1', '2']);
+      fixture.detectChanges();
+      clickShowOnlySelectedCheckbox();
+      fixture.detectChanges();
+
+      // Expect "show-selected" filter is set up.
+      state
+        .map(s => s.filters)
+        .take(1)
+        .subscribe(filters => {
+          let showSelectedFilter = filters.filter(filter => filter.name === 'show-selected')[0];
+          expect(showSelectedFilter).not.toBeNull();
+
+          // Expect filter function to only return rows with id '1' and '2'.
+          let filterFunction = showSelectedFilter.filterFunction;
+          expect(filterFunction(new ListItemModel('1', {}), true)).toEqual(true);
+          expect(filterFunction(new ListItemModel('2', {}), true)).toEqual(true);
+          expect(filterFunction(new ListItemModel('3', {}), true)).toBe(undefined);
+          expect(filterFunction(new ListItemModel('4', {}), true)).toBe(undefined);
+          expect(filterFunction(new ListItemModel('5', {}), true)).toBe(undefined);
+          expect(filterFunction(new ListItemModel('6', {}), true)).toBe(undefined);
+          expect(filterFunction(new ListItemModel('7', {}), true)).toBe(undefined);
+        });
+    });
+
+    it('should always return to page 1 when "Show only selected" is checked', () => {
+      initializeToolbarWithMultiselect();
+
+      // Tell dispatcher to go to page 99.
+      dispatcher.next(new ListPagingSetPageNumberAction(Number(99)));
+      fixture.detectChanges();
+
+      // Expect page number to be set to 99.
+      state
+      .map(s => s.paging)
+      .take(1)
+      .subscribe(paging => {
+        expect(paging.pageNumber).toEqual(99);
+      });
+
+      // Send selection to dispatcher and click "Show only selected".
+      dispatcher.setSelected(['1', '2']);
+      fixture.detectChanges();
+      clickShowOnlySelectedCheckbox();
+      fixture.detectChanges();
+
+      // Expect page number to be set to 1.
+      state
+      .map(s => s.paging)
+      .take(1)
+      .subscribe(paging => {
+        expect(paging.pageNumber).toEqual(1);
+      });
     });
   });
 

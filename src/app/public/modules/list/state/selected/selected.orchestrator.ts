@@ -25,13 +25,15 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
 
   private setLoading(
     state: AsyncItem<ListSelectedModel>,
-    action: ListSelectedSetLoadingAction): AsyncItem<ListSelectedModel> {
+    action: ListSelectedSetLoadingAction
+  ): AsyncItem<ListSelectedModel> {
     return new AsyncItem<ListSelectedModel>(state.item, state.lastUpdate, action.loading);
   }
 
   private load(
     state: AsyncItem<ListSelectedModel>,
-    action: ListSelectedLoadAction): AsyncItem<ListSelectedModel> {
+    action: ListSelectedLoadAction
+  ): AsyncItem<ListSelectedModel> {
     const newSelected = new ListSelectedModel();
     action.items.map(s => newSelected.selectedIdMap.set(s, true));
 
@@ -44,7 +46,8 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
 
   private setItemSelected(
     state: AsyncItem<ListSelectedModel>,
-    action: ListSelectedSetItemSelectedAction): AsyncItem<ListSelectedModel> {
+    action: ListSelectedSetItemSelectedAction
+  ): AsyncItem<ListSelectedModel> {
     const newSelected = Object.assign({}, state.item);
     newSelected.selectedIdMap.set(action.id, action.selected);
 
@@ -53,7 +56,8 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
 
   private setItemsSelected(
     state: AsyncItem<ListSelectedModel>,
-    action: ListSelectedSetItemsSelectedAction): AsyncItem<ListSelectedModel> {
+    action: ListSelectedSetItemsSelectedAction
+  ): AsyncItem<ListSelectedModel> {
     const newSelected = action.refresh ? new ListSelectedModel() : Object.assign({}, state.item);
 
     action.items.map(s => newSelected.selectedIdMap.set(s, action.selected));
@@ -63,7 +67,8 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
 
   private setItemsSelectedTrue(
     state: AsyncItem<ListSelectedModel>,
-    action: ListSelectedSetItemsSelectedTrueAction) {
+    action: ListSelectedSetItemsSelectedTrueAction
+  ) {
       const newSelected = action.refresh ? new ListSelectedModel() : Object.assign({}, state.item);
 
       newSelected.selectedIdMap.forEach((value, key, map) => {

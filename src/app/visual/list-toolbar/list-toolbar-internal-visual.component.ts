@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ListStateDispatcher } from '../../public/modules/list/state';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import {
+  ListStateDispatcher
+} from '../../public/modules/list/state';
 
 @Component({
   selector: 'list-toolbar-internal-visual',

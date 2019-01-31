@@ -86,7 +86,7 @@ describe('List Toolbar Component', () => {
   }
 
   function getMultiselectActionToolbar() {
-    return element.query(By.css('#sky-list-toolbar-multiselect-actions'));
+    return element.query(By.css('.sky-list-toolbar-multiselect-actions'));
   }
 
   function getSelectAllButton() {

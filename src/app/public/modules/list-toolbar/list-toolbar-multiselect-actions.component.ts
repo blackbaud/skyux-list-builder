@@ -36,9 +36,9 @@ import {
 export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDestroy {
 
   @Input()
-  public showOnlySelected: boolean = false;
+  public showOnlySelected = false;
 
-  private selectedIdMap: Map<string, boolean> = new Map<string, boolean>();
+  private selectedIdMap = new Map<string, boolean>();
 
   private ngUnsubscribe = new Subject();
 

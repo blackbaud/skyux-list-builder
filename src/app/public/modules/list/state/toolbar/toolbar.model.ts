@@ -5,7 +5,7 @@ export class ListToolbarModel {
   public disabled: boolean;
   public items: ListToolbarItemModel[] = [];
   public type: string;
-  public showMultiselectActionBar: boolean;
+  public showMultiselectActionBar = false;
 
   constructor(data?: any) {
     if (data) {

@@ -1,4 +1,7 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable
+} from '@angular/core';
+
 import {
   StateDispatcher,
   StateOrchestrator
@@ -8,9 +11,13 @@ import {
   ListSortFieldSelectorModel
 } from '@skyux/list-builder-common';
 
-import { ListStateAction } from './list-state-action.type';
+import {
+  ListStateAction
+} from './list-state-action.type';
 
-import { ListViewsSetActiveAction } from './views/actions';
+import {
+  ListViewsSetActiveAction
+} from './views/actions';
 
 import {
   ListToolbarItemsDisableAction,
@@ -20,7 +27,9 @@ import {
   ListToolbarShowMultiselectActionBarAction
 } from './toolbar/actions';
 
-import { ListToolbarItemModel } from './toolbar/toolbar-item.model';
+import {
+  ListToolbarItemModel
+} from './toolbar/toolbar-item.model';
 
 import {
   ListSearchSetFunctionsAction,
@@ -34,14 +43,30 @@ import {
   ListSortSetFieldSelectorsAction,
   ListSortSetGlobalAction
 } from './sort/actions';
-import { ListSortLabelModel } from './sort/label.model';
-import { ListFilterModel } from './filters/filter.model';
-import { ListSearchModel } from './search/search.model';
+
+import {
+  ListSortLabelModel
+} from './sort/label.model';
+
+import {
+  ListFilterModel
+} from './filters/filter.model';
+
+import {
+  ListSearchModel
+} from './search/search.model';
+
 import {
   ListFiltersUpdateAction
 } from './filters/actions';
-import { ListSelectedSetItemsSelectedTrueAction } from './selected/actions';
-import { ListItemsSetSelectedItemsTrueAction } from './items/actions';
+
+import {
+  ListSelectedSetItemsSelectedTrueAction
+} from './selected/actions';
+
+import {
+  ListItemsSetSelectedItemsTrueAction
+} from './items/actions';
 
 export class ListStateOrchestrator<T> extends StateOrchestrator<T, ListStateAction> {
 }

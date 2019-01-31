@@ -3,5 +3,6 @@
 export class ListSelectedSetItemsSelectedTrueAction {
   constructor(
     public items: string[],
-    public refresh: boolean = true) {}
+    public refresh: boolean = true
+  ) {}
 }

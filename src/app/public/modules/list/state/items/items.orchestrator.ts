@@ -2,8 +2,13 @@ import {
   ListItemModel
 } from '@skyux/list-builder-common';
 
-import { ListStateOrchestrator } from '../list-state.rxstate';
-import { AsyncList } from 'microedge-rxstate/dist';
+import {
+  AsyncList
+} from 'microedge-rxstate/dist';
+
+import {
+  ListStateOrchestrator
+} from '../list-state.rxstate';
 
 import {
   ListItemsLoadAction,
@@ -24,13 +29,15 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
 
   private setLoading(
     state: AsyncList<ListItemModel>,
-    action: ListItemsSetLoadingAction): AsyncList<ListItemModel> {
+    action: ListItemsSetLoadingAction
+  ): AsyncList<ListItemModel> {
     return new AsyncList<ListItemModel>(state.items, state.lastUpdate, action.loading, state.count);
   }
 
   private load(
     state: AsyncList<ListItemModel>,
-    action: ListItemsLoadAction): AsyncList<ListItemModel> {
+    action: ListItemsLoadAction
+  ): AsyncList<ListItemModel> {
     const newListItems = action.items.map(g => new ListItemModel(g.id, g.data, g.isSelected));
     const resultItems = (action.refresh) ? [...newListItems] : [...state.items, ...newListItems];
 
@@ -45,7 +52,8 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
 
   private setItemsSelectedTrue(
     state: AsyncList<ListItemModel>,
-    action: ListItemsSetSelectedItemsTrueAction): AsyncList<ListItemModel> {
+    action: ListItemsSetSelectedItemsTrueAction
+  ): AsyncList<ListItemModel> {
 
     const newListItems = state.items.map(listItemModel => {
       const isSelected = action.items.indexOf(listItemModel.id) > -1 ? true : false;

@@ -50,7 +50,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
   public ngOnInit() {
     this.state.map(t => t.selected.item)
       .takeUntil(this.ngUnsubscribe)
-      .distinctUntilChanged((x, y) => this.mapsEqual(x.selectedIdMap, y.selectedIdMap))
+      .distinctUntilChanged((x, y) => (x === y && this.mapsEqual(x.selectedIdMap, y.selectedIdMap)))
       .subscribe((model: ListSelectedModel) => {
         this.selectedIdMap = model.selectedIdMap;
 

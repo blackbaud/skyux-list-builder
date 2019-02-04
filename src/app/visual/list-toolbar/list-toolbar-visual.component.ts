@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import {
+  Component
+} from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs/Observable';
+
 import 'rxjs/add/observable/of';
 
 @Component({

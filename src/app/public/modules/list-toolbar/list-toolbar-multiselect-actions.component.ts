@@ -50,7 +50,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
   public ngOnInit() {
     this.state.map(t => t.selected.item)
       .takeUntil(this.ngUnsubscribe)
-      .distinctUntilChanged()
+      .distinctUntilChanged((x, y) => this.mapsEqual(x.selectedIdMap, y.selectedIdMap))
       .subscribe((model: ListSelectedModel) => {
         this.selectedIdMap = model.selectedIdMap;
 
@@ -130,6 +130,20 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
       },
       defaultValue: false.toString()
     });
+  }
+
+  private mapsEqual(mapA: Map<any, any>, mapB:  Map<any, any>): boolean {
+      if (mapA.size !== mapB.size) {
+          return false;
+      }
+      for (let key of Array.from( mapA.keys()) ) {
+        let valueB = mapB.get(key);
+        let valueA = mapA.get(key);
+        if (valueB !== valueA || (valueB === undefined && !mapB.has(key))) {
+            return false;
+        }
+    }
+    return true;
   }
 
 }

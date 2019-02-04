@@ -230,7 +230,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     if (this.appliedFiltersChange.observers.length > 0) {
       this.state.map(current => current.filters)
         .takeUntil(this.ngUnsubscribe)
-        .distinctUntilChanged()
+        .distinctUntilChanged(this.arraysEqual)
         .skip(1)
         .subscribe((filters: any) => {
           this.appliedFiltersChange.emit(filters);
@@ -381,5 +381,11 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
       item.isSelected = selectedIds.indexOf(item.id) > -1 ? true : false;
     });
     return updatedListModel;
+  }
+
+  private arraysEqual(arrayA: any[], arrayB: any[]) {
+    return arrayA.length === arrayB.length &&
+      arrayA.every((value, index) =>
+        value === arrayB[index]);
   }
 }

@@ -1,13 +1,22 @@
-import { ListStateOrchestrator } from '../list-state.rxstate';
-import { ListToolbarModel } from './toolbar.model';
-import { ListToolbarItemModel } from './toolbar-item.model';
+import {
+  ListStateOrchestrator
+} from '../list-state.rxstate';
+
+import {
+  ListToolbarModel
+} from './toolbar.model';
+
+import {
+  ListToolbarItemModel
+} from './toolbar-item.model';
+
 import {
   ListToolbarItemsLoadAction,
   ListToolbarItemsRemoveAction,
   ListToolbarSetExistsAction,
   ListToolbarSetTypeAction,
   ListToolbarItemsDisableAction,
-  ListToolbarShowMultiselectActionsAction
+  ListToolbarShowMultiselectToolbarAction
 } from './actions';
 
 export class ListToolbarOrchestrator
@@ -22,7 +31,7 @@ export class ListToolbarOrchestrator
       .register(ListToolbarItemsLoadAction, this.load)
       .register(ListToolbarSetTypeAction, this.setType)
       .register(ListToolbarItemsRemoveAction, this.remove)
-      .register(ListToolbarShowMultiselectActionsAction, this.showMultiselectToolbar);
+      .register(ListToolbarShowMultiselectToolbarAction, this.showMultiselectToolbar);
   }
 
   private setExists(
@@ -88,7 +97,7 @@ export class ListToolbarOrchestrator
 
   private showMultiselectToolbar(
     state: ListToolbarModel,
-    action: ListToolbarShowMultiselectActionsAction
+    action: ListToolbarShowMultiselectToolbarAction
   ): ListToolbarModel {
     const newModel = new ListToolbarModel(state);
     newModel.showMultiselectToolbar = action.exists;

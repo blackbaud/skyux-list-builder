@@ -90,15 +90,15 @@ describe('List Toolbar Component', () => {
   }
 
   function getSelectAllButton() {
-    return element.query(By.css('#sky-list-toolbar-multiselect-action-select-all'));
+    return element.query(By.css('#sky-list-multiselect-toolbar-0-select-all'));
   }
 
   function getClearAllButton() {
-    return element.query(By.css('#sky-list-toolbar-multiselect-action-clear-all'));
+    return element.query(By.css('#sky-list-multiselect-toolbar-0-clear-all'));
   }
 
   function getOnlyShowSelectedCheckbox() {
-    return element.query(By.css('#sky-list-toolbar-multiselect-action-show-selected input'));
+    return element.query(By.css('#sky-list-multiselect-toolbar-0-show-selected input'));
   }
 
   function clickSelectAllButton() {

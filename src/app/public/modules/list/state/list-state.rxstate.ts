@@ -24,7 +24,7 @@ import {
   ListToolbarItemsLoadAction,
   ListToolbarItemsRemoveAction,
   ListToolbarSetExistsAction,
-  ListToolbarShowMultiselectActionsAction
+  ListToolbarShowMultiselectToolbarAction
 } from './toolbar/actions';
 
 import {
@@ -95,7 +95,7 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
   }
 
   public toolbarShowMultiselectActions(show: boolean): void {
-    this.next(new ListToolbarShowMultiselectActionsAction(show));
+    this.next(new ListToolbarShowMultiselectToolbarAction(show));
   }
 
   public searchSetFunctions(sortFunctions: ((data: any, searchText: string) => boolean)[]): void {

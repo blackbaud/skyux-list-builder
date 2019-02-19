@@ -28,15 +28,19 @@ import {
   ListStateDispatcher
 } from '../list/state';
 
+let uniqueId = 0;
+
 @Component({
   selector: 'sky-list-multiselect-toolbar',
-  templateUrl: './list-toolbar-multiselect-actions.component.html',
-  styleUrls: ['./list-toolbar-multiselect-actions.component.scss']
+  templateUrl: './list-multiselect-toolbar.component.html',
+  styleUrls: ['./list-multiselect-toolbar.component.scss']
 })
 export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
 
   @Input()
   public showOnlySelected = false;
+
+  public multiselectToolbarId = `sky-list-multiselect-toolbar-${uniqueId++}`;
 
   private selectedIdMap = new Map<string, boolean>();
 
@@ -133,16 +137,16 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
   }
 
   /* istanbul ignore next */
-  private mapsEqual(mapA: Map<any, any>, mapB:  Map<any, any>): boolean {
-      if (mapA.size !== mapB.size) {
+  private mapsEqual(mapA: Map<any, any>, mapB: Map<any, any>): boolean {
+    if (mapA.size !== mapB.size) {
+        return false;
+    }
+    for (let key of Array.from( mapA.keys()) ) {
+      let valueB = mapB.get(key);
+      let valueA = mapA.get(key);
+      if (valueB !== valueA || (valueB === undefined && !mapB.has(key))) {
           return false;
       }
-      for (let key of Array.from( mapA.keys()) ) {
-        let valueB = mapB.get(key);
-        let valueA = mapA.get(key);
-        if (valueB !== valueA || (valueB === undefined && !mapB.has(key))) {
-            return false;
-        }
     }
     return true;
   }

@@ -27,9 +27,10 @@
 
 <ng-template #selectAllTemplate>
   <button
-    id="sky-list-toolbar-multiselect-action-select-all"
     class="sky-btn sky-btn-link"
-    (click)="selectAll(); false"
+    type="button"
+    [attr.id]="multiselectToolbarId + '-select-all'"
+    (click)="selectAll();$event.preventDefault();"
   >
     {{ 'skyux_list_mutliselect_select_all' | skyLibResources }}
   </button>
@@ -37,9 +38,10 @@
 
 <ng-template #clearSelectionsTemplate>
   <button
-    id="sky-list-toolbar-multiselect-action-clear-all"
     class="sky-btn sky-btn-link"
-    (click)="clearSelections(); false"
+    type="button"
+    [attr.id]="multiselectToolbarId + '-clear-all'"
+    (click)="clearSelections();$event.preventDefault();"
   >
     {{ 'skyux_list_multiselect_clear_all' | skyLibResources }}
   </button>
@@ -47,14 +49,12 @@
 
 <ng-template #showSelectedTemplate>
   <sky-checkbox
-    id="sky-list-toolbar-multiselect-action-show-selected"
+    [attr.id]="multiselectToolbarId + '-show-selected'"
     [checked]="showOnlySelected"
     (change)="changeVisibleItems($event)"
   >
     <sky-checkbox-label>
-      <div>
-        {{ 'skyux_list_mutliselect_show_selected' | skyLibResources }}
-      </div>
+      {{ 'skyux_list_mutliselect_show_selected' | skyLibResources }}
     </sky-checkbox-label>
   </sky-checkbox>
 </ng-template>

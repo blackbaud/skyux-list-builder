@@ -24,7 +24,8 @@ import {
 
 import {
   ListState,
-  ListStateDispatcher
+  ListStateDispatcher,
+  ListSelectedSetItemsSelectedTrueAction
 } from '../list/state';
 
 import {
@@ -46,6 +47,7 @@ import {
   ListViewsLoadAction,
   ListViewsSetActiveAction
 } from '../list/state';
+import { ListItemsSetSelectedItemsTrueAction } from '@blackbaud/skyux-builder/../../../dist/modules/list/state';
 
 describe('List Toolbar Component', () => {
   let state: ListState,
@@ -121,7 +123,7 @@ describe('List Toolbar Component', () => {
 
   function initializeToolbarWithMultiselect() {
     initializeToolbar();
-    dispatcher.toolbarShowMultiselectActionBar(true);
+    dispatcher.toolbarShowMultiselectActions(true);
     fixture.detectChanges();
   }
 
@@ -412,16 +414,16 @@ describe('List Toolbar Component', () => {
       expect(getMultiselectActionToolbar()).toBeNull();
     });
 
-    it('should toggle visibility when toolbarShowMultiselectActionBar is updated', () => {
+    it('should toggle visibility when toolbarShowMultiselectActions is updated', () => {
       initializeToolbar();
 
       // Call dispatcher. Expect action bar is visible.
-      dispatcher.toolbarShowMultiselectActionBar(true);
+      dispatcher.toolbarShowMultiselectActions(true);
       fixture.detectChanges();
       expect(getMultiselectActionToolbar()).not.toBeNull();
 
       // Call dispatcher. Expect action bar is hidden.
-      dispatcher.toolbarShowMultiselectActionBar(false);
+      dispatcher.toolbarShowMultiselectActions(false);
       fixture.detectChanges();
       expect(getMultiselectActionToolbar()).toBeNull();
     });
@@ -552,6 +554,26 @@ describe('List Toolbar Component', () => {
       .subscribe(paging => {
         expect(paging.pageNumber).toEqual(1);
       });
+    });
+
+    it('should not update map when fooooo', () => {
+      initializeToolbarWithMultiselect();
+      fixture.detectChanges();
+
+      // Update ListSelectedModel (checklist / select field).
+      dispatcher.next(new ListItemsSetSelectedItemsTrueAction(['1', '2'], false));
+      // Update ListItemModel (grid).
+      dispatcher.next(new ListSelectedSetItemsSelectedTrueAction(['1', '2'], false));
+
+        fixture.detectChanges();
+
+        // Update ListSelectedModel (checklist / select field).
+        dispatcher.next(new ListItemsSetSelectedItemsTrueAction(['4'], false));
+        // Update ListItemModel (grid).
+        dispatcher.next(new ListSelectedSetItemsSelectedTrueAction(['4'], false));
+
+          fixture.detectChanges();
+      expect(1).toEqual(1);
     });
   });
 

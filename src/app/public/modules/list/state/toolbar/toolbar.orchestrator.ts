@@ -7,7 +7,7 @@ import {
   ListToolbarSetExistsAction,
   ListToolbarSetTypeAction,
   ListToolbarItemsDisableAction,
-  ListToolbarShowMultiselectActionBarAction
+  ListToolbarShowMultiselectActionsAction
 } from './actions';
 
 export class ListToolbarOrchestrator
@@ -22,7 +22,7 @@ export class ListToolbarOrchestrator
       .register(ListToolbarItemsLoadAction, this.load)
       .register(ListToolbarSetTypeAction, this.setType)
       .register(ListToolbarItemsRemoveAction, this.remove)
-      .register(ListToolbarShowMultiselectActionBarAction, this.showMultiselectActionBar);
+      .register(ListToolbarShowMultiselectActionsAction, this.showMultiselectActionBar);
   }
 
   private setExists(
@@ -88,7 +88,7 @@ export class ListToolbarOrchestrator
 
   private showMultiselectActionBar(
     state: ListToolbarModel,
-    action: ListToolbarShowMultiselectActionBarAction
+    action: ListToolbarShowMultiselectActionsAction
   ): ListToolbarModel {
     const newModel = new ListToolbarModel(state);
     newModel.showMultiselectActionBar = action.exists;

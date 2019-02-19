@@ -18,6 +18,6 @@ export class ListToolbarVisualInternalComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.dispatcher.toolbarShowMultiselectActionBar(true);
+    this.dispatcher.toolbarShowMultiselectActions(true);
   }
 }

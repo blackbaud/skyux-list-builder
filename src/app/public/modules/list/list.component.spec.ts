@@ -34,7 +34,7 @@ import {
 import {
   ListState,
   ListStateDispatcher,
-  ListToolbarShowMultiselectActionBarAction
+  ListToolbarShowMultiselectActionsAction
 } from '../list/state';
 
 import {
@@ -1287,8 +1287,8 @@ describe('List Component', () => {
       expect(action).not.toBeUndefined();
     });
 
-    it('should construct ListToolbarShowMultiselectActionBarAction', () => {
-      let action = new ListToolbarShowMultiselectActionBarAction(true);
+    it('should construct ListToolbarShowMultiselectActionsAction', () => {
+      let action = new ListToolbarShowMultiselectActionsAction(true);
       expect(action).not.toBeUndefined();
     });
 

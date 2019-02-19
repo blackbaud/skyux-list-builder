@@ -1,3 +1,3 @@
-export class ListToolbarShowMultiselectActionBarAction {
+export class ListToolbarShowMultiselectActionsAction {
   constructor(public exists: boolean) {}
 }

@@ -132,6 +132,7 @@ export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDest
     });
   }
 
+  /* istanbul ignore next */
   private mapsEqual(mapA: Map<any, any>, mapB:  Map<any, any>): boolean {
       if (mapA.size !== mapB.size) {
           return false;

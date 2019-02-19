@@ -269,7 +269,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
       .takeUntil(this.ngUnsubscribe)
       .map(s => s.toolbar)
       .distinctUntilChanged()
-      .map(t => t.showMultiselectActionBar);
+      .map(t => t.showMultiselectToolbar);
 
     this.hasAppliedFilters = this.state
       .takeUntil(this.ngUnsubscribe)

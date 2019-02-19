@@ -22,7 +22,7 @@ export class ListToolbarOrchestrator
       .register(ListToolbarItemsLoadAction, this.load)
       .register(ListToolbarSetTypeAction, this.setType)
       .register(ListToolbarItemsRemoveAction, this.remove)
-      .register(ListToolbarShowMultiselectActionsAction, this.showMultiselectActionBar);
+      .register(ListToolbarShowMultiselectActionsAction, this.showMultiselectToolbar);
   }
 
   private setExists(
@@ -86,12 +86,12 @@ export class ListToolbarOrchestrator
     return newModel;
   }
 
-  private showMultiselectActionBar(
+  private showMultiselectToolbar(
     state: ListToolbarModel,
     action: ListToolbarShowMultiselectActionsAction
   ): ListToolbarModel {
     const newModel = new ListToolbarModel(state);
-    newModel.showMultiselectActionBar = action.exists;
+    newModel.showMultiselectToolbar = action.exists;
     return newModel;
   }
 }

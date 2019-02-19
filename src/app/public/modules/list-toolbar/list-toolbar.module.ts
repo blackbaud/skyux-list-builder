@@ -36,8 +36,8 @@ import {
 } from './list-toolbar-sort.component';
 
 import {
-  SkyListToolbarMultiselectActionsComponent
-} from './list-toolbar-multiselect-actions.component';
+  SkyListMultiselectToolbarComponent
+} from './list-multiselect-toolbar.component';
 
 import {
   SkyListToolbarViewActionsComponent
@@ -56,7 +56,7 @@ import {
     SkyListToolbarComponent,
     SkyListToolbarItemComponent,
     SkyListToolbarItemRendererComponent,
-    SkyListToolbarMultiselectActionsComponent,
+    SkyListMultiselectToolbarComponent,
     SkyListToolbarSortComponent,
     SkyListToolbarViewActionsComponent
   ],
@@ -75,7 +75,7 @@ import {
     SkyListToolbarComponent,
     SkyListToolbarItemComponent,
     SkyListToolbarItemRendererComponent,
-    SkyListToolbarMultiselectActionsComponent,
+    SkyListMultiselectToolbarComponent,
     SkyListToolbarSortComponent,
     SkyListToolbarViewActionsComponent
   ]

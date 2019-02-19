@@ -29,11 +29,11 @@ import {
 } from '../list/state';
 
 @Component({
-  selector: 'sky-list-toolbar-multiselect-actions',
+  selector: 'sky-list-multiselect-toolbar',
   templateUrl: './list-toolbar-multiselect-actions.component.html',
   styleUrls: ['./list-toolbar-multiselect-actions.component.scss']
 })
-export class SkyListToolbarMultiselectActionsComponent implements OnInit, OnDestroy {
+export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
 
   @Input()
   public showOnlySelected = false;

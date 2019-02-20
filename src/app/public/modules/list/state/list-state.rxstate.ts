@@ -94,7 +94,7 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
     this.next(new ListToolbarItemsRemoveAction(ids));
   }
 
-  public toolbarShowMultiselectActions(show: boolean): void {
+  public toolbarShowMultiselectToolbar(show: boolean): void {
     this.next(new ListToolbarShowMultiselectToolbarAction(show));
   }
 

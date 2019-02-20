@@ -121,7 +121,7 @@ describe('List Toolbar Component', () => {
 
   function initializeToolbarWithMultiselect() {
     initializeToolbar();
-    dispatcher.toolbarShowMultiselectActions(true);
+    dispatcher.toolbarShowMultiselectToolbar(true);
     fixture.detectChanges();
   }
 
@@ -412,16 +412,16 @@ describe('List Toolbar Component', () => {
       expect(getMultiselectActionToolbar()).toBeNull();
     });
 
-    it('should toggle visibility when toolbarShowMultiselectActions is updated', () => {
+    it('should toggle visibility when toolbarShowMultiselectToolbar is updated', () => {
       initializeToolbar();
 
       // Call dispatcher. Expect action bar is visible.
-      dispatcher.toolbarShowMultiselectActions(true);
+      dispatcher.toolbarShowMultiselectToolbar(true);
       fixture.detectChanges();
       expect(getMultiselectActionToolbar()).not.toBeNull();
 
       // Call dispatcher. Expect action bar is hidden.
-      dispatcher.toolbarShowMultiselectActions(false);
+      dispatcher.toolbarShowMultiselectToolbar(false);
       fixture.detectChanges();
       expect(getMultiselectActionToolbar()).toBeNull();
     });

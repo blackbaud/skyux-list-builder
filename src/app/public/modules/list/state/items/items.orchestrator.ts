@@ -13,7 +13,7 @@ import {
 import {
   ListItemsLoadAction,
   ListItemsSetLoadingAction,
-  ListItemsSetSelectedItemsTrueAction
+  ListItemsSetSelectedAction
 } from './actions';
 
 export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListItemModel>> {
@@ -24,7 +24,7 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     this
       .register(ListItemsSetLoadingAction, this.setLoading)
       .register(ListItemsLoadAction, this.load)
-      .register(ListItemsSetSelectedItemsTrueAction, this.setItemsSelectedTrue);
+      .register(ListItemsSetSelectedAction, this.setItemsSelectedTrue);
   }
 
   private setLoading(
@@ -52,14 +52,19 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
 
   private setItemsSelectedTrue(
     state: AsyncList<ListItemModel>,
-    action: ListItemsSetSelectedItemsTrueAction
+    action: ListItemsSetSelectedAction
   ): AsyncList<ListItemModel> {
 
-    const newListItems = state.items.map(listItemModel => {
-      const isSelected = action.items.indexOf(listItemModel.id) > -1 ? true : false;
-      return new ListItemModel(listItemModel.id, listItemModel.data, isSelected);
+    const newListItems: ListItemModel[] = [];
+    state.items.map(item => {
+      newListItems.push(new ListItemModel(item.id, item.data, action.items.indexOf(item.id) > -1 ? true : false));
     });
 
-    return new AsyncList<ListItemModel>(newListItems, state.lastUpdate, state.loading, state.count);
+    return new AsyncList<ListItemModel>(
+      newListItems,
+      Date.now(),
+      state.loading,
+      state.count
+    );
   }
 }

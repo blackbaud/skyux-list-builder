@@ -60,7 +60,7 @@ import {
 
 import {
   ListFilterModel,
-  ListItemsSetSelectedItemsTrueAction,
+  ListItemsSetSelectedAction,
   ListPagingModel,
   ListSearchModel,
   ListSearchSetFunctionsAction,
@@ -1282,8 +1282,8 @@ describe('List Component', () => {
       expect(action).not.toBeUndefined();
     });
 
-    it('should construct ListItemsSetSelectedItemsTrueAction', () => {
-      let action = new ListItemsSetSelectedItemsTrueAction(['1']);
+    it('should construct ListItemsSetSelectedAction', () => {
+      let action = new ListItemsSetSelectedAction(['1']);
       expect(action).not.toBeUndefined();
     });
 

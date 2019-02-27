@@ -210,11 +210,11 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
       .takeUntil(this.ngUnsubscribe)
       .distinctUntilChanged()
       .skip(1)
-      .subscribe((selected) => {
+      .subscribe(selected => {
 
         // Update lastSelectedIds to help us retain user selections.
         let selectedIdsList: string[] = [];
-        selected.item.selectedIdMap.forEach((value, key, map) => {
+        selected.item.selectedIdMap.forEach((value, key) => {
           if (value === true) {
             selectedIdsList.push(key);
           }

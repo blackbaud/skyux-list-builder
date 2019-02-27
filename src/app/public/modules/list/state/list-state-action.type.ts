@@ -1,7 +1,7 @@
 import {
   ListItemsLoadAction,
   ListItemsSetLoadingAction,
-  ListItemsSetSelectedItemsTrueAction
+  ListItemsSetSelectedAction
 } from './items/actions';
 
 import {
@@ -49,7 +49,7 @@ import {
 } from './filters/actions';
 
 export type ListStateAction =
-  ListItemsSetLoadingAction | ListItemsLoadAction | ListItemsSetSelectedItemsTrueAction |
+  ListItemsSetLoadingAction | ListItemsLoadAction | ListItemsSetSelectedAction |
   ListPagingSetMaxPagesAction | ListPagingSetItemsPerPageAction | ListPagingSetPageNumberAction |
   ListViewsLoadAction | ListViewsSetActiveAction | ListToolbarItemsLoadAction |
   ListToolbarSetExistsAction | ListSearchSetSearchTextAction | ListSearchSetFunctionsAction |

@@ -54,7 +54,7 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.state.map(t => t.selected.item)
       .takeUntil(this.ngUnsubscribe)
-      .distinctUntilChanged((x, y) => (x === y && this.mapsEqual(x.selectedIdMap, y.selectedIdMap)))
+      .distinctUntilChanged(this.listSelectedModelsEqual)
       .subscribe((model: ListSelectedModel) => {
         this.selectedIdMap = model.selectedIdMap;
 
@@ -137,8 +137,11 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
   }
 
   /* istanbul ignore next */
-  private mapsEqual(mapA: Map<any, any>, mapB: Map<any, any>): boolean {
-    if (mapA.size !== mapB.size) {
+  private listSelectedModelsEqual(modelA: ListSelectedModel, modelB: ListSelectedModel) {
+    let mapA = modelA.selectedIdMap;
+    let mapB = modelB.selectedIdMap;
+
+    if (modelA === modelB && mapA.size !== mapB.size) {
         return false;
     }
     for (let key of Array.from( mapA.keys()) ) {

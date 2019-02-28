@@ -55,6 +55,14 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     action: ListItemsSetSelectedAction
   ): AsyncList<ListItemModel> {
 
+    // OLD WAY
+    // const newListItems = state.items.map(listItemModel => {
+    //   const isSelected = action.items.indexOf(listItemModel.id) > -1 ? true : false;
+    //   return new ListItemModel(listItemModel.id, listItemModel.data, isSelected);
+    // });
+
+    // return new AsyncList<ListItemModel>(newListItems, state.lastUpdate, state.loading, state.count);
+
     const newListItems: ListItemModel[] = [];
     state.items.map(item => {
       newListItems.push(new ListItemModel(item.id, item.data, action.items.indexOf(item.id) > -1 ? true : false));

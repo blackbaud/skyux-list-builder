@@ -9,7 +9,7 @@ import {
 import 'rxjs/add/observable/of';
 
 @Component({
-  selector: 'list-toolbar-visual',
+  selector: 'sky-list-toolbar-visual',
   templateUrl: './list-toolbar-visual.component.html'
 })
 export class ListToolbarVisualComponent {
@@ -26,7 +26,13 @@ export class ListToolbarVisualComponent {
 
   public iconGroupSelectedValue = 'table';
 
+  public selectedIds: string[] = ['1'];
+
   public fruitTypeFilterFunction(): boolean {
     return true;
+  }
+
+  public selectedIdsChange(data: any) {
+    console.log('selectedIdsChange:', data);
   }
 }

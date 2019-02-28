@@ -19,14 +19,14 @@ import {
 
 // Internal component only used to get at ListStateDispatcher.
 @Component({
-  selector: 'sky-list-toolbar-internal-visual',
-  templateUrl: './list-toolbar-internal-visual.component.html',
+  selector: 'sky-list-view-isselected-visual',
+  templateUrl: './list-view-isselected-visual.component.html',
   providers: [
     /* tslint:disable-next-line */
-    { provide: ListViewComponent, useExisting: forwardRef(() => ListViewInteralTestComponent) },
+    { provide: ListViewComponent, useExisting: forwardRef(() => ListViewIsSelectedTestComponent) },
   ]
 })
-export class ListViewInteralTestComponent extends ListViewComponent implements OnInit {
+export class ListViewIsSelectedTestComponent extends ListViewComponent implements OnInit {
 
   public localItems: ListItemModel[];
 
@@ -42,7 +42,7 @@ export class ListViewInteralTestComponent extends ListViewComponent implements O
       });
   }
 
-  public modelChange(checked: boolean) {
+  public setItemSelection() {
     const selectedItemIds = this.localItems.filter(item => item.isSelected).map(item => item.id);
     this.dispatcher.setSelected(selectedItemIds);
   }

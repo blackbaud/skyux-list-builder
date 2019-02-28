@@ -332,8 +332,10 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
         return response;
       })
       .takeUntil(this.ngUnsubscribe)
+
+      // Retain user selections from previous state.
+      // This is only necessary for grids component (based on item.isSelected).
       .map(response => {
-        // Retain user selections from previous state.
         return response.map(listDataResponseModel => {
           return new ListDataResponseModel({
             count: listDataResponseModel.count,
@@ -341,6 +343,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
           });
         });
       })
+
       .flatMap((value: Observable<ListDataResponseModel>, index: number) => {
         return value;
       });

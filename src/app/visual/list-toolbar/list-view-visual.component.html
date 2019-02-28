@@ -3,8 +3,8 @@
     <span>
       <input
         type="checkbox"
-        [(ngModel)]="item.isSelected"
-        (change)="modelChange($event)"
+        [checked]="itemSelected(item.id) | async"
+        (change)="setItemSelection(item, $event)"
       />
       {{ item.id }}
     </span>

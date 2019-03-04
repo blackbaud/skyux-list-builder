@@ -4,3 +4,4 @@ export * from './list-filters';
 export * from './list-paging';
 export * from './list-secondary-actions';
 export * from './list-toolbar';
+export * from './list-view-switcher';

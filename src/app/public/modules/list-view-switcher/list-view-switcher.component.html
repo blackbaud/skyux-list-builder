@@ -1,0 +1,15 @@
+<sky-radio-group *ngIf="showSwitcher"
+  name="viewSwitcher"
+  [(ngModel)]="activeView"
+>
+  <span
+    class="sky-switch-icon-group"
+  >
+    <sky-radio *ngFor="let view of availableViews; let i = index"
+      [icon]="view.icon"
+      [value]="i"
+      (click)="activateView(view.view, i)"
+    >
+    </sky-radio>
+  </span>
+</sky-radio-group>

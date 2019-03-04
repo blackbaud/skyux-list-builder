@@ -218,7 +218,6 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
     this.watchTemplates();
 
     this.type = this.state.map((state) => state.toolbar.type).distinctUntilChanged();
-
     this.type
       .takeUntil(this.ngUnsubscribe)
       .subscribe((toolbarType) => {

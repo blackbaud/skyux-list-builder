@@ -141,7 +141,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
         (this.defaultView === undefined) ? this.listViews.first : this.defaultView;
 
       this.dispatcher.next(
-        new ListViewsLoadAction(this.listViews.map(v => new ListViewModel(v.id, v.label)))
+        new ListViewsLoadAction(this.listViews.map(v => new ListViewModel(v.id, v.label, v.type)))
       );
 
       // activate the default view

@@ -5,7 +5,16 @@
 }
 
 .sky-list-toolbar-view-actions {
+
+  display: flex;
+  align-items: center;
+  min-height: 49px;
+
   @media (max-width: $sky-screen-sm-max) {
     margin-bottom: 5px;
   }
+}
+
+.sky-list-toolbar-view-actions ::ng-deep > :not(:last-child) {
+  margin-right: 5px;
 }

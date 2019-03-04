@@ -61,3 +61,6 @@ export {
 export {
   ListViewsModel
 } from './views/views.model';
+export {
+  SkyListViewType
+} from './views/view-type';

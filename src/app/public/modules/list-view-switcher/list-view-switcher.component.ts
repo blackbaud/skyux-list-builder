@@ -43,10 +43,6 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
 
   public ngAfterViewInit() {
 
-    this.state.subscribe((s) => {
-      console.log(s);
-    });
-
     this.state
       .map(s => s.views)
       .distinctUntilChanged()

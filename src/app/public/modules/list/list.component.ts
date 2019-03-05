@@ -45,18 +45,41 @@ import {
   getValue
 } from 'microedge-rxstate/dist/helpers';
 
-import { ListDataRequestModel } from './list-data-request.model';
-import { ListDataResponseModel } from './list-data-response.model';
-import { ListDataProvider } from './list-data.provider';
-import { SkyListInMemoryDataProvider } from '../list-data-provider-in-memory';
-import { ListState, ListStateDispatcher } from './state';
+import {
+  ListDataRequestModel
+} from './list-data-request.model';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  ListDataResponseModel
+ } from './list-data-response.model';
+
+import {
+  ListDataProvider
+} from './list-data.provider';
+
+import {
+  SkyListInMemoryDataProvider
+} from '../list-data-provider-in-memory';
+
+import {
+  ListState,
+  ListStateDispatcher
+} from './state';
+
+import {
+  Observable
+} from 'rxjs/Observable';
+
 import 'rxjs/add/observable/combineLatest';
+
 import 'rxjs/add/observable/of';
+
 import 'rxjs/add/operator/distinctUntilChanged';
+
 import 'rxjs/add/operator/mergeMap';
+
 import 'rxjs/add/operator/take';
+
 import 'rxjs/add/operator/skip';
 
 import {
@@ -65,16 +88,22 @@ import {
   ListSortFieldSelectorModel
 } from '@skyux/list-builder-common';
 
-import { ListViewComponent } from './list-view.component';
+import {
+  ListViewComponent
+} from './list-view.component';
 
-import { ListSearchModel } from './state/search/search.model';
+import {
+  ListSearchModel
+} from './state/search/search.model';
 
 import {
   ListViewsLoadAction,
   ListViewsSetActiveAction
 } from './state/views/actions';
 
-import { ListViewModel } from './state/views/view.model';
+import {
+  ListViewModel
+} from './state/views/view.model';
 
 let idIndex = 0;
 
@@ -141,7 +170,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges {
         (this.defaultView === undefined) ? this.listViews.first : this.defaultView;
 
       this.dispatcher.next(
-        new ListViewsLoadAction(this.listViews.map(v => new ListViewModel(v.id, v.label)))
+        new ListViewsLoadAction(this.listViews.map(v => new ListViewModel(v.id, v.label, v.type)))
       );
 
       // activate the default view

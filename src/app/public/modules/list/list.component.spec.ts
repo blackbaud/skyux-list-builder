@@ -5,30 +5,73 @@ import {
   tick,
   ComponentFixture
 } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+
+import {
+  DebugElement
+} from '@angular/core';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  FormsModule
+} from '@angular/forms';
+
 import {
   ListState,
-  ListStateDispatcher
+  ListStateDispatcher,
+  SkyListViewType
 } from '../list/state';
 
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {
+  Observable
+} from 'rxjs/Observable';
+
+import {
+  BehaviorSubject
+} from 'rxjs/BehaviorSubject';
 
 import {
   ListItemModel,
   ListSortFieldSelectorModel
 } from '@skyux/list-builder-common';
 
-import { ListFixturesModule } from './fixtures/list-fixtures.module';
-import { ListTestComponent } from './fixtures/list.component.fixture';
-import { ListDualTestComponent } from './fixtures/list-dual.component.fixture';
-import { ListEmptyTestComponent } from './fixtures/list-empty.component.fixture';
-import { ListSelectedTestComponent } from './fixtures/list-selected.component.fixture';
-import { ListFilteredTestComponent } from './fixtures/list-filtered.component.fixture';
-import { SkyListComponent, SkyListModule, ListDataRequestModel, ListDataResponseModel } from './';
-import { SkyListToolbarModule } from '../list-toolbar';
+import {
+  ListFixturesModule
+} from './fixtures/list-fixtures.module';
+
+import {
+  ListTestComponent
+} from './fixtures/list.component.fixture';
+
+import {
+  ListDualTestComponent
+} from './fixtures/list-dual.component.fixture';
+
+import {
+  ListEmptyTestComponent
+} from './fixtures/list-empty.component.fixture';
+
+import {
+  ListSelectedTestComponent
+} from './fixtures/list-selected.component.fixture';
+
+import {
+  ListFilteredTestComponent
+} from './fixtures/list-filtered.component.fixture';
+
+import {
+  SkyListComponent,
+  SkyListModule,
+  ListDataRequestModel,
+  ListDataResponseModel
+} from './';
+
+import {
+  SkyListToolbarModule
+} from '../list-toolbar';
+
 import {
   ListSearchModel,
   ListSearchSetFunctionsAction,
@@ -43,8 +86,17 @@ import {
   ListPagingModel
 } from './state';
 
-import { SkyListInMemoryDataProvider } from '../list-data-provider-in-memory';
-import { ListViewTestComponent } from './fixtures/list-view-test.component.fixture';
+import {
+  SkyListInMemoryDataProvider
+} from '../list-data-provider-in-memory';
+
+import {
+  ListViewTestComponent
+} from './fixtures/list-view-test.component.fixture';
+
+import {
+  ListViewTestTypeComponent
+} from './fixtures/list-view-test-type.component.fixture';
 
 describe('List Component', () => {
   describe('List Fixture', () => {
@@ -1004,7 +1056,7 @@ describe('List Component', () => {
         fixture.detectChanges();
 
         expect(element.queryAll(
-          By.css('sky-list-view-test[ng-reflect-name="Second"] .list-view-test-item')
+          By.css('sky-list-view-test-type[ng-reflect-name="Second"] .list-view-test-item')
         ).length).toBe(7);
 
       });
@@ -1013,8 +1065,10 @@ describe('List Component', () => {
         expect(component.list.views.length).toBe(2);
         expect(component.list.views[0] instanceof ListViewTestComponent).toBeTruthy();
         expect(component.list.views[0].label).toBe('First');
-        expect(component.list.views[1] instanceof ListViewTestComponent).toBeTruthy();
+        expect(component.list.views[0].type).toBe(SkyListViewType.Custom);
+        expect(component.list.views[1] instanceof ListViewTestTypeComponent).toBeTruthy();
         expect(component.list.views[1].label).toBe('Second');
+        expect(component.list.views[1].type).toBe(SkyListViewType.Grid);
       });
     });
   });

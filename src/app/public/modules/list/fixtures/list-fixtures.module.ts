@@ -1,16 +1,50 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {
+  NgModule
+} from '@angular/core';
 
-import { SkyListModule } from '../';
-import { SkyListToolbarModule } from '../../list-toolbar';
+import {
+  CommonModule
+} from '@angular/common';
 
-import { ListTestComponent } from './list.component.fixture';
-import { ListDualTestComponent } from './list-dual.component.fixture';
-import { ListEmptyTestComponent } from './list-empty.component.fixture';
-import { ListSelectedTestComponent } from './list-selected.component.fixture';
-import { ListFilteredTestComponent } from './list-filtered.component.fixture';
-import { ListViewTestComponent } from './list-view-test.component.fixture';
+import {
+  FormsModule
+} from '@angular/forms';
+
+import {
+  SkyListModule
+} from '../';
+
+import {
+  SkyListToolbarModule
+} from '../../list-toolbar';
+
+import {
+  ListTestComponent
+} from './list.component.fixture';
+
+import {
+  ListDualTestComponent
+} from './list-dual.component.fixture';
+
+import {
+  ListEmptyTestComponent
+} from './list-empty.component.fixture';
+
+import {
+  ListSelectedTestComponent
+} from './list-selected.component.fixture';
+
+import {
+  ListFilteredTestComponent
+} from './list-filtered.component.fixture';
+
+import {
+  ListViewTestComponent
+ } from './list-view-test.component.fixture';
+
+import {
+  ListViewTestTypeComponent
+} from './list-view-test-type.component.fixture';
 
 @NgModule({
   declarations: [
@@ -19,7 +53,8 @@ import { ListViewTestComponent } from './list-view-test.component.fixture';
     ListEmptyTestComponent,
     ListSelectedTestComponent,
     ListFilteredTestComponent,
-    ListViewTestComponent
+    ListViewTestComponent,
+    ListViewTestTypeComponent
   ],
   imports: [
     CommonModule,
@@ -33,7 +68,8 @@ import { ListViewTestComponent } from './list-view-test.component.fixture';
     ListEmptyTestComponent,
     ListSelectedTestComponent,
     ListFilteredTestComponent,
-    ListViewTestComponent
+    ListViewTestComponent,
+    ListViewTestTypeComponent
   ]
 })
 export class ListFixturesModule { }

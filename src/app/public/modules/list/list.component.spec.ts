@@ -1061,6 +1061,14 @@ describe('List Component', () => {
 
       });
 
+      it('should set the correct view type when one is not given', () => {
+        expect(component.list.views[0].type).toBe(SkyListViewType.Custom);
+      });
+
+      it('should set the correct view type when one is given', () => {
+        expect(component.list.views[0].type).toBe(SkyListViewType.Grid);
+      });
+
       it('should return list of views', () => {
         expect(component.list.views.length).toBe(2);
         expect(component.list.views[0] instanceof ListViewTestComponent).toBeTruthy();

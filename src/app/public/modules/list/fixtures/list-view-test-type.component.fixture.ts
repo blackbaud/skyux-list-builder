@@ -1,5 +1,3 @@
-//#region imports
-
 import {
   Component,
   Input,
@@ -23,8 +21,6 @@ import {
 import {
   ListViewComponent
 } from '../list-view.component';
-
-//#endregion
 
 @Component({
   selector: 'sky-list-view-test-type',

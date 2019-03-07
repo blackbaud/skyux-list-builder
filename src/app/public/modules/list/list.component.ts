@@ -169,7 +169,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     private dispatcher: ListStateDispatcher
   ) {}
 
-  public ngAfterContentInit() {
+  public ngAfterContentInit(): void {
     if (this.data && this.dataProvider && this.initialTotal) {
       this.dataFirstLoad = true;
     }
@@ -239,14 +239,14 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
   }
 
-  public ngOnChanges(changes: SimpleChanges) {
+  public ngOnChanges(changes: SimpleChanges): void {
     if (changes['appliedFilters'] &&
       changes['appliedFilters'].currentValue !== changes['appliedFilters'].previousValue) {
       this.dispatcher.filtersUpdate(this.appliedFilters);
     }
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
@@ -359,7 +359,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     ).takeUntil(this.ngUnsubscribe);
   }
 
-  public get lastUpdate() {
+  public get lastUpdate(): Observable<Date> {
     return this.state
       .takeUntil(this.ngUnsubscribe)
       .map(s =>
@@ -367,11 +367,11 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
       );
   }
 
-  public get views() {
+  public get views(): Array<ListViewComponent> {
     return this.listViews.toArray();
   }
 
-  public get itemCount() {
+  public get itemCount(): Observable<number> {
     return this.dataProvider.count();
   }
 
@@ -386,7 +386,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     return updatedListModel;
   }
 
-  private arraysEqual(arrayA: any[], arrayB: any[]) {
+  private arraysEqual(arrayA: any[], arrayB: any[]): boolean {
     return arrayA.length === arrayB.length &&
       arrayA.every((value, index) =>
         value === arrayB[index]);

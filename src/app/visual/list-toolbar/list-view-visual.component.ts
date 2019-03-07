@@ -47,16 +47,16 @@ export class ListViewTestComponent extends ListViewComponent implements OnInit {
       });
   }
 
+  public ngOnInit(): void {
+    this.dispatcher.toolbarShowMultiselectToolbar(true);
+  }
+
   public itemSelected(id: string): Observable<boolean> {
     return this.state.map(state => state.selected.item.selectedIdMap.get(id));
   }
 
-  public setItemSelection(item: ListItemModel, event: any) {
+  public setItemSelection(item: ListItemModel, event: any): void {
     this.dispatcher.next(new ListSelectedSetItemSelectedAction(item.id, event.target.checked));
-  }
-
-  public ngOnInit() {
-    this.dispatcher.toolbarShowMultiselectToolbar(true);
   }
 
 }

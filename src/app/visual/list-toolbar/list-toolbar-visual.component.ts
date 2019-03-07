@@ -32,7 +32,7 @@ export class ListToolbarVisualComponent {
     return true;
   }
 
-  public selectedIdsChange(data: any) {
+  public selectedIdsChange(data: any): void {
     console.log('selectedIdsChange:', data);
   }
 }

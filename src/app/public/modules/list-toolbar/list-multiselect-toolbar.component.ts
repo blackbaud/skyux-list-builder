@@ -51,7 +51,7 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
     private dispatcher: ListStateDispatcher
   ) {}
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.state.map(t => t.selected.item)
       .takeUntil(this.ngUnsubscribe)
       .distinctUntilChanged()
@@ -64,12 +64,12 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
       });
   }
 
-  public ngOnDestroy() {
+  public ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  public selectAll() {
+  public selectAll(): void {
     this.state.map(state => state.items.items)
       .take(1)
       .subscribe(items => {
@@ -80,7 +80,7 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
       });
   }
 
-  public clearSelections() {
+  public clearSelections(): void {
     this.state.map(state => state.items.items)
       .take(1)
       .subscribe(items => {
@@ -91,12 +91,12 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
       });
   }
 
-  public changeVisibleItems(change: SkyCheckboxChange) {
+  public changeVisibleItems(change: SkyCheckboxChange): void {
     this.showOnlySelected = change.checked;
     this.reapplyFilter(change.checked);
   }
 
-  private reapplyFilter(isSelected: boolean) {
+  private reapplyFilter(isSelected: boolean): void {
     let self = this;
 
     this.state.map(state => state.filters)
@@ -123,7 +123,7 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
     this.dispatcher.toolbarSetDisabled(isSelected);
   }
 
-  private getShowSelectedFilter(isSelected: boolean) {
+  private getShowSelectedFilter(isSelected: boolean): ListFilterModel {
     return new ListFilterModel({
       name: 'show-selected',
       value: isSelected.toString(),

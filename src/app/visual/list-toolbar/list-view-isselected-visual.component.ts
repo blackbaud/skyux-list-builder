@@ -42,13 +42,13 @@ export class ListViewIsSelectedTestComponent extends ListViewComponent implement
       });
   }
 
-  public setItemSelection() {
-    const selectedItemIds = this.localItems.filter(item => item.isSelected).map(item => item.id);
-    this.dispatcher.setSelected(selectedItemIds);
+  public ngOnInit(): void {
+    this.dispatcher.toolbarShowMultiselectToolbar(true);
   }
 
-  public ngOnInit() {
-    this.dispatcher.toolbarShowMultiselectToolbar(true);
+  public setItemSelection(): void {
+    const selectedItemIds = this.localItems.filter(item => item.isSelected).map(item => item.id);
+    this.dispatcher.setSelected(selectedItemIds);
   }
 
 }

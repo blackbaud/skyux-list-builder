@@ -22,6 +22,10 @@ import {
   SkyListViewSwitcherCustomComponent
 } from './list-view-switcher-custom.component';
 
+import {
+  SkyListModule
+} from '../list/list.module';
+
 @NgModule({
   declarations: [
     SkyListViewSwitcherComponent,
@@ -30,6 +34,7 @@ import {
   imports: [
     CommonModule,
     FormsModule,
+    SkyListModule,
     SkyRadioModule
   ],
   exports: [

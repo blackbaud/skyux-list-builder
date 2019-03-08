@@ -15,5 +15,8 @@
     "unit": {
       "browserSet": "paranoid"
     }
+  },
+  "moduleAliases": {
+    "@skyux/list-builder": "./src/app/public"
   }
 }

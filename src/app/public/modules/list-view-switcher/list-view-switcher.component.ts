@@ -51,7 +51,6 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
         if (this.currentViews.length <= 1) {
           this.showSwitcher = false;
         } else {
-          this.showSwitcher = true;
           const viewTypes = this.currentViews.map(view => { return view.type; });
 
           this.availableViews = [];
@@ -89,16 +88,21 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
           // }
 
           this.customViews.forEach(customView => {
-            if (this.currentViews.map(view => { return view.id; }).indexOf(customView.view.id) >= 0) {
-              this.availableViews.push({
-                icon: customView.icon,
-                view: customView.view
-              });
+            if (customView.view &&
+              this.currentViews.map(view => { return view.id; }).indexOf(customView.view.id) >= 0) {
+                this.availableViews.push({
+                  icon: customView.icon,
+                  view: customView.view
+                });
             }
           });
 
           let activeView = this.currentViews.find(view => view.id === views.active);
           this.activeView = this.currentViews.indexOf(activeView);
+
+          if (this.availableViews.length >= 2) {
+            this.showSwitcher = true;
+          }
 
           this.changeDetector.detectChanges();
         }

@@ -1,0 +1,37 @@
+import {
+  Component,
+  forwardRef
+} from '@angular/core';
+
+ import {
+  ListItemModel
+} from '@skyux/list-builder-common';
+
+import {
+  ListViewComponent
+} from '../../list';
+
+import {
+  ListState,
+  SkyListViewType
+} from '../../list/state';
+
+ // Internal component only used to get at ListStateDispatcher.
+@Component({
+  selector: 'sky-list-view-switcher-secondary-view',
+  templateUrl: './list-view-switcher-secondary-view.component.fixture.html',
+  providers: [
+    /* tslint:disable-next-line */
+    { provide: ListViewComponent, useExisting: forwardRef(() => ListViewSwitcherSecondaryViewFixtureComponent) },
+  ]
+})
+export class ListViewSwitcherSecondaryViewFixtureComponent extends ListViewComponent {
+
+   public localItems: ListItemModel[];
+
+   constructor(
+    state: ListState
+  ) {
+    super(state, 'List View Switcher Secondary View', SkyListViewType.Custom);
+  }
+ }

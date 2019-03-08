@@ -15,29 +15,32 @@ import {
   SkyListFiltersModule,
   SkyListPagingModule,
   SkyListSecondaryActionsModule,
-  SkyListViewSwitcherModule,
   SkyListToolbarModule
+} from '@skyux/list-builder';
+
+import {
+  SkyListViewSwitcherModule
 } from './public';
 
 @NgModule({
   imports: [
     SkyIconModule,
+    SkyListModule,
     SkyListFiltersModule,
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
-    SkyListViewSwitcherModule,
     SkyListToolbarModule,
-    SkyListModule,
+    SkyListViewSwitcherModule,
     SkyListViewGridModule
   ],
   exports: [
     SkyIconModule,
+    SkyListModule,
     SkyListFiltersModule,
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
-    SkyListViewSwitcherModule,
     SkyListToolbarModule,
-    SkyListModule,
+    SkyListViewSwitcherModule,
     SkyListViewGridModule
   ],
   providers: [],

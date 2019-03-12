@@ -1,13 +1,11 @@
-import { SkyListViewType } from './view-type';
-
 export class ListViewModel {
   public id: string;
   public name: string;
-  public type: SkyListViewType;
+  public type: string;
 
-  constructor(id: string, name: string, type?: SkyListViewType) {
+  constructor(id: string, name: string, type?: string) {
     this.id = id;
     this.name = name;
-    this.type = type ? type : SkyListViewType.Custom;
+    this.type = type;
   }
 }

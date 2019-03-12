@@ -11,8 +11,20 @@ import {
 } from '@angular/forms';
 
 import {
+  SkyMediaQueryModule
+} from '@skyux/core';
+
+import {
   SkyRadioModule
 } from '@skyux/forms';
+
+import {
+  SkyIconModule
+} from '@skyux/indicators';
+
+import {
+  SkyDropdownModule
+} from '@skyux/popovers';
 
 import {
   SkyListViewSwitcherComponent
@@ -34,7 +46,10 @@ import {
   imports: [
     CommonModule,
     FormsModule,
+    SkyDropdownModule,
+    SkyIconModule,
     SkyListModule,
+    SkyMediaQueryModule,
     SkyRadioModule
   ],
   exports: [

@@ -3,7 +3,6 @@ import { SkyListComponent } from '../list/list.component';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/distinctUntilChanged';
-import { SkyListViewType } from './state/views/view-type';
 
 let idIndex = 0;
 
@@ -14,14 +13,14 @@ export abstract class ListViewComponent {
   protected state: ListState;
   protected list: SkyListComponent;
   protected hasToolbar: Observable<boolean>;
-  protected viewType: SkyListViewType;
+  protected viewType: string;
 
   private viewId: string = `sky-list-view-cmp-${++idIndex}`;
 
-  constructor(state: ListState, defaultName: string, type?: SkyListViewType) {
+  constructor(state: ListState, defaultName: string) {
     this.state = state;
     this.viewName = defaultName;
-    this.viewType = type;
+    this.viewType = this.getConstructorName();
 
     this.hasToolbar = this.state.map(s => s.toolbar.exists);
 
@@ -49,5 +48,16 @@ export abstract class ListViewComponent {
   }
 
   public onViewInactive() {
+  }
+
+  private getConstructorName(): string {
+    const constructor = (this as any).prototype ?
+      (this as any).prototype.constructor :
+      this.constructor;
+
+    const str = constructor.toString();
+    const cname = str.match(/function\s(\w*)/)[1];
+
+    return cname;
   }
 }

@@ -17,4 +17,7 @@ export class SkyListViewSwitcherCustomComponent {
 
   @Input()
   public view: ListViewComponent;
+
+  @Input()
+  public ariaLabel: string;
 }

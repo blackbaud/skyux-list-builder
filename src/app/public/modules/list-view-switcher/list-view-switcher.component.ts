@@ -7,9 +7,12 @@ import {
 } from '@angular/core';
 
 import {
+  SkyMediaQueryService, SkyMediaBreakpoints
+} from '@skyux/core';
+
+import {
   ListState,
   ListViewModel,
-  SkyListViewType,
   ListViewsSetActiveAction,
   ListStateDispatcher
 } from '../list/state';
@@ -27,8 +30,10 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
 
   public activeView: any;
   public showSwitcher: boolean = false;
+  public isMobile: boolean = false;
 
-  protected availableViews: any[];
+  public availableViews: any[];
+  public currentIcon: string;
 
   @ContentChildren(SkyListViewSwitcherCustomComponent)
   private customViews: QueryList<SkyListViewSwitcherCustomComponent>;
@@ -38,10 +43,19 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
   constructor(
     private state: ListState,
     private dispatcher: ListStateDispatcher,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private mediaQueryService: SkyMediaQueryService
   ) { }
 
   public ngAfterViewInit() {
+
+    this.mediaQueryService.subscribe((newBreakpoint: SkyMediaBreakpoints) => {
+      if (newBreakpoint === SkyMediaBreakpoints.xs) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    });
 
     this.state
       .map(s => s.views)
@@ -55,10 +69,11 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
 
           this.availableViews = [];
 
-          if (viewTypes.indexOf(SkyListViewType.Grid) >= 0) {
+          if (viewTypes.indexOf('SkyListViewGridComponent') >= 0) {
             this.availableViews.push({
               icon: 'table',
-              view: this.currentViews.find(view => view.type === SkyListViewType.Grid)
+              view: this.currentViews.find(view => view.type === 'SkyListViewGridComponent'),
+              ariaLabel: 'Table view'
             });
           }
 
@@ -92,7 +107,8 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
               this.currentViews.map(view => { return view.id; }).indexOf(customView.view.id) >= 0) {
                 this.availableViews.push({
                   icon: customView.icon,
-                  view: customView.view
+                  view: customView.view,
+                  ariaLabel: customView.ariaLabel
                 });
             }
           });
@@ -100,17 +116,30 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
           let activeView = this.currentViews.find(view => view.id === views.active);
           this.activeView = this.currentViews.indexOf(activeView);
 
+          let activeViewData = this.availableViews
+            .find(availableView => availableView.view === activeView);
+
+          if (activeViewData) {
+            this.currentIcon = activeViewData.icon;
+          }
+
           if (this.availableViews.length >= 2) {
             this.showSwitcher = true;
           }
-
+          console.log(this.availableViews);
           this.changeDetector.detectChanges();
         }
       });
   }
 
   public activateView(view: ListViewModel, viewIndex: number) {
-    this.dispatcher.next(new ListViewsSetActiveAction(view.id));
-    this.activeView = viewIndex;
+    if (this.activeView !== viewIndex) {
+      this.dispatcher.next(new ListViewsSetActiveAction(view.id));
+
+      this.currentIcon = this.availableViews.find(availableView => availableView.view === view).icon;
+
+      this.activeView = viewIndex;
+    }
+
   }
 }

@@ -1,15 +1,35 @@
-<sky-radio-group *ngIf="showSwitcher"
-  name="viewSwitcher"
-  [(ngModel)]="activeView"
->
-  <span
-    class="sky-switch-icon-group"
+<ng-container *ngIf="showSwitcher">
+  <sky-radio-group *ngIf="!isMobile"
+    name="viewSwitcher"
+    [(ngModel)]="activeView"
   >
-    <sky-radio *ngFor="let view of availableViews; let i = index"
-      [icon]="view.icon"
-      [value]="i"
-      (click)="activateView(view.view, i)"
+    <span
+      class="sky-switch-icon-group"
     >
-    </sky-radio>
-  </span>
-</sky-radio-group>
+      <sky-radio *ngFor="let view of availableViews; let i = index"
+        [icon]="view.icon"
+        [label]="view.ariaLabel"
+        [value]="i"
+        (click)="activateView(view.view, i)"
+      >
+      </sky-radio>
+    </span>
+  </sky-radio-group>
+  <sky-dropdown *ngIf="isMobile"
+    [buttonType]="currentIcon">
+    <sky-dropdown-menu>
+      <sky-dropdown-item *ngFor="let view of availableViews; let i = index">
+        <button
+          type="button"
+          [attr.aria-label]="view.ariaLabel"
+          (click)="activateView(view.view, i)"
+        >
+          <sky-icon
+            [icon]="view.icon"
+          >
+          </sky-icon>
+        </button>
+      </sky-dropdown-item>
+    </sky-dropdown-menu>
+  </sky-dropdown>
+</ng-container>

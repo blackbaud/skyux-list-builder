@@ -12,8 +12,7 @@ import {
 } from '../../list';
 
 import {
-  ListState,
-  SkyListViewType
+  ListState
 } from '../../list/state';
 
  // Internal component only used to get at ListStateDispatcher.
@@ -32,6 +31,6 @@ export class ListViewSwitcherSecondaryViewFixtureComponent extends ListViewCompo
    constructor(
     state: ListState
   ) {
-    super(state, 'List View Switcher Secondary View', SkyListViewType.Custom);
+    super(state, 'List View Switcher Secondary View');
   }
  }

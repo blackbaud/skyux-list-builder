@@ -61,12 +61,9 @@ import {
 } from './filters/actions';
 
 import {
-  ListSelectedSetItemsSelectedTrueAction
-} from './selected/actions';
-
-import {
   ListItemsSetSelectedAction
 } from './items/actions';
+import { ListSelectedSetItemsSelectedAction } from './selected/actions';
 
 export class ListStateOrchestrator<T> extends StateOrchestrator<T, ListStateAction> {
 }
@@ -134,10 +131,10 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
     this.next(new ListFiltersUpdateAction(filters));
   }
 
-  public setSelected(selectedIds: string[]): void {
-    // Update ListItemModel (grid).
-    this.next(new ListItemsSetSelectedAction(selectedIds, false));
+  public setSelected(selectedIds: string[], selected: boolean): void {
     // Update ListSelectedModel (checklist / select field).
-    this.next(new ListSelectedSetItemsSelectedTrueAction(selectedIds, false));
+    this.next(new ListSelectedSetItemsSelectedAction(selectedIds, selected, false));
+    // Update ListItemModel (grid).
+    this.next(new ListItemsSetSelectedAction(selectedIds, selected, false));
   }
 }

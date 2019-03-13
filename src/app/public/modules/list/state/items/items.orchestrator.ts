@@ -24,7 +24,7 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     this
       .register(ListItemsSetLoadingAction, this.setLoading)
       .register(ListItemsLoadAction, this.load)
-      .register(ListItemsSetSelectedAction, this.setItemsSelectedTrue);
+      .register(ListItemsSetSelectedAction, this.setItemsSelected);
   }
 
   private setLoading(
@@ -50,13 +50,17 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     );
   }
 
-  private setItemsSelectedTrue(
+  private setItemsSelected(
     state: AsyncList<ListItemModel>,
     action: ListItemsSetSelectedAction
   ): AsyncList<ListItemModel> {
-    const newListItems: ListItemModel[] = [];
-    state.items.map(item => {
-      newListItems.push(new ListItemModel(item.id, item.data, action.items.indexOf(item.id) > -1 ? true : false));
+    const newListItems = this.cloneListItemModelArray(state.items);
+
+    action.items.map(s => {
+      const newItem = newListItems.find(i => i.id === s);
+      if (newItem) {
+        newItem.isSelected = action.selected;
+      }
     });
 
     return new AsyncList<ListItemModel>(
@@ -65,5 +69,15 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
       state.loading,
       state.count
     );
+  }
+
+  private cloneListItemModelArray(source: Array<ListItemModel>) {
+    let newListItems: Array<ListItemModel> = [];
+    source.forEach(item => {
+      newListItems.push(
+        new ListItemModel(item.id, Object.assign({}, item.data), item.isSelected)
+      );
+    });
+    return newListItems;
   }
 }

@@ -24,7 +24,8 @@ import {
 
 import {
   ListState,
-  ListStateDispatcher
+  ListStateDispatcher,
+  ListSelectedSetItemsSelectedAction
 } from '../list/state';
 
 import {
@@ -483,14 +484,15 @@ describe('List Toolbar Component', () => {
       expect(filtersUpdateSpy).not.toHaveBeenCalled();
 
       // Send selection to dispatcher and expect filter update to have NOT been called.
-      dispatcher.setSelected(['1']);
+      dispatcher.setSelected(['1'], true);
       fixture.detectChanges();
       expect(filtersUpdateSpy).not.toHaveBeenCalled();
 
       // Click "Show only selected" and send new selection to dispatcher. Expect filter update to have been called.
       clickShowOnlySelectedCheckbox();
       filtersUpdateSpy.calls.reset();
-      dispatcher.setSelected(['1', '2']);
+      // dispatcher.setSelected(['1', '2'], true);
+      dispatcher.next(new ListSelectedSetItemsSelectedAction(['1', '2'], true, false));
       fixture.detectChanges();
       expect(filtersUpdateSpy).toHaveBeenCalled();
     });
@@ -499,7 +501,7 @@ describe('List Toolbar Component', () => {
       initializeToolbarWithMultiselect();
 
       // Send selection to dispatcher and click "Show only selected".
-      dispatcher.setSelected(['1', '2']);
+      dispatcher.setSelected(['1', '2'], true);
       fixture.detectChanges();
       clickShowOnlySelectedCheckbox();
       fixture.detectChanges();
@@ -540,7 +542,7 @@ describe('List Toolbar Component', () => {
       });
 
       // Send selection to dispatcher and click "Show only selected".
-      dispatcher.setSelected(['1', '2']);
+      dispatcher.setSelected(['1', '2'], true);
       fixture.detectChanges();
       clickShowOnlySelectedCheckbox();
       fixture.detectChanges();

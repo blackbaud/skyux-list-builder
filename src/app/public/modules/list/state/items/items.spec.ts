@@ -257,31 +257,31 @@ describe('list items', () => {
 
       tick();
 
-      dispatcher.next(new ListItemsSetSelectedAction(['1', '3']));
+      dispatcher.next(new ListItemsSetSelectedAction(['1', '3'], true));
 
       tick();
 
       state.take(1).subscribe(stateModel => {
         expect(stateModel.items.items[0].isSelected).toBe(true);
-        expect(stateModel.items.items[1].isSelected).toBe(false);
+        expect(stateModel.items.items[1].isSelected).toBeUndefined();
         expect(stateModel.items.items[2].isSelected).toBe(true);
       });
 
       tick();
 
-      dispatcher.next(new ListItemsSetSelectedAction(['2', '3']));
+      dispatcher.next(new ListItemsSetSelectedAction(['2', '3'], true));
 
       tick();
 
       state.take(1).subscribe(stateModel => {
-        expect(stateModel.items.items[0].isSelected).toBe(false);
+        expect(stateModel.items.items[0].isSelected).toBe(true);
         expect(stateModel.items.items[1].isSelected).toBe(true);
         expect(stateModel.items.items[2].isSelected).toBe(true);
       });
 
       tick();
 
-      dispatcher.next(new ListItemsSetSelectedAction([]));
+      dispatcher.next(new ListItemsSetSelectedAction(['1', '2', '3'], false));
 
       tick();
 

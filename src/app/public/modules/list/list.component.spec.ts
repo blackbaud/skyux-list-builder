@@ -539,7 +539,7 @@ describe('List Component', () => {
         ];
 
         // Select rows and apply "Show only selected" filter.
-        dispatcher.next(new ListSelectedSetItemsSelectedAction(['1', '2'], true));
+        dispatcher.setSelected(['1','2'], true);
         dispatcher.filtersUpdate(filters);
         fixture.detectChanges();
 
@@ -551,7 +551,7 @@ describe('List Component', () => {
         });
 
         // Change selections and disable the "Show only selected" filter.
-        dispatcher.setSelected(['1','4']);
+        dispatcher.setSelected(['4'], true);
         dispatcher.filtersUpdate([]);
         fixture.detectChanges();
 
@@ -559,7 +559,8 @@ describe('List Component', () => {
         component.list.selectedItems.take(1).subscribe((items)=> {
           expect(items.length === 2);
           expect(items[0].data.column2).toBe('Apple');
-          expect(items[1].data.column2).toBe('Carrot');
+          expect(items[1].data.column2).toBe('Banana');
+          expect(items[2].data.column2).toBe('Carrot');
         });
 
       }));
@@ -1283,7 +1284,7 @@ describe('List Component', () => {
     });
 
     it('should construct ListItemsSetSelectedAction', () => {
-      let action = new ListItemsSetSelectedAction(['1']);
+      let action = new ListItemsSetSelectedAction(['1'], true);
       expect(action).not.toBeUndefined();
     });
 

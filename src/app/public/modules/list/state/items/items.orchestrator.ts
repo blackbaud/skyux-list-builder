@@ -54,10 +54,10 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     state: AsyncList<ListItemModel>,
     action: ListItemsSetSelectedAction
   ): AsyncList<ListItemModel> {
-    const newListItems = this.cloneListItemModelArray(state.items);
+    let newListItems = this.cloneListItemModelArray(state.items);
 
     action.items.map(s => {
-      const newItem = newListItems.find(i => i.id === s);
+      let newItem = newListItems.find(i => i.id === s);
       if (newItem) {
         newItem.isSelected = action.selected;
       }

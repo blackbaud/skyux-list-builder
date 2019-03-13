@@ -148,7 +148,7 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
     });
   }
 
-  private showSelectedValuesEqual(prev: ListFilterModel[], next: ListFilterModel[]) {
+  private showSelectedValuesEqual(prev: ListFilterModel[], next: ListFilterModel[]): boolean {
     const prevShowSelectedFilter = prev.find(filter => filter.name === 'show-selected');
     const nextShowSelectedFilter = next.find(filter => filter.name === 'show-selected');
 

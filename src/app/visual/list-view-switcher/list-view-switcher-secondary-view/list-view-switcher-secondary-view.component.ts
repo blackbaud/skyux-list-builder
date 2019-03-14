@@ -20,8 +20,11 @@ import {
   selector: 'sky-list-view-switcher-secondary-view',
   templateUrl: './list-view-switcher-secondary-view.component.html',
   providers: [
-    /* tslint:disable-next-line */
-    { provide: ListViewComponent, useExisting: forwardRef(() => ListViewTestComponent) },
+    {
+      provide: ListViewComponent,
+      /* tslint:disable-next-line */
+      useExisting: forwardRef(() => ListViewTestComponent)
+    }
   ]
 })
 export class ListViewTestComponent extends ListViewComponent {

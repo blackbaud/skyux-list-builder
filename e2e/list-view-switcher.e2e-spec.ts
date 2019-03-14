@@ -2,7 +2,11 @@ import {
   expect,
   SkyHostBrowser
 } from '@skyux-sdk/e2e';
-import { element, by } from 'protractor';
+
+import {
+  element,
+  by
+} from 'protractor';
 
 describe('list view switcher component', () => {
 

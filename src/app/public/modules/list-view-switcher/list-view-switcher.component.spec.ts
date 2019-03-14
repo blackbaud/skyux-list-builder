@@ -1,17 +1,14 @@
 import {
-  DebugElement
-} from '@angular/core';
-
-import {
+  async,
   ComponentFixture,
-  TestBed,
   fakeAsync,
-  tick,
-  async
+  TestBed,
+  tick
 } from '@angular/core/testing';
 
 import {
-  SkyMediaQueryService, SkyMediaBreakpoints
+  SkyMediaBreakpoints,
+  SkyMediaQueryService
 } from '@skyux/core';
 
 import {
@@ -67,7 +64,6 @@ describe('List View Switcher Component', () => {
   let state: ListState,
     dispatcher: ListStateDispatcher,
     nativeElement: HTMLElement,
-    element: DebugElement,
     mockMediaQueryService: MockSkyMediaQueryService;
 
   describe('multi-view', () => {
@@ -100,7 +96,6 @@ describe('List View Switcher Component', () => {
 
       fixture = TestBed.createComponent(ListViewSwitcherFixtureComponent);
       nativeElement = fixture.nativeElement as HTMLElement;
-      element = fixture.debugElement as DebugElement;
       component = fixture.componentInstance;
     });
 
@@ -286,7 +281,6 @@ describe('List View Switcher Component', () => {
 
       fixture = TestBed.createComponent(ListViewSwitcherOnlyGridFixtureComponent);
       nativeElement = fixture.nativeElement as HTMLElement;
-      element = fixture.debugElement as DebugElement;
     });
 
     describe('normal view', () => {
@@ -360,7 +354,6 @@ describe('List View Switcher Component', () => {
 
       fixture = TestBed.createComponent(ListViewSwitcherOnlyCustomFixtureComponent);
       nativeElement = fixture.nativeElement as HTMLElement;
-      element = fixture.debugElement as DebugElement;
     });
 
     describe('normal view', () => {
@@ -434,7 +427,6 @@ describe('List View Switcher Component', () => {
 
       fixture = TestBed.createComponent(ListViewSwitcherExtraCustomFixtureComponent);
       nativeElement = fixture.nativeElement as HTMLElement;
-      element = fixture.debugElement as DebugElement;
     });
 
     describe('normal view', () => {

@@ -1,20 +1,26 @@
 import {
   AfterViewInit,
-  Component,
   ChangeDetectorRef,
+  Component,
   ContentChildren,
+  OnDestroy,
   QueryList
 } from '@angular/core';
 
 import {
-  SkyMediaQueryService, SkyMediaBreakpoints
+  SkyMediaBreakpoints,
+  SkyMediaQueryService
 } from '@skyux/core';
 
 import {
+  Subject
+} from 'rxjs/Subject';
+
+import {
   ListState,
+  ListStateDispatcher,
   ListViewModel,
-  ListViewsSetActiveAction,
-  ListStateDispatcher
+  ListViewsSetActiveAction
 } from '../list/state';
 
 import {
@@ -26,13 +32,16 @@ import {
   templateUrl: './list-view-switcher.component.html',
   styleUrls: ['./list-view-switcher.component.scss']
 })
-export class SkyListViewSwitcherComponent implements AfterViewInit {
+export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
 
   public activeView: any;
+
   public showSwitcher: boolean = false;
+
   public isMobile: boolean = false;
 
   public availableViews: any[];
+
   public currentIcon: string;
 
   @ContentChildren(SkyListViewSwitcherCustomComponent)
@@ -40,24 +49,28 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
 
   private currentViews: ListViewModel[];
 
+  private ngUnsubscribe = new Subject();
+
   constructor(
+    private changeDetector: ChangeDetectorRef,
     private state: ListState,
     private dispatcher: ListStateDispatcher,
-    private changeDetector: ChangeDetectorRef,
     private mediaQueryService: SkyMediaQueryService
   ) { }
 
-  public ngAfterViewInit() {
+  public ngAfterViewInit(): void {
 
-    this.mediaQueryService.subscribe((newBreakpoint: SkyMediaBreakpoints) => {
-      if (newBreakpoint === SkyMediaBreakpoints.xs) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
-    });
+    this.mediaQueryService
+      .subscribe((newBreakpoint: SkyMediaBreakpoints) => {
+        if (newBreakpoint === SkyMediaBreakpoints.xs) {
+          this.isMobile = true;
+        } else {
+          this.isMobile = false;
+        }
+      });
 
     this.state
+      .takeUntil(this.ngUnsubscribe)
       .map(s => s.views)
       .distinctUntilChanged()
       .subscribe(views => {
@@ -77,39 +90,28 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
             });
           }
 
-          // if (viewTypes.indexOf(SkyListViewType.Repeater) >= 0) {
-          //   this.availableViews.push({
-          //     icon: 'list',
-          //     view: this.currentViews.find(view => view.type === SkyListViewType.Repeater)
-          //   });
-          // }
-          // if (viewTypes.indexOf(SkyListViewType.Card) >= 0) {
-          //   this.availableViews.push({
-          //     icon: 'th-large',
-          //     view: this.currentViews.find(view => view.type === SkyListViewType.Card)
-          //   });
-          // }
-          // if (viewTypes.indexOf(SkyListViewType.Map) >= 0) {
-          //   this.availableViews.push({
-          //     icon: 'map-marker',
-          //     view: this.currentViews.find(view => view.type === SkyListViewType.Map)
-          //   });
-          // }
-          // if (viewTypes.indexOf(SkyListViewType.Calendar) >= 0) {
-          //   this.availableViews.push({
-          //     icon: 'calendar',
-          //     view: this.currentViews.find(view => view.type === SkyListViewType.Calendar)
-          //   });
-          // }
+          // Future built in types will go here. Per the design doc future icons would be:
+          // Repeater
+          //  Icon: list
+          //  Label: “List view”
+          // Card
+          //  Icon: th-large
+          //  Label: “Card view”
+          // Map
+          //  Icon: map-marker
+          //  Label: “Map view”
+          // Calendar
+          //  Icon: calendar
+          //  Label: “Calendar view”
 
           this.customViews.forEach(customView => {
             if (customView.view &&
               this.currentViews.map(view => { return view.id; }).indexOf(customView.view.id) >= 0) {
-                this.availableViews.push({
-                  icon: customView.icon,
-                  view: customView.view,
-                  label: customView.label
-                });
+              this.availableViews.push({
+                icon: customView.icon,
+                view: customView.view,
+                label: customView.label
+              });
             }
           });
 
@@ -131,17 +133,24 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
       });
   }
 
-  public activateView(view: ListViewModel, viewIndex: number) {
+  public ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  public activateView(view: ListViewModel, viewIndex: number): void {
     if (this.activeView !== viewIndex) {
+
       // Without this timeout the list updates too quickly and the dropdown on mobile does not close
       setTimeout(() => {
         this.dispatcher.next(new ListViewsSetActiveAction(view.id));
       }, 0);
 
-      this.currentIcon = this.availableViews.find(availableView => availableView.view === view).icon;
+      this.currentIcon = this.availableViews
+        .find(availableView => availableView.view === view).icon;
 
       this.activeView = viewIndex;
-    }
 
+    }
   }
 }

@@ -3,7 +3,7 @@ import {
   forwardRef
 } from '@angular/core';
 
- import {
+import {
   ListItemModel
 } from '@skyux/list-builder-common';
 
@@ -15,22 +15,25 @@ import {
   ListState
 } from '../../list/state';
 
- // Internal component only used to get at ListStateDispatcher.
+// Internal component only used to get at ListStateDispatcher.
 @Component({
   selector: 'sky-list-view-switcher-secondary-view',
   templateUrl: './list-view-switcher-secondary-view.component.fixture.html',
   providers: [
-    /* tslint:disable-next-line */
-    { provide: ListViewComponent, useExisting: forwardRef(() => ListViewSwitcherSecondaryViewFixtureComponent) },
+    {
+      provide: ListViewComponent,
+      /* tslint:disable-next-line */
+      useExisting: forwardRef(() => ListViewSwitcherSecondaryViewFixtureComponent)
+    }
   ]
 })
 export class ListViewSwitcherSecondaryViewFixtureComponent extends ListViewComponent {
 
-   public localItems: ListItemModel[];
+  public localItems: ListItemModel[];
 
-   constructor(
+  constructor(
     state: ListState
   ) {
     super(state, 'List View Switcher Secondary View');
   }
- }
+}

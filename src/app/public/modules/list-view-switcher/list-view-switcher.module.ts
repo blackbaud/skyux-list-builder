@@ -31,6 +31,10 @@ import {
 } from '@skyux/popovers';
 
 import {
+  SkyListModule
+} from '../list/list.module';
+
+import {
   SkyListBuilderResourcesModule
 } from '../shared/list-builder-resources.module';
 
@@ -42,10 +46,6 @@ import {
   SkyListViewSwitcherCustomComponent
 } from './list-view-switcher-custom.component';
 
-import {
-  SkyListModule
-} from '../list/list.module';
-
 @NgModule({
   declarations: [
     SkyListViewSwitcherComponent,
@@ -54,10 +54,10 @@ import {
   imports: [
     CommonModule,
     FormsModule,
-    SkyListBuilderResourcesModule,
     SkyDropdownModule,
     SkyI18nModule,
     SkyIconModule,
+    SkyListBuilderResourcesModule,
     SkyListModule,
     SkyMediaQueryModule,
     SkyRadioModule

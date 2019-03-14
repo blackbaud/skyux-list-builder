@@ -73,7 +73,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
             this.availableViews.push({
               icon: 'table',
               view: this.currentViews.find(view => view.type === 'SkyListViewGridComponent'),
-              ariaLabel: 'Table view'
+              label: 'Table view'
             });
           }
 
@@ -108,7 +108,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
                 this.availableViews.push({
                   icon: customView.icon,
                   view: customView.view,
-                  ariaLabel: customView.ariaLabel
+                  label: customView.label
                 });
             }
           });
@@ -126,7 +126,6 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
           if (this.availableViews.length >= 2) {
             this.showSwitcher = true;
           }
-          console.log(this.availableViews);
           this.changeDetector.detectChanges();
         }
       });
@@ -134,7 +133,10 @@ export class SkyListViewSwitcherComponent implements AfterViewInit {
 
   public activateView(view: ListViewModel, viewIndex: number) {
     if (this.activeView !== viewIndex) {
-      this.dispatcher.next(new ListViewsSetActiveAction(view.id));
+      // Without this timeout the list updates too quickly and the dropdown on mobile does not close
+      setTimeout(() => {
+        this.dispatcher.next(new ListViewsSetActiveAction(view.id));
+      }, 0);
 
       this.currentIcon = this.availableViews.find(availableView => availableView.view === view).icon;
 

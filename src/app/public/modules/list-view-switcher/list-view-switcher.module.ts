@@ -19,12 +19,20 @@ import {
 } from '@skyux/forms';
 
 import {
+  SkyI18nModule
+} from '@skyux/i18n';
+
+import {
   SkyIconModule
 } from '@skyux/indicators';
 
 import {
   SkyDropdownModule
 } from '@skyux/popovers';
+
+import {
+  SkyListBuilderResourcesModule
+} from '../shared/list-builder-resources.module';
 
 import {
   SkyListViewSwitcherComponent
@@ -46,7 +54,9 @@ import {
   imports: [
     CommonModule,
     FormsModule,
+    SkyListBuilderResourcesModule,
     SkyDropdownModule,
+    SkyI18nModule,
     SkyIconModule,
     SkyListModule,
     SkyMediaQueryModule,

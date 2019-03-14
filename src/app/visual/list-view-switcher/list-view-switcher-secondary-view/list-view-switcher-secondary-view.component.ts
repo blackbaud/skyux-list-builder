@@ -9,11 +9,11 @@ import {
 
 import {
   ListViewComponent
-} from '../../../public';
+} from '@skyux/list-builder';
 
 import {
   ListState
-} from '../../../public/modules/list/state';
+} from '@skyux/list-builder/modules/list/state';
 
  // Internal component only used to get at ListStateDispatcher.
 @Component({

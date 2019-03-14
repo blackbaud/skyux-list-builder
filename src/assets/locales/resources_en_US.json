@@ -6,5 +6,9 @@
   "skyux_list_show_secondary_actions_button": {
     "_description": "Button text for the button that opens the secondary actions menu in the list toolbar",
     "message": "More"
+  },
+  "skyux_list_view_switcher_dropdown_title": {
+    "_description": "Title for list view switcher dropdown button",
+    "message": "Select view"
   }
 }

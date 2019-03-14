@@ -11,8 +11,40 @@ import {
 } from '@angular/core/testing';
 
 import {
+  SkyMediaQueryService, SkyMediaBreakpoints
+} from '@skyux/core';
+
+import {
+  MockSkyMediaQueryService
+} from '@skyux/core/testing';
+
+import {
   SkyListViewGridModule
 } from '@skyux/list-builder-view-grids';
+
+import {
+  expect
+} from '@skyux-sdk/testing';
+
+import {
+  ListViewSwitcherFixtureComponent
+} from './fixtures/list-view-switcher.component.fixture';
+
+import {
+  ListViewSwitcherSecondaryViewFixtureComponent
+} from './fixtures/list-view-switcher-secondary-view.component.fixture';
+
+import {
+  ListViewSwitcherOnlyGridFixtureComponent
+} from './fixtures/list-view-switcher-only-grid.component.fixture';
+
+import {
+  ListViewSwitcherOnlyCustomFixtureComponent
+} from './fixtures/list-view-switcher-only-custom.component.fixture';
+
+import {
+  ListViewSwitcherExtraCustomFixtureComponent
+} from './fixtures/list-view-switcher-extra-custom.component.fixture';
 
 import {
   SkyListModule
@@ -28,31 +60,15 @@ import {
 } from '../list-toolbar';
 
 import {
-  ListViewSwitcherFixtureComponent
-} from './fixtures/list-view-switcher.component.fixture';
-
-import {
-  ListViewSwitcherSecondaryViewFixtureComponent
-} from './fixtures/list-view-switcher-secondary-view.component.fixture';
-
-import {
   SkyListViewSwitcherModule
 } from './list-view-switcher.module';
-
-import {
-  ListViewSwitcherOnlyGridFixtureComponent
-} from './fixtures/list-view-switcher-only-grid.component.fixture';
-
-import {
-  ListViewSwitcherOnlyCustomFixtureComponent
-} from './fixtures/list-view-switcher-only-custom.component.fixture';
-import { ListViewSwitcherExtraCustomFixtureComponent } from './fixtures/list-view-switcher-extra-custom.component.fixture';
 
 describe('List View Switcher Component', () => {
   let state: ListState,
     dispatcher: ListStateDispatcher,
     nativeElement: HTMLElement,
-    element: DebugElement;
+    element: DebugElement,
+    mockMediaQueryService: MockSkyMediaQueryService;
 
   describe('multi-view', () => {
 
@@ -62,6 +78,7 @@ describe('List View Switcher Component', () => {
     beforeEach(() => {
       dispatcher = new ListStateDispatcher();
       state = new ListState(dispatcher);
+      mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
         declarations: [
@@ -76,7 +93,8 @@ describe('List View Switcher Component', () => {
         ],
         providers: [
           { provide: ListState, useValue: state },
-          { provide: ListStateDispatcher, useValue: dispatcher }
+          { provide: ListStateDispatcher, useValue: dispatcher },
+          { provide: SkyMediaQueryService, useValue: mockMediaQueryService }
         ]
       });
 
@@ -86,58 +104,156 @@ describe('List View Switcher Component', () => {
       component = fixture.componentInstance;
     });
 
-    it('should show the view switcher if more than one view exists', fakeAsync(() => {
-      fixture.detectChanges();
-      tick();
-      expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
-        .not.toBeUndefined();
-    }));
+    describe('normal view', () => {
 
-    it('should set the default radio button for a grid correctly', fakeAsync(() => {
-      fixture.detectChanges();
-      tick();
-      const gridRadio: HTMLElement = <HTMLElement>nativeElement
-        .querySelector('sky-list-view-switcher sky-radio[ng-reflect-icon="table"]');
-      expect(gridRadio).not.toBeNull();
-      expect(gridRadio.querySelector('i.fa-table')).not.toBeNull();
-    }));
+      it('should show the view switcher if more than one view exists', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
+          .not.toBeUndefined();
+      }));
 
-    it('should set the custom radio button correctly', fakeAsync(() => {
-      fixture.detectChanges();
-      tick();
-      const gridRadio: HTMLElement = <HTMLElement>nativeElement
-        .querySelector('sky-list-view-switcher sky-radio[ng-reflect-icon="gavel"]');
-      expect(gridRadio).not.toBeNull();
-      expect(gridRadio.querySelector('i.fa-gavel')).not.toBeNull();
-    }));
+      it('should set the default radio button for a grid correctly', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        const gridRadio: HTMLElement = <HTMLElement>nativeElement
+          .querySelector('sky-list-view-switcher sky-radio[ng-reflect-icon="table"]');
+        expect(gridRadio).not.toBeNull();
+        expect(gridRadio.querySelector('i.fa-table')).not.toBeNull();
+      }));
 
-    it('should set the list to the default view', async(() => {
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        component.gridView.active.subscribe(activeState => {
-          expect(activeState).toBeFalsy();
+      it('should set the custom radio button correctly', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        const gridRadio: HTMLElement = <HTMLElement>nativeElement
+          .querySelector('sky-list-view-switcher sky-radio[ng-reflect-icon="gavel"]');
+        expect(gridRadio).not.toBeNull();
+        expect(gridRadio.querySelector('i.fa-gavel')).not.toBeNull();
+      }));
+
+      it('should set the list to the default view', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          component.gridView.active.subscribe(activeState => {
+            expect(activeState).toBeFalsy();
+          });
+          component.secondaryView.active.subscribe(activeState => {
+            expect(activeState).toBeTruthy();
+          });
         });
-        component.secondaryView.active.subscribe(activeState => {
-          expect(activeState).toBeTruthy();
+      }));
+
+      it('should switch to the grid view correctly', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          (<HTMLElement>nativeElement
+            .querySelector('sky-list-view-switcher sky-radio[ng-reflect-icon="table"]'))
+            .click();
+          fixture.detectChanges();
+          fixture.whenStable().then(() => {
+            component.gridView.active.subscribe(activeState => {
+              expect(activeState).toBeTruthy();
+            });
+            component.secondaryView.active.subscribe(activeState => {
+              expect(activeState).toBeFalsy();
+            });
+          });
         });
+      }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
+
+    describe('mobile view', () => {
+
+      beforeEach(() => {
+        mockMediaQueryService.fire(SkyMediaBreakpoints.xs);
       });
-    }));
 
-    it('should switch to the grid view correctly', async(() => {
-      fixture.detectChanges();
-      fixture.whenStable().then(() => {
-        (<HTMLElement>nativeElement
-          .querySelector('sky-list-view-switcher sky-radio[ng-reflect-icon="table"]'))
+      it('should show the view switcher if more than one view exists', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
+          .not.toBeUndefined();
+      }));
+
+      it('should set the dropdown button for a grid correctly', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        (<HTMLElement>document.querySelector('sky-list-view-switcher .sky-dropdown-button'))
           .click();
         fixture.detectChanges();
-        component.gridView.active.subscribe(activeState => {
-          expect(activeState).toBeTruthy();
+        tick();
+        const gridDropdownButton: HTMLElement =
+          <HTMLElement>nativeElement
+            .querySelector('sky-list-view-switcher sky-dropdown-item sky-icon[ng-reflect-icon="table"]');
+        expect(gridDropdownButton).not.toBeNull();
+        expect(gridDropdownButton.querySelector('i.fa-table')).not.toBeNull();
+      }));
+
+      it('should set the custom dropdown button correctly', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        (<HTMLElement>document.querySelector('sky-list-view-switcher .sky-dropdown-button'))
+          .click();
+        fixture.detectChanges();
+        tick();
+        const customDropdownButton: HTMLElement =
+          <HTMLElement>nativeElement
+            .querySelector('sky-list-view-switcher sky-dropdown-item sky-icon[ng-reflect-icon="gavel"]');
+        expect(customDropdownButton).not.toBeNull();
+        expect(customDropdownButton.querySelector('i.fa-gavel')).not.toBeNull();
+      }));
+
+      it('should set the list to the default view', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          component.gridView.active.subscribe(activeState => {
+            expect(activeState).toBeFalsy();
+          });
+          component.secondaryView.active.subscribe(activeState => {
+            expect(activeState).toBeTruthy();
+          });
         });
-        component.secondaryView.active.subscribe(activeState => {
-          expect(activeState).toBeFalsy();
+      }));
+
+      it('should switch to the grid view correctly', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          (<HTMLElement>document.querySelector('sky-list-view-switcher .sky-dropdown-button'))
+            .click();
+          fixture.detectChanges();
+          fixture.whenStable().then(() => {
+            (<HTMLElement>nativeElement
+              .querySelectorAll('sky-list-view-switcher sky-dropdown-item button')[0])
+              .click();
+            fixture.detectChanges();
+            fixture.whenStable().then(() => {
+              component.gridView.active.subscribe(activeState => {
+                expect(activeState).toBeTruthy();
+              });
+              component.secondaryView.active.subscribe(activeState => {
+                expect(activeState).toBeFalsy();
+              });
+            });
+          });
         });
-      });
-    }));
+      }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
 
   });
 
@@ -148,6 +264,7 @@ describe('List View Switcher Component', () => {
     beforeEach(() => {
       dispatcher = new ListStateDispatcher();
       state = new ListState(dispatcher);
+      mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
         declarations: [
@@ -162,7 +279,8 @@ describe('List View Switcher Component', () => {
         ],
         providers: [
           { provide: ListState, useValue: state },
-          { provide: ListStateDispatcher, useValue: dispatcher }
+          { provide: ListStateDispatcher, useValue: dispatcher },
+          { provide: SkyMediaQueryService, useValue: mockMediaQueryService }
         ]
       });
 
@@ -171,12 +289,45 @@ describe('List View Switcher Component', () => {
       element = fixture.debugElement as DebugElement;
     });
 
-    it('should not show the view switcher if only a default view exists', fakeAsync(() => {
-      fixture.detectChanges();
-      tick();
-      expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
-        .toBeNull();
-    }));
+    describe('normal view', () => {
+
+      it('should not show the view switcher if only a default view exists', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
+          .toBeNull();
+      }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
+
+    describe('mobile view', () => {
+
+      beforeEach(() => {
+        mockMediaQueryService.fire(SkyMediaBreakpoints.xs);
+      });
+
+      it('should not show the view switcher if only a default view exists', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
+          .toBeNull();
+      }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
 
   });
 
@@ -187,6 +338,7 @@ describe('List View Switcher Component', () => {
     beforeEach(() => {
       dispatcher = new ListStateDispatcher();
       state = new ListState(dispatcher);
+      mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
         declarations: [
@@ -201,7 +353,8 @@ describe('List View Switcher Component', () => {
         ],
         providers: [
           { provide: ListState, useValue: state },
-          { provide: ListStateDispatcher, useValue: dispatcher }
+          { provide: ListStateDispatcher, useValue: dispatcher },
+          { provide: SkyMediaQueryService, useValue: mockMediaQueryService }
         ]
       });
 
@@ -210,22 +363,56 @@ describe('List View Switcher Component', () => {
       element = fixture.debugElement as DebugElement;
     });
 
-    it('should not show the view switcher if only one custom view exists', fakeAsync(() => {
-      fixture.detectChanges();
-      tick();
-      expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
-        .toBeNull();
-    }));
+    describe('normal view', () => {
+
+      it('should not show the view switcher if only one custom view exists', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
+          .toBeNull();
+      }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
+
+    describe('mobile view', () => {
+
+      beforeEach(() => {
+        mockMediaQueryService.fire(SkyMediaBreakpoints.xs);
+      });
+
+      it('should not show the view switcher if only a default view exists', fakeAsync(() => {
+        fixture.detectChanges();
+        tick();
+        expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
+          .toBeNull();
+      }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
 
   });
 
-  describe('custom only', () => {
+  describe('custom only with extra declaration', () => {
 
     let fixture: ComponentFixture<ListViewSwitcherExtraCustomFixtureComponent>;
 
     beforeEach(() => {
       dispatcher = new ListStateDispatcher();
       state = new ListState(dispatcher);
+      mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
         declarations: [
@@ -240,7 +427,8 @@ describe('List View Switcher Component', () => {
         ],
         providers: [
           { provide: ListState, useValue: state },
-          { provide: ListStateDispatcher, useValue: dispatcher }
+          { provide: ListStateDispatcher, useValue: dispatcher },
+          { provide: SkyMediaQueryService, useValue: mockMediaQueryService }
         ]
       });
 
@@ -249,13 +437,46 @@ describe('List View Switcher Component', () => {
       element = fixture.debugElement as DebugElement;
     });
 
-    it('should not show the view switcher if only one view and an extra custom declaration exists',
-      fakeAsync(() => {
+    describe('normal view', () => {
+
+      it('should not show the view switcher if only one view and an extra custom declaration exists',
+        fakeAsync(() => {
+          fixture.detectChanges();
+          tick();
+          expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
+            .toBeNull();
+        }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
+
+    describe('mobile view', () => {
+
+      beforeEach(() => {
+        mockMediaQueryService.fire(SkyMediaBreakpoints.xs);
+      });
+
+      it('should not show the view switcher if only a default view exists', fakeAsync(() => {
         fixture.detectChanges();
         tick();
-        expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
+        expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
           .toBeNull();
       }));
+
+      it('should be accessible', async(() => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          expect(nativeElement).toBeAccessible();
+        });
+      }));
+
+    });
 
   });
 

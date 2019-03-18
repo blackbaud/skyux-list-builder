@@ -6,8 +6,7 @@ import {
   ListSelectedLoadAction,
   ListSelectedSetLoadingAction,
   ListSelectedSetItemSelectedAction,
-  ListSelectedSetItemsSelectedAction,
-  ListSelectedSetItemsSelectedTrueAction
+  ListSelectedSetItemsSelectedAction
 } from './actions';
 
 export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<ListSelectedModel>> {
@@ -19,7 +18,6 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
       .register(ListSelectedSetLoadingAction, this.setLoading)
       .register(ListSelectedSetItemSelectedAction, this.setItemSelected)
       .register(ListSelectedSetItemsSelectedAction, this.setItemsSelected)
-      .register(ListSelectedSetItemsSelectedTrueAction, this.setItemsSelectedTrue)
       .register(ListSelectedLoadAction, this.load);
   }
 
@@ -48,7 +46,8 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
     state: AsyncItem<ListSelectedModel>,
     action: ListSelectedSetItemSelectedAction
   ): AsyncItem<ListSelectedModel> {
-    const newSelected = Object.assign({}, state.item);
+    const newSelected = this.cloneListSelectedModel(state.item);
+
     newSelected.selectedIdMap.set(action.id, action.selected);
 
     return new AsyncItem<ListSelectedModel>(newSelected, state.lastUpdate, state.loading);
@@ -58,24 +57,17 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
     state: AsyncItem<ListSelectedModel>,
     action: ListSelectedSetItemsSelectedAction
   ): AsyncItem<ListSelectedModel> {
-    const newSelected = action.refresh ? new ListSelectedModel() : Object.assign({}, state.item);
+    const newSelected = action.refresh ? new ListSelectedModel() : this.cloneListSelectedModel(state.item);
 
     action.items.map(s => newSelected.selectedIdMap.set(s, action.selected));
 
     return new AsyncItem<ListSelectedModel>(newSelected, state.lastUpdate, state.loading);
   }
 
-  private setItemsSelectedTrue(
-    state: AsyncItem<ListSelectedModel>,
-    action: ListSelectedSetItemsSelectedTrueAction
-  ): AsyncItem<ListSelectedModel> {
-      const newSelected = action.refresh ? new ListSelectedModel() : Object.assign({}, state.item);
+  private cloneListSelectedModel(source: ListSelectedModel) {
+    let newListItems = new ListSelectedModel();
+    newListItems.selectedIdMap = new Map<string, boolean>(source.selectedIdMap);
 
-      newSelected.selectedIdMap.forEach((value, key, map) => {
-        newSelected.selectedIdMap.set(key, action.items.indexOf(key) > -1 ? true : false);
-      });
-      action.items.map(s => newSelected.selectedIdMap.set(s, true));
-
-      return new AsyncItem<ListSelectedModel>(newSelected, state.lastUpdate, state.loading);
+    return newListItems;
   }
 }

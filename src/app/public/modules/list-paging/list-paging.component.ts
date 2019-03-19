@@ -18,7 +18,9 @@ import {
   getValue
 } from 'microedge-rxstate/dist/helpers';
 
-import { Observable } from 'rxjs/Observable';
+import {
+  Observable
+} from 'rxjs/Observable';
 
 import 'rxjs/add/operator/distinctUntilChanged';
 

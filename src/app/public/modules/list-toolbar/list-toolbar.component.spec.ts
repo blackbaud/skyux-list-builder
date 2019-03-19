@@ -24,8 +24,7 @@ import {
 
 import {
   ListState,
-  ListStateDispatcher,
-  ListSelectedSetItemsSelectedAction
+  ListStateDispatcher
 } from '../list/state';
 
 import {
@@ -491,8 +490,7 @@ describe('List Toolbar Component', () => {
       // Click "Show only selected" and send new selection to dispatcher. Expect filter update to have been called.
       clickShowOnlySelectedCheckbox();
       filtersUpdateSpy.calls.reset();
-      // dispatcher.setSelected(['1', '2'], true);
-      dispatcher.next(new ListSelectedSetItemsSelectedAction(['1', '2'], true, false));
+      dispatcher.setSelected(['1', '2'], true);
       fixture.detectChanges();
       expect(filtersUpdateSpy).toHaveBeenCalled();
     });

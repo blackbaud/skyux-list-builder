@@ -63,7 +63,10 @@ import {
 import {
   ListItemsSetSelectedAction
 } from './items/actions';
-import { ListSelectedSetItemsSelectedAction } from './selected/actions';
+
+import {
+  ListSelectedSetItemsSelectedAction
+} from './selected/actions';
 
 export class ListStateOrchestrator<T> extends StateOrchestrator<T, ListStateAction> {
 }

@@ -1,6 +1,6 @@
 # 3.2.0 (2019-03-19)
 
-- Added support for multiselect action toolbar. [#18](https://github.com/blackbaud/skyux-list-builder/pull/18/)
+- Added support for multiselect toolbar. [#18](https://github.com/blackbaud/skyux-list-builder/pull/18/)
 
 # 3.1.0 (2019-03-19)
 

@@ -1,4 +1,5 @@
 {
+  "$schema": "./node_modules/@skyux/config/skyuxconfig-schema.json",
   "name": "skyux-list-builder",
   "mode": "easy",
   "compileMode": "aot",

@@ -1,3 +1,20 @@
+# 3.2.1 (2019-03-20)
+
+- Fixed `SkyListToolbarModule` to properly import `SkyListBuilderResourcesModule`. [#37](https://github.com/blackbaud/skyux-list-builder/pull/37/)
+
+# 3.2.0 (2019-03-19)
+
+- Added support for multiselect toolbar. [#18](https://github.com/blackbaud/skyux-list-builder/pull/18/)
+
+# 3.1.0 (2019-03-19)
+
+- Added support for `microedge-rxstate@>=2.0.2`. [#33](https://github.com/blackbaud/skyux-list-builder/pull/33)
+- Fixed `ListPagingComponent` to properly import `scan` RxJS operator. [#33](https://github.com/blackbaud/skyux-list-builder/pull/33)
+
+# 3.0.1 (2019-03-07)
+
+- Fixed list paging component to update after list items change. [#25](https://github.com/blackbaud/skyux-list-builder/pull/25)
+
 # 3.0.0 (2019-01-14)
 
 - Major version release.

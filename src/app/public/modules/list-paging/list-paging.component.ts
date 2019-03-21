@@ -6,14 +6,26 @@ import {
   OnInit
 } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/distinctUntilChanged';
-
 import {
   ListItemModel
 } from '@skyux/list-builder-common';
 
-import { getValue } from 'microedge-rxstate/dist/helpers';
+import {
+  AsyncList
+} from 'microedge-rxstate/dist';
+
+import {
+  getValue
+} from 'microedge-rxstate/dist/helpers';
+
+import {
+  Observable
+} from 'rxjs/Observable';
+
+import 'rxjs/add/operator/distinctUntilChanged';
+
+import 'rxjs/add/operator/scan';
+
 import { ListPagingComponent } from '../list/list-paging.component';
 import { ListState, ListStateDispatcher } from '../list/state';
 import {
@@ -21,10 +33,6 @@ import {
   ListPagingSetItemsPerPageAction,
   ListPagingSetPageNumberAction
 } from '../list/state/paging/actions';
-
-import {
-  AsyncList
-} from 'microedge-rxstate/dist';
 
 @Component({
   selector: 'sky-list-paging',
@@ -102,9 +110,13 @@ export class SkyListPagingComponent extends ListPagingComponent implements OnIni
   }
 
   public pageChange(currentPage: number) {
-    this.dispatcher.next(
-      new ListPagingSetPageNumberAction(Number(currentPage))
-    );
+    // Paging must be updated after list data has been updated.
+    // Adding a setTimeout will pull it out of the stream.
+    setTimeout(() => {
+      this.dispatcher.next(
+        new ListPagingSetPageNumberAction(Number(currentPage))
+      );
+    });
   }
 
 }

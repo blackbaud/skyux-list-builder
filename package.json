@@ -1,6 +1,6 @@
 {
   "name": "@skyux/list-builder",
-  "version": "3.0.0",
+  "version": "3.2.1",
   "description": "SKY UX List Builder",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",
@@ -37,7 +37,7 @@
     "@skyux/lists": "^3.0.0",
     "@skyux/lookup": "^3.0.0",
     "@skyux/popovers": "^3.0.0",
-    "microedge-rxstate": "^2.0.2"
+    "microedge-rxstate": ">=2.0.2"
   },
   "dependencies": {},
   "devDependencies": {

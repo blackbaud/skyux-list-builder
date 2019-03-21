@@ -5,7 +5,7 @@ import {
 
 import {
   ListViewComponent
-} from '@skyux/list-builder';
+} from '../list';
 
 @Component({
   selector: 'sky-list-view-switcher-custom',

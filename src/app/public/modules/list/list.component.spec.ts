@@ -1,50 +1,81 @@
 import {
+  DebugElement
+} from '@angular/core';
+
+import {
   TestBed,
   async,
   fakeAsync,
   tick,
   ComponentFixture
 } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import {
-  ListState,
-  ListStateDispatcher
-} from '../list/state';
 
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import {
+  FormsModule
+} from '@angular/forms';
+
+import {
+  By
+} from '@angular/platform-browser';
+
+import {
+  BehaviorSubject
+} from 'rxjs/BehaviorSubject';
+
+import {
+  Observable
+} from 'rxjs/Observable';
 
 import {
   ListItemModel,
   ListSortFieldSelectorModel
 } from '@skyux/list-builder-common';
 
-import { ListFixturesModule } from './fixtures/list-fixtures.module';
-import { ListTestComponent } from './fixtures/list.component.fixture';
-import { ListDualTestComponent } from './fixtures/list-dual.component.fixture';
-import { ListEmptyTestComponent } from './fixtures/list-empty.component.fixture';
-import { ListSelectedTestComponent } from './fixtures/list-selected.component.fixture';
-import { ListFilteredTestComponent } from './fixtures/list-filtered.component.fixture';
-import { SkyListComponent, SkyListModule, ListDataRequestModel, ListDataResponseModel } from './';
-import { SkyListToolbarModule } from '../list-toolbar';
 import {
+  ListState,
+  ListStateDispatcher,
+  ListToolbarShowMultiselectToolbarAction
+} from '../list/state';
+
+import {
+  ListDualTestComponent,
+  ListEmptyTestComponent,
+  ListFilteredTestComponent,
+  ListFixturesModule,
+  ListSelectedTestComponent,
+  ListTestComponent,
+  ListViewTestComponent
+} from './fixtures';
+
+import {
+  ListDataRequestModel,
+  ListDataResponseModel,
+  SkyListComponent,
+  SkyListModule
+} from './';
+
+import {
+  SkyListToolbarModule
+} from '../list-toolbar';
+
+import {
+  ListFilterModel,
+  ListItemsSetSelectedAction,
+  ListPagingModel,
   ListSearchModel,
   ListSearchSetFunctionsAction,
   ListSearchSetFieldSelectorsAction,
   ListSelectedSetItemsSelectedAction,
   ListSelectedSetItemSelectedAction,
-  ListToolbarItemModel,
-  ListToolbarItemsLoadAction,
   ListSortSetFieldSelectorsAction,
   ListSortLabelModel,
-  ListFilterModel,
-  ListPagingModel
+  ListToolbarItemModel,
+  ListToolbarItemsLoadAction
 } from './state';
 
-import { SkyListInMemoryDataProvider } from '../list-data-provider-in-memory';
-import { ListViewTestComponent } from './fixtures/list-view-test.component.fixture';
+import {
+  SkyListInMemoryDataProvider
+} from '../list-data-provider-in-memory';
 
 describe('List Component', () => {
   describe('List Fixture', () => {
@@ -58,7 +89,6 @@ describe('List Component', () => {
           dispatcher: ListStateDispatcher,
           component: ListTestComponent,
           fixture: any,
-          nativeElement: HTMLElement,
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
@@ -109,7 +139,6 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
         element = fixture.debugElement as DebugElement;
         component = fixture.componentInstance;
 
@@ -322,8 +351,6 @@ describe('List Component', () => {
           dispatcher: ListStateDispatcher,
           component: ListSelectedTestComponent,
           fixture: ComponentFixture<ListSelectedTestComponent>,
-          nativeElement: HTMLElement,
-          element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
 
@@ -373,8 +400,6 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListSelectedTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
-        element = fixture.debugElement as DebugElement;
         component = fixture.componentInstance;
 
         fixture.detectChanges();
@@ -499,6 +524,40 @@ describe('List Component', () => {
         expect(selectedIds[0]).toBe('1');
         expect(selectedIds[1]).toBe('2');
       }));
+
+      it('should retain selections after applying/removing filters', fakeAsync(() => {
+        const filters = [
+          new ListFilterModel({
+            name: 'show-selected'
+          })
+        ];
+
+        // Select rows and apply "Show only selected" filter.
+        dispatcher.setSelected(['1','2'], true);
+        dispatcher.filtersUpdate(filters);
+        fixture.detectChanges();
+
+        // Expect rows to still be selected.
+        component.list.selectedItems.take(1).subscribe((items)=> {
+          expect(items.length === 2);
+          expect(items[0].data.column2).toBe('Apple');
+          expect(items[1].data.column2).toBe('Banana');
+        });
+
+        // Change selections and disable the "Show only selected" filter.
+        dispatcher.setSelected(['4'], true);
+        dispatcher.filtersUpdate([]);
+        fixture.detectChanges();
+
+        // Expect new rows to be selected.
+        component.list.selectedItems.take(1).subscribe((items)=> {
+          expect(items.length === 2);
+          expect(items[0].data.column2).toBe('Apple');
+          expect(items[1].data.column2).toBe('Banana');
+          expect(items[2].data.column2).toBe('Carrot');
+        });
+
+      }));
     });
 
     describe('filtering', () => {
@@ -506,7 +565,6 @@ describe('List Component', () => {
           dispatcher: ListStateDispatcher,
           component: ListFilteredTestComponent,
           fixture: ComponentFixture<ListFilteredTestComponent>,
-          nativeElement: HTMLElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
 
@@ -556,7 +614,6 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListFilteredTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
         component = fixture.componentInstance;
 
         fixture.detectChanges();
@@ -618,9 +675,7 @@ describe('List Component', () => {
     describe('List Component with Array', () => {
       let state: ListState,
           dispatcher: ListStateDispatcher,
-          component: ListTestComponent,
           fixture: any,
-          nativeElement: HTMLElement,
           element: DebugElement;
 
       beforeEach(async(() => {
@@ -665,9 +720,7 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
         element = fixture.debugElement as DebugElement;
-        component = fixture.componentInstance;
         fixture.detectChanges();
 
         // always skip the first update to ListState, when state is ready
@@ -686,10 +739,8 @@ describe('List Component', () => {
     describe('List Component with Observable', () => {
       let state: ListState,
           dispatcher: ListStateDispatcher,
-          component: ListTestComponent,
           fixture: any,
           dataProvider: SkyListInMemoryDataProvider,
-          nativeElement: HTMLElement,
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
@@ -731,9 +782,7 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListEmptyTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
         element = fixture.debugElement as DebugElement;
-        component = fixture.componentInstance;
         fixture.detectChanges();
 
         // always skip the first update to ListState, when state is ready
@@ -812,11 +861,8 @@ describe('List Component', () => {
     describe('List Component with no data', () => {
       let state: ListState,
           dispatcher: ListStateDispatcher,
-          component: ListTestComponent,
           fixture: any,
-          dataProvider: SkyListInMemoryDataProvider,
-          nativeElement: HTMLElement,
-          element: DebugElement;
+          dataProvider: SkyListInMemoryDataProvider;
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -845,9 +891,6 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListEmptyTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
-        element = fixture.debugElement as DebugElement;
-        component = fixture.componentInstance;
         fixture.detectChanges();
 
         // always skip the first update to ListState, when state is ready
@@ -873,10 +916,7 @@ describe('List Component', () => {
     describe('List Component with no data and no data provider', () => {
       let state: ListState,
           dispatcher: ListStateDispatcher,
-          component: ListTestComponent,
-          fixture: any,
-          nativeElement: HTMLElement,
-          element: DebugElement;
+          fixture: any;
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -904,9 +944,6 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListEmptyTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
-        element = fixture.debugElement as DebugElement;
-        component = fixture.componentInstance;
         fixture.detectChanges();
 
         // always skip the first update to ListState, when state is ready
@@ -932,7 +969,6 @@ describe('List Component', () => {
           dispatcher: ListStateDispatcher,
           component: ListTestComponent,
           fixture: any,
-          nativeElement: HTMLElement,
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
@@ -983,7 +1019,6 @@ describe('List Component', () => {
         });
 
         fixture = TestBed.createComponent(ListDualTestComponent);
-        nativeElement = fixture.nativeElement as HTMLElement;
         element = fixture.debugElement as DebugElement;
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -1215,6 +1250,16 @@ describe('List Component', () => {
 
     it('should construct ListSelectedSetItemsSelectedAction', () => {
       let action = new ListSelectedSetItemsSelectedAction(['1']);
+      expect(action).not.toBeUndefined();
+    });
+
+    it('should construct ListItemsSetSelectedAction', () => {
+      let action = new ListItemsSetSelectedAction(['1'], true);
+      expect(action).not.toBeUndefined();
+    });
+
+    it('should construct ListToolbarShowMultiselectToolbarAction', () => {
+      let action = new ListToolbarShowMultiselectToolbarAction(true);
       expect(action).not.toBeUndefined();
     });
 

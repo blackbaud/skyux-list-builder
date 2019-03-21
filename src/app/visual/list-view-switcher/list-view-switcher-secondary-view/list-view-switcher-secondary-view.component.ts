@@ -9,11 +9,11 @@ import {
 
 import {
   ListViewComponent
-} from '@skyux/list-builder';
+} from '../../../public';
 
 import {
   ListState
-} from '@skyux/list-builder/modules/list/state';
+} from '../../../public/modules/list/state';
 
  // Internal component only used to get at ListStateDispatcher.
 @Component({
@@ -23,11 +23,11 @@ import {
     {
       provide: ListViewComponent,
       /* tslint:disable-next-line */
-      useExisting: forwardRef(() => ListViewTestComponent)
+      useExisting: forwardRef(() => ListViewSwitcherSecondaryViewTestComponent)
     }
   ]
 })
-export class ListViewTestComponent extends ListViewComponent {
+export class ListViewSwitcherSecondaryViewTestComponent extends ListViewComponent {
 
    public localItems: ListItemModel[];
 

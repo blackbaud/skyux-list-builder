@@ -85,7 +85,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
           if (viewTypes.indexOf('SkyListViewGridComponent') >= 0) {
             this.availableViews.push({
               icon: 'table',
-              view: this.currentViews.find(view => view.type === 'SkyListViewGridComponent'),
+              viewModel: this.currentViews.find(view => view.type === 'SkyListViewGridComponent'),
               label: 'Table view'
             });
           }
@@ -109,7 +109,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
               this.currentViews.map(view => { return view.id; }).indexOf(customView.view.id) >= 0) {
               this.availableViews.push({
                 icon: customView.icon,
-                view: customView.view,
+                viewModel: this.currentViews.find(view => view.type === customView.view.type),
                 label: customView.label
               });
             }
@@ -119,7 +119,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
           this.activeView = this.currentViews.indexOf(activeView);
 
           let activeViewData = this.availableViews
-            .find(availableView => availableView.view === activeView);
+            .find(availableView => availableView.viewModel === activeView);
 
           if (activeViewData) {
             this.currentIcon = activeViewData.icon;
@@ -147,7 +147,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
       }, 0);
 
       this.currentIcon = this.availableViews
-        .find(availableView => availableView.view === view).icon;
+        .find(availableView => availableView.viewModel === view).icon;
 
       this.activeView = viewIndex;
 

@@ -13,7 +13,7 @@
         [icon]="view.icon"
         [label]="view.label"
         [value]="i"
-        (click)="activateView(view.view, i)"
+        (click)="activateView(view.viewModel, i)"
       >
       </sky-radio>
     </span>
@@ -30,7 +30,7 @@
           type="button"
           [attr.aria-label]="view.label"
           [attr.title]="view.label"
-          (click)="activateView(view.view, i)"
+          (click)="activateView(view.viewModel, i)"
         >
           <sky-icon
             [icon]="view.icon"

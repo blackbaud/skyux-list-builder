@@ -11,12 +11,12 @@ import {
 } from '@skyux/list-builder-view-grids';
 
 import {
-  SkyListFiltersModule,
   SkyListModule,
+  SkyListFiltersModule,
   SkyListPagingModule,
   SkyListSecondaryActionsModule,
-  SkyListToolbarModule }
-from '@skyux/list-builder';
+  SkyListToolbarModule
+} from '@skyux/list-builder';
 
 import {
   SkyListViewSwitcherModule

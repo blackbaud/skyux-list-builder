@@ -138,6 +138,24 @@ describe('List View Switcher Component', () => {
         });
       }));
 
+      it('should not change view when activated view is clicked', () => {
+        fixture.detectChanges();
+        fixture.whenStable().then(() => {
+          (<HTMLElement>nativeElement
+            .querySelector('sky-list-view-switcher sky-radio[ng-reflect-icon="gavel"]'))
+            .click();
+          fixture.detectChanges();
+          fixture.whenStable().then(() => {
+            component.gridView.active.subscribe(activeState => {
+              expect(activeState).toBeFalsy();
+            });
+            component.secondaryView.active.subscribe(activeState => {
+              expect(activeState).toBeTruthy();
+            });
+          });
+        });
+      });
+
       it('should switch to the grid view correctly', async(() => {
         fixture.detectChanges();
         fixture.whenStable().then(() => {

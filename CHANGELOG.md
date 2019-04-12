@@ -1,6 +1,6 @@
 # 3.2.2 (2019-04-12)
 
-- Fixed missing model type exports. [#39](https://github.com/blackbaud/skyux-list-builder/pull/39)
+- Fixed missing model exports. [#39](https://github.com/blackbaud/skyux-list-builder/pull/39)
 
 # 3.2.1 (2019-03-20)
 

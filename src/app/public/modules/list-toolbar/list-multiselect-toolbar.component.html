@@ -15,12 +15,7 @@
       </sky-list-toolbar-item-renderer>
     </sky-toolbar-item>
     <sky-toolbar-view-actions>
-      <sky-toolbar-item>
-        <sky-list-toolbar-item-renderer
-          [template]="showSelectedTemplate"
-        >
-        </sky-list-toolbar-item-renderer>
-      </sky-toolbar-item>
+      <ng-container *ngTemplateOutlet="showSelectedTemplate"></ng-container>
     </sky-toolbar-view-actions>
   </sky-toolbar-section>
 </sky-toolbar>

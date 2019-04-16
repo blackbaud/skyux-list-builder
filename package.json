@@ -32,7 +32,7 @@
     "@skyux/animations": "^3.0.0",
     "@skyux/forms": "^3.0.0",
     "@skyux/indicators": "^3.0.0",
-    "@skyux/layout": "^3.0.0",
+    "@skyux/layout": "^3.1.0",
     "@skyux/list-builder-common": "^3.0.0",
     "@skyux/lists": "^3.0.0",
     "@skyux/lookup": "^3.0.0",

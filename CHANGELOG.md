@@ -1,3 +1,7 @@
+# 3.2.3 (2019-04-16)
+
+- Fixed list builder view actions visual styles. [#41](https://github.com/blackbaud/skyux-list-builder/pull/41)
+
 # 3.2.2 (2019-04-12)
 
 - Fixed missing model exports. [#39](https://github.com/blackbaud/skyux-list-builder/pull/39)

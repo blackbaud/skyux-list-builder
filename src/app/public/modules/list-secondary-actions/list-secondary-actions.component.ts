@@ -28,7 +28,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkyListSecondaryActionsComponent implements AfterViewInit {
-  public dropdownHidden = false;
   public actions: any[] = [];
 
   @ViewChild('secondaryActions')

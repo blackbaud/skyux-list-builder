@@ -17,7 +17,7 @@
   display: none;
 }
 
-@include sky-host-media-container-xs-min() {
+@include sky-host-responsive-container-xs-min() {
   .sky-list-secondary-actions-btn-text {
     display: none;
   }
@@ -27,7 +27,7 @@
   }
 }
 
-@include sky-host-media-container-sm-min() {
+@include sky-host-responsive-container-sm-min() {
   .sky-list-secondary-actions-btn-text {
     display: inline;
   }

@@ -162,10 +162,9 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @ViewChild('inlineFilterButton')
   private inlineFilterButtonTemplate: TemplateRef<any>;
 
+  private customItemIds: string[] = [];
   private hasSortSelectors: boolean = false;
   private ngUnsubscribe = new Subject();
-
-  private _customItemIds: string[] = [];
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -320,34 +319,36 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         toolbarItem.index
       );
 
-      this._customItemIds.push(toolbarItem.id);
+      this.customItemIds.push(toolbarItem.id);
     });
 
-    this.toolbarItems.changes.subscribe((newItems: QueryList<SkyListToolbarItemComponent>) => {
-      newItems.forEach(item => {
-        if (this._customItemIds.indexOf(item.id) < 0) {
-          this.dispatcher.toolbarAddItems(
-            [
-              new ListToolbarItemModel(item)
-            ],
-            item.index
-          );
+    this.toolbarItems.changes
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((newItems: QueryList<SkyListToolbarItemComponent>) => {
+        newItems.forEach(item => {
+          if (this.customItemIds.indexOf(item.id) < 0) {
+            this.dispatcher.toolbarAddItems(
+              [
+                new ListToolbarItemModel(item)
+              ],
+              item.index
+            );
 
-          this._customItemIds.push(item.id);
-        }
+            this.customItemIds.push(item.id);
+          }
+        });
+
+        const itemsToRemove: string[] = [];
+
+        this.customItemIds.forEach((itemId, index) => {
+          if (!newItems.find(item => item.id === itemId)) {
+            itemsToRemove.push(itemId);
+            this.customItemIds.splice(index, 1);
+          }
+        });
+
+        this.dispatcher.toolbarRemoveItems(itemsToRemove);
       });
-
-      const itemsToRemove: string[] = [];
-
-      this._customItemIds.forEach((itemId, index) => {
-        if (!newItems.find(item => item.id === itemId)) {
-          itemsToRemove.push(itemId);
-          this._customItemIds.splice(index, 1);
-        }
-      });
-
-      this.dispatcher.toolbarRemoveItems(itemsToRemove);
-    });
 
     const sortModels = this.toolbarSorts.map(sort =>
       new ListSortLabelModel(

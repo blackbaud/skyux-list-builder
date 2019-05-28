@@ -1,3 +1,7 @@
+# 3.2.4 (2019-05-28)
+
+- Fixed the list toolbar component to properly show list toolbar items which are dynamically shown and hidden. [#45](https://github.com/blackbaud/skyux-list-builder/pull/45)
+
 # 3.2.3 (2019-04-16)
 
 - Fixed visual styles for list toolbar view actions component. [#41](https://github.com/blackbaud/skyux-list-builder/pull/41)

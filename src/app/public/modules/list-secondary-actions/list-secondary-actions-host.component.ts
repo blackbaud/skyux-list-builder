@@ -22,8 +22,8 @@ import {
   SkyListSecondaryAction
 } from './list-secondary-action';
 
-// Note: this component is needed to ensure any styles place in the element have their host to
-// be based off of. Without this component the host is not written via the dispatcher.
+// Note: this component is needed to ensure any reactive styles placed in the element have
+// their host to be based off of. Without this component the host is not written via the dispatcher.
 
 @Component({
   selector: 'sky-list-secondary-actions-host',

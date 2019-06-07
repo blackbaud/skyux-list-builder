@@ -1,6 +1,6 @@
 {
   "name": "@skyux/list-builder",
-  "version": "3.2.4",
+  "version": "3.3.0",
   "description": "SKY UX List Builder",
   "main": "bundles/bundle.umd.js",
   "module": "index.ts",

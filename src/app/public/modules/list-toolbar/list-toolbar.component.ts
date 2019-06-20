@@ -15,11 +15,15 @@ import {
 import {
   Observable
 } from 'rxjs/Observable';
+
 import {
   Subject
 } from 'rxjs/Subject';
+
 import 'rxjs/add/operator/distinctUntilChanged';
+
 import 'rxjs/add/operator/take';
+
 import 'rxjs/add/operator/takeUntil';
 
 import {
@@ -31,9 +35,9 @@ import {
 } from '@skyux/list-builder-common';
 
 import {
-  SkyListFilterSummaryComponent,
-  SkyListFilterInlineComponent
-} from '../list-filters';
+  SkySearchComponent
+} from '@skyux/lookup';
+
 import {
   ListToolbarModel,
   ListToolbarItemModel,
@@ -44,16 +48,23 @@ import {
   ListFilterModel,
   ListPagingSetPageNumberAction
 } from '../list/state';
+
+import {
+  SkyListFilterSummaryComponent,
+  SkyListFilterInlineComponent
+} from '../list-filters';
+
 import {
   SkyListToolbarItemComponent
 } from './list-toolbar-item.component';
+
 import {
   SkyListToolbarSortComponent
 } from './list-toolbar-sort.component';
 
 import {
-  SkySearchComponent
-} from '@skyux/lookup';
+  SkyListToolbarViewActionsComponent
+} from './list-toolbar-view-actions.component';
 
 import {
   ListToolbarConfigSetSearchEnabledAction,
@@ -122,6 +133,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   public hasInlineFilters: boolean;
   public inlineFilterBarExpanded: boolean = false;
   public hasAdditionalToolbarSection = false;
+  public hasViewActions = false;
 
   public filterButtonId: string = `sky-list-toolbar-filter-button-${++nextId}`;
   public listFilterInlineId: string = `sky-list-toolbar-filter-inline-${++nextId}`;
@@ -138,6 +150,9 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @ContentChildren(SkyListFilterInlineComponent)
   private inlineFilter: QueryList<SkyListFilterInlineComponent>;
 
+  @ContentChildren(SkyListToolbarViewActionsComponent)
+  private viewActions: QueryList<SkyListToolbarViewActionsComponent>;
+
   @ViewChild('search')
   private searchTemplate: TemplateRef<any>;
 
@@ -147,6 +162,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @ViewChild('inlineFilterButton')
   private inlineFilterButtonTemplate: TemplateRef<any>;
 
+  private customItemIds: string[] = [];
   private hasSortSelectors: boolean = false;
   private ngUnsubscribe = new Subject();
 
@@ -302,7 +318,37 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         ],
         toolbarItem.index
       );
+
+      this.customItemIds.push(toolbarItem.id);
     });
+
+    this.toolbarItems.changes
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((newItems: QueryList<SkyListToolbarItemComponent>) => {
+        newItems.forEach(item => {
+          if (this.customItemIds.indexOf(item.id) < 0) {
+            this.dispatcher.toolbarAddItems(
+              [
+                new ListToolbarItemModel(item)
+              ],
+              item.index
+            );
+
+            this.customItemIds.push(item.id);
+          }
+        });
+
+        const itemsToRemove: string[] = [];
+
+        this.customItemIds.forEach((itemId, index) => {
+          if (!newItems.find(item => item.id === itemId)) {
+            itemsToRemove.push(itemId);
+            this.customItemIds.splice(index, 1);
+          }
+        });
+
+        this.dispatcher.toolbarRemoveItems(itemsToRemove);
+      });
 
     const sortModels = this.toolbarSorts.map(sort =>
       new ListSortLabelModel(
@@ -332,6 +378,9 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         ]
       );
     }
+
+    // Check for view actions
+    this.hasViewActions = (this.viewActions.length > 0);
   }
 
   public ngOnDestroy() {
@@ -420,7 +469,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         return templates;
       }
     )
-    .takeUntil(this.ngUnsubscribe);
+      .takeUntil(this.ngUnsubscribe);
 
     templateStream
       .takeUntil(this.ngUnsubscribe)

@@ -407,6 +407,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
 
     // Check for view actions
     this.hasViewActions = (this.viewActions.length > 0);
+    this.hasSearchSectionAction = (this.viewSearchSectionActions.length > 0);
   }
 
   public ngOnDestroy() {

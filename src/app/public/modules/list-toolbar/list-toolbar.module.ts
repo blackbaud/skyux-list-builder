@@ -62,7 +62,10 @@ import {
 import {
   SkyListBuilderResourcesModule
 } from '../shared/list-builder-resources.module';
-import { SkyListSearchToolbarViewActionsComponent } from './sky-list-search-toolbar-view-actions.component';
+
+import {
+  SkyListSearchToolbarViewActionsComponent
+} from './sky-list-search-toolbar-view-actions.component';
 
 @NgModule({
   declarations: [

@@ -102,6 +102,12 @@
   </sky-list-multiselect-toolbar>
 </div>
 
+
+<ng-template #searchSectionAction>
+  <ng-content  select="sky-list-search-toolbar-view-actions">
+  </ng-content>
+</ng-template>
+
 <ng-template #search>
   <div *ngIf="isSearchEnabled | async">
     <sky-search

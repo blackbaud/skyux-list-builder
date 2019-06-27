@@ -75,6 +75,7 @@ import {
   ListToolbarStateDispatcher,
   ListToolbarStateModel
 } from './state';
+import { SkyListSearchToolbarViewActionsComponent } from './sky-list-search-toolbar-view-actions.component';
 
 let nextId = 0;
 
@@ -134,6 +135,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   public inlineFilterBarExpanded: boolean = false;
   public hasAdditionalToolbarSection = false;
   public hasViewActions = false;
+  public hasSearchSectionAction = false;
 
   public filterButtonId: string = `sky-list-toolbar-filter-button-${++nextId}`;
   public listFilterInlineId: string = `sky-list-toolbar-filter-inline-${++nextId}`;
@@ -153,8 +155,14 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @ContentChildren(SkyListToolbarViewActionsComponent)
   private viewActions: QueryList<SkyListToolbarViewActionsComponent>;
 
+  @ContentChildren(SkyListSearchToolbarViewActionsComponent)
+  private viewSearchSectionActions: QueryList<SkyListSearchToolbarViewActionsComponent>;
+
   @ViewChild('search')
   private searchTemplate: TemplateRef<any>;
+
+  @ViewChild('searchSectionAction')
+  private searchSectionActionTemplate: TemplateRef<any>;
 
   @ViewChild('sortSelector')
   private sortSelectorTemplate: TemplateRef<any>;
@@ -256,6 +264,24 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
               new ListToolbarItemModel({
                 id: 'search',
                 template: this.searchTemplate,
+                location: 'right'
+              })
+            ]
+          );
+        }
+      });
+
+      this.type
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((toolbarType) => {
+        if (toolbarType === 'search') {
+          this.dispatcher.toolbarRemoveItems(['searchSectionAction']);
+        } else {
+          this.dispatcher.toolbarAddItems(
+            [
+              new ListToolbarItemModel({
+                id: 'search-section-action',
+                template: this.searchSectionActionTemplate,
                 location: 'right'
               })
             ]

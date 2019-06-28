@@ -134,7 +134,6 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   public inlineFilterBarExpanded: boolean = false;
   public hasAdditionalToolbarSection = false;
   public hasViewActions = false;
-  public hasSearchSectionAction = false;
 
   public filterButtonId: string = `sky-list-toolbar-filter-button-${++nextId}`;
   public listFilterInlineId: string = `sky-list-toolbar-filter-inline-${++nextId}`;

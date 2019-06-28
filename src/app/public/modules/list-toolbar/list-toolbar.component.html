@@ -102,15 +102,9 @@
   </sky-list-multiselect-toolbar>
 </div>
 
-
-<ng-template #searchSectionAction>
-  <ng-content  select="sky-list-search-toolbar-view-actions">
-  </ng-content>
-</ng-template>
-
 <ng-template #search>
   <div *ngIf="isSearchEnabled | async">
-    <sky-search
+    <sky-search class="place-search-inline"
       [disabled]="isToolbarDisabled"
       [expandMode]="(type | async) === 'search' ? 'fit' : 'responsive'"
       [placeholderText]="placeholder"
@@ -119,6 +113,9 @@
       #searchComponent
     >
     </sky-search>
+    <ng-content
+      select="sky-list-search-toolbar-view-actions"
+    ></ng-content>
   </div>
 </ng-template>
 

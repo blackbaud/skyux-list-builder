@@ -79,4 +79,19 @@ describe('list-toolbar component', () => {
       screenshotName: 'list-toolbar-with-multiselect'
     });
   });
+
+  it('should display toolbar with type search', (done) => {
+    SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
+    expect('#screenshot-list-toolbar-search').toMatchBaselineScreenshot(done, {
+      screenshotName: 'list-toolbar-type-search'
+    });
+  });
+
+  it('should display toolbar with type search (xs screen)', (done) => {
+    SkyHostBrowser.setWindowBreakpoint('xs');
+    SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
+    expect('#screenshot-list-toolbar-search').toMatchBaselineScreenshot(done, {
+      screenshotName: 'list-toolbar-type-search-xs'
+    });
+  });
 });

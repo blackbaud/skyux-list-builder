@@ -64,8 +64,8 @@ import {
 } from '../shared/list-builder-resources.module';
 
 import {
-  SkyListSearchToolbarViewActionsComponent
-} from './sky-list-search-toolbar-view-actions.component';
+  SkyListToolbarSearchActionsComponent
+} from './list-toolbar-search-actions.component';
 
 @NgModule({
   declarations: [
@@ -73,9 +73,9 @@ import {
     SkyListToolbarItemComponent,
     SkyListToolbarItemRendererComponent,
     SkyListMultiselectToolbarComponent,
+    SkyListToolbarSearchActionsComponent,
     SkyListToolbarSortComponent,
-    SkyListToolbarViewActionsComponent,
-    SkyListSearchToolbarViewActionsComponent
+    SkyListToolbarViewActionsComponent
   ],
   imports: [
     CommonModule,
@@ -94,10 +94,9 @@ import {
     SkyListToolbarItemComponent,
     SkyListToolbarItemRendererComponent,
     SkyListMultiselectToolbarComponent,
+    SkyListToolbarSearchActionsComponent,
     SkyListToolbarSortComponent,
-    SkyListToolbarViewActionsComponent,
-    SkyListSearchToolbarViewActionsComponent
+    SkyListToolbarViewActionsComponent
   ]
 })
-export class SkyListToolbarModule {
-}
+export class SkyListToolbarModule { }

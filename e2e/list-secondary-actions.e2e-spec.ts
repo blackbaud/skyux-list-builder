@@ -17,6 +17,8 @@ describe('list-secondary-actions component', () => {
   it('should display toolbar with secondary actions', (done) => {
       element(by.css('.sky-list-secondary-actions .sky-dropdown-button'));
 
-      expect('#screenshot-list-secondary-actions').toMatchBaselineScreenshot(done);
+      expect('#screenshot-list-secondary-actions').toMatchBaselineScreenshot(done, {
+        screenshotName: 'list-secondary-actions'
+      });
   });
 });

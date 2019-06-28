@@ -7,9 +7,6 @@
     [data]="data"
   >
     <sky-list-toolbar>
-      <sky-list-search-toolbar-view-actions>
-        Place the button here!
-      </sky-list-search-toolbar-view-actions>
       <sky-list-secondary-actions>
         <sky-list-secondary-action>
           <button
@@ -327,5 +324,28 @@
 
     <sky-list-view-isselected-visual></sky-list-view-isselected-visual>
 
+  </sky-list>
+</div>
+
+<div
+  class="sky-padding-even-default"
+  id="screenshot-list-toolbar-search"
+>
+  <h2>
+    Search-centric toolbar
+  </h2>
+  <sky-list>
+    <sky-list-toolbar
+      toolbarType="search"
+    >
+      <sky-list-toolbar-search-actions>
+        <button
+          class="sky-btn sky-btn-primary"
+          type="button"
+        >
+          Add
+        </button>
+      </sky-list-toolbar-search-actions>
+    </sky-list-toolbar>
   </sky-list>
 </div>

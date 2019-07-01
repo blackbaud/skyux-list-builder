@@ -9,6 +9,7 @@
       padding-top: 0;
       padding-bottom: 0;
       padding-left: 0;
+      position: static;
     }
 
     .sky-search-container {
@@ -22,6 +23,18 @@
 
     sky-list-toolbar-search-actions {
       flex: 0 0 auto;
+      z-index: 1;
+    }
+  }
+}
+
+.sky-list-toolbar-container {
+  ::ng-deep {
+    .sky-toolbar-section-items {
+      sky-toolbar-item {
+        flex: 0 1 auto;
+        align-self: flex-start;
+      }
     }
   }
 }

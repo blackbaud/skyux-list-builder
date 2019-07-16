@@ -250,7 +250,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
       // Only send selection changes to the dispatcher if this is the first change or the changes are distinct.
       if (!this.lastSelectedIds || newSelectedIdsDistinct) {
-        this.dispatcher.next(new ListSelectedLoadAction(newSelectedIds));
+        this.dispatcher.setSelected(newSelectedIds, true, true);
       }
     }
   }

@@ -19,6 +19,7 @@ import {
 
 import {
   ListSelectedLoadAction,
+  // ListSelectedSetItemsSelectedAction,
   ListSelectedSetLoadingAction
 } from './state/selected/actions';
 
@@ -243,6 +244,15 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     if (changes['appliedFilters'] &&
       changes['appliedFilters'].currentValue !== changes['appliedFilters'].previousValue) {
       this.dispatcher.filtersUpdate(this.appliedFilters);
+    }
+    if (changes['selectedIds']) {
+      const newSelectedIds = changes['selectedIds'].currentValue;
+      const newSelectedIdsDistinct = this.lastSelectedIds && !this.arraysEqual(newSelectedIds, this.lastSelectedIds);
+
+      // Only send selection changes to the dispatcher if this is the first change or the changes are distinct.
+      if (!this.lastSelectedIds || newSelectedIdsDistinct) {
+        this.dispatcher.next(new ListSelectedLoadAction(newSelectedIds));
+      }
     }
   }
 

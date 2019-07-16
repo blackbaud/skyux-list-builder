@@ -496,6 +496,60 @@ describe('List Component', () => {
         tick();
       }));
 
+      it('should allow users to change selectedIds', fakeAsync(() => {
+        tick();
+        fixture.detectChanges();
+
+        component.selectedIds = ['3', '4']
+        tick();
+        fixture.detectChanges();
+        state.take(1).subscribe((current) => {
+          expect(current.selected.item.selectedIdMap.get('1')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('2')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('3')).toBe(true);
+          expect(current.selected.item.selectedIdMap.get('4')).toBe(true);
+          expect(current.selected.item.selectedIdMap.get('5')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('6')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('7')).toBeUndefined();
+        });
+
+        component.selectedIds = []
+        tick();
+        fixture.detectChanges();
+        state.take(1).subscribe((current) => {
+          expect(current.selected.item.selectedIdMap.get('1')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('2')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('3')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('4')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('5')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('6')).toBeUndefined();
+          expect(current.selected.item.selectedIdMap.get('7')).toBeUndefined();
+        });
+
+        fixture.detectChanges();
+        tick();
+      }));
+
+      it('should not change selectedIds if the values are not distinct', fakeAsync(() => {
+        tick();
+        fixture.detectChanges();
+        const dispatcherSpy = spyOn(dispatcher, 'next').and.callThrough();
+
+        component.selectedIds = ['3', '4']
+        tick();
+        fixture.detectChanges();
+        expect(dispatcherSpy).toHaveBeenCalledTimes(1);
+        dispatcherSpy.calls.reset();
+
+        component.selectedIds = ['3', '4']
+        tick();
+        fixture.detectChanges();
+        expect(dispatcherSpy).not.toHaveBeenCalled();
+
+        fixture.detectChanges();
+        tick();
+      }));
+
       it('should allow users to access displayed selectedItems', fakeAsync(() => {
         tick();
         fixture.detectChanges();

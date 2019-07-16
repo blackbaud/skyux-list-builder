@@ -19,7 +19,6 @@ import {
 
 import {
   ListSelectedLoadAction,
-  // ListSelectedSetItemsSelectedAction,
   ListSelectedSetLoadingAction
 } from './state/selected/actions';
 

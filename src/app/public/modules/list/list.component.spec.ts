@@ -533,7 +533,7 @@ describe('List Component', () => {
       it('should not change selectedIds if the values are not distinct', fakeAsync(() => {
         tick();
         fixture.detectChanges();
-        const dispatcherSpy = spyOn(dispatcher, 'next').and.callThrough();
+        const dispatcherSpy = spyOn(dispatcher, 'setSelected').and.callThrough();
 
         component.selectedIds = ['3', '4']
         tick();

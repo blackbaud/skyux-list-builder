@@ -57,7 +57,7 @@ export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListI
     let newListItems = this.cloneListItemModelArray(state.items);
 
     if (action.refresh) {
-      newListItems.forEach(item => item.isSelected = false);
+      newListItems.forEach(item => item.isSelected = undefined);
     }
 
     action.items.map(s => {

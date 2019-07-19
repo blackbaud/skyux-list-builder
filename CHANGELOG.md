@@ -1,6 +1,6 @@
 # 3.5.0 (2019-07-19)
 
-- Updated `selectedIds` input property to programmatically select rows when used in conjunction with the list view grids component. [#57](https://github.com/blackbaud/skyux-list-builder/pull/57)
+- Updated the list component to programmatically select rows when the `selectedIds` input property is used in conjunction with the list view grids component. [#57](https://github.com/blackbaud/skyux-list-builder/pull/57)
 
 # 3.4.0 (2019-07-01)
 

@@ -1,3 +1,7 @@
+# 3.5.0 (2019-07-19)
+
+- Updated `selectedIds` input property to programmatically select rows when used in conjunction with the list view grids component. [#57](https://github.com/blackbaud/skyux-list-builder/pull/57)
+
 # 3.4.0 (2019-07-01)
 
 - Added `sky-list-toolbar-search-actions` to the list toolbar's child components. [#52](https://github.com/blackbaud/skyux-list-builder/pull/52) (Thanks [@blackbaud-vimal-kumar](https://github.com/blackbaud-vimal-kumar)!)

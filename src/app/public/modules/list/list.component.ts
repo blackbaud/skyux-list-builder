@@ -234,6 +234,11 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
         .takeUntil(this.ngUnsubscribe)
         .skip(1)
         .subscribe((filters: any) => {
+          /**
+           * We are doing this instead of a distinctUntilChange due to memory allocation issues
+           * with the javascript array. To fix fully the array should be changed to an object in
+           * a breaking change.
+           */
           if (!this.arraysEqual(filters, this.lastFilters)) {
             this.lastFilters = filters.slice(0);
             this.appliedFiltersChange.emit(filters);

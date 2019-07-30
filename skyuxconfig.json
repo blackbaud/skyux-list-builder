@@ -14,6 +14,10 @@
       "browserSet": "paranoid"
     }
   },
+  "moduleAliases": {
+    "@skyux/list-builder/modules/list/state": "src/app/public/modules/list/state/index.ts",
+    "@skyux/list-builder": "src/app/public/index.ts"
+  },
   "app": {
     "styles": [
       "@skyux/theme/css/sky.css"

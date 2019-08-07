@@ -257,10 +257,8 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     if (changes['selectedIds']) {
       // Only send selection changes to dispatcher if changes are distinct.
       const newSelectedIds = changes['selectedIds'].currentValue;
-      if (newSelectedIds !== this.lastSelectedIds) {
-        if (!this.arraysEqual(newSelectedIds, this.lastSelectedIds)) {
-          this.dispatcher.setSelected(newSelectedIds, true, true);
-        }
+      if (!this.arraysEqual(newSelectedIds, this.lastSelectedIds)) {
+        this.dispatcher.setSelected(newSelectedIds, true, true);
       }
     }
   }
@@ -403,6 +401,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private arraysEqual(arrayA: any[], arrayB: any[]): boolean {
+    /* istanbul ignore next */
     if (arrayA === arrayB) {
       return true;
     }

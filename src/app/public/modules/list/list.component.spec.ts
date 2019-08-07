@@ -559,7 +559,7 @@ describe('List Component', () => {
         tick();
       }));
 
-      it('should handle and undefined value for selectedIds', fakeAsync(() => {
+      it('should handle an undefined value for selectedIds', fakeAsync(() => {
         tick();
         fixture.detectChanges();
         const dispatcherSpy = spyOn(dispatcher, 'setSelected').and.callThrough();

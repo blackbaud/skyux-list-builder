@@ -420,5 +420,3 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     return true;
   }
 }
-
-// TODO: Also, it should never call setselected with undefined items!

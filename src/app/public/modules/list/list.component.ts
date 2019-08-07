@@ -160,7 +160,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   @ContentChildren(ListViewComponent)
   private listViews: QueryList<ListViewComponent>;
 
-  private lastSelectedIds: string[];
+  private lastSelectedIds: string[] = [];
 
   private lastFilters: ListFilterModel[] = [];
 
@@ -211,7 +211,6 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     this.state.map(current => current.selected)
       .takeUntil(this.ngUnsubscribe)
       .distinctUntilChanged()
-      .skip(1)
       .subscribe(selected => {
 
         // Update lastSelectedIds to help us retain user selections.
@@ -221,12 +220,14 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
             selectedIdsList.push(key);
           }
         });
-        this.lastSelectedIds = selectedIdsList;
 
-        // Emit new selected items if there is an observer.
-        if (this.selectedIdsChange.observers.length > 0) {
+        // If changes are distinct, emit selectedIdsChange.
+        const distinctChanges = !this.arraysEqual(this.lastSelectedIds, selectedIdsList);
+        if (this.selectedIdsChange.observers.length > 0 && distinctChanges) {
           this.selectedIdsChange.emit(selected.item.selectedIdMap);
         }
+
+        this.lastSelectedIds = selectedIdsList;
       });
 
     if (this.appliedFiltersChange.observers.length > 0) {

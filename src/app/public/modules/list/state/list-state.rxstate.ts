@@ -28,10 +28,6 @@ import {
 } from './list-state-action.type';
 
 import {
-  ListPagingSetPageNumberAction
-} from './paging/actions';
-
-import {
   ListSearchSetFunctionsAction,
   ListSearchSetSearchTextAction,
   ListSearchSetFieldSelectorsAction,
@@ -110,11 +106,7 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
     this.next(new ListSearchSetFieldSelectorsAction(fieldSelectors));
   }
 
-  public searchSetText(searchText: string, notFirstPage?: boolean) {
-    if (notFirstPage) {
-      this.next(new ListPagingSetPageNumberAction(Number(1)));
-    }
-
+  public searchSetText(searchText: string) {
     this.next(new ListSearchSetSearchTextAction(searchText));
   }
 

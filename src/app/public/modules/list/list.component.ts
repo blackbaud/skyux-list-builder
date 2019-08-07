@@ -254,12 +254,12 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
       this.dispatcher.filtersUpdate(this.appliedFilters);
     }
     if (changes['selectedIds']) {
+      // Only send selection changes to dispatcher if changes are distinct.
       const newSelectedIds = changes['selectedIds'].currentValue;
-      const newSelectedIdsDistinct = this.lastSelectedIds && !this.arraysEqual(newSelectedIds, this.lastSelectedIds);
-
-      // Only send selection changes to the dispatcher if this is the first change or the changes are distinct.
-      if (!this.lastSelectedIds || newSelectedIdsDistinct) {
-        this.dispatcher.setSelected(newSelectedIds, true, true);
+      if (newSelectedIds !== this.lastSelectedIds) {
+        if (!this.arraysEqual(newSelectedIds, this.lastSelectedIds)) {
+          this.dispatcher.setSelected(newSelectedIds, true, true);
+        }
       }
     }
   }
@@ -402,8 +402,22 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private arraysEqual(arrayA: any[], arrayB: any[]): boolean {
-    return arrayA.length === arrayB.length &&
-      arrayA.every((value, index) =>
-        value === arrayB[index]);
+    if (arrayA === arrayB) {
+      return true;
+    }
+    if (arrayA === undefined || arrayB === undefined) {
+      return false;
+    }
+    if (arrayA.length !== arrayB.length) {
+      return false;
+    }
+    for (let i = 0; i < arrayA.length; ++i) {
+      if (arrayA[i] !== arrayB[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 }
+
+// TODO: Also, it should never call setselected with undefined items!

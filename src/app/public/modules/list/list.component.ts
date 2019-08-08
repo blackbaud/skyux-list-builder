@@ -390,7 +390,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private getItemsAndRetainSelections(newList: ListItemModel[], selectedIds: string[]): ListItemModel[] {
-    if (!selectedIds) {
+    if (selectedIds.length === 0) {
       return newList;
     }
     let updatedListModel = newList.slice();

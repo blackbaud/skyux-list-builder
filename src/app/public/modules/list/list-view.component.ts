@@ -51,11 +51,7 @@ export abstract class ListViewComponent {
   }
 
   private getConstructorName(): string {
-    const constructor = (this as any).prototype ?
-      (this as any).prototype.constructor :
-      this.constructor;
-
-    const str = constructor.toString();
+    const str = this.constructor.toString();
     const cname = str.match(/function\s(\w*)/)[1];
 
     return cname;

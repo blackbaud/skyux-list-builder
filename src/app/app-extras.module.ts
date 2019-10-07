@@ -11,6 +11,10 @@ import {
 } from '@skyux/list-builder-view-grids';
 
 import {
+  SkyAppLinkModule
+} from '@skyux/router';
+
+import {
   SkyListModule,
   SkyListFiltersModule,
   SkyListPagingModule,
@@ -23,17 +27,8 @@ import {
 } from './public';
 
 @NgModule({
-  imports: [
-    SkyIconModule,
-    SkyListModule,
-    SkyListFiltersModule,
-    SkyListPagingModule,
-    SkyListSecondaryActionsModule,
-    SkyListToolbarModule,
-    SkyListViewSwitcherModule,
-    SkyListViewGridModule
-  ],
   exports: [
+    SkyAppLinkModule,
     SkyIconModule,
     SkyListModule,
     SkyListFiltersModule,

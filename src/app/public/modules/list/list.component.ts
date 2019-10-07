@@ -160,14 +160,20 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   @ContentChildren(ListViewComponent)
   private listViews: QueryList<ListViewComponent>;
 
-  private lastSelectedIds: string[];
+  private lastSelectedIds: string[] = [];
 
+  private lastFilters: ListFilterModel[] = [];
+
+  // This subject is used to cancel previous request to the list's data provider when a new change
+  // to the list's state occurs. In a future breaking change this should be replaced or coupled
+  // with adding a debounce time to the Observable which watches for state changes.
+  private cancelLastRequest = new Subject();
   private ngUnsubscribe = new Subject();
 
   constructor(
     private state: ListState,
     private dispatcher: ListStateDispatcher
-  ) {}
+  ) { }
 
   public ngAfterContentInit(): void {
     if (this.data && this.dataProvider && this.initialTotal) {
@@ -209,7 +215,6 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     this.state.map(current => current.selected)
       .takeUntil(this.ngUnsubscribe)
       .distinctUntilChanged()
-      .skip(1)
       .subscribe(selected => {
 
         // Update lastSelectedIds to help us retain user selections.
@@ -219,21 +224,30 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
             selectedIdsList.push(key);
           }
         });
-        this.lastSelectedIds = selectedIdsList;
 
-        // Emit new selected items if there is an observer.
-        if (this.selectedIdsChange.observers.length > 0) {
+        // If changes are distinct, emit selectedIdsChange.
+        const distinctChanges = !this.arraysEqual(this.lastSelectedIds, selectedIdsList);
+        if (this.selectedIdsChange.observers.length > 0 && distinctChanges) {
           this.selectedIdsChange.emit(selected.item.selectedIdMap);
         }
+
+        this.lastSelectedIds = selectedIdsList;
       });
 
     if (this.appliedFiltersChange.observers.length > 0) {
       this.state.map(current => current.filters)
         .takeUntil(this.ngUnsubscribe)
-        .distinctUntilChanged(this.arraysEqual)
         .skip(1)
         .subscribe((filters: any) => {
-          this.appliedFiltersChange.emit(filters);
+          /**
+           * We are doing this instead of a distinctUntilChange due to memory allocation issues
+           * with the javascript array. To fix fully the array should be changed to an object in
+           * a breaking change.
+           */
+          if (!this.arraysEqual(filters, this.lastFilters)) {
+            this.lastFilters = filters.slice(0);
+            this.appliedFiltersChange.emit(filters);
+          }
         });
     }
 
@@ -243,6 +257,13 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     if (changes['appliedFilters'] &&
       changes['appliedFilters'].currentValue !== changes['appliedFilters'].previousValue) {
       this.dispatcher.filtersUpdate(this.appliedFilters);
+    }
+    if (changes['selectedIds']) {
+      // Only send selection changes to dispatcher if changes are distinct.
+      const newSelectedIds = changes['selectedIds'].currentValue;
+      if (!this.arraysEqual(newSelectedIds, this.lastSelectedIds)) {
+        this.dispatcher.setSelected(newSelectedIds, true, true);
+      }
     }
   }
 
@@ -301,7 +322,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
         selected: Array<string>,
         itemsData: Array<any>
       ) => {
-
+        this.cancelLastRequest.next();
         if (selectedChanged) {
           this.dispatcher.next(new ListSelectedSetLoadingAction());
           this.dispatcher.next(new ListSelectedLoadAction(selected));
@@ -317,7 +338,8 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
           response = Observable.of(new ListDataResponseModel({
             count: this.initialTotal,
             items: initialItems
-          }));
+          }))
+            .takeUntil(this.cancelLastRequest);
         } else {
           response = this.dataProvider.get(new ListDataRequestModel({
             filters: filters,
@@ -326,7 +348,8 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
             search: search,
             sort: new ListSortModel({ fieldSelectors: sortFieldSelectors }),
             isToolbarDisabled: isToolbarDisabled
-          }));
+          }))
+            .takeUntil(this.cancelLastRequest);
         }
 
         return response;
@@ -343,10 +366,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
           });
         });
       })
-
-      .flatMap((value: Observable<ListDataResponseModel>, index: number) => {
-        return value;
-      });
+      .flatMap((value) => value);
   }
 
   public get selectedItems(): Observable<Array<ListItemModel>> {
@@ -376,7 +396,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private getItemsAndRetainSelections(newList: ListItemModel[], selectedIds: string[]): ListItemModel[] {
-    if (!selectedIds) {
+    if (selectedIds.length === 0) {
       return newList;
     }
     let updatedListModel = newList.slice();
@@ -387,8 +407,21 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   private arraysEqual(arrayA: any[], arrayB: any[]): boolean {
-    return arrayA.length === arrayB.length &&
-      arrayA.every((value, index) =>
-        value === arrayB[index]);
+    /* istanbul ignore next */
+    if (arrayA === arrayB) {
+      return true;
+    }
+    if (arrayA === undefined || arrayB === undefined) {
+      return false;
+    }
+    if (arrayA.length !== arrayB.length) {
+      return false;
+    }
+    for (let i = 0; i < arrayA.length; ++i) {
+      if (arrayA[i] !== arrayB[i]) {
+        return false;
+      }
+    }
+    return true;
   }
 }

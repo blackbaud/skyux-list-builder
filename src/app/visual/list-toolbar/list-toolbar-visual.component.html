@@ -89,6 +89,7 @@
   <h2>Toolbar with multiselect</h2>
   <sky-list
     [data]="data"
+    [selectedIds]="selectedIds"
     (selectedIdsChange)="selectedIdsChange($event)"
   >
     <sky-list-toolbar>
@@ -169,15 +170,23 @@
     <sky-list-view-visual></sky-list-view-visual>
 
   </sky-list>
+
+  <button
+    type="button"
+    (click)="onSelectRowsClick()"
+  >
+    Programmatically select rows 2, 3, and 5
+  </button>
 </div>
 
 <div
   class="sky-padding-even-default"
 >
   <h2>Toolbar with multiselect (based on item.isSelected property)</h2>
-  <p>This is to simulate how list-view-grids would work, as its the only component that should go off of item.</p>
+  <p>This is to simulate how the vanilla grids component would work, as its the only component that should go off of item.</p>
   <sky-list
     [data]="data"
+    [selectedIds]="selectedIds"
     (selectedIdsChange)="selectedIdsChange($event)"
   >
     <sky-list-toolbar>
@@ -257,5 +266,40 @@
 
     <sky-list-view-isselected-visual></sky-list-view-isselected-visual>
 
+  </sky-list>
+</div>
+
+<div
+  class="sky-padding-even-default"
+  id="screenshot-list-toolbar-search"
+>
+  <h2>
+    Search-centric toolbar
+  </h2>
+
+  <sky-list>
+    <sky-list-toolbar
+      toolbarType="search"
+    >
+    </sky-list-toolbar>
+  </sky-list>
+
+  <h3>
+    Search actions container
+  </h3>
+
+  <sky-list>
+    <sky-list-toolbar
+      toolbarType="search"
+    >
+      <sky-list-toolbar-search-actions>
+        <button
+          class="sky-btn sky-btn-primary"
+          type="button"
+        >
+          Add
+        </button>
+      </sky-list-toolbar-search-actions>
+    </sky-list-toolbar>
   </sky-list>
 </div>

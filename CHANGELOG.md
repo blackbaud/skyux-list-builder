@@ -1,3 +1,20 @@
+# 3.5.2 (2019-09-11)
+
+- Fixed the list component to properly display results when searching pages other than the first page. [#61](https://github.com/blackbaud/skyux-list-builder/pull/61)
+- Fixed the list builder component to load properly when `selectedIds` are undefined. [#63](https://github.com/blackbaud/skyux-list-builder/pull/63)
+
+# 3.5.1 (2019-08-02)
+
+- Fixed the list component to properly notify consumers when filters are removed. [#60](https://github.com/blackbaud/skyux-list-builder/pull/60)
+
+# 3.5.0 (2019-07-19)
+
+- Updated the list component to programmatically select rows when the `selectedIds` input property is used in conjunction with the list view grids component. [#57](https://github.com/blackbaud/skyux-list-builder/pull/57)
+
+# 3.4.0 (2019-07-01)
+
+- Added `sky-list-toolbar-search-actions` to the list toolbar's child components. [#52](https://github.com/blackbaud/skyux-list-builder/pull/52) (Thanks [@blackbaud-vimal-kumar](https://github.com/blackbaud-vimal-kumar)!)
+
 # 3.3.0 (2019-06-07)
 
 - Added the ability to trigger responsive styles based on a parent component. [#43](https://github.com/blackbaud/skyux-list-builder/pull/43)

@@ -78,14 +78,14 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
         if (this.currentViews.length <= 1) {
           this.showSwitcher = false;
         } else {
-          const viewTypes = this.currentViews.map(view => { return view.type; });
+          const viewNames = this.currentViews.map(view => { return view.name; });
 
           this.availableViews = [];
 
-          if (viewTypes.indexOf('SkyListViewGridComponent') >= 0) {
+          if (viewNames.indexOf('Grid View') >= 0) {
             this.availableViews.push({
               icon: 'table',
-              viewModel: this.currentViews.find(view => view.type === 'SkyListViewGridComponent'),
+              viewModel: this.currentViews.find(view => view.name === 'Grid View'),
               label: 'Table view'
             });
           }
@@ -109,7 +109,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
               this.currentViews.map(view => { return view.id; }).indexOf(customView.view.id) >= 0) {
               this.availableViews.push({
                 icon: customView.icon,
-                viewModel: this.currentViews.find(view => view.type === customView.view.type),
+                viewModel: this.currentViews.find(view => view.name === customView.view.label),
                 label: customView.label
               });
             }

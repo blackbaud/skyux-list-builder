@@ -7,10 +7,6 @@ import {
 } from '@skyux/indicators';
 
 import {
-  SkyListViewGridModule
-} from '@skyux/list-builder-view-grids';
-
-import {
   SkyAppLinkModule
 } from '@skyux/router';
 
@@ -20,7 +16,7 @@ import {
   SkyListPagingModule,
   SkyListSecondaryActionsModule,
   SkyListToolbarModule
-} from '@skyux/list-builder';
+} from '../app/public/modules';
 
 import {
   SkyListViewSwitcherModule
@@ -35,8 +31,7 @@ import {
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
     SkyListToolbarModule,
-    SkyListViewSwitcherModule,
-    SkyListViewGridModule
+    SkyListViewSwitcherModule
   ],
   providers: [],
   entryComponents: []

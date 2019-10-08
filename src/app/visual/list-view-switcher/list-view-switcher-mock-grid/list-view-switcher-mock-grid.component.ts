@@ -17,23 +17,23 @@ import {
 
  // Internal component only used to get at ListStateDispatcher.
 @Component({
-  selector: 'sky-list-view-switcher-secondary-view',
-  templateUrl: './list-view-switcher-secondary-view.component.html',
+  selector: 'sky-list-view-switcher-mock-grid',
+  templateUrl: './list-view-switcher-mock-grid.component.html',
   providers: [
     {
       provide: ListViewComponent,
       /* tslint:disable-next-line */
-      useExisting: forwardRef(() => ListViewSwitcherSecondaryViewTestComponent)
+      useExisting: forwardRef(() => SkyListViewGridComponent)
     }
   ]
 })
-export class ListViewSwitcherSecondaryViewTestComponent extends ListViewComponent {
+export class SkyListViewGridComponent extends ListViewComponent {
 
    public localItems: ListItemModel[];
 
    constructor(
     state: ListState
   ) {
-    super(state, 'List View Switcher Secondary View');
+    super(state, 'Grid View');
   }
  }

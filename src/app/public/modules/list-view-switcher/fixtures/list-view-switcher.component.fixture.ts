@@ -4,14 +4,14 @@ import {
 } from '@angular/core';
 
 import {
+  SkyListViewGridComponent
+} from '@skyux/list-builder-view-grids';
+
+import {
   Observable
 } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
-
-import {
-  SkyListViewGridComponent
-} from '@skyux/list-builder-view-grids';
 
 import {
   ListViewSwitcherSecondaryViewFixtureComponent

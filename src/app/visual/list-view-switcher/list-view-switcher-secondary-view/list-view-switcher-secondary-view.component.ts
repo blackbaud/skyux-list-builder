@@ -8,12 +8,9 @@ import {
 } from '@skyux/list-builder-common';
 
 import {
+  ListState,
   ListViewComponent
-} from '../../../public/modules/list';
-
-import {
-  ListState
-} from '../../../public/modules/list/state';
+} from '../../../public';
 
  // Internal component only used to get at ListStateDispatcher.
 @Component({

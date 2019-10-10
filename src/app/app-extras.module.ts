@@ -11,14 +11,11 @@ import {
 } from '@skyux/router';
 
 import {
-  SkyListModule,
   SkyListFiltersModule,
+  SkyListModule,
   SkyListPagingModule,
   SkyListSecondaryActionsModule,
-  SkyListToolbarModule
-} from '../app/public/modules';
-
-import {
+  SkyListToolbarModule,
   SkyListViewSwitcherModule
 } from './public';
 

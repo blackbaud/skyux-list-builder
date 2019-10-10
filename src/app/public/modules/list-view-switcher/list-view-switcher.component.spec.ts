@@ -16,20 +16,17 @@ import {
 } from '@skyux/core/testing';
 
 import {
-  SkyListViewGridModule
-} from '@skyux/list-builder-view-grids';
-
-import {
   expect
 } from '@skyux-sdk/testing';
 
 import {
-  ListViewSwitcherFixtureComponent
-} from './fixtures/list-view-switcher.component.fixture';
+  ListState,
+  ListStateDispatcher
+} from '../list/state';
 
 import {
-  ListViewSwitcherSecondaryViewFixtureComponent
-} from './fixtures/list-view-switcher-secondary-view.component.fixture';
+  ListViewSwitcherFixtureComponent
+} from './fixtures/list-view-switcher.component.fixture';
 
 import {
   ListViewSwitcherOnlyGridFixtureComponent
@@ -44,21 +41,8 @@ import {
 } from './fixtures/list-view-switcher-extra-custom.component.fixture';
 
 import {
-  SkyListModule
-} from '../list';
-
-import {
-  ListState,
-  ListStateDispatcher
-} from '../list/state';
-
-import {
-  SkyListToolbarModule
-} from '../list-toolbar';
-
-import {
-  SkyListViewSwitcherModule
-} from './list-view-switcher.module';
+  SkySummaryActionBarFixtureModule
+} from './fixtures/list-view-switcher.module.fixture';
 
 describe('List View Switcher Component', () => {
   let state: ListState,
@@ -77,15 +61,8 @@ describe('List View Switcher Component', () => {
       mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
-        declarations: [
-          ListViewSwitcherFixtureComponent,
-          ListViewSwitcherSecondaryViewFixtureComponent
-        ],
         imports: [
-          SkyListModule,
-          SkyListToolbarModule,
-          SkyListViewGridModule,
-          SkyListViewSwitcherModule
+          SkySummaryActionBarFixtureModule
         ],
         providers: [
           { provide: ListState, useValue: state },
@@ -280,15 +257,8 @@ describe('List View Switcher Component', () => {
       mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
-        declarations: [
-          ListViewSwitcherOnlyGridFixtureComponent,
-          ListViewSwitcherSecondaryViewFixtureComponent
-        ],
         imports: [
-          SkyListModule,
-          SkyListToolbarModule,
-          SkyListViewGridModule,
-          SkyListViewSwitcherModule
+          SkySummaryActionBarFixtureModule
         ],
         providers: [
           { provide: ListState, useValue: state },
@@ -310,13 +280,6 @@ describe('List View Switcher Component', () => {
           .toBeNull();
       }));
 
-      it('should be accessible', async(() => {
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          expect(nativeElement).toBeAccessible();
-        });
-      }));
-
     });
 
     describe('mobile view', () => {
@@ -330,13 +293,6 @@ describe('List View Switcher Component', () => {
         tick();
         expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
           .toBeNull();
-      }));
-
-      it('should be accessible', async(() => {
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          expect(nativeElement).toBeAccessible();
-        });
       }));
 
     });
@@ -353,15 +309,8 @@ describe('List View Switcher Component', () => {
       mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
-        declarations: [
-          ListViewSwitcherOnlyCustomFixtureComponent,
-          ListViewSwitcherSecondaryViewFixtureComponent
-        ],
         imports: [
-          SkyListModule,
-          SkyListToolbarModule,
-          SkyListViewGridModule,
-          SkyListViewSwitcherModule
+          SkySummaryActionBarFixtureModule
         ],
         providers: [
           { provide: ListState, useValue: state },
@@ -383,13 +332,6 @@ describe('List View Switcher Component', () => {
           .toBeNull();
       }));
 
-      it('should be accessible', async(() => {
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          expect(nativeElement).toBeAccessible();
-        });
-      }));
-
     });
 
     describe('mobile view', () => {
@@ -403,13 +345,6 @@ describe('List View Switcher Component', () => {
         tick();
         expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
           .toBeNull();
-      }));
-
-      it('should be accessible', async(() => {
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          expect(nativeElement).toBeAccessible();
-        });
       }));
 
     });
@@ -426,15 +361,8 @@ describe('List View Switcher Component', () => {
       mockMediaQueryService = new MockSkyMediaQueryService();
 
       TestBed.configureTestingModule({
-        declarations: [
-          ListViewSwitcherExtraCustomFixtureComponent,
-          ListViewSwitcherSecondaryViewFixtureComponent
-        ],
         imports: [
-          SkyListModule,
-          SkyListToolbarModule,
-          SkyListViewGridModule,
-          SkyListViewSwitcherModule
+          SkySummaryActionBarFixtureModule
         ],
         providers: [
           { provide: ListState, useValue: state },
@@ -457,13 +385,6 @@ describe('List View Switcher Component', () => {
             .toBeNull();
         }));
 
-      it('should be accessible', async(() => {
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          expect(nativeElement).toBeAccessible();
-        });
-      }));
-
     });
 
     describe('mobile view', () => {
@@ -477,13 +398,6 @@ describe('List View Switcher Component', () => {
         tick();
         expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
           .toBeNull();
-      }));
-
-      it('should be accessible', async(() => {
-        fixture.detectChanges();
-        fixture.whenStable().then(() => {
-          expect(nativeElement).toBeAccessible();
-        });
       }));
 
     });

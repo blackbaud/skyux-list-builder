@@ -8,7 +8,7 @@
     <span
       class="sky-switch-icon-group"
     >
-      <sky-radio *ngFor="let view of availableViews; let i = index"
+      <sky-radio *ngFor="let view of availableViewButtons; let i = index"
         [attr.title]="view.label"
         [icon]="view.icon"
         [label]="view.label"
@@ -25,7 +25,7 @@
     [label]="'skyux_list_view_switcher_dropdown_title' | skyLibResources"
   >
     <sky-dropdown-menu>
-      <sky-dropdown-item *ngFor="let view of availableViews; let i = index">
+      <sky-dropdown-item *ngFor="let view of availableViewButtons; let i = index">
         <button
           type="button"
           [attr.aria-label]="view.label"

@@ -43,13 +43,13 @@ import {
 } from './list-view-switcher.component';
 
 import {
-  SkyListViewSwitcherCustomComponent
+  SkyListViewSwitcherCustomButtonComponent
 } from './list-view-switcher-custom.component';
 
 @NgModule({
   declarations: [
     SkyListViewSwitcherComponent,
-    SkyListViewSwitcherCustomComponent
+    SkyListViewSwitcherCustomButtonComponent
   ],
   imports: [
     CommonModule,
@@ -64,7 +64,7 @@ import {
   ],
   exports: [
     SkyListViewSwitcherComponent,
-    SkyListViewSwitcherCustomComponent
+    SkyListViewSwitcherCustomButtonComponent
   ]
 })
 export class SkyListViewSwitcherModule { }

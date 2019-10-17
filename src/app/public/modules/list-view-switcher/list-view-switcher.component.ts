@@ -25,7 +25,7 @@ import {
 } from '../list/state';
 
 import {
-  SkyListViewSwitcherCustomComponent
+  SkyListViewSwitcherCustomButtonComponent
 } from './list-view-switcher-custom.component';
 
 @Component({
@@ -37,7 +37,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
 
   public activeView: any;
 
-  public availableViews: any[];
+  public availableViewButtons: any[];
 
   public currentIcon: string;
 
@@ -47,8 +47,8 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
 
   private currentViews: ListViewModel[];
 
-  @ContentChildren(SkyListViewSwitcherCustomComponent)
-  private customViews: QueryList<SkyListViewSwitcherCustomComponent>;
+  @ContentChildren(SkyListViewSwitcherCustomButtonComponent)
+  private customViewButtons: QueryList<SkyListViewSwitcherCustomButtonComponent>;
 
   private ngUnsubscribe = new Subject();
 
@@ -79,7 +79,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
         this.resetAvailableViews(views.active);
       });
 
-    this.customViews.changes.subscribe(() => this.resetAvailableViews());
+    this.customViewButtons.changes.subscribe(() => this.resetAvailableViews());
   }
 
   public ngOnDestroy(): void {
@@ -95,7 +95,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
         this.dispatcher.next(new ListViewsSetActiveAction(view.id));
       });
 
-      this.currentIcon = this.availableViews
+      this.currentIcon = this.availableViewButtons
         .find(availableView => availableView.viewModel === view).icon;
 
       this.activeView = viewIndex;
@@ -139,10 +139,10 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
     } else {
       const viewNames = this.currentViews.map(view => { return view.name; });
 
-      this.availableViews = [];
+      this.availableViewButtons = [];
 
       if (viewNames.indexOf('Grid View') >= 0) {
-        this.availableViews.push({
+        this.availableViewButtons.push({
           icon: 'table',
           viewModel: this.currentViews.find(view => view.name === 'Grid View'),
           label: 'Table view'
@@ -163,13 +163,13 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
       //  Icon: calendar
       //  Label: “Calendar view”
 
-      this.customViews.forEach(customView => {
-        if (customView.view &&
-          this.currentViews.map(view => { return view.id; }).indexOf(customView.view.id) >= 0) {
-          this.availableViews.push({
-            icon: customView.icon,
-            viewModel: this.currentViews.find(view => view.name === customView.view.label),
-            label: customView.label
+      this.customViewButtons.forEach(customViewButton => {
+        if (customViewButton.view &&
+          this.currentViews.map(view => { return view.id; }).indexOf(customViewButton.view.id) >= 0) {
+          this.availableViewButtons.push({
+            icon: customViewButton.icon,
+            viewModel: this.currentViews.find(view => view.name === customViewButton.view.label),
+            label: customViewButton.label
           });
         }
       });
@@ -177,14 +177,14 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
       let activeView = this.currentViews.find(view => view.id === activeViewId);
       this.activeView = this.currentViews.indexOf(activeView);
 
-      let activeViewData = this.availableViews
+      let activeViewData = this.availableViewButtons
         .find(availableView => availableView.viewModel === activeView);
 
       if (activeViewData) {
         this.currentIcon = activeViewData.icon;
       }
 
-      if (this.availableViews.length >= 2) {
+      if (this.availableViewButtons.length >= 2) {
         this.showSwitcher = true;
       }
 

@@ -8,10 +8,10 @@ import {
 } from '../list';
 
 @Component({
-  selector: 'sky-list-view-switcher-custom',
+  selector: 'sky-list-view-switcher-custom-button',
   template: ''
 })
-export class SkyListViewSwitcherCustomComponent {
+export class SkyListViewSwitcherCustomButtonComponent {
 
   @Input()
   public icon: string;

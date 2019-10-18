@@ -74,6 +74,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
         } else {
           this.isMobile = false;
         }
+        this.changeDetector.markForCheck();
       });
 
     this.state

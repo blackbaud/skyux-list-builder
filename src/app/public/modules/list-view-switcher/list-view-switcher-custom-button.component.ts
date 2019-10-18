@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input
 } from '@angular/core';
@@ -9,7 +10,8 @@ import {
 
 @Component({
   selector: 'sky-list-view-switcher-custom-button',
-  template: ''
+  template: '',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkyListViewSwitcherCustomButtonComponent {
 

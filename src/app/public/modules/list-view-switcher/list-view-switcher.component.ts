@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   OnDestroy,
@@ -25,19 +26,24 @@ import {
 } from '../list/state';
 
 import {
+  SkyListViewSwitcherButtonModel
+} from './list-view-switcher-button.model';
+
+import {
   SkyListViewSwitcherCustomButtonComponent
-} from './list-view-switcher-custom.component';
+} from './list-view-switcher-custom-button.component';
 
 @Component({
   selector: 'sky-list-view-switcher',
   templateUrl: './list-view-switcher.component.html',
-  styleUrls: ['./list-view-switcher.component.scss']
+  styleUrls: ['./list-view-switcher.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
 
-  public activeView: any;
+  public activeView: number;
 
-  public availableViewButtons: any[];
+  public availableViewButtons: SkyListViewSwitcherButtonModel[];
 
   public currentIcon: string;
 
@@ -106,7 +112,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
   // Ignoring coverage here due to a bug where we can't test hiding and showing views. We should fix
   // this when that bug is fixed.
   /* istanbul ignore next */
-  private listViewsModelCompare(listViewsModelA: ListViewsModel, listViewsModelB: ListViewsModel) {
+  private listViewsModelCompare(listViewsModelA: ListViewsModel, listViewsModelB: ListViewsModel): boolean {
     if (listViewsModelA.active !== listViewsModelB.active) {
       return false;
     }
@@ -133,7 +139,7 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
     return true;
   }
 
-  private resetAvailableViews(activeViewId?: string) {
+  private resetAvailableViews(activeViewId?: string): void {
     if (this.currentViews.length <= 1) {
       this.showSwitcher = false;
     } else {

@@ -44,7 +44,7 @@ import {
 
 import {
   SkyListViewSwitcherCustomButtonComponent
-} from './list-view-switcher-custom.component';
+} from './list-view-switcher-custom-button.component';
 
 @NgModule({
   declarations: [

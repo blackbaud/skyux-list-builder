@@ -82,8 +82,22 @@ describe('List View Switcher Component', () => {
         fixture.detectChanges();
         tick();
         expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
-          .not.toBeUndefined();
+          .not.toBeNull();
       }));
+
+      it('should not show the view if their is no custom button defined for a custom view',
+        fakeAsync(() => {
+          component.showCustomSwitcherButton = false;
+          fixture.detectChanges();
+          tick();
+          expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
+            .toBeNull();
+          component.showCustomSwitcherButton = true;
+          fixture.detectChanges();
+          tick();
+          expect(nativeElement.querySelector('sky-list-view-switcher sky-radio-group'))
+            .not.toBeNull();
+        }));
 
       it('should set the default radio button for a grid correctly', fakeAsync(() => {
         fixture.detectChanges();
@@ -170,7 +184,7 @@ describe('List View Switcher Component', () => {
         fixture.detectChanges();
         tick();
         expect(nativeElement.querySelector('sky-list-view-switcher sky-dropdown'))
-          .not.toBeUndefined();
+          .not.toBeNull();
       }));
 
       it('should set the dropdown button for a grid correctly', fakeAsync(() => {

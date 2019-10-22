@@ -9,7 +9,7 @@
     </sky-list-column-selector-action>
     <sky-list-toolbar-view-actions>
       <sky-list-view-switcher>
-        <sky-list-view-switcher-custom-button
+        <sky-list-view-switcher-custom-button *ngIf="showCustomSwitcherButton"
           icon="gavel"
           label="Secondary view"
           [view]="secondary"

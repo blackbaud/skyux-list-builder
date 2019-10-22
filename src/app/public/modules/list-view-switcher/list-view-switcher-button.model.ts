@@ -11,7 +11,7 @@ export class SkyListViewSwitcherButtonModel {
     if (data) {
       this.icon = data.icon;
       this.label = data.label;
-      this.viewModel = data.view;
+      this.viewModel = data.viewModel;
     }
   }
 }

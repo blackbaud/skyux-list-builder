@@ -149,11 +149,11 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
       this.availableViewButtons = [];
 
       if (viewNames.indexOf('Grid View') >= 0) {
-        this.availableViewButtons.push({
+        this.availableViewButtons.push(new SkyListViewSwitcherButtonModel({
           icon: 'table',
           viewModel: this.currentViews.find(view => view.name === 'Grid View'),
           label: 'Table view'
-        });
+        }));
       }
 
       // Future built in types will go here. Per the design doc future icons would be:
@@ -173,11 +173,11 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
       this.customViewButtons.forEach(customViewButton => {
         if (customViewButton.view &&
           this.currentViews.map(view => { return view.id; }).indexOf(customViewButton.view.id) >= 0) {
-          this.availableViewButtons.push({
+          this.availableViewButtons.push(new SkyListViewSwitcherButtonModel({
             icon: customViewButton.icon,
             viewModel: this.currentViews.find(view => view.name === customViewButton.view.label),
             label: customViewButton.label
-          });
+          }));
         }
       });
 
@@ -187,6 +187,8 @@ export class SkyListViewSwitcherComponent implements AfterViewInit, OnDestroy {
       let activeViewData = this.availableViewButtons
         .find(availableView => availableView.viewModel === activeView);
 
+      /* sanity check */
+      /* istanbul ignore else */
       if (activeViewData) {
         this.currentIcon = activeViewData.icon;
       }

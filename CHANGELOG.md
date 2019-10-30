@@ -1,6 +1,6 @@
 # 3.6.0 (2019-10-30)
 
-- Added the list-view switcher component to provide toolbar buttons to switch between list views. [#32](https://github.com/blackbaud/skyux-list-builder/pull/32)
+- Added the list view switcher component to provide toolbar buttons to switch between list views. [#32](https://github.com/blackbaud/skyux-list-builder/pull/32)
 
 # 3.5.2 (2019-09-11)
 

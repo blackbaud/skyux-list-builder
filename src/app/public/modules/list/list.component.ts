@@ -324,6 +324,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
         itemsData: Array<any>
       ) => {
         cancelLastRequest.next();
+        cancelLastRequest.complete();
         if (selectedChanged) {
           this.dispatcher.next(new ListSelectedSetLoadingAction());
           this.dispatcher.next(new ListSelectedLoadAction(selected));

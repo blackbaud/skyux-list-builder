@@ -135,9 +135,6 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
   }
 
   public setSelected(selectedIds: string[], selected: boolean, refresh: boolean = false): void {
-    // Update ListSelectedModel (checklist / select field).
     this.next(new ListSelectedSetItemsSelectedAction(selectedIds, selected, refresh));
-    // Update ListItemModel (grid).
-    this.next(new ListItemsSetSelectedAction(selectedIds, selected, refresh));
   }
 }

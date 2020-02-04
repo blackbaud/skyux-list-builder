@@ -20,10 +20,6 @@ import {
 } from './filters/actions';
 
 import {
-  ListItemsSetSelectedAction
-} from './items/actions';
-
-import {
   ListStateAction
 } from './list-state-action.type';
 

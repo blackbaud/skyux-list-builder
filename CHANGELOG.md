@@ -1,6 +1,6 @@
 # 3.6.3 (2020-02-06)
 
-- Fixed the `ListStateDispatcher` to no longer send redundant updates to the `ListItemModel`, resulting in better performance for the list view grid component. [#77](https://github.com/blackbaud/skyux-list-builder/pull/77)
+- Fixed `ListStateDispatcher` to prevent redundant updates to `ListItemModel` and improve performance for the list view grid component. [#77](https://github.com/blackbaud/skyux-list-builder/pull/77)
 
 # 3.6.2 (2019-12-06)
 

@@ -15,7 +15,7 @@ import {
 
 import {
   ListFilterModel
-} from '@skyux/list-builder/modules/list/state';
+} from '@skyux/list-builder';
 
 import {
   ListItemModel

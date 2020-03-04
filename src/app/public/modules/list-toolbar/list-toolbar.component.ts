@@ -404,6 +404,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   }
 
   public ngOnDestroy() {
+    this.searchApplied.complete();
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }

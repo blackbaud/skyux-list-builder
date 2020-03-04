@@ -13,6 +13,7 @@ import {
    templateUrl: './list-toolbar.component.fixture.html'
  })
  export class ListToolbarTestComponent {
+  public inMemorySearchEnabled: boolean;
   public toolbarType: string;
   public searchEnabled: boolean;
   public sortEnabled: boolean;
@@ -24,4 +25,6 @@ import {
 
   @ViewChild('default')
   public default: TemplateRef<any>;
+
+  public onSearchApplied(searchText: string): void {}
 }

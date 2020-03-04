@@ -4,9 +4,11 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
+  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
+  Output,
   QueryList,
   TemplateRef,
   ViewChild
@@ -90,6 +92,19 @@ let nextId = 0;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDestroy {
+
+  @Input()
+  public set inMemorySearchEnabled(value: boolean) {
+    this._inMemorySearchEnabled = value;
+  }
+
+  public get inMemorySearchEnabled(): boolean {
+    if (this._inMemorySearchEnabled === undefined) {
+      return true;
+    }
+    return this._inMemorySearchEnabled;
+  }
+
   @Input()
   public placeholder: string;
 
@@ -107,6 +122,9 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
 
   @Input()
   public searchText: string | Observable<string>;
+
+  @Output()
+  public searchApplied: EventEmitter<string> = new EventEmitter<string>();
 
   public get isFilterBarDisplayed(): boolean {
     return !this.isToolbarDisabled && this.hasInlineFilters && this.inlineFilterBarExpanded;
@@ -165,6 +183,8 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   private customItemIds: string[] = [];
   private hasSortSelectors: boolean = false;
   private ngUnsubscribe = new Subject();
+
+  private _inMemorySearchEnabled: boolean;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -399,15 +419,18 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   }
 
   public updateSearchText(searchText: string) {
-    this.state.take(1).subscribe((currentState) => {
-      if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
-        this.dispatcher.next(
-          new ListPagingSetPageNumberAction(Number(1))
-        );
-      }
+    this.searchApplied.emit(searchText);
+    if (this.inMemorySearchEnabled) {
+      this.state.take(1).subscribe((currentState) => {
+        if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
+          this.dispatcher.next(
+            new ListPagingSetPageNumberAction(Number(1))
+          );
+        }
 
-      this.dispatcher.searchSetText(searchText);
-    });
+        this.dispatcher.searchSetText(searchText);
+      });
+    }
   }
 
   private itemIsInView(itemView: string, activeView: string) {

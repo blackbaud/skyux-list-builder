@@ -93,6 +93,13 @@ let nextId = 0;
 })
 export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDestroy {
 
+  /**
+   * Indicates whether to use the in-memory search.
+   * Setting this to `false` will allow consumers to run their own searches remotely,
+   * and push new values to the list component by updating the `data` property.
+   * @default true
+   * @internal
+   */
   @Input()
   public set inMemorySearchEnabled(value: boolean) {
     this._inMemorySearchEnabled = value;
@@ -123,6 +130,10 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @Input()
   public searchText: string | Observable<string>;
 
+  /**
+   * Fires when users submit a search.
+   * @internal
+   */
   @Output()
   public searchApplied: EventEmitter<string> = new EventEmitter<string>();
 

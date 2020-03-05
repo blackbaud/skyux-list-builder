@@ -1,6 +1,6 @@
 # 3.7.0 (2020-03-05)
 
-- Added the `inMemorySearchEnabled` and `searchApplied` properties to the list toolbar component giving consuming SKYUX components the option to allow consumers to run their own searches remotely. [#82](https://github.com/blackbaud/skyux-list-builder/pull/82)
+- Added the `inMemorySearchEnabled` and `searchApplied` properties to the list toolbar component to enable consuming SKY UX components to run searches remotely. [#82](https://github.com/blackbaud/skyux-list-builder/pull/82)
 
 # 3.6.4 (2020-02-07)
 

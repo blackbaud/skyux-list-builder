@@ -25,6 +25,4 @@ import {
 
   @ViewChild('default')
   public default: TemplateRef<any>;
-
-  public onSearchApplied(searchText: string): void {}
 }

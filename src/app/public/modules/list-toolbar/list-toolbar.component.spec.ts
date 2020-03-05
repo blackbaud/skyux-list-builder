@@ -228,7 +228,7 @@ describe('List Toolbar Component', () => {
       initializeToolbar();
       fixture.whenStable().then(() => {
         fixture.detectChanges();
-        const spy = spyOn(component, 'onSearchApplied').and.callThrough();
+        const spy = spyOn(component.toolbar.searchApplied, 'next').and.callThrough();
 
         component.toolbar.searchComponent.applySearchText('something');
         fixture.detectChanges();

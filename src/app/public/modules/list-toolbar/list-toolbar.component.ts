@@ -4,11 +4,9 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
-  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
-  Output,
   QueryList,
   TemplateRef,
   ViewChild
@@ -130,13 +128,6 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @Input()
   public searchText: string | Observable<string>;
 
-  /**
-   * Fires when users submit a search.
-   * @internal
-   */
-  @Output()
-  public searchApplied: EventEmitter<string> = new EventEmitter<string>();
-
   public get isFilterBarDisplayed(): boolean {
     return !this.isToolbarDisabled && this.hasInlineFilters && this.inlineFilterBarExpanded;
   }
@@ -166,6 +157,12 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
 
   public filterButtonId: string = `sky-list-toolbar-filter-button-${++nextId}`;
   public listFilterInlineId: string = `sky-list-toolbar-filter-inline-${++nextId}`;
+
+  /**
+   * Fires when users submit a search.
+   * @internal
+   */
+  public searchApplied: Subject<string> = new Subject<string>();
 
   @ContentChildren(SkyListToolbarItemComponent)
   private toolbarItems: QueryList<SkyListToolbarItemComponent>;
@@ -431,7 +428,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   }
 
   public updateSearchText(searchText: string) {
-    this.searchApplied.emit(searchText);
+    this.searchApplied.next(searchText);
     if (this.inMemorySearchEnabled) {
       this.state.take(1).subscribe((currentState) => {
         if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {

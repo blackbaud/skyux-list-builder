@@ -1,3 +1,11 @@
+# 3.7.0 (2020-03-05)
+
+- Added the `inMemorySearchEnabled` and `searchApplied` properties to the list toolbar component to enable consuming SKY UX components to run searches remotely. [#82](https://github.com/blackbaud/skyux-list-builder/pull/82)
+
+# 3.6.4 (2020-02-07)
+
+- Fixed the package's primary entrypoint to include the list state types and removed an invalid import in the multiselect toolbar component. [#79](https://github.com/blackbaud/skyux-list-builder/pull/79)
+
 # 3.6.3 (2020-02-06)
 
 - Fixed `ListStateDispatcher` to prevent redundant updates to `ListItemModel` and improve performance for the list view grid component. [#77](https://github.com/blackbaud/skyux-list-builder/pull/77)

@@ -1,3 +1,5 @@
+
+import {take, skip} from 'rxjs/operators';
 import {
   ListState,
   ListStateDispatcher,
@@ -73,7 +75,7 @@ describe('List filter summary', () => {
     nativeElement = fixture.nativeElement as HTMLElement;
     component = fixture.componentInstance;
     fixture.detectChanges();
-    state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+    state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
 
     dispatcher.filtersUpdate(filters);
   }));
@@ -127,7 +129,7 @@ describe('List filter summary', () => {
       fixture.detectChanges();
       fixture.whenStable().then(() => {
         fixture.detectChanges();
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           expect(current.filters.length).toBe(1);
           expect(current.filters[0].name).toBe('color');
         });

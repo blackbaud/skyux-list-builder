@@ -1,7 +1,9 @@
+
+import {of as observableOf,  Observable } from 'rxjs';
+
+import {take} from 'rxjs/operators';
 import { SkyListInMemoryDataProvider } from '.';
 import { ListDataRequestModel } from '../list';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
 
 import {
   fakeAsync,
@@ -24,7 +26,7 @@ describe('in memory data provider', () => {
   }
 
   beforeEach(() => {
-    items = Observable.of([
+    items = observableOf([
       { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples' },
       { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
       { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },
@@ -53,7 +55,7 @@ describe('in memory data provider', () => {
 
     tick();
 
-    provider.get(request).take(1).subscribe((result) => {
+    provider.get(request).pipe(take(1)).subscribe((result) => {
       expect(result.items.length).toBe(0);
       expect(result.count).toBe(0);
     });
@@ -72,7 +74,7 @@ describe('in memory data provider', () => {
 
     tick();
 
-    provider.get(request).take(1).subscribe((result) => {
+    provider.get(request).pipe(take(1)).subscribe((result) => {
       expect(result.items.length).toBe(5);
       expect(result.count).toBe(7);
     });
@@ -87,7 +89,7 @@ describe('in memory data provider', () => {
 
     tick();
 
-    provider.get(request).take(1).subscribe((result) => {
+    provider.get(request).pipe(take(1)).subscribe((result) => {
       expect(result.items.length).toBe(2);
       expect(result.count).toBe(7);
     });
@@ -97,7 +99,7 @@ describe('in memory data provider', () => {
 
   it('should handle more than 10 data entries when paging is undefined', fakeAsync(() => {
 
-    let provider = new SkyListInMemoryDataProvider(Observable.of([
+    let provider = new SkyListInMemoryDataProvider(observableOf([
       { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples' },
       { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
       { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },
@@ -114,7 +116,7 @@ describe('in memory data provider', () => {
 
     tick();
 
-    provider.get(request).take(1).subscribe((result) => {
+    provider.get(request).pipe(take(1)).subscribe((result) => {
       expect(result.items.length).toBe(11);
       expect(result.count).toBe(11);
     });
@@ -141,7 +143,7 @@ describe('in memory data provider', () => {
 
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.count).toBe(7);
         expect(result.items[2].data.column2).toEqual('Banana');
 
@@ -169,7 +171,7 @@ describe('in memory data provider', () => {
 
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.count).toBe(7);
         expect(result.items[0].data.column2).toEqual('Strawberry');
 
@@ -208,7 +210,7 @@ describe('in memory data provider', () => {
 
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.count).toBe(7);
         expect(result.items[0].data.column2).toEqual('Banana');
 
@@ -218,7 +220,7 @@ describe('in memory data provider', () => {
     }));
 
     it('should handle sorting with nonstring values', fakeAsync(() => {
-       items = Observable.of([
+       items = observableOf([
         { id: '1', column1: 101, column2: new Date('2/1/2016'), column3: 'Anne eats apples' },
         { id: '2', column1: 202, column2: new Date('1/1/2016'), column3: 'Ben eats bananas' },
         { id: '3', column1: 303, column2: new Date('6/1/2016'), column3: 'Patty eats pears' },
@@ -245,7 +247,7 @@ describe('in memory data provider', () => {
 
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.count).toBe(7);
         expect(result.items[0].id).toEqual('2');
 
@@ -286,14 +288,14 @@ describe('in memory data provider', () => {
 
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.count).toBe(3);
 
       });
 
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.count).toBe(3);
       });
 
@@ -316,7 +318,7 @@ describe('in memory data provider', () => {
       });
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.count).toBe(7);
       });
     }));
@@ -337,7 +339,7 @@ describe('in memory data provider', () => {
 
       tick();
 
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.items.length).toBe(1);
         expect(result.count).toBe(1);
       });
@@ -366,7 +368,7 @@ describe('in memory data provider', () => {
       tick();
 
       // Searching for "berry" and filtering by "yellow" should return NO results.
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.items.length).toBe(0);
         expect(result.count).toBe(0);
       });
@@ -382,7 +384,7 @@ describe('in memory data provider', () => {
       tick();
 
       // If filter is removed, original search results should remain.
-      provider.get(request).take(1).subscribe((result) => {
+      provider.get(request).pipe(take(1)).subscribe((result) => {
         expect(result.items.length).toBe(1);
         expect(result.count).toBe(1);
       });

@@ -19,12 +19,13 @@ import {
 } from '@angular/platform-browser';
 
 import {
-  BehaviorSubject
-} from 'rxjs/BehaviorSubject';
+  BehaviorSubject,
+  Observable
+} from 'rxjs';
 
 import {
-  Observable
-} from 'rxjs/Observable';
+  map as observableMap
+} from 'rxjs/operators';
 
 import {
   ListItemModel,
@@ -76,6 +77,7 @@ import {
 import {
   SkyListInMemoryDataProvider
 } from '../list-data-provider-in-memory';
+import { skip, take } from 'rxjs/operators';
 
 describe('List Component', () => {
   describe('List Fixture', () => {
@@ -149,7 +151,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
       }
 
@@ -338,7 +340,7 @@ describe('List Component', () => {
         it('should return undefined if not defined', fakeAsync(() => {
           initializeList();
           tick();
-          state.map((s) => s.items.lastUpdate = undefined).take(1).subscribe();
+          state.pipe(observableMap((s) => s.items.lastUpdate = undefined), take(1)).subscribe();
           component.list.lastUpdate.take(1).subscribe((u) => {
             expect(u).toBeUndefined();
           });
@@ -406,7 +408,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
 
       }));
@@ -667,7 +669,7 @@ describe('List Component', () => {
         fixture.detectChanges();
 
         // Expect all rows to be selected.
-        state.map(s => s.items.items).take(1).subscribe((items)=> {
+        state.pipe(observableMap(s => s.items.items), take(1)).subscribe((items)=> {
           items.forEach(i => {
             expect(i.isSelected).toEqual(true);
           });
@@ -682,7 +684,7 @@ describe('List Component', () => {
         fixture.detectChanges();
 
         // Expect no rows to be selected.
-        state.map(s => s.items.items).take(1).subscribe((items)=> {
+        state.pipe(observableMap(s => s.items.items), take(1)).subscribe((items)=> {
           items.forEach(i => {
             expect(i.isSelected).toEqual(false);
           });
@@ -750,7 +752,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
 
       }));
@@ -864,7 +866,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
       }));
 
@@ -926,7 +928,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
       }));
 
@@ -1034,7 +1036,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
       }));
 
@@ -1087,7 +1089,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
       }));
 
@@ -1164,7 +1166,7 @@ describe('List Component', () => {
 
         // always skip the first update to ListState, when state is ready
         // run detectChanges once more then begin tests
-        state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+        state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
         fixture.detectChanges();
       }));
 
@@ -1243,14 +1245,14 @@ describe('List Component', () => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
 
-        state.skip(1).take(1).subscribe(() => tick());
+        state.pipe(skip(1), take(1)).subscribe(() => tick());
         tick();
       }));
 
       it('should call searchSetOptions with undefined parameters', fakeAsync(() => {
         dispatcher.searchSetOptions(new ListSearchModel());
 
-        state.map(s => s.search).take(1).subscribe(search => {
+        state.pipe(observableMap(s => s.search), take(1)).subscribe(search => {
           expect(search.searchText).toBe('');
           expect(search.functions.length).toBe(0);
           expect(search.fieldSelectors.length).toBe(0);
@@ -1266,7 +1268,7 @@ describe('List Component', () => {
           fieldSelectors: ['fields']
         }));
 
-        state.map(s => s.search).take(1).subscribe(search => {
+        state.pipe(observableMap(s => s.search), take(1)).subscribe(search => {
           expect(search.searchText).toBe('search text');
           expect(search.functions.length).toBe(1);
           expect(search.fieldSelectors.length).toBe(1);
@@ -1282,7 +1284,7 @@ describe('List Component', () => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
 
-        state.skip(1).take(1).subscribe(() => tick());
+        state.pipe(skip(1), take(1)).subscribe(() => tick());
         tick();
       }));
 

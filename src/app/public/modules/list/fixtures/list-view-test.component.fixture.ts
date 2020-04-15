@@ -8,7 +8,11 @@ import {
 
 import {
   Observable
-} from 'rxjs/Observable';
+} from 'rxjs';
+
+import {
+  map as observableMap, distinctUntilChanged
+} from 'rxjs/operators';
 
 import {
   ListItemModel
@@ -53,8 +57,8 @@ export class ListViewTestComponent extends ListViewComponent {
   ) {
     super(state, 'Test View');
 
-    state.map(s => s.items)
-      .distinctUntilChanged()
+    state.pipe(observableMap(s => s.items),
+      distinctUntilChanged())
       .subscribe((items) => {
         this.items = items.items;
       });

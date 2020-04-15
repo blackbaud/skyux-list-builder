@@ -1,3 +1,5 @@
+import { map as observableMap, skip, take} from 'rxjs/operators';
+
 import {
   async,
   ComponentFixture,
@@ -83,7 +85,7 @@ describe('List Toolbar Component', () => {
     fixture.detectChanges();
     // always skip the first update to ListState, when state is ready
     // run detectChanges once more then begin tests
-    state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+    state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
   }
 
   function getMultiselectActionToolbar() {
@@ -185,7 +187,7 @@ describe('List Toolbar Component', () => {
 
         component.toolbar.searchComponent.applySearchText('something');
         fixture.detectChanges();
-        state.take(1).subscribe((s) => {
+        state.pipe(take(1)).subscribe((s) => {
           expect(s.search.searchText).toBe('something');
           stateChecked = true;
         });
@@ -206,7 +208,7 @@ describe('List Toolbar Component', () => {
           fixture.detectChanges();
           component.toolbar.searchComponent.applySearchText('something');
           fixture.detectChanges();
-          state.take(1).subscribe((s) => {
+          state.pipe(take(1)).subscribe((s) => {
             expect(s.search.searchText).toBe('something');
             expect(s.paging.pageNumber).toBe(1);
           });
@@ -224,7 +226,7 @@ describe('List Toolbar Component', () => {
           fixture.detectChanges();
           component.toolbar.searchComponent.applySearchText('something');
           fixture.detectChanges();
-          state.take(1).subscribe((s) => {
+          state.pipe(take(1)).subscribe((s) => {
             expect(s.search.searchText).toBe('something');
             expect(s.paging.pageNumber).not.toBe(1);
           });
@@ -362,7 +364,7 @@ describe('List Toolbar Component', () => {
           fixture.detectChanges();
           tick();
           fixture.detectChanges();
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             expect(current.toolbar.items
             .filter((item) => { return item.id === 'sort-selector'; }).length).toBe(0);
           });
@@ -634,9 +636,10 @@ describe('List Toolbar Component', () => {
       fixture.detectChanges();
 
       // Expect "show-selected" filter is set up.
-      state
-        .map(s => s.filters)
-        .take(1)
+      state.pipe(
+        observableMap(s => s.filters),
+        take(1)
+      )
         .subscribe(filters => {
           let showSelectedFilter = filters.filter(filter => filter.name === 'show-selected')[0];
           expect(showSelectedFilter).not.toBeNull();
@@ -661,9 +664,9 @@ describe('List Toolbar Component', () => {
       fixture.detectChanges();
 
       // Expect page number to be set to 99.
-      state
-      .map(s => s.paging)
-      .take(1)
+      state.pipe(
+      observableMap(s => s.paging),
+      take(1))
       .subscribe(paging => {
         expect(paging.pageNumber).toEqual(99);
       });
@@ -675,9 +678,9 @@ describe('List Toolbar Component', () => {
       fixture.detectChanges();
 
       // Expect page number to be set to 1.
-      state
-      .map(s => s.paging)
-      .take(1)
+      state.pipe(
+      observableMap(s => s.paging),
+      take(1))
       .subscribe(paging => {
         expect(paging.pageNumber).toEqual(1);
       });

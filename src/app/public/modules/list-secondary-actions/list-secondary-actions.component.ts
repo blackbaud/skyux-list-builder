@@ -5,11 +5,6 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
-
-import 'rxjs/add/operator/takeUntil';
-
-import 'rxjs/add/operator/distinctUntilChanged';
-
 import {
   ListStateDispatcher,
   ListToolbarItemModel

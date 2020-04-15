@@ -1,3 +1,4 @@
+import {take} from 'rxjs/operators';
 import {
   Component,
   AfterContentInit,
@@ -14,8 +15,11 @@ import {
   ListFilterModel
 } from '../list/state';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/take';
+import { Observable } from 'rxjs';
+
+import {
+  map as observableMap
+} from 'rxjs/operators';
 
 @Component({
   selector: 'sky-list-filter-summary',
@@ -34,13 +38,13 @@ export class SkyListFilterSummaryComponent implements AfterContentInit {
   ) {}
 
   public ngAfterContentInit() {
-    this.appliedFilters = this.state.map((state) => {
+    this.appliedFilters = this.state.pipe(observableMap((state) => {
       return state.filters;
-    });
+    }));
   }
 
   public filterSummaryItemDismiss(index: number) {
-    this.appliedFilters.take(1).subscribe((filters) => {
+    this.appliedFilters.pipe(take(1)).subscribe((filters) => {
       filters.splice(index, 1);
       this.dispatcher.filtersUpdate(filters.slice());
     });

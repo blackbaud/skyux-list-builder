@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {of as observableOf,  Observable } from 'rxjs';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'list-secondary-actions-visual',
@@ -9,7 +8,7 @@ import 'rxjs/add/observable/of';
 })
 export class ListSecondaryActionsVisualComponent {
 
-  public data: Observable<Array<any>> = Observable.of([
+  public data: Observable<Array<any>> = observableOf([
     { id: '1', column1: 101, column2: 'Apple', column3: 'Anne eats apples'},
     { id: '2', column1: 202, column2: 'Banana', column3: 'Ben eats bananas' },
     { id: '3', column1: 303, column2: 'Pear', column3: 'Patty eats pears' },

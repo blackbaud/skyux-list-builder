@@ -20,12 +20,10 @@ import {
 
 import {
   Observable
-} from 'rxjs/Observable';
-
-import 'rxjs/add/operator/distinctUntilChanged';
-
-import 'rxjs/add/operator/scan';
-
+} from 'rxjs';
+import {
+  map as observableMap, scan, distinctUntilChanged
+} from 'rxjs/operators';
 import { ListPagingComponent } from '../list/list-paging.component';
 import { ListState, ListStateDispatcher } from '../list/state';
 import {
@@ -71,26 +69,28 @@ export class SkyListPagingComponent extends ListPagingComponent implements OnIni
 
   public ngOnInit() {
 
-    this.currentPageNumber = this.state.map(s => s.paging.pageNumber);
+    this.currentPageNumber = this.state.pipe(observableMap(s => s.paging.pageNumber));
 
-    this.maxDisplayedPages = this.state.map(s => s.paging.maxDisplayedPages);
+    this.maxDisplayedPages = this.state.pipe(observableMap(s => s.paging.maxDisplayedPages));
 
-    this.itemsPerPage = this.state.map(s => s.paging.itemsPerPage);
+    this.itemsPerPage = this.state.pipe(observableMap(s => s.paging.itemsPerPage));
 
-    this.itemCount = this.state.map((s) => {
-      return s.items;
-    })
-    .scan((previousValue: AsyncList<ListItemModel>, newValue: AsyncList<ListItemModel>) => {
-      if (previousValue.lastUpdate > newValue.lastUpdate) {
-        return previousValue;
-      } else {
-        return newValue;
-      }
-    })
-    .map((result: AsyncList<ListItemModel>) => {
-      return result.count;
-    })
-    .distinctUntilChanged();
+    this.itemCount = this.state.pipe(
+      observableMap((s) => {
+        return s.items;
+      }),
+      scan((previousValue: AsyncList<ListItemModel>, newValue: AsyncList<ListItemModel>) => {
+        if (previousValue.lastUpdate > newValue.lastUpdate) {
+          return previousValue;
+        } else {
+          return newValue;
+        }
+      }),
+      observableMap((result: AsyncList<ListItemModel>) => {
+        return result.count;
+      }),
+      distinctUntilChanged()
+    );
 
     // subscribe to or use inputs
     getValue(this.pageSize, (pageSize: number) =>

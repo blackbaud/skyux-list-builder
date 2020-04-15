@@ -1,3 +1,4 @@
+import {take, skip} from 'rxjs/operators';
 import {
   TestBed,
   async,
@@ -58,7 +59,7 @@ describe('List Paging Component', () => {
 
     // always skip the first update to ListState, when state is ready
     // run detectChanges once more then begin tests
-    state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+    state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
   }));
 
   function getPagingSelector(type: string) {
@@ -155,7 +156,7 @@ describe('List Paging Component', () => {
         tick();
         fixture.detectChanges();
 
-        state.take(1).subscribe(stateModel => {
+        state.pipe(take(1)).subscribe(stateModel => {
           expect(stateModel.paging.pageNumber).toBe(3);
         });
 

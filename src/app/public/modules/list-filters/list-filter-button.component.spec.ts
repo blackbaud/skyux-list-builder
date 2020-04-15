@@ -1,3 +1,5 @@
+
+import {take, skip} from 'rxjs/operators';
 import {
   ListState,
   ListStateDispatcher
@@ -47,7 +49,10 @@ describe('List filter button', () => {
     fixture = TestBed.createComponent(ListFilterButtonTestComponent);
     nativeElement = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
-    state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+    state.pipe(
+      skip(1),
+      take(1)
+    ).subscribe(() => fixture.detectChanges());
   }));
 
   it('should place content in the appropriate area for the filter button', async(() => {

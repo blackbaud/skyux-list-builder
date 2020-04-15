@@ -1,3 +1,5 @@
+
+import {take, skip} from 'rxjs/operators';
 import {
   ListState,
   ListStateDispatcher
@@ -84,7 +86,10 @@ describe('List inline filters', () => {
 
     beforeEach(async(() => {
       fixture.detectChanges();
-      state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+      state.pipe(
+        skip(1),
+        take(1)
+      ).subscribe(() => fixture.detectChanges());
 
     }));
     it('should add a filter button and inline filters when provided', fakeAsync(() => {
@@ -133,7 +138,7 @@ describe('List inline filters', () => {
     it('should filter appropriately when change function is called', fakeAsync(() => {
       fixture.detectChanges();
       tick();
-      state.take(1).subscribe((current) => {
+      state.pipe(take(1)).subscribe((current) => {
         expect(current.filters.length).toBe(2);
         expect(current.filters[0].value).toBe('any');
         expect(current.filters[0].defaultValue).toBe('any');
@@ -151,7 +156,7 @@ describe('List inline filters', () => {
       tick();
       fixture.detectChanges();
       tick();
-      state.take(1).subscribe((current) => {
+      state.pipe(take(1)).subscribe((current) => {
         expect(current.filters.length).toBe(2);
         expect(current.filters[0].value).toBe('berry');
         expect(current.filters[0].defaultValue).toBe('any');

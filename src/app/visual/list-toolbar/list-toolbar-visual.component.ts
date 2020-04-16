@@ -1,10 +1,11 @@
-
-import {of as observableOf,
-  Observable
-} from 'rxjs';
 import {
   Component
 } from '@angular/core';
+
+import {
+  of as observableOf,
+  Observable
+} from 'rxjs';
 
 @Component({
   selector: 'sky-list-toolbar-visual',

@@ -25,7 +25,10 @@ import {
 export class SkyListSecondaryActionsComponent implements AfterViewInit {
   public actions: any[] = [];
 
-  @ViewChild('secondaryActions')
+  @ViewChild('secondaryActions', {
+    read: TemplateRef,
+    static: true
+  })
   private secondaryActionsTemplate: TemplateRef<any>;
 
   constructor(

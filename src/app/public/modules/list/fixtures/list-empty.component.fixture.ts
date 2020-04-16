@@ -8,14 +8,19 @@ import { SkyListInMemoryDataProvider } from '../../list-data-provider-in-memory'
   templateUrl: './list-empty.component.fixture.html'
 })
 export class ListEmptyTestComponent {
-  @ViewChild(SkyListComponent) public list: SkyListComponent;
+
+  @ViewChild(SkyListComponent, {
+    read: SkyListComponent,
+    static: true
+  })
+  public list: SkyListComponent;
+
   public itemsCount: number = 2;
 
   constructor(
     @Inject('items') public items: any,
     public dataProvider: SkyListInMemoryDataProvider
-  ) {
-  }
+  ) { }
 
   public get options() {
     let bs = new BehaviorSubject<Array<any>>(['banana', 'apple']);

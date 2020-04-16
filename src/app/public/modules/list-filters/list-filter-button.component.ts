@@ -18,7 +18,10 @@ import {
   templateUrl: './list-filter-button.component.html'
 })
 export class SkyListFilterButtonComponent implements AfterViewInit {
-  @ViewChild('filterButton')
+  @ViewChild('filterButton', {
+    read: TemplateRef,
+    static: true
+  })
   private filterButtonTemplate: TemplateRef<any>;
 
   constructor(

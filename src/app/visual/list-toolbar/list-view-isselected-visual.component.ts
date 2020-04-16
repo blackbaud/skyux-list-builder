@@ -40,7 +40,9 @@ export class ListViewIsSelectedTestComponent extends ListViewComponent implement
   ) {
     super(state, 'Test View');
 
-    state.pipe(observableMap(s => s.items))
+    state.pipe(
+      observableMap(s => s.items)
+    )
       .subscribe((items) => {
         this.localItems = items.items;
       });

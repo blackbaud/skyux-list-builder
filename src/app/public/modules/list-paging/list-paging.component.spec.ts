@@ -28,7 +28,7 @@ import {
   ListPagingSetPageNumberAction
 } from '../list/state/paging/actions';
 
-import { AsyncList } from 'microedge-rxstate/dist';
+import { AsyncList } from '@skyux/list-builder-common';
 
 describe('List Paging Component', () => {
   let state: ListState,

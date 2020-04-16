@@ -1,4 +1,3 @@
-import {take} from 'rxjs/operators';
 import {
   Component,
   AfterContentInit,
@@ -18,7 +17,8 @@ import {
 import { Observable } from 'rxjs';
 
 import {
-  map as observableMap
+  map as observableMap,
+  take
 } from 'rxjs/operators';
 
 @Component({

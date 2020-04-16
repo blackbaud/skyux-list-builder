@@ -22,11 +22,15 @@ import {
 
 import {
   getValue
-} from 'microedge-rxstate/dist/helpers';
+} from '@skyux/list-builder-common';
 
 import {
   ListSortFieldSelectorModel
 } from '@skyux/list-builder-common';
+
+import {
+  SkySearchComponent
+} from '@skyux/lookup';
 
 import {
   ListToolbarModel,
@@ -106,8 +110,11 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @Input()
   public searchEnabled: boolean | Observable<boolean>;
 
-  @ViewChild('searchComponent')
-  public searchComponent: any;
+  @ViewChild(SkySearchComponent, {
+    read: SkySearchComponent,
+    static: false
+  })
+  public searchComponent: SkySearchComponent;
 
   @Input()
   public sortSelectorEnabled: boolean | Observable<boolean>;
@@ -169,13 +176,22 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   @ContentChildren(SkyListToolbarViewActionsComponent)
   private viewActions: QueryList<SkyListToolbarViewActionsComponent>;
 
-  @ViewChild('search')
+  @ViewChild('search', {
+    read: TemplateRef,
+    static: true
+  })
   private searchTemplate: TemplateRef<any>;
 
-  @ViewChild('sortSelector')
+  @ViewChild('sortSelector', {
+    read: TemplateRef,
+    static: true
+  })
   private sortSelectorTemplate: TemplateRef<any>;
 
-  @ViewChild('inlineFilterButton')
+  @ViewChild('inlineFilterButton', {
+    read: TemplateRef,
+    static: true
+  })
   private inlineFilterButtonTemplate: TemplateRef<any>;
 
   private customItemIds: string[] = [];
@@ -471,12 +487,14 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         });
 
         return resultSortSelectors;
-      }).pipe(
-      takeUntil(this.ngUnsubscribe));
+      }
+    ).pipe(
+      takeUntil(this.ngUnsubscribe)
+    );
   }
 
   private watchTemplates() {
-    const templateStream = observableCombineLatest(
+    observableCombineLatest(
       this.state.pipe(observableMap(s => s.toolbar), distinctUntilChanged()),
       this.view.pipe(distinctUntilChanged()),
       (toolbar: ListToolbarModel, view: string) => {
@@ -494,10 +512,8 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         return templates;
       }
     ).pipe(
-      takeUntil(this.ngUnsubscribe));
-
-    templateStream.pipe(
-      takeUntil(this.ngUnsubscribe))
+      takeUntil(this.ngUnsubscribe)
+    )
       .subscribe((value) => {
         this.leftTemplates = value.left;
         this.centerTemplates = value.center;

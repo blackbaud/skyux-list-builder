@@ -1,11 +1,14 @@
-import {distinctUntilChanged} from 'rxjs/operators';
-import { ListState } from './state';
-import { SkyListComponent } from '../list/list.component';
-
-import { Observable } from 'rxjs';
 import {
+  Observable
+} from 'rxjs';
+
+import {
+  distinctUntilChanged,
   map as observableMap
 } from 'rxjs/operators';
+
+import { ListState } from './state';
+import { SkyListComponent } from '../list/list.component';
 
 let idIndex = 0;
 
@@ -22,11 +25,17 @@ export abstract class ListViewComponent {
     this.state = state;
     this.viewName = defaultName;
 
-    this.hasToolbar = this.state.pipe(observableMap(s => s.toolbar.exists));
+    this.hasToolbar = this.state.pipe(
+      observableMap(s => s.toolbar.exists)
+    );
 
-    this.active = this.state.pipe(observableMap(s => s.views.active === this.viewId));
+    this.active = this.state.pipe(
+      observableMap(s => s.views.active === this.viewId)
+    );
 
-    this.active.pipe(distinctUntilChanged()).subscribe(
+    this.active.pipe(
+      distinctUntilChanged()
+    ).subscribe(
       isActive => isActive ? this.onViewActive() : this.onViewInactive()
     );
   }

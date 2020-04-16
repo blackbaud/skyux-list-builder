@@ -12,11 +12,11 @@ import {
 
 import {
   AsyncList
-} from 'microedge-rxstate/dist';
+} from '@skyux/list-builder-common';
 
 import {
   getValue
-} from 'microedge-rxstate/dist/helpers';
+} from '@skyux/list-builder-common';
 
 import {
   Observable

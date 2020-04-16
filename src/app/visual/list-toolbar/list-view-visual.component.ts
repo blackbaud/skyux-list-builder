@@ -45,7 +45,9 @@ export class ListViewTestComponent extends ListViewComponent implements OnInit {
   ) {
     super(state, 'Test View');
 
-    state.pipe(observableMap(s => s.items))
+    state.pipe(
+      observableMap(s => s.items)
+    )
       .subscribe((items) => {
         this.localItems = items.items;
       });
@@ -56,7 +58,9 @@ export class ListViewTestComponent extends ListViewComponent implements OnInit {
   }
 
   public itemSelected(id: string): Observable<boolean> {
-    return this.state.pipe(observableMap(state => state.selected.item.selectedIdMap.get(id)));
+    return this.state.pipe(
+      observableMap(state => state.selected.item.selectedIdMap.get(id))
+    );
   }
 
   public setItemSelection(item: ListItemModel, event: any): void {

@@ -258,11 +258,20 @@ describe('List Component', () => {
         }));
 
         it('should sort based on column using cached search', fakeAsync(() => {
+
           initializeList();
+
+          fixture.detectChanges();
           tick();
-          applySearch('banana')
-          .then(() => {
+          fixture.detectChanges();
+          tick();
+          fixture.detectChanges();
+          tick();
+
+          applySearch('banana').then(() => {
             fixture.detectChanges();
+            tick();
+
             validateRowCount(element, 2);
             validateRowValue(0, 1, '01');
 
@@ -318,8 +327,8 @@ describe('List Component', () => {
         it('should return item count', fakeAsync(() => {
           initializeList();
           tick();
-          component.list.itemCount.take(1).subscribe(u => {
-            state.take(1).subscribe((s) => {
+          component.list.itemCount.pipe(take(1)).subscribe(u => {
+            state.pipe(take(1)).subscribe((s) => {
               expect(u).toBe(s.items.count);
             });
           });
@@ -330,8 +339,8 @@ describe('List Component', () => {
         it('should return last updated date', fakeAsync(() => {
           initializeList();
           tick();
-          component.list.lastUpdate.take(1).subscribe(u => {
-            state.take(1).subscribe((s) => {
+          component.list.lastUpdate.pipe(take(1)).subscribe(u => {
+            state.pipe(take(1)).subscribe((s) => {
               expect(u.getTime()).toEqual(s.items.lastUpdate)
             });
           });
@@ -341,7 +350,7 @@ describe('List Component', () => {
           initializeList();
           tick();
           state.pipe(observableMap((s) => s.items.lastUpdate = undefined), take(1)).subscribe();
-          component.list.lastUpdate.take(1).subscribe((u) => {
+          component.list.lastUpdate.pipe(take(1)).subscribe((u) => {
             expect(u).toBeUndefined();
           });
         }));
@@ -419,7 +428,7 @@ describe('List Component', () => {
 
           tick();
 
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             const selectedIdMap = current.selected.item.selectedIdMap;
             expect(selectedIdMap.get('2')).toBe(true);
             expect(selectedIdMap.get('1')).toBe(true);
@@ -431,7 +440,7 @@ describe('List Component', () => {
 
           tick();
 
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             const selectedIdMap = current.selected.item.selectedIdMap;
             expect(selectedIdMap.get('2')).toBe(true);
             expect(selectedIdMap.get('1')).toBe(false);
@@ -443,7 +452,7 @@ describe('List Component', () => {
 
           tick();
 
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             const selectedIdMap = current.selected.item.selectedIdMap;
             expect(selectedIdMap.get('2')).toBe(undefined);
             expect(selectedIdMap.get('3')).toBe(true);
@@ -458,7 +467,7 @@ describe('List Component', () => {
 
           tick();
 
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             const selectedIdMap = current.selected.item.selectedIdMap;
             expect(selectedIdMap.get('1')).toBe(true);
           });
@@ -469,7 +478,7 @@ describe('List Component', () => {
 
           tick();
 
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             const selectedIdMap = current.selected.item.selectedIdMap;
             expect(selectedIdMap.get('2')).toBe(true);
             expect(selectedIdMap.get('1')).toBe(true);
@@ -481,7 +490,7 @@ describe('List Component', () => {
 
           tick();
 
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             const selectedIdMap = current.selected.item.selectedIdMap;
             expect(selectedIdMap.get('2')).toBe(true);
             expect(selectedIdMap.get('1')).toBe(false);
@@ -495,7 +504,7 @@ describe('List Component', () => {
 
         tick();
         fixture.detectChanges();
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           const selectedIdMap = current.selected.item.selectedIdMap;
           expect(selectedIdMap.get('2')).toBe(true);
           expect(selectedIdMap.get('1')).toBe(true);
@@ -512,7 +521,7 @@ describe('List Component', () => {
         component.selectedIds = ['3', '4']
         tick();
         fixture.detectChanges();
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           const selectedIdMap = current.selected.item.selectedIdMap;
           expect(selectedIdMap.get('1')).toBeUndefined();
           expect(selectedIdMap.get('2')).toBeUndefined();
@@ -526,7 +535,7 @@ describe('List Component', () => {
         component.selectedIds = []
         tick();
         fixture.detectChanges();
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           const selectedIdMap = current.selected.item.selectedIdMap;
           expect(selectedIdMap.get('1')).toBeUndefined();
           expect(selectedIdMap.get('2')).toBeUndefined();
@@ -576,7 +585,7 @@ describe('List Component', () => {
         tick();
         fixture.detectChanges();
         expect(dispatcherSpy).toHaveBeenCalledTimes(1);
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           const selectedIdMap = current.selected.item.selectedIdMap;
           expect(selectedIdMap.get('1')).toBeUndefined();
           expect(selectedIdMap.get('2')).toBeUndefined();
@@ -633,7 +642,7 @@ describe('List Component', () => {
         fixture.detectChanges();
 
         // Expect rows to still be selected.
-        component.list.selectedItems.take(1).subscribe((items)=> {
+        component.list.selectedItems.pipe(take(1)).subscribe((items)=> {
           expect(items.length === 2);
           expect(items[0].data.column2).toBe('Apple');
           expect(items[1].data.column2).toBe('Banana');
@@ -645,7 +654,7 @@ describe('List Component', () => {
         fixture.detectChanges();
 
         // Expect new rows to be selected.
-        component.list.selectedItems.take(1).subscribe((items)=> {
+        component.list.selectedItems.pipe(take(1)).subscribe((items)=> {
           expect(items.length === 2);
           expect(items[0].data.column2).toBe('Apple');
           expect(items[1].data.column2).toBe('Banana');
@@ -773,7 +782,7 @@ describe('List Component', () => {
         component.listFilters = appliedFilters;
         fixture.detectChanges();
         tick();
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           expect(current.filters.length).toBe(1);
           expect(current.items.items.length).toBe(1);
         });
@@ -978,8 +987,8 @@ describe('List Component', () => {
         });
 
         let response = provider.get(request);
-        response.take(1).subscribe();
-        response.take(1).subscribe((r: any) => expect(r.count).toBe(2));
+        response.pipe(take(1)).subscribe();
+        response.pipe(take(1)).subscribe((r: any) => expect(r.count).toBe(2));
 
       });
 
@@ -994,7 +1003,7 @@ describe('List Component', () => {
         });
 
         let response = provider.get(request);
-        response.take(1).subscribe((r: any) => expect(r.count).toBe(2));
+        response.pipe(take(1)).subscribe((r: any) => expect(r.count).toBe(2));
 
       });
     });
@@ -1047,7 +1056,7 @@ describe('List Component', () => {
         expect(list.dataProvider).not.toBe(null);
 
         list.dataProvider.count()
-          .take(1)
+          .pipe(take(1))
           .subscribe((count: any) => {
             expect(count).toBe(0);
         });
@@ -1302,7 +1311,7 @@ describe('List Component', () => {
 
         tick();
 
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           expect(current.toolbar.items.length).toBe(2);
         });
 
@@ -1318,7 +1327,7 @@ describe('List Component', () => {
 
         tick();
 
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           expect(current.toolbar.items[2].id).toBe('blue');
         });
 
@@ -1350,7 +1359,7 @@ describe('List Component', () => {
 
         tick();
 
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           expect(current.toolbar.items[0].id).toBe('blue');
         });
 
@@ -1381,7 +1390,7 @@ describe('List Component', () => {
 
         tick();
 
-        state.take(1).subscribe((current) => {
+        state.pipe(take(1)).subscribe((current) => {
           expect(current.toolbar.items[1].id).toBe('blue');
         });
 

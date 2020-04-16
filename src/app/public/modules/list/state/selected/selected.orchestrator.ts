@@ -1,5 +1,5 @@
 import { ListStateOrchestrator } from '../list-state.rxstate';
-import { AsyncItem } from 'microedge-rxstate/dist';
+import { AsyncItem } from '@skyux/list-builder-common';
 
 import { ListSelectedModel } from './selected.model';
 import {

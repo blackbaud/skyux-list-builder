@@ -140,7 +140,8 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
     /* istanbul ignore else */
     if (isSelected) {
       this.state.pipe(
-        take(1))
+        take(1)
+      )
         .subscribe((currentState) => {
           if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
             this.dispatcher.next(

@@ -55,7 +55,7 @@ export class SkyListInMemoryDataProvider extends ListDataProvider {
   }
 
   public get(request: ListDataRequestModel): Observable<ListDataResponseModel> {
-    return this.filteredItems(request).pipe(observableMap((result: Array<ListItemModel>) => {
+    return this.filteredItems(request).pipe(observableMap((result) => {
       if (request.pageNumber && request.pageSize) {
         let itemStart = (request.pageNumber - 1) * request.pageSize;
         let pagedResult = result.slice(itemStart, itemStart + request.pageSize);

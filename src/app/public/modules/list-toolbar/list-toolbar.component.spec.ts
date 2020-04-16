@@ -31,7 +31,7 @@ import {
 
 import {
   SkyListToolbarModule
-} from './';
+} from './list-toolbar.module';
 
 import {
   ListToolbarTestComponent

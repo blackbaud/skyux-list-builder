@@ -44,9 +44,12 @@ import {
 } from '../list/state';
 
 import {
-  SkyListFilterSummaryComponent,
   SkyListFilterInlineComponent
-} from '../list-filters';
+} from '../list-filters/list-filter-inline.component';
+
+import {
+  SkyListFilterSummaryComponent
+} from '../list-filters/list-filter-summary.component';
 
 import {
   SkyListToolbarItemComponent

@@ -39,25 +39,52 @@ import {
 } from '../list/state';
 
 import {
-  ListDualTestComponent,
-  ListEmptyTestComponent,
-  ListFilteredTestComponent,
-  ListFixturesModule,
-  ListSelectedTestComponent,
-  ListTestComponent,
-  ListViewTestComponent
-} from './fixtures';
+  ListDualTestComponent
+} from './fixtures/list-dual.component.fixture';
 
 import {
-  ListDataRequestModel,
-  ListDataResponseModel,
-  SkyListComponent,
+  ListEmptyTestComponent
+} from './fixtures/list-empty.component.fixture';
+
+import {
+  ListFilteredTestComponent
+} from './fixtures/list-filtered.component.fixture';
+
+import {
+  ListFixturesModule
+} from './fixtures/list-fixtures.module';
+
+import {
+  ListSelectedTestComponent
+} from './fixtures/list-selected.component.fixture';
+
+import {
+  ListTestComponent
+} from './fixtures/list.component.fixture';
+
+import {
+  ListViewTestComponent
+} from './fixtures/list-view-test.component.fixture';
+
+import {
+  ListDataRequestModel
+} from './list-data-request.model';
+
+import {
+  ListDataResponseModel
+} from './list-data-response.model';
+
+import {
+  SkyListComponent
+} from './list.component';
+
+import {
   SkyListModule
-} from './';
+} from './list.module';
 
 import {
   SkyListToolbarModule
-} from '../list-toolbar';
+} from '../list-toolbar/list-toolbar.module';
 
 import {
   ListFilterModel,
@@ -76,7 +103,7 @@ import {
 
 import {
   SkyListInMemoryDataProvider
-} from '../list-data-provider-in-memory';
+} from '../list-data-provider-in-memory/list-data-in-memory.provider';
 import { skip, take } from 'rxjs/operators';
 
 describe('List Component', () => {

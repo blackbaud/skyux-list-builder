@@ -16,7 +16,7 @@ import {
 } from '../list/state';
 import {
   SkyListToolbarModule
-} from '../list-toolbar';
+} from '../list-toolbar/list-toolbar.module';
 
 import {
   ListSecondaryActionsTestComponent

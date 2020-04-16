@@ -72,7 +72,7 @@ import {
 
 import {
   SkyListInMemoryDataProvider
-} from '../list-data-provider-in-memory';
+} from '../list-data-provider-in-memory/list-data-in-memory.provider';
 
 import {
   ListState,

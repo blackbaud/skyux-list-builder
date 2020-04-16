@@ -3,8 +3,8 @@ import {
 } from '@angular/core';
 
 import {
-  of as observableOf,
-  Observable
+  Observable,
+  of as observableOf
 } from 'rxjs';
 
 @Component({

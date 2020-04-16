@@ -22,11 +22,11 @@ import {
 
 import {
   SkyListToolbarModule
-} from '../list-toolbar';
+} from '../list-toolbar/list-toolbar.module';
 
 import {
   SkyListFiltersModule
-} from '.';
+} from './list-filters.module';
 
 describe('List filter summary', () => {
   let state: ListState,

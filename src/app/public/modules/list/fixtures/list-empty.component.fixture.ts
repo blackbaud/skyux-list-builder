@@ -1,7 +1,7 @@
 import { Component, ViewChild, Inject } from '@angular/core';
 import { SkyListComponent } from '../list.component';
 import { BehaviorSubject } from 'rxjs';
-import { SkyListInMemoryDataProvider } from '../../list-data-provider-in-memory';
+import { SkyListInMemoryDataProvider } from '../../list-data-provider-in-memory/list-data-in-memory.provider';
 
 @Component({
   selector: 'sky-test-cmp',

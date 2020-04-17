@@ -1,3 +1,9 @@
+# 4.0.0-rc.2 (2020-04-17)
+
+### New features
+
+- Added `SkyListSecondaryActionsComponent` and `SkyListToolbarComponent` to the exports API.
+
 # 4.0.0-rc.1 (2020-04-17)
 
 ### New features

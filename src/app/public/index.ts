@@ -1,8 +1,6 @@
 export * from './modules/list/list-data-request.model';
 export * from './modules/list/list-data-response.model';
 export * from './modules/list/list-data.provider';
-export * from './modules/list/list-view.component';
-export * from './modules/list/list.component';
 export * from './modules/list/list.module';
 
 export * from './modules/list/state/list-state-action.type';
@@ -73,3 +71,9 @@ export * from './modules/list-secondary-actions/list-secondary-action';
 export * from './modules/list-secondary-actions/list-secondary-actions.module';
 
 export * from './modules/list-toolbar/list-toolbar.module';
+
+// The following exports are used internally by `@skyux/list-builder-view-grids`.
+export * from './modules/list/list-view.component';
+export * from './modules/list/list.component';
+export * from './modules/list-secondary-actions/list-secondary-actions.component';
+export * from './modules/list-toolbar/list-toolbar.component';

@@ -20,7 +20,7 @@ import {
   ListState,
   ListStateDispatcher,
   ListSelectedSetItemSelectedAction
-} from '../../public/modules/list/state';
+} from '../../public';
 
 import {
   ListViewComponent

@@ -1,7 +1,10 @@
 import {
-  ListState,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 import {
   TestBed,

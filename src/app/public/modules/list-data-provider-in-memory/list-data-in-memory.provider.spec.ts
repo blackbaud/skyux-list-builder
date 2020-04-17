@@ -27,7 +27,7 @@ import {
 
 import {
   ListFilterModel
-} from '../list/state';
+} from '../list/state/filters/filter.model';
 
 describe('in memory data provider', () => {
   let items: Observable<Array<any>>;

@@ -20,9 +20,12 @@ import {
 } from '@skyux/list-builder-common';
 
 import {
-  ListState,
+  ListState
+} from '../state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../state';
+} from '../state/list-state.rxstate';
 
 import {
   ListViewComponent

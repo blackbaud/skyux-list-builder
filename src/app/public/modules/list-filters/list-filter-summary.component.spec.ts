@@ -1,8 +1,14 @@
 import {
-  ListState,
-  ListStateDispatcher,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
+  ListStateDispatcher
+} from '../list/state/list-state.rxstate';
+
+import {
   ListFilterModel
-} from '../list/state';
+} from '../list/state/filters/filter.model';
 
 import {
   TestBed,

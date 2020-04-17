@@ -1,6 +1,8 @@
 export * from './modules/list/list-data-request.model';
 export * from './modules/list/list-data-response.model';
 export * from './modules/list/list-data.provider';
+export * from './modules/list/list-view.component';
+export * from './modules/list/list.component';
 export * from './modules/list/list.module';
 
 export * from './modules/list/state/list-state-action.type';

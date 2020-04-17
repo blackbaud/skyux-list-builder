@@ -1,3 +1,9 @@
+# 4.0.0-rc.1 (2020-04-17)
+
+### New features
+
+- Added `SkyListViewComponent` and `SkyListComponent` to the exports API.
+
 # 4.0.0-rc.0 (2020-04-17)
 
 ### New features

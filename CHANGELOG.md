@@ -1,3 +1,9 @@
+# 4.0.0-rc.0 (2020-04-17)
+
+### New features
+
+- Updated the pipeline to transpile to the [Angular Package Format](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview). [#87](https://github.com/blackbaud/skyux-list-builder/pull/87)
+
 # 3.7.1 (2020-03-11)
 
 - Fixed the list toolbar component to not display an empty toolbar when search is disabled. [#76](https://github.com/blackbaud/skyux-list-builder/pull/76)

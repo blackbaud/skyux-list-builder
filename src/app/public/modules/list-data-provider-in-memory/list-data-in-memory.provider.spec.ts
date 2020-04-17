@@ -8,8 +8,13 @@ import {
   take
 } from 'rxjs/operators';
 
-import { SkyListInMemoryDataProvider } from './list-data-in-memory.provider';
-import { ListDataRequestModel } from '../list/list-data-request.model';
+import {
+  ListDataRequestModel
+} from '../list/list-data-request.model';
+
+import {
+  SkyListInMemoryDataProvider
+} from './list-data-in-memory.provider';
 
 import {
   fakeAsync,

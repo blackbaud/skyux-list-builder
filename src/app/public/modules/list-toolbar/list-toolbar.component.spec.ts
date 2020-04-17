@@ -1,5 +1,3 @@
-import { map as observableMap, skip, take} from 'rxjs/operators';
-
 import {
   async,
   ComponentFixture,
@@ -23,6 +21,12 @@ import {
 import {
   ListItemModel
 } from '@skyux/list-builder-common';
+
+import {
+  map as observableMap,
+  skip,
+  take
+} from 'rxjs/operators';
 
 import {
   ListState,
@@ -636,10 +640,11 @@ describe('List Toolbar Component', () => {
       fixture.detectChanges();
 
       // Expect "show-selected" filter is set up.
-      state.pipe(
-        observableMap(s => s.filters),
-        take(1)
-      )
+      state
+        .pipe(
+          observableMap(s => s.filters),
+          take(1)
+        )
         .subscribe(filters => {
           let showSelectedFilter = filters.filter(filter => filter.name === 'show-selected')[0];
           expect(showSelectedFilter).not.toBeNull();
@@ -664,12 +669,14 @@ describe('List Toolbar Component', () => {
       fixture.detectChanges();
 
       // Expect page number to be set to 99.
-      state.pipe(
-      observableMap(s => s.paging),
-      take(1))
-      .subscribe(paging => {
-        expect(paging.pageNumber).toEqual(99);
-      });
+      state
+        .pipe(
+          observableMap(s => s.paging),
+          take(1)
+        )
+        .subscribe(paging => {
+          expect(paging.pageNumber).toEqual(99);
+        });
 
       // Send selection to dispatcher and click "Show only selected".
       dispatcher.setSelected(['1', '2'], true);
@@ -678,12 +685,14 @@ describe('List Toolbar Component', () => {
       fixture.detectChanges();
 
       // Expect page number to be set to 1.
-      state.pipe(
-      observableMap(s => s.paging),
-      take(1))
-      .subscribe(paging => {
-        expect(paging.pageNumber).toEqual(1);
-      });
+      state
+        .pipe(
+          observableMap(s => s.paging),
+          take(1)
+        )
+        .subscribe(paging => {
+          expect(paging.pageNumber).toEqual(1);
+        });
     });
   });
 

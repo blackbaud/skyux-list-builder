@@ -6,6 +6,15 @@ import {
 } from '@angular/core';
 
 import {
+  Observable
+} from 'rxjs';
+
+import {
+  map as observableMap,
+  take
+} from 'rxjs/operators';
+
+import {
   ListState,
   ListStateDispatcher
 } from '../list/state';
@@ -13,13 +22,6 @@ import {
 import {
   ListFilterModel
 } from '../list/state';
-
-import { Observable } from 'rxjs';
-
-import {
-  map as observableMap,
-  take
-} from 'rxjs/operators';
 
 @Component({
   selector: 'sky-list-filter-summary',

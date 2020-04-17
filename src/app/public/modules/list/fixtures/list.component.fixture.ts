@@ -1,7 +1,14 @@
 import { Component, ViewChild, Inject } from '@angular/core';
+
+import {
+  BehaviorSubject
+} from 'rxjs';
+
+import {
+  SkyListToolbarComponent
+} from '../../list-toolbar/list-toolbar.component';
+
 import { SkyListComponent } from '../list.component';
-import { BehaviorSubject } from 'rxjs';
-import { SkyListToolbarComponent } from '../../list-toolbar/list-toolbar.component';
 import { ListViewComponent } from '../list-view.component';
 
 @Component({
@@ -25,9 +32,8 @@ export class ListTestComponent {
   public default: ListViewComponent;
   public sortFields: any;
 
-  constructor(
-    @Inject('items') public items: any
-  ) { }
+  constructor(@Inject('items') public items: any) {
+  }
 
   public get options() {
     let bs = new BehaviorSubject<Array<any>>(['banana', 'apple']);

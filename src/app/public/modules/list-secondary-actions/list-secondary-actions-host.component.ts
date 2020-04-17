@@ -1,4 +1,3 @@
-import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {
   Component,
   ChangeDetectorRef,
@@ -10,6 +9,12 @@ import {
 import {
   Subject
 } from 'rxjs';
+
+import {
+  distinctUntilChanged,
+  takeUntil
+} from 'rxjs/operators';
+
 import {
   SkyListSecondaryActionsService
 } from './list-secondary-actions.service';

@@ -1,8 +1,4 @@
 import {
-  DebugElement
-} from '@angular/core';
-
-import {
   TestBed,
   async,
   fakeAsync,
@@ -11,12 +7,20 @@ import {
 } from '@angular/core/testing';
 
 import {
+  DebugElement
+} from '@angular/core';
+
+import {
   FormsModule
 } from '@angular/forms';
 
 import {
   By
 } from '@angular/platform-browser';
+import {
+  ListItemModel,
+  ListSortFieldSelectorModel
+} from '@skyux/list-builder-common';
 
 import {
   BehaviorSubject,
@@ -24,19 +28,24 @@ import {
 } from 'rxjs';
 
 import {
-  map as observableMap
+  map as observableMap,
+  skip,
+  take
 } from 'rxjs/operators';
-
-import {
-  ListItemModel,
-  ListSortFieldSelectorModel
-} from '@skyux/list-builder-common';
 
 import {
   ListState,
   ListStateDispatcher,
   ListToolbarShowMultiselectToolbarAction
 } from '../list/state';
+
+import {
+  SkyListInMemoryDataProvider
+} from '../list-data-provider-in-memory/list-data-in-memory.provider';
+
+import {
+  SkyListToolbarModule
+} from '../list-toolbar/list-toolbar.module';
 
 import {
   ListDualTestComponent
@@ -83,10 +92,6 @@ import {
 } from './list.module';
 
 import {
-  SkyListToolbarModule
-} from '../list-toolbar/list-toolbar.module';
-
-import {
   ListFilterModel,
   ListItemsSetSelectedAction,
   ListPagingModel,
@@ -100,11 +105,6 @@ import {
   ListToolbarItemModel,
   ListToolbarItemsLoadAction
 } from './state';
-
-import {
-  SkyListInMemoryDataProvider
-} from '../list-data-provider-in-memory/list-data-in-memory.provider';
-import { skip, take } from 'rxjs/operators';
 
 describe('List Component', () => {
   describe('List Fixture', () => {
@@ -285,20 +285,11 @@ describe('List Component', () => {
         }));
 
         it('should sort based on column using cached search', fakeAsync(() => {
-
           initializeList();
-
-          fixture.detectChanges();
           tick();
-          fixture.detectChanges();
-          tick();
-          fixture.detectChanges();
-          tick();
-
-          applySearch('banana').then(() => {
+          applySearch('banana')
+          .then(() => {
             fixture.detectChanges();
-            tick();
-
             validateRowCount(element, 2);
             validateRowValue(0, 1, '01');
 

@@ -1,5 +1,3 @@
-
-import {take, skip} from 'rxjs/operators';
 import {
   fakeAsync,
   tick
@@ -8,6 +6,11 @@ import {
 import {
   ListItemModel
 } from '@skyux/list-builder-common';
+
+import {
+  skip,
+  take
+} from 'rxjs/operators';
 
 import {
   ListItemsLoadAction,

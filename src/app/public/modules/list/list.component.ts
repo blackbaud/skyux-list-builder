@@ -29,6 +29,11 @@ import {
 } from '@angular/core';
 
 import {
+  AsyncItem,
+  getValue
+} from '@skyux/list-builder-common';
+
+import {
   ListItemsLoadAction,
   ListItemsSetLoadingAction
 } from './state/items/actions';
@@ -53,10 +58,6 @@ import {
 import {
   ListFilterModel
 } from './state/filters/filter.model';
-
-import {
-  getValue, AsyncItem
-} from '@skyux/list-builder-common';
 
 import {
   ListDataRequestModel
@@ -200,11 +201,12 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     });
 
     // Watch for selection changes.
-    this.state.pipe(
-      observableMap(current => current.selected),
-      takeUntil(this.ngUnsubscribe),
-      distinctUntilChanged()
-    )
+    this.state
+      .pipe(
+        observableMap(current => current.selected),
+        takeUntil(this.ngUnsubscribe),
+        distinctUntilChanged()
+      )
       .subscribe(selected => {
 
         // Update lastSelectedIds to help us retain user selections.
@@ -225,11 +227,12 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
       });
 
     if (this.appliedFiltersChange.observers.length > 0) {
-      this.state.pipe(
-        observableMap(current => current.filters),
-        takeUntil(this.ngUnsubscribe),
-        skip(1)
-      )
+      this.state
+        .pipe(
+          observableMap(current => current.filters),
+          takeUntil(this.ngUnsubscribe),
+          skip(1)
+        )
         .subscribe((filters) => {
           /**
            * We are doing this instead of a distinctUntilChange due to memory allocation issues
@@ -265,9 +268,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   }
 
   public refreshDisplayedItems(): void {
-    this.displayedItems.pipe(
-      take(1)
-    ).subscribe((result) => {
+    this.displayedItems.pipe(take(1)).subscribe((result) => {
       this.dispatcher.next(new ListItemsSetLoadingAction());
       this.dispatcher.next(new ListItemsLoadAction(result.items, true, true, result.count));
     });

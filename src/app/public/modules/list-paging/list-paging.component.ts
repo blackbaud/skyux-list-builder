@@ -7,23 +7,21 @@ import {
 } from '@angular/core';
 
 import {
+  AsyncList,
+  getValue,
   ListItemModel
-} from '@skyux/list-builder-common';
-
-import {
-  AsyncList
-} from '@skyux/list-builder-common';
-
-import {
-  getValue
 } from '@skyux/list-builder-common';
 
 import {
   Observable
 } from 'rxjs';
+
 import {
-  map as observableMap, scan, distinctUntilChanged
+  distinctUntilChanged,
+  map as observableMap,
+  scan
 } from 'rxjs/operators';
+
 import { ListPagingComponent } from '../list/list-paging.component';
 import { ListState, ListStateDispatcher } from '../list/state';
 import {
@@ -75,22 +73,23 @@ export class SkyListPagingComponent extends ListPagingComponent implements OnIni
 
     this.itemsPerPage = this.state.pipe(observableMap(s => s.paging.itemsPerPage));
 
-    this.itemCount = this.state.pipe(
-      observableMap((s) => {
-        return s.items;
-      }),
-      scan((previousValue: AsyncList<ListItemModel>, newValue: AsyncList<ListItemModel>) => {
-        if (previousValue.lastUpdate > newValue.lastUpdate) {
-          return previousValue;
-        } else {
-          return newValue;
-        }
-      }),
-      observableMap((result: AsyncList<ListItemModel>) => {
-        return result.count;
-      }),
-      distinctUntilChanged()
-    );
+    this.itemCount = this.state
+      .pipe(
+        observableMap((s) => {
+          return s.items;
+        }),
+        scan((previousValue: AsyncList<ListItemModel>, newValue: AsyncList<ListItemModel>) => {
+          if (previousValue.lastUpdate > newValue.lastUpdate) {
+            return previousValue;
+          } else {
+            return newValue;
+          }
+        }),
+        observableMap((result: AsyncList<ListItemModel>) => {
+          return result.count;
+        }),
+        distinctUntilChanged()
+      );
 
     // subscribe to or use inputs
     getValue(this.pageSize, (pageSize: number) =>

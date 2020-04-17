@@ -1,5 +1,3 @@
-
-import {take, skip} from 'rxjs/operators';
 import {
   ListState,
   ListStateDispatcher
@@ -10,6 +8,11 @@ import {
   async,
   ComponentFixture
 } from '@angular/core/testing';
+
+import {
+  skip,
+  take
+} from 'rxjs/operators';
 
 import {
   ListFilterButtonTestComponent
@@ -50,10 +53,7 @@ describe('List filter button', () => {
     fixture = TestBed.createComponent(ListFilterButtonTestComponent);
     nativeElement = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
-    state.pipe(
-      skip(1),
-      take(1)
-    ).subscribe(() => fixture.detectChanges());
+    state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
   }));
 
   it('should place content in the appropriate area for the filter button', async(() => {

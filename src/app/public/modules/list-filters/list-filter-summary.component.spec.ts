@@ -1,5 +1,3 @@
-
-import {take, skip} from 'rxjs/operators';
 import {
   ListState,
   ListStateDispatcher,
@@ -15,6 +13,11 @@ import {
 import {
   expect
 } from '@skyux-sdk/testing';
+
+import {
+  skip,
+  take
+} from 'rxjs/operators';
 
 import {
   ListFilterSummaryTestComponent

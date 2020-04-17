@@ -10,10 +10,10 @@ import {
 } from 'rxjs';
 
 import {
+  distinctUntilChanged,
   map as observableMap,
   take,
-  takeUntil,
-  distinctUntilChanged
+  takeUntil
 } from 'rxjs/operators';
 
 import {
@@ -59,11 +59,12 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
   ) {}
 
   public ngOnInit(): void {
-    this.state.pipe(
-      observableMap(t => t.selected.item),
-      takeUntil(this.ngUnsubscribe),
-      distinctUntilChanged(this.selectedMapEqual)
-    )
+    this.state
+      .pipe(
+        observableMap(t => t.selected.item),
+        takeUntil(this.ngUnsubscribe),
+        distinctUntilChanged(this.selectedMapEqual)
+      )
       .subscribe((model: ListSelectedModel) => {
         this.selectedIdMap = model.selectedIdMap;
 
@@ -74,11 +75,12 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
 
     // If 'show-selected' filter is programatically set from a child component (e.g. checkilst),
     // make sure the checked state of the 'show-selected' checkbox stays in sync.
-    this.state.pipe(
-      observableMap(t => t.filters),
-      takeUntil(this.ngUnsubscribe),
-      distinctUntilChanged(this.showSelectedValuesEqual)
-    )
+    this.state
+      .pipe(
+        observableMap(t => t.filters),
+        takeUntil(this.ngUnsubscribe),
+        distinctUntilChanged(this.showSelectedValuesEqual)
+      )
       .subscribe((filters: ListFilterModel[]) => {
         const showSelectedFilter = filters.find(filter => filter.name === 'show-selected');
         if (showSelectedFilter) {
@@ -93,10 +95,11 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
   }
 
   public selectAll(): void {
-    this.state.pipe(
-      observableMap(state => state.items.items),
-      take(1)
-    )
+    this.state
+      .pipe(
+        observableMap(state => state.items.items),
+        take(1)
+      )
       .subscribe(items => {
         this.dispatcher.setSelected(items.map(item => item.id), true);
         if (this.showOnlySelected) {
@@ -106,10 +109,11 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
   }
 
   public clearSelections(): void {
-    this.state.pipe(
-      observableMap(state => state.items.items),
-      take(1)
-    )
+    this.state
+      .pipe(
+        observableMap(state => state.items.items),
+        take(1)
+      )
       .subscribe(items => {
         this.dispatcher.setSelected(items.map(item => item.id), false);
         if (this.showOnlySelected) {
@@ -126,10 +130,11 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
   private reapplyFilter(isSelected: boolean): void {
     let self = this;
 
-    this.state.pipe(
-      observableMap(state => state.filters),
-      take(1)
-    )
+    this.state
+      .pipe(
+        observableMap(state => state.filters),
+        take(1)
+      )
       .subscribe((filters: ListFilterModel[]) => {
         filters = filters.filter(filter => filter.name !== 'show-selected');
         filters.push(self.getShowSelectedFilter(isSelected));
@@ -139,9 +144,7 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
     // If "show selected" is checked and paging is enabled, go to page one.
     /* istanbul ignore else */
     if (isSelected) {
-      this.state.pipe(
-        take(1)
-      )
+      this.state.pipe(take(1))
         .subscribe((currentState) => {
           if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
             this.dispatcher.next(

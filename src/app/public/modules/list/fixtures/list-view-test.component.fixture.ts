@@ -11,7 +11,8 @@ import {
 } from 'rxjs';
 
 import {
-  map as observableMap, distinctUntilChanged
+  distinctUntilChanged,
+  map as observableMap
 } from 'rxjs/operators';
 
 import {
@@ -57,8 +58,11 @@ export class ListViewTestComponent extends ListViewComponent {
   ) {
     super(state, 'Test View');
 
-    state.pipe(observableMap(s => s.items),
-      distinctUntilChanged())
+    state
+      .pipe(
+        observableMap(s => s.items),
+        distinctUntilChanged()
+      )
       .subscribe((items) => {
         this.items = items.items;
       });

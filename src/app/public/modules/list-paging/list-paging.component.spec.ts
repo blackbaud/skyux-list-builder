@@ -1,4 +1,3 @@
-import {take, skip} from 'rxjs/operators';
 import {
   TestBed,
   async,
@@ -9,15 +8,25 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 import {
+  AsyncList,
   ListItemModel
 } from '@skyux/list-builder-common';
+
+import {
+  skip,
+  take
+} from 'rxjs/operators';
 
 import {
   ListState,
   ListStateDispatcher,
   ListStateModel
 } from '../list/state';
-import { SkyListPagingModule } from './list-paging.module';
+
+import {
+  SkyListPagingModule
+} from './list-paging.module';
+
 import {
   ListPagingTestComponent
 } from './fixtures/list-paging.component.fixture';
@@ -27,8 +36,6 @@ import {
   ListPagingSetMaxPagesAction,
   ListPagingSetPageNumberAction
 } from '../list/state/paging/actions';
-
-import { AsyncList } from '@skyux/list-builder-common';
 
 describe('List Paging Component', () => {
   let state: ListState,

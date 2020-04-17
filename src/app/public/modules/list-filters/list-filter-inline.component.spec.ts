@@ -1,5 +1,3 @@
-
-import {take, skip} from 'rxjs/operators';
 import {
   ListState,
   ListStateDispatcher
@@ -17,6 +15,11 @@ import {
   expect,
   SkyAppTestUtility
 } from '@skyux-sdk/testing';
+
+import {
+  skip,
+  take
+} from 'rxjs/operators';
 
 import {
   ListFilterInlineTestComponent
@@ -86,10 +89,7 @@ describe('List inline filters', () => {
 
     beforeEach(async(() => {
       fixture.detectChanges();
-      state.pipe(
-        skip(1),
-        take(1)
-      ).subscribe(() => fixture.detectChanges());
+      state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
 
     }));
     it('should add a filter button and inline filters when provided', fakeAsync(() => {

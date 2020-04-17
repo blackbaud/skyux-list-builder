@@ -1,6 +1,6 @@
 import {
-  Observable,
-  BehaviorSubject
+  BehaviorSubject,
+  Observable
 } from 'rxjs';
 
 import {

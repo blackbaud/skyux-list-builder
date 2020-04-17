@@ -15,13 +15,16 @@ import {
 } from 'rxjs/operators';
 
 import {
-  ListState,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 import {
   ListFilterModel
-} from '../list/state';
+} from '../list/state/filters/filter.model';
 
 @Component({
   selector: 'sky-list-filter-summary',

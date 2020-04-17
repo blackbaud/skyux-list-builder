@@ -34,10 +34,16 @@ import {
 } from 'rxjs/operators';
 
 import {
-  ListState,
-  ListStateDispatcher,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
+  ListStateDispatcher
+} from '../list/state/list-state.rxstate';
+
+import {
   ListToolbarShowMultiselectToolbarAction
-} from '../list/state';
+} from '../list/state/toolbar/show-multiselect-toolbar.action';
 
 import {
   SkyListInMemoryDataProvider
@@ -92,19 +98,52 @@ import {
 } from './list.module';
 
 import {
-  ListFilterModel,
-  ListItemsSetSelectedAction,
-  ListPagingModel,
-  ListSearchModel,
-  ListSearchSetFunctionsAction,
-  ListSearchSetFieldSelectorsAction,
-  ListSelectedSetItemsSelectedAction,
-  ListSelectedSetItemSelectedAction,
-  ListSortSetFieldSelectorsAction,
-  ListSortLabelModel,
-  ListToolbarItemModel,
+  ListFilterModel
+} from './state/filters/filter.model';
+
+import {
+  ListItemsSetSelectedAction
+} from './state/items/set-items-selected.action';
+
+import {
+  ListPagingModel
+} from './state/paging/paging.model';
+
+import {
+  ListSearchModel
+} from './state/search/search.model';
+
+import {
+  ListSearchSetFunctionsAction
+} from './state/search/set-functions.action';
+
+import {
+  ListSearchSetFieldSelectorsAction
+} from './state/search/set-field-selectors.action';
+
+import {
+  ListSelectedSetItemsSelectedAction
+} from './state/selected/set-items-selected.action';
+
+import {
+  ListSelectedSetItemSelectedAction
+} from './state/selected/set-item-selected.action';
+
+import {
+  ListSortSetFieldSelectorsAction
+} from './state/sort/set-field-selectors.action';
+
+import {
+  ListSortLabelModel
+} from './state/sort/label.model';
+
+import {
+  ListToolbarItemModel
+} from './state/toolbar/toolbar-item.model';
+
+import {
   ListToolbarItemsLoadAction
-} from './state';
+} from './state/toolbar/load.action';
 
 describe('List Component', () => {
   describe('List Fixture', () => {

@@ -23,12 +23,19 @@ import {
 } from 'rxjs/operators';
 
 import { ListPagingComponent } from '../list/list-paging.component';
-import { ListState, ListStateDispatcher } from '../list/state';
+import { ListState } from '../list/state/list-state.state-node';
+import { ListStateDispatcher } from '../list/state/list-state.rxstate';
 import {
-  ListPagingSetMaxPagesAction,
-  ListPagingSetItemsPerPageAction,
+  ListPagingSetMaxPagesAction
+} from '../list/state/paging/set-max-pages.action';
+
+import {
+  ListPagingSetItemsPerPageAction
+} from '../list/state/paging/set-items-per-page.action';
+
+import {
   ListPagingSetPageNumberAction
-} from '../list/state/paging/actions';
+} from '../list/state/paging/set-page-number.action';
 
 @Component({
   selector: 'sky-list-paging',

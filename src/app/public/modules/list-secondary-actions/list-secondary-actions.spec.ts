@@ -11,9 +11,13 @@ import {
 } from '@skyux-sdk/testing';
 
 import {
-  ListState,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
+
 import {
   SkyListToolbarModule
 } from '../list-toolbar/list-toolbar.module';

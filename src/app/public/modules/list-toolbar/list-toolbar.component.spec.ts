@@ -29,9 +29,12 @@ import {
 } from 'rxjs/operators';
 
 import {
-  ListState,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 import {
   SkyListToolbarModule
@@ -42,16 +45,40 @@ import {
 } from './fixtures/list-toolbar.component.fixture';
 
 import {
-  ListItemsLoadAction,
-  ListPagingSetPageNumberAction,
-  ListSortLabelModel,
-  ListToolbarItemModel,
-  ListToolbarItemsLoadAction,
-  ListToolbarSetTypeAction,
-  ListViewModel,
-  ListViewsLoadAction,
+  ListItemsLoadAction
+} from '../list/state/items/load.action';
+
+import {
+  ListPagingSetPageNumberAction
+} from '../list/state/paging/set-page-number.action';
+
+import {
+  ListSortLabelModel
+} from '../list/state/sort/label.model';
+
+import {
+  ListToolbarItemModel
+} from '../list/state/toolbar/toolbar-item.model';
+
+import {
+  ListToolbarItemsLoadAction
+} from '../list/state/toolbar/load.action';
+
+import {
+  ListToolbarSetTypeAction
+} from '../list/state/toolbar/set-type.action';
+
+import {
+  ListViewModel
+} from '../list/state/views/view.model';
+
+import {
+  ListViewsLoadAction
+} from '../list/state/views/load.action';
+
+import {
   ListViewsSetActiveAction
-} from '../list/state';
+} from '../list/state/views/set-active.action';
 
 describe('List Toolbar Component', () => {
   let state: ListState,

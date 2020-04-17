@@ -11,10 +11,16 @@ import {
 } from '../list-state.rxstate';
 
 import {
-  ListItemsLoadAction,
-  ListItemsSetLoadingAction,
+  ListItemsLoadAction
+} from './load.action';
+
+import {
+  ListItemsSetLoadingAction
+} from './set-loading.action';
+
+import {
   ListItemsSetSelectedAction
-} from './actions';
+} from './set-items-selected.action';
 
 export class ListItemsOrchestrator extends ListStateOrchestrator<AsyncList<ListItemModel>> {
   /* istanbul ignore next */

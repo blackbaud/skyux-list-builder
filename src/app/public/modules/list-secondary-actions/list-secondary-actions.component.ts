@@ -5,10 +5,14 @@ import {
   TemplateRef,
   ViewChild
 } from '@angular/core';
+
 import {
-  ListStateDispatcher,
+  ListStateDispatcher
+} from '../list/state/list-state.rxstate';
+
+import {
   ListToolbarItemModel
-} from '../list/state';
+} from '../list/state/toolbar/toolbar-item.model';
 
 import {
   SkyListSecondaryActionsService

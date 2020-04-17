@@ -13,15 +13,24 @@ import {
 } from 'rxjs/operators';
 
 import {
-  ListItemsLoadAction,
-  ListItemsSetLoadingAction,
-  ListItemsSetSelectedAction
-} from './actions';
+  ListItemsLoadAction
+} from './load.action';
 
 import {
-  ListState,
+  ListItemsSetLoadingAction
+} from './set-loading.action';
+
+import {
+  ListItemsSetSelectedAction
+} from './set-items-selected.action';
+
+import {
+  ListState
+} from '../list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../';
+} from '../list-state.rxstate';
 
 describe('list items', () => {
   describe('loading and set loading action', () => {

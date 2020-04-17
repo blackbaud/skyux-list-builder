@@ -7,7 +7,7 @@ import {
   map as observableMap
 } from 'rxjs/operators';
 
-import { ListState } from './state';
+import { ListState } from './state/list-state.state-node';
 import { SkyListComponent } from '../list/list.component';
 
 let idIndex = 0;

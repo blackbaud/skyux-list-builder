@@ -34,14 +34,20 @@ import {
 } from '@skyux/list-builder-common';
 
 import {
-  ListItemsLoadAction,
-  ListItemsSetLoadingAction
-} from './state/items/actions';
+  ListItemsLoadAction
+} from './state/items/load.action';
 
 import {
-  ListSelectedLoadAction,
+  ListItemsSetLoadingAction
+} from './state/items/set-loading.action';
+
+import {
+  ListSelectedLoadAction
+} from './state/selected/load.action';
+
+import {
   ListSelectedSetLoadingAction
-} from './state/selected/actions';
+} from './state/selected/set-loading.action';
 
 import {
   ListSelectedModel
@@ -53,7 +59,7 @@ import {
 
 import {
   ListSortSetFieldSelectorsAction
-} from './state/sort/actions';
+} from './state/sort/set-field-selectors.action';
 
 import {
   ListFilterModel
@@ -76,9 +82,12 @@ import {
 } from '../list-data-provider-in-memory/list-data-in-memory.provider';
 
 import {
-  ListState,
+  ListState
+} from './state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from './state';
+} from './state/list-state.rxstate';
 
 import {
   isObservable,
@@ -95,9 +104,12 @@ import {
 } from './state/search/search.model';
 
 import {
-  ListViewsLoadAction,
+  ListViewsLoadAction
+} from './state/views/load.action';
+
+import {
   ListViewsSetActiveAction
-} from './state/views/actions';
+} from './state/views/set-active.action';
 
 import {
   ListViewModel

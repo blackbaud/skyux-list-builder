@@ -22,18 +22,27 @@ import {
 
 import {
   ListFilterModel
-} from '../list/state';
+} from '../list/state/filters/filter.model';
 
 import {
   ListItemModel
 } from '@skyux/list-builder-common';
 
 import {
-  ListPagingSetPageNumberAction,
-  ListSelectedModel,
-  ListState,
+  ListPagingSetPageNumberAction
+} from '../list/state/paging/set-page-number.action';
+
+import {
+  ListSelectedModel
+} from '../list/state/selected/selected.model';
+
+import {
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 let uniqueId = 0;
 

@@ -7,11 +7,11 @@ import {
 
 import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 import {
   ListToolbarItemModel
-} from '../list/state';
+} from '../list/state/toolbar/toolbar-item.model';
 
 @Component({
   selector: 'sky-list-filter-button',

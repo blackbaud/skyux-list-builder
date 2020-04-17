@@ -18,10 +18,16 @@ import {
 } from 'rxjs/operators';
 
 import {
-  ListState,
-  ListStateDispatcher,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
+  ListStateDispatcher
+} from '../list/state/list-state.rxstate';
+
+import {
   ListStateModel
-} from '../list/state';
+} from '../list/state/list-state.model';
 
 import {
   SkyListPagingModule
@@ -30,12 +36,18 @@ import {
 import {
   ListPagingTestComponent
 } from './fixtures/list-paging.component.fixture';
-import { ListItemsLoadAction } from '../list/state/items/actions';
+import { ListItemsLoadAction } from '../list/state/items/load.action';
 import {
-  ListPagingSetItemsPerPageAction,
-  ListPagingSetMaxPagesAction,
+  ListPagingSetItemsPerPageAction
+} from '../list/state/paging/set-items-per-page.action';
+
+import {
+  ListPagingSetMaxPagesAction
+} from '../list/state/paging/set-max-pages.action';
+
+import {
   ListPagingSetPageNumberAction
-} from '../list/state/paging/actions';
+} from '../list/state/paging/set-page-number.action';
 
 describe('List Paging Component', () => {
   let state: ListState,

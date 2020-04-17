@@ -33,15 +33,36 @@ import {
 } from '@skyux/lookup';
 
 import {
-  ListToolbarModel,
-  ListToolbarItemModel,
-  ListToolbarSetTypeAction,
-  ListState,
-  ListStateDispatcher,
-  ListSortLabelModel,
-  ListFilterModel,
+  ListToolbarModel
+} from '../list/state/toolbar/toolbar.model';
+
+import {
+  ListToolbarItemModel
+} from '../list/state/toolbar/toolbar-item.model';
+
+import {
+  ListToolbarSetTypeAction
+} from '../list/state/toolbar/set-type.action';
+
+import {
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
+  ListStateDispatcher
+} from '../list/state/list-state.rxstate';
+
+import {
+  ListSortLabelModel
+} from '../list/state/sort/label.model';
+
+import {
+  ListFilterModel
+} from '../list/state/filters/filter.model';
+
+import {
   ListPagingSetPageNumberAction
-} from '../list/state';
+} from '../list/state/paging/set-page-number.action';
 
 import {
   SkyListFilterInlineComponent
@@ -64,14 +85,24 @@ import {
 } from './list-toolbar-view-actions.component';
 
 import {
-  ListToolbarConfigSetSearchEnabledAction,
-  ListToolbarConfigSetSortSelectorEnabledAction
-} from './state/config/actions';
+  ListToolbarConfigSetSearchEnabledAction
+} from './state/config/set-search-enabled.action';
+
 import {
-  ListToolbarState,
-  ListToolbarStateDispatcher,
+  ListToolbarConfigSetSortSelectorEnabledAction
+} from './state/config/set-sort-selector-enabled.action';
+
+import {
+  ListToolbarState
+} from './state/toolbar-state.state-node';
+
+import {
+  ListToolbarStateDispatcher
+} from './state/toolbar-state.rxstate';
+
+import {
   ListToolbarStateModel
-} from './state';
+} from './state/toolbar-state.model';
 
 let nextId = 0;
 

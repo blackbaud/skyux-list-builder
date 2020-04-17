@@ -9,11 +9,11 @@ import { SkyListFilterInlineItemComponent } from './list-filter-inline-item.comp
 
 import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 import {
   ListFilterModel
-} from '../list/state';
+} from '../list/state/filters/filter.model';
 
 import {
   SkyListFilterInlineModel

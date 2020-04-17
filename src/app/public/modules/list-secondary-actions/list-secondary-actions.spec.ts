@@ -11,12 +11,16 @@ import {
 } from '@skyux-sdk/testing';
 
 import {
-  ListState,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
+
 import {
   SkyListToolbarModule
-} from '../list-toolbar';
+} from '../list-toolbar/list-toolbar.module';
 
 import {
   ListSecondaryActionsTestComponent
@@ -63,7 +67,7 @@ describe('List Secondary Actions Component', () => {
     fixture.detectChanges();
     fixture.whenStable().then(() => {
       fixture.detectChanges();
-      const query = '.sky-list-secondary-actions .sky-dropdown-item';
+      const query = '.sky-list-secondary-actions .sky-dropdown-button';
       expect(nativeElement.querySelector(query)).not.toBeNull();
     });
   }));

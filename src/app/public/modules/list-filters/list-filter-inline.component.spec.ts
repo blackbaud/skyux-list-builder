@@ -1,7 +1,10 @@
 import {
-  ListState,
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 import {
   TestBed,
@@ -17,16 +20,21 @@ import {
 } from '@skyux-sdk/testing';
 
 import {
+  skip,
+  take
+} from 'rxjs/operators';
+
+import {
   ListFilterInlineTestComponent
 } from './fixtures/list-filter-inline.component.fixture';
 
 import {
   SkyListToolbarModule
-} from '../list-toolbar';
+} from '../list-toolbar/list-toolbar.module';
 
 import {
   SkyListFiltersModule
-} from '.';
+} from './list-filters.module';
 
 import { FormsModule } from '@angular/forms';
 
@@ -84,7 +92,7 @@ describe('List inline filters', () => {
 
     beforeEach(async(() => {
       fixture.detectChanges();
-      state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+      state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
 
     }));
     it('should add a filter button and inline filters when provided', fakeAsync(() => {
@@ -133,7 +141,7 @@ describe('List inline filters', () => {
     it('should filter appropriately when change function is called', fakeAsync(() => {
       fixture.detectChanges();
       tick();
-      state.take(1).subscribe((current) => {
+      state.pipe(take(1)).subscribe((current) => {
         expect(current.filters.length).toBe(2);
         expect(current.filters[0].value).toBe('any');
         expect(current.filters[0].defaultValue).toBe('any');
@@ -151,7 +159,7 @@ describe('List inline filters', () => {
       tick();
       fixture.detectChanges();
       tick();
-      state.take(1).subscribe((current) => {
+      state.pipe(take(1)).subscribe((current) => {
         expect(current.filters.length).toBe(2);
         expect(current.filters[0].value).toBe('berry');
         expect(current.filters[0].defaultValue).toBe('any');

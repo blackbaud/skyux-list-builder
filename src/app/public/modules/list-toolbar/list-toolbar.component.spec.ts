@@ -23,29 +23,62 @@ import {
 } from '@skyux/list-builder-common';
 
 import {
-  ListState,
+  map as observableMap,
+  skip,
+  take
+} from 'rxjs/operators';
+
+import {
+  ListState
+} from '../list/state/list-state.state-node';
+
+import {
   ListStateDispatcher
-} from '../list/state';
+} from '../list/state/list-state.rxstate';
 
 import {
   SkyListToolbarModule
-} from './';
+} from './list-toolbar.module';
 
 import {
   ListToolbarTestComponent
 } from './fixtures/list-toolbar.component.fixture';
 
 import {
-  ListItemsLoadAction,
-  ListPagingSetPageNumberAction,
-  ListSortLabelModel,
-  ListToolbarItemModel,
-  ListToolbarItemsLoadAction,
-  ListToolbarSetTypeAction,
-  ListViewModel,
-  ListViewsLoadAction,
+  ListItemsLoadAction
+} from '../list/state/items/load.action';
+
+import {
+  ListPagingSetPageNumberAction
+} from '../list/state/paging/set-page-number.action';
+
+import {
+  ListSortLabelModel
+} from '../list/state/sort/label.model';
+
+import {
+  ListToolbarItemModel
+} from '../list/state/toolbar/toolbar-item.model';
+
+import {
+  ListToolbarItemsLoadAction
+} from '../list/state/toolbar/load.action';
+
+import {
+  ListToolbarSetTypeAction
+} from '../list/state/toolbar/set-type.action';
+
+import {
+  ListViewModel
+} from '../list/state/views/view.model';
+
+import {
+  ListViewsLoadAction
+} from '../list/state/views/load.action';
+
+import {
   ListViewsSetActiveAction
-} from '../list/state';
+} from '../list/state/views/set-active.action';
 
 describe('List Toolbar Component', () => {
   let state: ListState,
@@ -83,7 +116,7 @@ describe('List Toolbar Component', () => {
     fixture.detectChanges();
     // always skip the first update to ListState, when state is ready
     // run detectChanges once more then begin tests
-    state.skip(1).take(1).subscribe(() => fixture.detectChanges());
+    state.pipe(skip(1), take(1)).subscribe(() => fixture.detectChanges());
   }
 
   function getMultiselectActionToolbar() {
@@ -185,7 +218,7 @@ describe('List Toolbar Component', () => {
 
         component.toolbar.searchComponent.applySearchText('something');
         fixture.detectChanges();
-        state.take(1).subscribe((s) => {
+        state.pipe(take(1)).subscribe((s) => {
           expect(s.search.searchText).toBe('something');
           stateChecked = true;
         });
@@ -206,7 +239,7 @@ describe('List Toolbar Component', () => {
           fixture.detectChanges();
           component.toolbar.searchComponent.applySearchText('something');
           fixture.detectChanges();
-          state.take(1).subscribe((s) => {
+          state.pipe(take(1)).subscribe((s) => {
             expect(s.search.searchText).toBe('something');
             expect(s.paging.pageNumber).toBe(1);
           });
@@ -224,7 +257,7 @@ describe('List Toolbar Component', () => {
           fixture.detectChanges();
           component.toolbar.searchComponent.applySearchText('something');
           fixture.detectChanges();
-          state.take(1).subscribe((s) => {
+          state.pipe(take(1)).subscribe((s) => {
             expect(s.search.searchText).toBe('something');
             expect(s.paging.pageNumber).not.toBe(1);
           });
@@ -362,7 +395,7 @@ describe('List Toolbar Component', () => {
           fixture.detectChanges();
           tick();
           fixture.detectChanges();
-          state.take(1).subscribe((current) => {
+          state.pipe(take(1)).subscribe((current) => {
             expect(current.toolbar.items
             .filter((item) => { return item.id === 'sort-selector'; }).length).toBe(0);
           });
@@ -386,10 +419,18 @@ describe('List Toolbar Component', () => {
     it('should create ascending and descending items for each sort label', fakeAsync(() => {
       initializeToolbar();
 
-      tick();
       fixture.detectChanges();
+      tick();
 
-      const sortItems = nativeElement.querySelectorAll('.sky-sort .sky-sort-item');
+      const dropdownButtonEl = nativeElement.querySelector(
+        '.sky-sort .sky-dropdown-button'
+      ) as HTMLButtonElement;
+      dropdownButtonEl.click();
+
+      fixture.detectChanges();
+      tick();
+
+      const sortItems = document.querySelectorAll('.sky-sort-item');
 
       expect(sortItems.length).toBe(8);
       verifyInnerText(sortItems.item(0), 'Custom');
@@ -402,31 +443,46 @@ describe('List Toolbar Component', () => {
       verifyInnerText(sortItems.item(7), 'Number (Lowest first)');
     }));
 
-    it('should handle sort item click', async(() => {
+    it('should handle sort item click', fakeAsync(() => {
       initializeToolbar();
-        fixture.whenStable().then(() => {
-          fixture.detectChanges();
-        let sortSelectorDropdownButtonEl = nativeElement
-          .querySelector('.sky-sort .sky-dropdown-button') as HTMLButtonElement;
-        sortSelectorDropdownButtonEl.click();
 
-        let sortItems = nativeElement.querySelectorAll('.sky-sort-item');
+      fixture.detectChanges();
+      tick();
 
-        let clickItem = sortItems.item(1).querySelector('button') as HTMLButtonElement;
+      let sortSelectorDropdownButtonEl = nativeElement.querySelector(
+        '.sky-sort .sky-dropdown-button'
+      ) as HTMLButtonElement;
+      sortSelectorDropdownButtonEl.click();
 
-        clickItem.click();
-        fixture.detectChanges();
-        sortItems = nativeElement.querySelectorAll('.sky-sort-item');
-        expect(sortItems.item(1)).toHaveCssClass('sky-sort-item-selected');
+      fixture.detectChanges();
+      tick();
 
-        clickItem = sortItems.item(0).querySelector('button') as HTMLButtonElement;
+      let sortItems = document.querySelectorAll('.sky-sort-item');
+      let clickItem = sortItems.item(1).querySelector('button') as HTMLButtonElement;
 
-        clickItem.click();
-        fixture.detectChanges();
-        sortItems = nativeElement.querySelectorAll('.sky-sort-item');
-        expect(sortItems.item(0)).toHaveCssClass('sky-sort-item-selected');
-        });
+      clickItem.click();
+      fixture.detectChanges();
+      tick();
 
+      sortSelectorDropdownButtonEl.click();
+      fixture.detectChanges();
+      tick();
+
+      sortItems = document.querySelectorAll('.sky-sort-item');
+      expect(sortItems.item(1)).toHaveCssClass('sky-sort-item-selected');
+
+      clickItem = sortItems.item(0).querySelector('button') as HTMLButtonElement;
+      clickItem.click();
+
+      fixture.detectChanges();
+      tick();
+
+      sortSelectorDropdownButtonEl.click();
+      fixture.detectChanges();
+      tick();
+
+      sortItems = document.querySelectorAll('.sky-sort-item');
+      expect(sortItems.item(0)).toHaveCssClass('sky-sort-item-selected');
     }));
 
     it('should load custom items', async(() => {
@@ -612,8 +668,10 @@ describe('List Toolbar Component', () => {
 
       // Expect "show-selected" filter is set up.
       state
-        .map(s => s.filters)
-        .take(1)
+        .pipe(
+          observableMap(s => s.filters),
+          take(1)
+        )
         .subscribe(filters => {
           let showSelectedFilter = filters.filter(filter => filter.name === 'show-selected')[0];
           expect(showSelectedFilter).not.toBeNull();
@@ -639,11 +697,13 @@ describe('List Toolbar Component', () => {
 
       // Expect page number to be set to 99.
       state
-      .map(s => s.paging)
-      .take(1)
-      .subscribe(paging => {
-        expect(paging.pageNumber).toEqual(99);
-      });
+        .pipe(
+          observableMap(s => s.paging),
+          take(1)
+        )
+        .subscribe(paging => {
+          expect(paging.pageNumber).toEqual(99);
+        });
 
       // Send selection to dispatcher and click "Show only selected".
       dispatcher.setSelected(['1', '2'], true);
@@ -653,11 +713,13 @@ describe('List Toolbar Component', () => {
 
       // Expect page number to be set to 1.
       state
-      .map(s => s.paging)
-      .take(1)
-      .subscribe(paging => {
-        expect(paging.pageNumber).toEqual(1);
-      });
+        .pipe(
+          observableMap(s => s.paging),
+          take(1)
+        )
+        .subscribe(paging => {
+          expect(paging.pageNumber).toEqual(1);
+        });
     });
   });
 

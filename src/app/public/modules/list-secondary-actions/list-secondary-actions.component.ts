@@ -41,7 +41,8 @@ export class SkyListSecondaryActionsComponent implements AfterViewInit {
     const secondaryActionItem = new ListToolbarItemModel({
       id: 'secondary-actions',
       template: this.secondaryActionsTemplate,
-      location: 'left'
+      location: 'center',
+      index: 5000
     });
 
     this.dispatcher.toolbarAddItems(

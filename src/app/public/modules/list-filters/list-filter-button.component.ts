@@ -30,10 +30,10 @@ export class SkyListFilterButtonComponent implements AfterViewInit {
       [
         new ListToolbarItemModel({
           template: this.filterButtonTemplate,
-          location: 'left'
+          location: 'left',
+          index: 5000
         })
-      ],
-      1
+      ]
     );
   }
 }

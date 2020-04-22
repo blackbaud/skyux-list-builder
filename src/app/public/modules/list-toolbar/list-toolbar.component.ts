@@ -243,10 +243,10 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
               new ListToolbarItemModel({
                 id: 'sort-selector',
                 template: this.sortSelectorTemplate,
-                location: 'left'
+                location: 'left',
+                index: 6000
               })
-            ],
-            2
+            ]
           );
         } else if (currentSort.length < 1 && this.hasSortSelectors) {
           this.hasSortSelectors = false;
@@ -343,8 +343,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
       this.dispatcher.toolbarAddItems(
         [
           new ListToolbarItemModel(toolbarItem)
-        ],
-        toolbarItem.index
+        ]
       );
 
       this.customItemIds.push(toolbarItem.id);
@@ -358,8 +357,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
             this.dispatcher.toolbarAddItems(
               [
                 new ListToolbarItemModel(item)
-              ],
-              item.index
+              ]
             );
 
             this.customItemIds.push(item.id);
@@ -401,7 +399,8 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         [
           new ListToolbarItemModel({
             template: this.inlineFilterButtonTemplate,
-            location: 'left'
+            location: 'left',
+            index: 5000
           })
         ]
       );

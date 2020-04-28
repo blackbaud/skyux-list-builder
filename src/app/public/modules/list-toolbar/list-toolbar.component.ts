@@ -190,6 +190,8 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
 
   private customItemIds: string[] = [];
   private hasSortSelectors: boolean = false;
+  private inlineFiltersItemToolbarIndex: number = 5000;
+  private sortSelectorItemToolbarIndex: number = 6000;
   private ngUnsubscribe = new Subject();
 
   private _inMemorySearchEnabled: boolean;
@@ -244,7 +246,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
                 id: 'sort-selector',
                 template: this.sortSelectorTemplate,
                 location: 'left',
-                index: 6000
+                index: this.sortSelectorItemToolbarIndex
               })
             ]
           );
@@ -400,7 +402,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
           new ListToolbarItemModel({
             template: this.inlineFilterButtonTemplate,
             location: 'left',
-            index: 5000
+            index: this.inlineFiltersItemToolbarIndex
           })
         ]
       );

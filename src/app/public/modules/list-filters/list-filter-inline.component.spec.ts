@@ -7,6 +7,10 @@ import {
 } from '../list/state/list-state.rxstate';
 
 import {
+  ListPagingSetPageNumberAction
+} from '../list/state/paging/set-page-number.action';
+
+import {
   TestBed,
   fakeAsync,
   async,
@@ -168,6 +172,32 @@ describe('List inline filters', () => {
       filterButton = getFilterButton() as HTMLButtonElement;
 
       expect(filterButton).toHaveCssClass('sky-filter-btn-active');
+    }));
+
+    it('should return the list to the first page when filters are applied', fakeAsync(() => {
+      fixture.detectChanges();
+      tick();
+      dispatcher.next(
+        new ListPagingSetPageNumberAction(Number(2))
+      );
+      let filterButton = getFilterButton() as HTMLButtonElement;
+
+      tick();
+      filterButton.click();
+      state.pipe(take(1)).subscribe((current) => {
+        expect(current.paging.pageNumber).toBe(2);
+      });
+      tick();
+      fixture.detectChanges();
+      let selectEl = nativeElement.querySelector('#sky-demo-select-type') as HTMLSelectElement;
+      selectEl.value = 'berry';
+      SkyAppTestUtility.fireDomEvent(selectEl, 'change');
+      tick();
+      fixture.detectChanges();
+      tick();
+      state.pipe(take(1)).subscribe((current) => {
+        expect(current.paging.pageNumber).toBe(1);
+      });
     }));
 
     it('should handle a model without data properly', () => {

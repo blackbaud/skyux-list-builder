@@ -1,3 +1,9 @@
+# 3.8.1 (2020-05-06)
+
+- Fixed the list component to return to the first page after applying a filter or sorting a list. [#89](https://github.com/blackbaud/skyux-list-builder/pull/89)
+- Fixed the list toolbar item component to honor item indexing. [#88](https://github.com/blackbaud/skyux-list-builder/pull/88)
+
+
 # 4.0.0-rc.2 (2020-04-17)
 
 ### New features
@@ -15,6 +21,10 @@
 ### New features
 
 - Updated the pipeline to transpile to the [Angular Package Format](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview). [#87](https://github.com/blackbaud/skyux-list-builder/pull/87)
+
+# 3.8.0 (2020-04-15)
+
+- Upgraded the package development dependencies. [#85](https://github.com/blackbaud/skyux-list-builder/pull/85)
 
 # 3.7.1 (2020-03-11)
 

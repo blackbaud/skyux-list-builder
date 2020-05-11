@@ -230,6 +230,8 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
 
   private customItemIds: string[] = [];
   private hasSortSelectors: boolean = false;
+  private inlineFiltersItemToolbarIndex: number = 5000;
+  private sortSelectorItemToolbarIndex: number = 6000;
   private ngUnsubscribe = new Subject();
 
   private _inMemorySearchEnabled: boolean;
@@ -285,10 +287,10 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
               new ListToolbarItemModel({
                 id: 'sort-selector',
                 template: this.sortSelectorTemplate,
-                location: 'left'
+                location: 'left',
+                index: this.sortSelectorItemToolbarIndex
               })
-            ],
-            2
+            ]
           );
         } else if (currentSort.length < 1 && this.hasSortSelectors) {
           this.hasSortSelectors = false;
@@ -385,8 +387,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
       this.dispatcher.toolbarAddItems(
         [
           new ListToolbarItemModel(toolbarItem)
-        ],
-        toolbarItem.index
+        ]
       );
 
       this.customItemIds.push(toolbarItem.id);
@@ -400,8 +401,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
             this.dispatcher.toolbarAddItems(
               [
                 new ListToolbarItemModel(item)
-              ],
-              item.index
+              ]
             );
 
             this.customItemIds.push(item.id);
@@ -443,7 +443,8 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
         [
           new ListToolbarItemModel({
             template: this.inlineFilterButtonTemplate,
-            location: 'left'
+            location: 'left',
+            index: this.inlineFiltersItemToolbarIndex
           })
         ]
       );
@@ -460,9 +461,17 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
   }
 
   public setSort(sort: ListSortLabelModel): void {
-    this.dispatcher.sortSetFieldSelectors(
-      [{ fieldSelector: sort.fieldSelector, descending: sort.descending }]
-    );
+    this.state.pipe(take(1)).subscribe((currentState) => {
+      if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
+        this.dispatcher.next(
+          new ListPagingSetPageNumberAction(Number(1))
+        );
+      }
+
+      this.dispatcher.sortSetFieldSelectors(
+        [{ fieldSelector: sort.fieldSelector, descending: sort.descending }]
+      );
+    });
   }
 
   public inlineFilterButtonClick() {

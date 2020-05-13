@@ -100,6 +100,10 @@ import {
 } from './list-view.component';
 
 import {
+  ListPagingSetPageNumberAction
+} from './state/paging/set-page-number.action';
+
+import {
   ListSearchModel
 } from './state/search/search.model';
 
@@ -263,7 +267,15 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['appliedFilters'] &&
       changes['appliedFilters'].currentValue !== changes['appliedFilters'].previousValue) {
-      this.dispatcher.filtersUpdate(this.appliedFilters);
+      this.state.pipe(take(1)).subscribe((currentState) => {
+        if (currentState.paging.pageNumber && currentState.paging.pageNumber !== 1) {
+          this.dispatcher.next(
+            new ListPagingSetPageNumberAction(Number(1))
+          );
+        }
+
+        this.dispatcher.filtersUpdate(this.appliedFilters);
+      });
     }
     if (changes['selectedIds']) {
       // Only send selection changes to dispatcher if changes are distinct.

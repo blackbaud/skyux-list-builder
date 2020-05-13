@@ -42,6 +42,10 @@ import {
 } from '../list/state/list-state.rxstate';
 
 import {
+  ListPagingSetPageNumberAction
+} from '../list/state/paging/set-page-number.action';
+
+import {
   ListToolbarShowMultiselectToolbarAction
 } from '../list/state/toolbar/show-multiselect-toolbar.action';
 
@@ -846,6 +850,38 @@ describe('List Component', () => {
         tick();
       }));
 
+      it('should return the list to page 1 when filters are changed', fakeAsync(() => {
+        dispatcher.next(
+          new ListPagingSetPageNumberAction(Number(2))
+        );
+        fixture.detectChanges();
+        tick();
+        fixture.detectChanges();
+        state.pipe(take(1)).subscribe((current) => {
+          expect(current.filters.length).toBe(0);
+          expect(current.items.items.length).toBe(7);
+          expect(current.paging.pageNumber).toBe(2);
+        });
+
+        let appliedFilters = [
+          new ListFilterModel({
+            name: 'filter1',
+            value: 'Apple',
+            filterFunction: appleFilterFunction
+          })
+        ];
+
+        component.listFilters = appliedFilters;
+        fixture.detectChanges();
+        tick();
+        state.pipe(take(1)).subscribe((current) => {
+          expect(current.filters.length).toBe(1);
+          expect(current.items.items.length).toBe(1);
+          expect(current.paging.pageNumber).toBe(1);
+        });
+        tick();
+      }));
+
       it('should output event when filters are changed and output listener exists', fakeAsync(() => {
         let appliedFilters = [
           new ListFilterModel({
@@ -1402,7 +1438,7 @@ describe('List Component', () => {
             id: '2'
           })
         ];
-        dispatcher.toolbarAddItems(newItems, -1);
+        dispatcher.toolbarAddItems(newItems);
 
         tick();
 
@@ -1417,7 +1453,9 @@ describe('List Component', () => {
         tick();
 
         state.pipe(take(1)).subscribe((current) => {
-          expect(current.toolbar.items[0].id).toBe('blue');
+          expect(current.toolbar.items[0].id).toBe('0');
+          expect(current.toolbar.items[1].id).toBe('2');
+          expect(current.toolbar.items[2].id).toBe('blue');
         });
 
         tick();
@@ -1433,7 +1471,7 @@ describe('List Component', () => {
             id: '2'
           })
         ];
-        dispatcher.toolbarAddItems(newItems, -1);
+        dispatcher.toolbarAddItems(newItems);
 
         tick();
 
@@ -1448,7 +1486,45 @@ describe('List Component', () => {
         tick();
 
         state.pipe(take(1)).subscribe((current) => {
+          expect(current.toolbar.items[0].id).toBe('0');
+          expect(current.toolbar.items[1].id).toBe('2');
+          expect(current.toolbar.items[2].id).toBe('blue');
+        });
+
+        tick();
+      }));
+
+      it('should handle index set on the items', fakeAsync(() => {
+
+        let newItems: ListToolbarItemModel[] = [
+          new ListToolbarItemModel({
+            id: '0',
+            index: 2
+          }),
+          new ListToolbarItemModel({
+            id: '2',
+            index: 0
+          })
+        ];
+        dispatcher.toolbarAddItems(newItems);
+
+        tick();
+
+        newItems = [
+          new ListToolbarItemModel({
+            id: 'blue',
+            index: 1
+          })
+        ];
+
+        dispatcher.toolbarAddItems(newItems);
+
+        tick();
+
+        state.pipe(take(1)).subscribe((current) => {
+          expect(current.toolbar.items[0].id).toBe('2');
           expect(current.toolbar.items[1].id).toBe('blue');
+          expect(current.toolbar.items[2].id).toBe('0');
         });
 
         tick();

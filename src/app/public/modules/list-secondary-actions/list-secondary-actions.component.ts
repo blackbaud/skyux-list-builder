@@ -35,6 +35,8 @@ export class SkyListSecondaryActionsComponent implements AfterViewInit {
   })
   private secondaryActionsTemplate: TemplateRef<any>;
 
+  private secondaryActionsItemToolbarIndex: number = 5000;
+
   constructor(
     private dispatcher: ListStateDispatcher
   ) { }
@@ -43,7 +45,8 @@ export class SkyListSecondaryActionsComponent implements AfterViewInit {
     const secondaryActionItem = new ListToolbarItemModel({
       id: 'secondary-actions',
       template: this.secondaryActionsTemplate,
-      location: 'left'
+      location: 'center',
+      index: this.secondaryActionsItemToolbarIndex
     });
 
     this.dispatcher.toolbarAddItems(

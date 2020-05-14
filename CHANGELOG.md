@@ -3,7 +3,6 @@
 - Fixed the list component to return to the first page after applying a filter or sorting a list. [#89](https://github.com/blackbaud/skyux-list-builder/pull/89)
 - Fixed the list toolbar item component to honor item indexing. [#88](https://github.com/blackbaud/skyux-list-builder/pull/88)
 
-
 # 4.0.0-rc.2 (2020-04-17)
 
 ### New features

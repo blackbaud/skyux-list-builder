@@ -19,12 +19,9 @@ import {
 import {
   ListState,
   ListStateDispatcher,
-  ListSelectedSetItemSelectedAction
-} from '../../public';
-
-import {
+  ListSelectedSetItemSelectedAction,
   ListViewComponent
-} from '../../public/modules/list/list-view.component';
+} from '../../public/public_api';
 
 // Internal component only used to get at ListStateDispatcher.
 @Component({

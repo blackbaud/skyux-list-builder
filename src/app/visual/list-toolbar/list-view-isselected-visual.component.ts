@@ -15,7 +15,7 @@ import {
 import {
   ListState,
   ListStateDispatcher
-} from '../../public';
+} from '../../public/public_api';
 
 import {
   ListViewComponent

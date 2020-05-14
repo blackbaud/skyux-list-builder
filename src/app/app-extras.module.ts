@@ -21,7 +21,7 @@ import {
   SkyListPagingModule,
   SkyListSecondaryActionsModule,
   SkyListToolbarModule
-} from './public';
+} from './public/public_api';
 
 @NgModule({
   exports: [

@@ -1,3 +1,9 @@
+# 4.0.0 (2020-05-14)
+
+### New features
+
+- Updated the pipeline to transpile to the [Angular Package Format](https://docs.google.com/document/d/1CZC2rcpxffTDfRDs6p1cfbmKNLA6x5O-NtkJglDaBVs/preview). [#87](https://github.com/blackbaud/skyux-list-builder/pull/87)
+
 # 3.8.1 (2020-05-06)
 
 - Fixed the list component to return to the first page after applying a filter or sorting a list. [#89](https://github.com/blackbaud/skyux-list-builder/pull/89)
@@ -5,13 +11,13 @@
 
 # 4.0.0-rc.2 (2020-04-17)
 
-### New features
+### Bug fixes
 
 - Added `SkyListSecondaryActionsComponent` and `SkyListToolbarComponent` to the exports API.
 
 # 4.0.0-rc.1 (2020-04-17)
 
-### New features
+### Bug fixes
 
 - Added `SkyListViewComponent` and `SkyListComponent` to the exports API.
 

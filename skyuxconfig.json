@@ -6,9 +6,7 @@
   "plugins": [
     "@skyux-sdk/builder-plugin-skyux"
   ],
-  "omnibar": {
-    "experimental": true
-  },
+  "omnibar": {},
   "params": {
     "svcid": {
       "value": "skyux"
@@ -23,11 +21,11 @@
     }
   },
   "app": {
-    "styles": [
-      "@skyux/theme/css/sky.css"
-    ]
+    "styles": []
   },
-  "moduleAliases": {
-    "@skyux/list-builder": "./src/app/public"
+  "host": {
+    "frameOptions": {
+      "none": true
+    }
   }
 }

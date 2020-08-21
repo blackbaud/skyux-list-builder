@@ -17,6 +17,8 @@ import {
 import {
   ListSelectedSetItemsSelectedAction
 } from './set-items-selected.action';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<ListSelectedModel>> {
   /* istanbul ignore next */
@@ -69,7 +71,17 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
     const newSelectedIds = action.items || [];
     const newListSelectedModel = action.refresh ? new ListSelectedModel() : this.cloneListSelectedModel(state.item);
 
-    newSelectedIds.map(s => newListSelectedModel.selectedIdMap.set(s, action.selected));
+    if (newSelectedIds instanceof Observable) {
+      newSelectedIds
+        .pipe(take(1))
+        .subscribe(selectedIds => {
+          selectedIds.map(s => newListSelectedModel.selectedIdMap.set(s, action.selected));
+          console.log('observable');
+        });
+    } else {
+      console.log('string array');
+      newSelectedIds.map(s => newListSelectedModel.selectedIdMap.set(s, action.selected));
+    }
 
     return new AsyncItem<ListSelectedModel>(newListSelectedModel, state.lastUpdate, state.loading);
   }

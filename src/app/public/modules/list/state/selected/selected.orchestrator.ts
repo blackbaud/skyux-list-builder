@@ -1,10 +1,22 @@
-import { ListStateOrchestrator } from '../list-state.rxstate';
-import { AsyncItem } from '@skyux/list-builder-common';
-
-import { ListSelectedModel } from './selected.model';
 import {
-  ListSelectedLoadAction
-} from './load.action';
+  AsyncItem
+} from '@skyux/list-builder-common';
+
+import {
+  Observable
+} from 'rxjs';
+
+import {
+  take
+} from 'rxjs/operators';
+
+import {
+  ListStateOrchestrator
+} from '../list-state.rxstate';
+
+import {
+  ListSelectedModel
+} from './selected.model';
 
 import {
   ListSelectedSetLoadingAction
@@ -17,8 +29,10 @@ import {
 import {
   ListSelectedSetItemsSelectedAction
 } from './set-items-selected.action';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+
+import {
+  ListSelectedLoadAction
+} from './load.action';
 
 export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<ListSelectedModel>> {
   /* istanbul ignore next */
@@ -76,10 +90,8 @@ export class ListSelectedOrchestrator extends ListStateOrchestrator<AsyncItem<Li
         .pipe(take(1))
         .subscribe(selectedIds => {
           selectedIds.map(s => newListSelectedModel.selectedIdMap.set(s, action.selected));
-          console.log('observable');
         });
     } else {
-      console.log('string array');
       newSelectedIds.map(s => newListSelectedModel.selectedIdMap.set(s, action.selected));
     }
 

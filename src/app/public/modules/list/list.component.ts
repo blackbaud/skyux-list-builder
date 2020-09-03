@@ -129,33 +129,84 @@ let idIndex = 0;
 })
 export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy {
   public id: string = `sky-list-cmp-${++idIndex}`;
+  /**
+   * Specifies the data to display. The list component requires this property or the
+   * `dataProvider` property. For checklist or multiselect grids, each row requires an
+   * `id` property to manage selected items with the `selectedIds` input property and the
+   * `selectedIdsChange` event. If you do not provide an `id`, the list automatically
+   * generates one. (To update data in your view outside of a `dataProvider`, you must use
+   * an observable instead of a static array.)
+   */
   @Input()
   public data?: Array<any> | Observable<Array<any>> = [];
 
+  /**
+   * Specifies a data provider to obtain the data to display. The list component requires
+   * this property or the `data` property. To extend `ListDataProvider`, provide a `get`
+   * function that accepts a `ListDataRequestModel` as an argument and returns an
+   * `Observable ListDataResponseModel`, and a `count` function that returns an
+   * `Observable number` that indicates how many total records are in the list. For lists
+   * that use `dataProvider` instead of `data`, consumers are responsible for managing all
+   * `ListDataRequestModel` properties. For examples of custom searching, filters, and
+   * paging, see the demo code.
+   */
   @Input()
   public dataProvider?: ListDataProvider;
 
+  /**
+   * x
+   */
   @Input()
   public defaultView?: ListViewComponent;
 
+  /**
+   * Specifies the total number of items for the initial data set when initialized. When
+   * used in conjunction with `data` and `dataProvider`, it allows an initial data to be
+   * set with the need to call the `dataProvider`.
+   */
   @Input()
   public initialTotal?: number;
 
+  /**
+   * Specifies a set of IDs for the items to select in a checklist or multiselect grid.
+   * The IDs match the `id` properties of the `data` objects. Items with IDs that are not
+   * included are de-selected in the checklist or multiselect grid.
+   */
   @Input()
   public selectedIds?: Array<string> | Observable<Array<string>>;
 
+  /**
+   * Specifies a set of fields to sort by. If array of fields then sorted by order of
+   * array. Acceptable values: `ListFieldSelectorModel`, `Observable ListFieldSelectorModel`,
+   * `Array of ListFieldSelectorModel`, or `Observable Array of ListFieldSelectorModel`.
+   * Where `ListFieldSelectorModel` is an object with the `fieldSelector` property (a string
+   * that specifies the property of the data that is actively being sorted upon) and the
+   * `descending` property (a boolean that indicates the active sort is descending).
+   */
   @Input()
   public sortFields?: ListSortFieldSelectorModel |
     Array<ListSortFieldSelectorModel> |
     Observable<Array<ListSortFieldSelectorModel>> |
     Observable<ListSortFieldSelectorModel>;
 
+  /**
+   * Specifies a set of filters to apply to list data. These filters create a filter
+   * summary when the list includes the `sky-list-filter-summary` component.
+   */
   @Input()
   public appliedFilters: Array<ListFilterModel> = [];
 
+  /**
+   * When using a list view that supports item selection, the list emits this event with
+   * a `Map string, boolean` object that indicates which data entries are selected.
+   */
   @Output()
   public selectedIdsChange = new EventEmitter<Map<string, boolean>>();
 
+  /**
+   * The list emits this event with aN `Array of ListFilterModel` with the new filters
+   * applied to the list.
+   */
   @Output()
   public appliedFiltersChange = new EventEmitter<Array<ListFilterModel>>();
 

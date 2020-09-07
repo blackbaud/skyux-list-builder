@@ -132,30 +132,26 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   /**
    * Specifies the data to display. The list component requires this property or the
    * `dataProvider` property. For checklist or multiselect grids, each row requires an
-   * `id` property to manage selected items with the `selectedIds` input property and the
+   * `id` property to manage selected items with the `selectedIds` input and the
    * `selectedIdsChange` event. If you do not provide an `id`, the list automatically
-   * generates one. (To update data in your view outside of a `dataProvider`, you must use
-   * an observable instead of a static array.)
+   * generates one. To update data in your view outside of a `dataProvider`, you must use
+   * an observable instead of a static array.
    */
   @Input()
   public data?: Array<any> | Observable<Array<any>> = [];
 
   /**
    * Specifies a data provider to obtain the data to display. The list component requires
-   * this property or the `data` property. To extend `ListDataProvider`, provide a `get`
-   * function that accepts a `ListDataRequestModel` as an argument and returns an
-   * `Observable ListDataResponseModel`, and a `count` function that returns an
-   * `Observable number` that indicates how many total records are in the list. For lists
-   * that use `dataProvider` instead of `data`, consumers are responsible for managing all
-   * `ListDataRequestModel` properties. For examples of custom searching, filters, and
-   * paging, see the demo code.
+   * this property or the `data` property. Acceptable values: `extends ListDataProvider`.
+   * To extend `ListDataProvider`, provide a `get` function that accepts a `ListDataRequestModel`
+   * as an argument and returns an `Observable ListDataResponseModel`, and a `count` function
+   * that returns an `Observable number` that indicates how many total records are in the list.
+   * For lists that use `dataProvider` instead of `data`, consumers are responsible for managing
+   * all `ListDataRequestModel` properties.
    */
   @Input()
   public dataProvider?: ListDataProvider;
 
-  /**
-   * x
-   */
   @Input()
   public defaultView?: ListViewComponent;
 
@@ -204,7 +200,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   public selectedIdsChange = new EventEmitter<Map<string, boolean>>();
 
   /**
-   * The list emits this event with aN `Array of ListFilterModel` with the new filters
+   * The list emits this event with an `Array of ListFilterModel` with the new filters
    * applied to the list.
    */
   @Output()

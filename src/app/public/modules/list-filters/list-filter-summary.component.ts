@@ -26,12 +26,21 @@ import {
   ListFilterModel
 } from '../list/state/filters/filter.model';
 
+/**
+ * Creates a filter summary based on the `appliedFilters` property of the
+ * <a href="https://developer.blackbaud.com/skyux/components/list/overview#list-properties">list component</a>.
+ * Place this component within the sky-list-toolbar component.
+ */
 @Component({
   selector: 'sky-list-filter-summary',
   templateUrl: './list-filter-summary.component.html'
 })
 export class SkyListFilterSummaryComponent implements AfterContentInit {
 
+  /**
+   * Emits a `ListFilterModel` when users click a summary item. A common use case is
+   * to open a filter modal when this event is received.
+   */
   @Output()
   public summaryItemClick = new EventEmitter<ListFilterModel>();
 

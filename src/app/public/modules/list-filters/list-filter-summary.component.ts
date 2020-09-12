@@ -28,7 +28,7 @@ import {
 
 /**
  * Creates a filter summary based on the `appliedFilters` property of the
- * <a href="https://developer.blackbaud.com/skyux/components/list/overview#list-properties">list component</a>.
+ * [list component](https://developer.blackbaud.com/skyux/components/list/overview#list-properties).
  * Place this component within the sky-list-toolbar component.
  */
 @Component({
@@ -38,7 +38,7 @@ import {
 export class SkyListFilterSummaryComponent implements AfterContentInit {
 
   /**
-   * Emits a `ListFilterModel` when users click a summary item. A common use case is
+   * Emits a `ListFilterModel` when users select a summary item. A common use case is
    * to open a filter modal when this event is received.
    */
   @Output()

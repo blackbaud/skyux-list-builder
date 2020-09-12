@@ -17,7 +17,7 @@ import {
  * Contains a filter button for the list toolbar. Place a `sky-filter-button`
  * component inside this component to open a modal with filtering options.
  * To apply filter options, use the `appliedFilters` property on the
- * <a href="https://developer.blackbaud.com/skyux/components/list/overview#list-properties>list component</a>.
+ * [list component](https://developer.blackbaud.com/skyux/components/list/overview).
  */
 @Component({
   selector: 'sky-list-filter-button',

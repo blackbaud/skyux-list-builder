@@ -59,7 +59,7 @@ export class SkyListPagingComponent extends ListPagingComponent implements OnIni
   public pageSize: Observable<number> | number = 10;
 
   /**
-   * Specifies the maximum pages displayed.
+   * Specifies the maximum pages to display.
    * @default 5
    */
   @Input()

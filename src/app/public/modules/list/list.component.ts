@@ -148,6 +148,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
    * that returns an `Observable number` that indicates how many total records are in the list.
    * For lists that use `dataProvider` instead of `data`, consumers are responsible for managing
    * all `ListDataRequestModel` properties.
+   * @default SkyListInMemoryDataProvider
    */
   @Input()
   public dataProvider?: ListDataProvider;
@@ -206,9 +207,13 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   @Output()
   public appliedFiltersChange = new EventEmitter<Array<ListFilterModel>>();
 
+  /**
+   * Specifies a function to apply as a global sort on the list.
+   * Acceptable value: `(searchText: string) => Observable Array` or `Promise Array`.
+   */
   /* tslint:disable */
   @Input('search')
-  private searchFunction: (data: any, searchText: string) => boolean;
+  public searchFunction: (data: any, searchText: string) => boolean;
   /* tslint:enable */
 
   private dataFirstLoad: boolean = false;

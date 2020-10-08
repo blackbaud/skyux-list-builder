@@ -5,8 +5,17 @@ import {
 import { ListSortLabelModel } from './label.model';
 
 export class ListSortModel {
+  /**
+   * Specifies the list of available views to sort.
+   */
   public available: Array<ListSortLabelModel> = [];
+  /**
+   * Specifies whether the sort applies to all list views.
+   */
   public global: Array<ListSortLabelModel> = [];
+  /**
+   * Specifies the fields to sort.
+   */
   public fieldSelectors: Array<ListSortFieldSelectorModel> = [];
 
   constructor(data?: any) {

@@ -4,6 +4,9 @@ import {
   ListFiltersUpdateAction
 } from './update.action';
 
+/**
+ * @internal
+ */
 export class ListFiltersOrchestrator extends ListStateOrchestrator<ListFilterModel[]> {
   /* istanbul ignore next */
   constructor() {

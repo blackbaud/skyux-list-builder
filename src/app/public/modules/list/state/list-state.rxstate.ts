@@ -94,6 +94,9 @@ import {
 export class ListStateOrchestrator<T> extends StateOrchestrator<T, ListStateAction> {
 }
 
+/**
+ * @internal
+ */
 @Injectable()
 export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
 

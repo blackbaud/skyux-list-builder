@@ -46,6 +46,9 @@ import {
 
 let uniqueId = 0;
 
+/**
+ * @internal
+ */
 @Component({
   selector: 'sky-list-multiselect-toolbar',
   templateUrl: './list-multiselect-toolbar.component.html',

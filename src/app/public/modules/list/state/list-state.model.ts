@@ -12,6 +12,9 @@ import { ListSortModel } from './sort/sort.model';
 import { ListToolbarModel } from './toolbar/toolbar.model';
 import { ListViewsModel } from './views/views.model';
 
+/**
+ * @internal
+ */
 export class ListStateModel {
 
   public filters: ListFilterModel[] = [];

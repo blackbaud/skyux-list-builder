@@ -91,6 +91,9 @@ import {
   ListViewsSetActiveAction
 } from './views/set-active.action';
 
+/**
+ * @internal
+ */
 export class ListStateOrchestrator<T> extends StateOrchestrator<T, ListStateAction> {
 }
 

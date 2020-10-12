@@ -142,17 +142,16 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
   /**
    * Specifies a data provider to obtain the data to display. The list component requires
-   * this property or the `data` property. Acceptable values: `extends ListDataProvider`.
-   * To extend `ListDataProvider`, provide a `get` function that accepts a `ListDataRequestModel`
-   * as an argument and returns an `Observable ListDataResponseModel`, and a `count` function
-   * that returns an `Observable number` that indicates how many total records are in the list.
-   * For lists that use `dataProvider` instead of `data`, consumers are responsible for managing
-   * all `ListDataRequestModel` properties.
+   * this property or the `data` property. For lists that use `dataProvider` instead of `data`,
+   * consumers are responsible for managing all `ListDataRequestModel` properties.
    * @default SkyListInMemoryDataProvider
    */
   @Input()
   public dataProvider?: ListDataProvider;
 
+  /**
+   * @internal
+   */
   @Input()
   public defaultView?: ListViewComponent;
 
@@ -173,12 +172,7 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
   public selectedIds?: Array<string> | Observable<Array<string>>;
 
   /**
-   * Specifies a set of fields to sort by. If array of fields then sorted by order of
-   * array. Acceptable values: `ListFieldSelectorModel`, `Observable ListFieldSelectorModel`,
-   * `Array of ListFieldSelectorModel`, or `Observable Array of ListFieldSelectorModel`.
-   * Where `ListFieldSelectorModel` is an object with the `fieldSelector` property (a string
-   * that specifies the property of the data that is actively being sorted upon) and the
-   * `descending` property (a boolean that indicates the active sort is descending).
+   * Specifies a set of fields to sort by. If array of fields then sorted by order of array.
    */
   @Input()
   public sortFields?: ListSortFieldSelectorModel |
@@ -187,29 +181,28 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
     Observable<ListSortFieldSelectorModel>;
 
   /**
-   * Specifies a set of filters to apply to list data. These filters create a filter
-   * summary when the list includes the `sky-list-filter-summary` component.
+   * Specifies a set of filters to apply to list data.
+   * These filters create a filter summary when the list includes the
+   * [`sky-list-filter-summary`](https://developer.blackbaud.com/skyux/components/list/filters)
+   * component.
    */
   @Input()
   public appliedFilters: Array<ListFilterModel> = [];
 
   /**
-   * When using a list view that supports item selection, the list emits this event with
-   * a `Map string, boolean` object that indicates which data entries are selected.
+   * For list views that support item selection, emits the selected entries.
    */
   @Output()
   public selectedIdsChange = new EventEmitter<Map<string, boolean>>();
 
   /**
-   * The list emits this event with an `Array of ListFilterModel` with the new filters
-   * applied to the list.
+   * Emits the filters applied to the list.
    */
   @Output()
   public appliedFiltersChange = new EventEmitter<Array<ListFilterModel>>();
 
   /**
    * Specifies a function to apply as a global sort on the list.
-   * Acceptable value: `(searchText: string) => Observable Array` or `Promise Array`.
    */
   /* tslint:disable */
   @Input('search')

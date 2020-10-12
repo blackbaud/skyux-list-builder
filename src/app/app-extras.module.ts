@@ -8,12 +8,32 @@ import {
 } from '@skyux/docs-tools';
 
 import {
+  SkyCheckboxModule
+} from '@skyux/forms';
+
+import {
   SkyIconModule
 } from '@skyux/indicators';
 
 import {
+  SkyFilterModule
+} from '@skyux/lists';
+
+import {
+  SkyModalModule
+} from '@skyux/modals';
+
+import {
   SkyAppLinkModule
 } from '@skyux/router';
+
+import {
+  SkyListViewGridModule
+} from '@skyux/list-builder-view-grids';
+
+import {
+  ListFiltersDocsModalComponent
+} from './docs/list-filters/demo/list-filters-docs-modal.component';
 
 import {
   SkyListFiltersModule,
@@ -26,13 +46,17 @@ import {
 @NgModule({
   exports: [
     SkyAppLinkModule,
+    SkyCheckboxModule,
     SkyDocsToolsModule,
+    SkyFilterModule,
     SkyIconModule,
+    SkyModalModule,
     SkyListModule,
     SkyListFiltersModule,
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
-    SkyListToolbarModule
+    SkyListToolbarModule,
+    SkyListViewGridModule
   ],
   providers: [
     {
@@ -43,6 +67,8 @@ import {
       }
     }
   ],
-  entryComponents: []
+  entryComponents: [
+    ListFiltersDocsModalComponent
+  ]
 })
 export class AppExtrasModule { }

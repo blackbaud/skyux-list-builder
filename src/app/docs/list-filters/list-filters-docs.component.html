@@ -8,7 +8,21 @@
   </sky-docs-demo-page-summary>
 
   <sky-docs-demo>
-    See documentation for how to setup demos.
+    <sky-list-toolbar
+      [searchEnabled]="false"
+    >
+      <sky-list-filter-button>
+        <sky-filter-button
+          (filterButtonClick)="openFilterModal()"
+          [showButtonText]="true"
+        >
+        </sky-filter-button>
+      </sky-list-filter-button>
+      <sky-list-filter-summary
+        (summaryItemClick)="openFilterModal()"
+      >
+      </sky-list-filter-summary>
+    </sky-list-toolbar>
   </sky-docs-demo>
 
   <sky-docs-design-guidelines>

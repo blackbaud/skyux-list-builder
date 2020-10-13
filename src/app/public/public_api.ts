@@ -67,13 +67,13 @@ export * from './modules/list-filters/list-filters.module';
 
 export * from './modules/list-paging/list-paging.module';
 
-export * from './modules/list-secondary-actions/list-secondary-action';
-export * from './modules/list-secondary-actions/list-secondary-actions.module';
+export * from './modules/list-toolbar/list-secondary-actions/list-secondary-action';
+export * from './modules/list-toolbar/list-secondary-actions/list-secondary-actions.module';
 
 export * from './modules/list-toolbar/list-toolbar.module';
 
 // The following exports are used internally by `@skyux/list-builder-view-grids`.
 export * from './modules/list/list-view.component';
 export * from './modules/list/list.component';
-export * from './modules/list-secondary-actions/list-secondary-actions.component';
+export * from './modules/list-toolbar/list-secondary-actions/list-secondary-actions.component';
 export * from './modules/list-toolbar/list-toolbar.component';

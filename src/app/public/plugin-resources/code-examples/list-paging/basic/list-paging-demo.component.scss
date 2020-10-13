@@ -1,0 +1,6 @@
+@import "~@skyux/theme/scss/mixins";
+@import "~@skyux/theme/scss/_compat/mixins";
+
+::ng-deep .sky-grid-table {
+  @include sky-border(dark, top);
+}

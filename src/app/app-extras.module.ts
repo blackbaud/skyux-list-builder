@@ -8,7 +8,8 @@ import {
 } from '@skyux/docs-tools';
 
 import {
-  SkyCheckboxModule
+  SkyCheckboxModule,
+  SkyRadioModule
 } from '@skyux/forms';
 
 import {
@@ -22,6 +23,10 @@ import {
 import {
   SkyModalModule
 } from '@skyux/modals';
+
+import {
+  SkyDropdownModule
+} from '@skyux/popovers';
 
 import {
   SkyAppLinkModule
@@ -48,6 +53,7 @@ import {
     SkyAppLinkModule,
     SkyCheckboxModule,
     SkyDocsToolsModule,
+    SkyDropdownModule,
     SkyFilterModule,
     SkyIconModule,
     SkyModalModule,
@@ -56,7 +62,8 @@ import {
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
     SkyListToolbarModule,
-    SkyListViewGridModule
+    SkyListViewGridModule,
+    SkyRadioModule
   ],
   providers: [
     {

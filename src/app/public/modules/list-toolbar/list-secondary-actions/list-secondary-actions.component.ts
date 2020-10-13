@@ -8,11 +8,11 @@ import {
 
 import {
   ListStateDispatcher
-} from '../list/state/list-state.rxstate';
+} from '../../list/state/list-state.rxstate';
 
 import {
   ListToolbarItemModel
-} from '../list/state/toolbar/toolbar-item.model';
+} from '../../list/state/toolbar/toolbar-item.model';
 
 import {
   SkyListSecondaryActionsService

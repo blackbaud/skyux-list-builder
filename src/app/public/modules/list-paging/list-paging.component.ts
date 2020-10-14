@@ -52,7 +52,7 @@ import {
 })
 export class SkyListPagingComponent extends ListPagingComponent implements OnInit {
   /**
-   * Specifies the page size.
+   * Specifies the number of list items per page.
    * @default 10
    */
   @Input()

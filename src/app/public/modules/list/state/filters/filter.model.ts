@@ -30,6 +30,8 @@ export class ListFilterModel {
   /**
    * Specifies a function to determine whether items are filtered.
    * This property is required when using an in-memory data provider.
+   * For information about `ListItemModel`, see the
+   * [shared classes for lists](https://developer.blackbaud.com/skyux-list-builder-common/docs/list-builder-common).
    */
   public filterFunction: (item: ListItemModel, filter: any) => boolean;
 

@@ -173,6 +173,8 @@ export class SkyListComponent implements AfterContentInit, OnChanges, OnDestroy 
 
   /**
    * Specifies a set of fields to sort by. If array of fields then sorted by order of array.
+   * For information about `ListSortFieldSelectorModel`, see the
+   * [shared classes for lists](https://developer.blackbaud.com/skyux-list-builder-common/docs/list-builder-common).
    */
   @Input()
   public sortFields?: ListSortFieldSelectorModel |

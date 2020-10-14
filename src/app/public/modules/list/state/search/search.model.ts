@@ -1,7 +1,7 @@
 /**
  * Specifies a function to dynamically manage the data source when users change the text
  * in the list field. The search function must return an array or a promise of an array.
- * The search property is particularly useful when the data source does not live
+ * The `search` property is particularly useful when the data source does not live
  * in the source code.
  */
 export class ListSearchModel {

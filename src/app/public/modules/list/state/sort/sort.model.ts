@@ -18,6 +18,8 @@ export class ListSortModel {
   public global: Array<ListSortLabelModel> = [];
   /**
    * Specifies the fields to sort.
+   * For information about `ListSortFieldSelectorModel`, see the
+   * [shared classes for lists](https://developer.blackbaud.com/skyux-list-builder-common/docs/list-builder-common).
    */
   public fieldSelectors: Array<ListSortFieldSelectorModel> = [];
 

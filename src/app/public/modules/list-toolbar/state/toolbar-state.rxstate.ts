@@ -9,5 +9,8 @@ import { ListToolbarStateAction } from './toolbar-state-action.type';
 export class ListToolbarStateDispatcher extends StateDispatcher<ListToolbarStateAction> {
 }
 
+/**
+ * @internal
+ */
 export class ListToolbarStateOrchestrator<T> extends StateOrchestrator<T, ListToolbarStateAction> {
 }

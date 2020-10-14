@@ -9,11 +9,12 @@ export class ListFilterModel {
   public name: string;
   /**
    * Specifies a label for the filter's summary item.
-   * The label defaults to the value of the filter.
+   * The label defaults to the `value` of the filter.
    */
   public label: string;
   /**
    * Indicates whether users can dismiss the filter's summary item.
+   * @default true
    */
   public dismissible: boolean = true;
   /**

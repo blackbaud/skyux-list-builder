@@ -351,10 +351,10 @@ describe('List Component', () => {
 
             fixture.detectChanges();
             validateRowValue(0, 1, '11');
-
-            fixture.destroy();
-            flush();
           });
+
+          fixture.destroy();
+          flush();
         }));
 
         it('should set initial sort with non-array', fakeAsync(() => {

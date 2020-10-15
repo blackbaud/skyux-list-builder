@@ -8,7 +8,6 @@ export * from './modules/list/state/list-state.model';
 export * from './modules/list/state/list-state.rxstate';
 export * from './modules/list/state/list-state.state-node';
 
-export * from './modules/list-filters/filter.model';
 export * from './modules/list/state/filters/filters.orchestrator';
 export * from './modules/list/state/filters/update.action';
 
@@ -62,6 +61,7 @@ export * from './modules/list/state/views/views.orchestrator';
 
 export * from './modules/list-data-provider-in-memory/list-data-in-memory.provider';
 
+export * from './modules/list-filters/filter.model';
 export * from './modules/list-filters/list-filter-inline.model';
 export * from './modules/list-filters/list-filters.module';
 

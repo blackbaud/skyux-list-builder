@@ -12,7 +12,10 @@ let idIndex = 0;
 export class SkyListToolbarItemComponent {
   /**
    * Specifies the ID of the item.
+<<<<<<< HEAD
    * @default 'moment().toDate().getTime().toString()''
+=======
+>>>>>>> master
    */
   @Input() public id: string = `sky-list-toolbar-item-${++idIndex}`;
   /**

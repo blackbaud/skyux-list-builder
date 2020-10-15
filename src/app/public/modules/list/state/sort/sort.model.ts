@@ -4,6 +4,9 @@ import {
 
 import { ListSortLabelModel } from './label.model';
 
+/**
+ * Specifies a set of fields to sort by.
+ */
 export class ListSortModel {
   /**
    * Specifies the list of available views to sort.
@@ -15,6 +18,11 @@ export class ListSortModel {
   public global: Array<ListSortLabelModel> = [];
   /**
    * Specifies the fields to sort.
+<<<<<<< HEAD
+=======
+   * For information about `ListSortFieldSelectorModel`, see the
+   * [shared classes for lists](https://developer.blackbaud.com/skyux-list-builder-common/docs/list-builder-common).
+>>>>>>> master
    */
   public fieldSelectors: Array<ListSortFieldSelectorModel> = [];
 

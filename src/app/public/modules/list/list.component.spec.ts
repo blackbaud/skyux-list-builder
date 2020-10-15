@@ -328,26 +328,32 @@ describe('List Component', () => {
         }));
 
         // TODO: This test causes timer issues on Windows machines.
-        // it('should sort based on column using cached search', fakeAsync(() => {
-        //   initializeList();
-        //   tick();
-        //   applySearch('banana')
-        //   .then(() => {
-        //     fixture.detectChanges();
-        //     validateRowCount(element, 2);
-        //     validateRowValue(0, 1, '01');
+        fit('should sort based on column using cached search', fakeAsync(async () => {
+          initializeList();
 
-        //     dispatcher.next(new ListSortSetFieldSelectorsAction([
-        //       {
-        //         fieldSelector: 'column1',
-        //         descending: true
-        //       }
-        //     ]));
+          fixture.detectChanges();
+          tick();
 
-        //     fixture.detectChanges();
-        //     validateRowValue(0, 1, '11');
-        //   });
-        // }));
+          await applySearch('banana');
+
+          fixture.detectChanges();
+          tick();
+
+          validateRowCount(element, 2);
+          validateRowValue(0, 1, '01');
+
+          dispatcher.next(new ListSortSetFieldSelectorsAction([
+            {
+              fieldSelector: 'column1',
+              descending: true
+            }
+          ]));
+
+          fixture.detectChanges();
+          tick();
+
+          validateRowValue(0, 1, '11');
+        }));
 
         it('should set initial sort with non-array', fakeAsync(() => {
           component.sortFields = {

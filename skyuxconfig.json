@@ -33,7 +33,9 @@
     }
   },
   "app": {
-    "styles": []
+    "styles": [
+      "@skyux/docs-tools/css/docs-tools.css"
+    ]
   },
   "host": {
     "frameOptions": {

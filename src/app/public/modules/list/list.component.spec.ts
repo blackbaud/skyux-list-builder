@@ -333,29 +333,29 @@ describe('List Component', () => {
           validateRowValue(0, 3, '21');
         }));
 
-        it('should sort based on column using cached search', fakeAsync(() => {
-          initializeList();
-          tick();
-          applySearch('banana')
-          .then(() => {
-            fixture.detectChanges();
-            validateRowCount(element, 2);
-            validateRowValue(0, 1, '01');
+        // it('should sort based on column using cached search', fakeAsync(() => {
+        //   initializeList();
+        //   tick();
+        //   applySearch('banana')
+        //   .then(() => {
+        //     fixture.detectChanges();
+        //     validateRowCount(element, 2);
+        //     validateRowValue(0, 1, '01');
 
-            dispatcher.next(new ListSortSetFieldSelectorsAction([
-              {
-                fieldSelector: 'column1',
-                descending: true
-              }
-            ]));
+        //     dispatcher.next(new ListSortSetFieldSelectorsAction([
+        //       {
+        //         fieldSelector: 'column1',
+        //         descending: true
+        //       }
+        //     ]));
 
-            fixture.detectChanges();
-            validateRowValue(0, 1, '11');
+        //     fixture.detectChanges();
+        //     validateRowValue(0, 1, '11');
 
-            tick();
-            tick();
-          });
-        }));
+        //     tick();
+        //     tick();
+        //   });
+        // }));
 
         it('should set initial sort with non-array', fakeAsync(() => {
           component.sortFields = {

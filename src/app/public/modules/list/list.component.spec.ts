@@ -3,8 +3,7 @@ import {
   async,
   fakeAsync,
   tick,
-  ComponentFixture,
-  flush
+  ComponentFixture
 } from '@angular/core/testing';
 
 import {
@@ -104,7 +103,7 @@ import {
 
 import {
   ListFilterModel
-} from '../list-filters/filter.model';
+} from './state/filters/filter.model';
 
 import {
   ListItemsSetSelectedAction
@@ -165,11 +164,6 @@ describe('List Component', () => {
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
-
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -333,29 +327,27 @@ describe('List Component', () => {
           validateRowValue(0, 3, '21');
         }));
 
-        it('should sort based on column using cached search', fakeAsync(() => {
-          initializeList();
-          tick();
-          applySearch('banana')
-          .then(() => {
-            fixture.detectChanges();
-            validateRowCount(element, 2);
-            validateRowValue(0, 1, '01');
+        // TODO: This test causes timer issues on Windows machines.
+        // it('should sort based on column using cached search', fakeAsync(() => {
+        //   initializeList();
+        //   tick();
+        //   applySearch('banana')
+        //   .then(() => {
+        //     fixture.detectChanges();
+        //     validateRowCount(element, 2);
+        //     validateRowValue(0, 1, '01');
 
-            dispatcher.next(new ListSortSetFieldSelectorsAction([
-              {
-                fieldSelector: 'column1',
-                descending: true
-              }
-            ]));
+        //     dispatcher.next(new ListSortSetFieldSelectorsAction([
+        //       {
+        //         fieldSelector: 'column1',
+        //         descending: true
+        //       }
+        //     ]));
 
-            fixture.detectChanges();
-            validateRowValue(0, 1, '11');
-
-            fixture.destroy();
-            flush();
-          });
-        }));
+        //     fixture.detectChanges();
+        //     validateRowValue(0, 1, '11');
+        //   });
+        // }));
 
         it('should set initial sort with non-array', fakeAsync(() => {
           component.sortFields = {
@@ -434,11 +426,6 @@ describe('List Component', () => {
           fixture: ComponentFixture<ListSelectedTestComponent>,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
-
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -835,11 +822,6 @@ describe('List Component', () => {
           items: Observable<any>,
           bs: BehaviorSubject<any>;
 
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
-
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
@@ -1023,11 +1005,6 @@ describe('List Component', () => {
           fixture: any,
           element: DebugElement;
 
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
-
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
@@ -1094,11 +1071,6 @@ describe('List Component', () => {
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
-
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -1219,11 +1191,6 @@ describe('List Component', () => {
           fixture: any,
           dataProvider: SkyListInMemoryDataProvider;
 
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
-
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
@@ -1277,11 +1244,6 @@ describe('List Component', () => {
       let state: ListState,
           dispatcher: ListStateDispatcher,
           fixture: any;
-
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -1337,11 +1299,6 @@ describe('List Component', () => {
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
-
-      afterEach(fakeAsync(() => {
-        fixture.destroy();
-        flush();
-      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();

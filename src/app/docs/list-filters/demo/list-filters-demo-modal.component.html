@@ -3,14 +3,39 @@
     {{headerText}}
   </sky-modal-header>
   <sky-modal-content>
-    <label for="sky-demo-select-type">Fruit type</label>
-    <select id="sky-demo-select-type" [(ngModel)]="fruitType" class="sky-form-control">
-      <option value="any">Any fruit</option>
-      <option value="citrus">Citrus</option>
-      <option value="berry">Berry</option>
+    <label
+      [for]="fruitTypeSelect.id"
+    >
+      Fruit type
+    </label>
+    <select
+      class="sky-form-control"
+      skyId
+      [(ngModel)]="fruitType"
+      #fruitTypeSelect="skyId"
+    >
+      <option
+        value="any"
+      >
+        Any fruit
+      </option>
+      <option
+        value="citrus"
+      >
+        Citrus
+      </option>
+      <option
+        value="berry"
+      >
+        Berry
+      </option>
     </select>
-    <div style="margin-top: 15px;">
-      <sky-checkbox [(ngModel)]="hideOrange">
+    <div
+      style="margin-top: 15px;"
+    >
+      <sky-checkbox
+        [(ngModel)]="hideOrange"
+      >
         <sky-checkbox-label>
           Hide orange fruits
         </sky-checkbox-label>
@@ -19,21 +44,24 @@
   </sky-modal-content>
   <sky-modal-footer>
     <button
-      type="button"
       class="sky-btn sky-btn-primary"
-      (click)="applyFilters()">
+      type="button"
+      (click)="applyFilters()"
+    >
       Apply filters
     </button>
     <button
-      type="button"
       class="sky-btn sky-btn-link"
-      (click)="clearAllFilters()">
+      type="button"
+      (click)="clearAllFilters()"
+    >
       Clear all filters
     </button>
     <button
-      type="button"
       class="sky-btn sky-btn-link"
-      (click)="cancel()">
+      type="button"
+      (click)="cancel()"
+    >
       Cancel
     </button>
   </sky-modal-footer>

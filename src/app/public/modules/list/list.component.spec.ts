@@ -351,6 +351,9 @@ describe('List Component', () => {
 
             fixture.detectChanges();
             validateRowValue(0, 1, '11');
+
+            tick();
+            tick();
           });
         }));
 

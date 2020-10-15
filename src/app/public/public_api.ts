@@ -8,7 +8,7 @@ export * from './modules/list/state/list-state.model';
 export * from './modules/list/state/list-state.rxstate';
 export * from './modules/list/state/list-state.state-node';
 
-export * from './modules/list/state/filters/filter.model';
+export * from './modules/list-filters/filter.model';
 export * from './modules/list/state/filters/filters.orchestrator';
 export * from './modules/list/state/filters/update.action';
 

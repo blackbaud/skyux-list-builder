@@ -22,7 +22,7 @@ import {
 
 import {
   ListFilterModel
-} from '../list/state/filters/filter.model';
+} from '../list-filters/filter.model';
 
 import {
   ListItemModel

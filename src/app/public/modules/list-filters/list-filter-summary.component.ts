@@ -24,7 +24,7 @@ import {
 
 import {
   ListFilterModel
-} from '../list/state/filters/filter.model';
+} from './filter.model';
 
 /**
  * Creates a filter summary based on the

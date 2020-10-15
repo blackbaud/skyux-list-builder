@@ -13,7 +13,7 @@ import {
 
 import {
   ListFilterModel
-} from './filters/filter.model';
+} from '../../list-filters/filter.model';
 
 import {
   ListFiltersUpdateAction

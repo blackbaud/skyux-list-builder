@@ -1,5 +1,5 @@
 import { ListStateOrchestrator } from '../list-state.rxstate';
-import { ListFilterModel } from './filter.model';
+import { ListFilterModel } from '../../../list-filters/filter.model';
 import {
   ListFiltersUpdateAction
 } from './update.action';

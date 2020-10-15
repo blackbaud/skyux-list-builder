@@ -3,24 +3,30 @@ import {
 } from '@skyux/list-builder-common';
 
 export class ListFilterModel {
+
   /**
    * Specifies the name of the filter.
+   * @required
    */
   public name: string;
+
   /**
    * Specifies a label for the filter's summary item.
    * The label defaults to the `value` of the filter.
    */
   public label: string;
+
   /**
    * Indicates whether users can dismiss the filter's summary item.
    * @default true
    */
   public dismissible: boolean = true;
+
   /**
    * Specifies the current value of the filter.
    */
   public value: any;
+
   /**
    * Specifies the default value of the filter. When users do not set the
    * default value, the filter does not affect the list.

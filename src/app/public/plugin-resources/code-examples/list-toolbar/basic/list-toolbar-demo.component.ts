@@ -20,6 +20,8 @@ export class ListToolbarDemoComponent {
     { id: '9', name: 'Hubert J. Farnsworth', email: 'hubert.j.farnsworth@example.com', amount: 999.99, status: 'Past Due' }
   ];
 
+  public iconGroupSelectedValue = 'table';
+
   public onFilterButtonClicked(): void {
     alert('Filter button clicked');
   }

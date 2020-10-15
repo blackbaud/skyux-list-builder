@@ -25,4 +25,10 @@ const state = new ListState(dispatcher);
     }
   ]
 })
-export class ListToolbarDocsComponent { }
+export class ListToolbarDocsComponent {
+
+  public data: any[] = [];
+
+  public iconGroupSelectedValue = 'table';
+
+}

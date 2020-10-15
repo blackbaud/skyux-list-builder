@@ -3,7 +3,8 @@ import {
   async,
   fakeAsync,
   tick,
-  ComponentFixture
+  ComponentFixture,
+  flush
 } from '@angular/core/testing';
 
 import {
@@ -164,6 +165,11 @@ describe('List Component', () => {
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
+
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -425,6 +431,11 @@ describe('List Component', () => {
           fixture: ComponentFixture<ListSelectedTestComponent>,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
+
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -821,6 +832,11 @@ describe('List Component', () => {
           items: Observable<any>,
           bs: BehaviorSubject<any>;
 
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
+
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
@@ -1004,6 +1020,11 @@ describe('List Component', () => {
           fixture: any,
           element: DebugElement;
 
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
+
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
@@ -1070,6 +1091,11 @@ describe('List Component', () => {
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
+
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -1190,6 +1216,11 @@ describe('List Component', () => {
           fixture: any,
           dataProvider: SkyListInMemoryDataProvider;
 
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
+
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
         state = new ListState(dispatcher);
@@ -1243,6 +1274,11 @@ describe('List Component', () => {
       let state: ListState,
           dispatcher: ListStateDispatcher,
           fixture: any;
+
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();
@@ -1298,6 +1334,11 @@ describe('List Component', () => {
           element: DebugElement,
           items: Observable<any>,
           bs: BehaviorSubject<any>;
+
+      afterEach(fakeAsync(() => {
+        fixture.destroy();
+        flush();
+      }));
 
       beforeEach(async(() => {
         dispatcher = new ListStateDispatcher();

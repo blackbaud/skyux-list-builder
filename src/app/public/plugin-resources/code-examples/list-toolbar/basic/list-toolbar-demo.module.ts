@@ -7,7 +7,8 @@ import {
 } from '@angular/common';
 
 import {
-  FormsModule
+  FormsModule,
+  ReactiveFormsModule
 } from '@angular/forms';
 
 import {
@@ -53,7 +54,8 @@ import {
     SkyListSecondaryActionsModule,
     SkyListToolbarModule,
     SkyListViewGridModule,
-    SkyRadioModule
+    SkyRadioModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ListToolbarDemoComponent

@@ -59,38 +59,25 @@
       </sky-list-secondary-action>
     </sky-list-secondary-actions>
     <sky-list-toolbar-view-actions>
-      <div
-        class="sky-switch-icon-group"
+      <form
+        novalidate
+        [formGroup]="myForm"
       >
-        <sky-radio
-          icon="table"
-          name="iconradiogrouptest"
-          value="table"
-          [(ngModel)]="iconGroupSelectedValue"
+        <sky-radio-group
+          formControlName="myView"
         >
-        </sky-radio>
-        <sky-radio
-          icon="list"
-          name="iconradiogrouptest"
-          value="list"
-          [(ngModel)]="iconGroupSelectedValue"
-        >
-        </sky-radio>
-        <sky-radio
-          icon="th-large"
-          name="iconradiogrouptest"
-          value="cards"
-          [(ngModel)]="iconGroupSelectedValue"
-        >
-        </sky-radio>
-        <sky-radio
-          icon="map-marker"
-          name="iconradiogrouptest"
-          value="map"
-          [(ngModel)]="iconGroupSelectedValue"
-        >
-        </sky-radio>
-      </div>
+          <div
+            class="sky-switch-icon-group"
+          >
+            <sky-radio *ngFor="let view of views"
+              [icon]="view.icon"
+              [label]="view.label"
+              [value]="view.name"
+            >
+            </sky-radio>
+          </div>
+        </sky-radio-group>
+      </form>
     </sky-list-toolbar-view-actions>
   </sky-list-toolbar>
   <sky-list-view-grid

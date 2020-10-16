@@ -1,12 +1,18 @@
 import {
-  Component
+  Component,
+  OnInit
 } from '@angular/core';
+
+import {
+  FormBuilder,
+  FormGroup
+} from '@angular/forms';
 
 @Component({
   selector: 'app-list-toolbar-demo',
   templateUrl: './list-toolbar-demo.component.html'
 })
-export class ListToolbarDemoComponent {
+export class ListToolbarDemoComponent implements OnInit {
 
   public data: any[] = [
     { id: '1', name: 'Niels Bohr', email: 'niels.bohr@example.com', amount: 170.75, status: 'Paid' },
@@ -20,7 +26,24 @@ export class ListToolbarDemoComponent {
     { id: '9', name: 'Hubert J. Farnsworth', email: 'hubert.j.farnsworth@example.com', amount: 999.99, status: 'Past Due' }
   ];
 
-  public iconGroupSelectedValue = 'table';
+  public myForm: FormGroup;
+
+  public views: any[] = [
+    { icon: 'table', label: 'Table', name: 'table' },
+    { icon: 'list', label: 'List', name: 'list' },
+    { icon: 'th-large', label: 'Cards', name: 'cards' },
+    { icon: 'map-marker', label: 'Map', name: 'map' }
+  ];
+
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
+
+  public ngOnInit(): void {
+    this.myForm = this.formBuilder.group({
+      myView: this.views[0].name
+    });
+  }
 
   public onFilterButtonClicked(): void {
     alert('Filter button clicked');

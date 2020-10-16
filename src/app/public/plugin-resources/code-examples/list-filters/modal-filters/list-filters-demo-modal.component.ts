@@ -19,7 +19,7 @@ import {
 } from './list-filters-demo-modal-context';
 
 @Component({
-  selector: 'sky-demo-filter-modal-form',
+  selector: 'app-demo-filter-modal-form',
   templateUrl: './list-filters-demo-modal.component.html'
 })
 export class ListFilterDemoModalComponent {

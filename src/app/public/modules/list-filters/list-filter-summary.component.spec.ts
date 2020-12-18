@@ -112,7 +112,7 @@ describe('List filter summary', () => {
     });
   }));
 
-  it('should show filter summary in the appropriate area when filter a filters which have no effect exists', async(() => {
+  it('should show filter summary in the appropriate area when filters which have no effect exist', async(() => {
     filters = filters.concat([
       new ListFilterModel({
         name: 'name',

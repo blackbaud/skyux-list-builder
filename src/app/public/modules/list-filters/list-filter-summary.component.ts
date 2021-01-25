@@ -1,8 +1,8 @@
 import {
-  Component,
   AfterContentInit,
-  Output,
-  EventEmitter
+  Component,
+  EventEmitter,
+  Output
 } from '@angular/core';
 
 import {
@@ -10,6 +10,7 @@ import {
 } from 'rxjs';
 
 import {
+  delay,
   map as observableMap,
   take
 } from 'rxjs/operators';
@@ -53,7 +54,8 @@ export class SkyListFilterSummaryComponent implements AfterContentInit {
   ) {}
 
   public ngAfterContentInit() {
-    this.appliedFilters = this.state.pipe(observableMap((state) => {
+    // The delay here is to ensure we avoid any ExpressionChangedAfterItHasBeenCheckedError issues.
+    this.appliedFilters = this.state.pipe(delay(50), observableMap((state) => {
       return state.filters.filter((filter) => {
         return filter.value !== '' &&
           filter.value !== undefined &&

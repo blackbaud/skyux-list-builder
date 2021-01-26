@@ -54,7 +54,7 @@ export class SkyListFilterSummaryComponent implements AfterContentInit {
 
   public ngAfterContentInit() {
     // The setTimeout here is to ensure we avoid any ExpressionChangedAfterItHasBeenCheckedError issues.
-    // setTimeout(() => {
+    setTimeout(() => {
       this.appliedFilters = this.state.pipe(observableMap((state) => {
         return state.filters.filter((filter) => {
           return filter.value !== '' &&
@@ -63,7 +63,7 @@ export class SkyListFilterSummaryComponent implements AfterContentInit {
             filter.value !== filter.defaultValue;
         });
       }));
-    // });
+    });
   }
 
   public filterSummaryItemDismiss(index: number) {

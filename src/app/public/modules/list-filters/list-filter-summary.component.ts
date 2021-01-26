@@ -10,7 +10,6 @@ import {
 } from 'rxjs';
 
 import {
-  delay,
   map as observableMap,
   take
 } from 'rxjs/operators';
@@ -54,15 +53,17 @@ export class SkyListFilterSummaryComponent implements AfterContentInit {
   ) {}
 
   public ngAfterContentInit() {
-    // The delay here is to ensure we avoid any ExpressionChangedAfterItHasBeenCheckedError issues.
-    this.appliedFilters = this.state.pipe(delay(50), observableMap((state) => {
-      return state.filters.filter((filter) => {
-        return filter.value !== '' &&
-          filter.value !== undefined &&
-          filter.value !== false &&
-          filter.value !== filter.defaultValue;
-      });
-    }));
+    // The setTimeout here is to ensure we avoid any ExpressionChangedAfterItHasBeenCheckedError issues.
+    // setTimeout(() => {
+      this.appliedFilters = this.state.pipe(observableMap((state) => {
+        return state.filters.filter((filter) => {
+          return filter.value !== '' &&
+            filter.value !== undefined &&
+            filter.value !== false &&
+            filter.value !== filter.defaultValue;
+        });
+      }));
+    // });
   }
 
   public filterSummaryItemDismiss(index: number) {

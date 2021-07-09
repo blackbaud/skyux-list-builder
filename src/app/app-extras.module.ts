@@ -45,6 +45,10 @@ import {
 } from './docs/list-filters/demo/list-filters-docs-modal.component';
 
 import {
+  SkyListBuilderForRootCompatModule
+} from './public/modules/shared/list-builder-for-root-compat.module';
+
+import {
   SkyListFiltersModule,
   SkyListModule,
   SkyListPagingModule,
@@ -53,6 +57,9 @@ import {
 } from './public/public_api';
 
 @NgModule({
+  imports: [
+    SkyListBuilderForRootCompatModule
+  ],
   exports: [
     SkyAppLinkModule,
     SkyCheckboxModule,

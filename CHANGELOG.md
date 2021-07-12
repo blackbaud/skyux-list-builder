@@ -1,3 +1,9 @@
+# 5.0.0-beta.0 (2021-07-12)
+
+- Initial beta release.
+- Added support for `5.0.0-beta.*` versions of SKY UX component libraries. [#129](https://github.com/blackbaud/skyux-list-builder/pull/129)
+- Added support for `@angular/core@^12`. [#129](https://github.com/blackbaud/skyux-list-builder/pull/129)
+
 # 4.0.4 (2021-01-26)
 
 - Fixed the filter summary component to not error when an unapplied filter exists upon creation. [#126](https://github.com/blackbaud/skyux-list-builder/pull/126)

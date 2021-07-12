@@ -7,10 +7,6 @@ import {
 } from '@angular/common';
 
 import {
-  SkyMediaQueryModule
-} from '@skyux/core';
-
-import {
   SkyI18nModule
 } from '@skyux/i18n';
 
@@ -49,8 +45,7 @@ import {
     SkyDropdownModule,
     SkyI18nModule,
     SkyIconModule,
-    SkyListBuilderResourcesModule,
-    SkyMediaQueryModule
+    SkyListBuilderResourcesModule
   ],
   exports: [
     SkyListSecondaryActionsComponent,

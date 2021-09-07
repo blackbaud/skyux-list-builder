@@ -20,7 +20,7 @@ import {
 
 import {
   SkyListBuilderResourcesModule
-} from '../../shared/list-builder-resources.module';
+} from '../../shared/sky-list-builder-resources.module';
 
 import {
   SkyListSecondaryActionsComponent

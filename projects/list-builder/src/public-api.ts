@@ -77,3 +77,17 @@ export * from './modules/list/list-view.component';
 export * from './modules/list/list.component';
 export * from './modules/list-toolbar/list-secondary-actions/list-secondary-actions.component';
 export * from './modules/list-toolbar/list-toolbar.component';
+
+// Components and directives must be exported to support Angular's "partial" Ivy compiler.
+// Obscure names are used to indicate types are not part of the public API.
+export { SkyListFilterButtonComponent as λ1 } from './modules/list-filters/list-filter-button.component';
+export { SkyListFilterSummaryComponent as λ2 } from './modules/list-filters/list-filter-summary.component';
+export { SkyListFilterInlineItemComponent as λ3 } from './modules/list-filters/list-filter-inline-item.component';
+export { SkyListFilterInlineComponent as λ4 } from './modules/list-filters/list-filter-inline.component';
+export { SkyListPagingComponent as λ5 } from './modules/list-paging/list-paging.component';
+export { SkyListSecondaryActionComponent as λ6 } from './modules/list-toolbar/list-secondary-actions/list-secondary-action.component';
+export { SkyListSecondaryActionsComponent as λ7 } from './modules/list-toolbar/list-secondary-actions/list-secondary-actions.component';
+export { SkyListToolbarItemComponent as λ8 } from './modules/list-toolbar/list-toolbar-item.component';
+export { SkyListToolbarSortComponent as λ9 } from './modules/list-toolbar/list-toolbar-sort.component';
+export { SkyListToolbarViewActionsComponent as λ10 } from './modules/list-toolbar/list-toolbar-view-actions.component';
+export { SkyListToolbarSearchActionsComponent as λ11 } from './modules/list-toolbar/list-toolbar-search-actions.component';

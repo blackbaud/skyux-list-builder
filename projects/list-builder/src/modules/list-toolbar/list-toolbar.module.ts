@@ -92,8 +92,6 @@ import {
   exports: [
     SkyListToolbarComponent,
     SkyListToolbarItemComponent,
-    SkyListToolbarItemRendererComponent,
-    SkyListMultiselectToolbarComponent,
     SkyListToolbarSearchActionsComponent,
     SkyListToolbarSortComponent,
     SkyListToolbarViewActionsComponent

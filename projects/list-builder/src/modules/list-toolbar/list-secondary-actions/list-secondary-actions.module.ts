@@ -49,7 +49,6 @@ import {
   ],
   exports: [
     SkyListSecondaryActionsComponent,
-    SkyListSecondaryActionsHostComponent,
     SkyListSecondaryActionComponent
   ]
 })

@@ -27,8 +27,7 @@ import {
     SkyListFilterButtonComponent,
     SkyListFilterSummaryComponent,
     SkyListFilterInlineItemComponent,
-    SkyListFilterInlineComponent,
-    SkyListFilterInlineItemRendererComponent
+    SkyListFilterInlineComponent
   ]
 })
 export class SkyListFiltersModule { }

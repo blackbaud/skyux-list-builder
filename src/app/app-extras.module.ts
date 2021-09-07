@@ -17,6 +17,7 @@ import {
 } from '@skyux/forms';
 
 import {
+  SkyAlertModule,
   SkyIconModule
 } from '@skyux/indicators';
 
@@ -61,6 +62,7 @@ import {
     SkyListBuilderForRootCompatModule
   ],
   exports: [
+    SkyAlertModule,
     SkyAppLinkModule,
     SkyCheckboxModule,
     SkyDocsToolsModule,

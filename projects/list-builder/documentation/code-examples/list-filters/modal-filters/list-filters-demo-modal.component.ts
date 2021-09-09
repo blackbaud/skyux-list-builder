@@ -8,7 +8,7 @@ import {
 
 import {
   ListFilterModel
-} from '@skyux/list-builder';
+} from 'projects/list-builder/src/public-api';
 
 import {
   SkyModalInstance

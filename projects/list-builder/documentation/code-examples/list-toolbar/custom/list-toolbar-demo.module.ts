@@ -9,7 +9,7 @@ import {
 import {
   SkyListModule,
   SkyListToolbarModule
-} from '@skyux/list-builder';
+} from 'projects/list-builder/src/public-api';
 
 import {
   SkyListViewGridModule

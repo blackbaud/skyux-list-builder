@@ -24,7 +24,7 @@ import {
   SkyListModule,
   SkyListSecondaryActionsModule,
   SkyListToolbarModule
-} from '@skyux/list-builder';
+} from 'projects/list-builder/src/public-api';
 
 import {
   SkyListViewGridModule

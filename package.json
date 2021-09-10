@@ -33,6 +33,7 @@
     "@skyux/indicators": "^5.0.0-beta.4",
     "@skyux/inline-form": "^5.0.0-beta.1",
     "@skyux/layout": "^5.0.0-beta.6",
+    "@skyux/list-builder": "^5.0.0-beta.0",
     "@skyux/list-builder-common": "^5.0.0-beta.1",
     "@skyux/list-builder-view-checklist": "^5.0.0-beta.0",
     "@skyux/list-builder-view-grids": "^5.0.0-beta.0",

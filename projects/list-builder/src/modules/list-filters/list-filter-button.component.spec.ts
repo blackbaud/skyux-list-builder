@@ -28,6 +28,7 @@ import {
 import {
   SkyListFiltersModule
 } from './list-filters.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('List filter button', () => {
   let state: ListState,
@@ -45,7 +46,8 @@ describe('List filter button', () => {
       ],
       imports: [
         SkyListToolbarModule,
-        SkyListFiltersModule
+        SkyListFiltersModule,
+        NoopAnimationsModule
       ],
       providers: [
         { provide: ListState, useValue: state },

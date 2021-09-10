@@ -148,6 +148,7 @@ import {
 import {
   ListToolbarItemsLoadAction
 } from './state/toolbar/load.action';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('List Component', () => {
   describe('List Fixture', () => {
@@ -195,7 +196,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: items }
@@ -457,7 +459,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: items }
@@ -852,7 +855,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: items }
@@ -1031,7 +1035,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: items }
@@ -1092,7 +1097,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: items },
@@ -1201,7 +1207,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: null },
@@ -1254,7 +1261,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: null },
@@ -1330,7 +1338,8 @@ describe('List Component', () => {
             ListFixturesModule,
             SkyListModule,
             SkyListToolbarModule,
-            FormsModule
+            FormsModule,
+            NoopAnimationsModule
           ],
           providers: [
             { provide: 'items', useValue: items }

@@ -49,6 +49,7 @@ import {
 import {
   SkyListFilterInlineModel
 } from './list-filter-inline.model';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('List inline filters', () => {
 
@@ -70,7 +71,8 @@ describe('List inline filters', () => {
         SkyListToolbarModule,
         SkyListFiltersModule,
         FormsModule,
-        SkyCheckboxModule
+        SkyCheckboxModule,
+        NoopAnimationsModule
       ],
       providers: [
         { provide: ListState, useValue: state },

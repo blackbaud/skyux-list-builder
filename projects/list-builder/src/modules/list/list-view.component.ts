@@ -28,6 +28,7 @@ export abstract class ListViewComponent {
     this.state = state;
     this.viewName = defaultName;
 
+    /* istanbul ignore next */
     this.hasToolbar = this.state.pipe(
       observableMap(s => s.toolbar.exists)
     );

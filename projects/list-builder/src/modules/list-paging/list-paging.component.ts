@@ -37,6 +37,9 @@ import {
   ListPagingSetPageNumberAction
 } from '../list/state/paging/set-page-number.action';
 
+/* istanbul ignore next */
+const listPagingComponentRef = forwardRef(() => SkyListPagingComponent);
+
 /**
  * Displays a pagination control for a SKY UX-themed list of data.
  */
@@ -44,9 +47,7 @@ import {
   selector: 'sky-list-paging',
   templateUrl: './list-paging.component.html',
   providers: [
-    /* tslint:disable */
-    { provide: ListPagingComponent, useExisting: forwardRef(() => SkyListPagingComponent)}
-    /* tslint:enable */
+    { provide: ListPagingComponent, useExisting: listPagingComponentRef }
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })

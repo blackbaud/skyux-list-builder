@@ -10,27 +10,27 @@ import {
 
 describe('list-toolbar component', () => {
 
-  beforeEach(() => {
-    SkyHostBrowser.get('visual/list-toolbar');
-    SkyHostBrowser.setWindowBreakpoint('lg');
+  beforeEach(async () => {
+    await SkyHostBrowser.get('visual/list-toolbar');
+    await SkyHostBrowser.setWindowBreakpoint('lg');
   });
 
-  it('should display toolbar correctly', (done) => {
+  it('should display toolbar correctly', async (done) => {
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
       screenshotName: 'list-toolbar'
     });
   });
 
-  it('should display toolbar correctly (xs screen)', (done) => {
-    SkyHostBrowser.setWindowBreakpoint('xs');
+  it('should display toolbar correctly (xs screen)', async (done) => {
+    await SkyHostBrowser.setWindowBreakpoint('xs');
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
       screenshotName: 'list-toolbar-xs'
     });
   });
 
-  it('should display toolbar with the column chooser', (done) => {
-    element(
+  it('should display toolbar with the column chooser', async (done) => {
+    await element(
       by.css('#screenshot-list-toolbar .sky-list-secondary-actions .sky-dropdown-button')
     ).click();
 
@@ -39,9 +39,9 @@ describe('list-toolbar component', () => {
     });
   });
 
-  it('should display toolbar with the column chooser (xs screen)', (done) => {
-    SkyHostBrowser.setWindowBreakpoint('xs');
-    element(
+  it('should display toolbar with the column chooser (xs screen)', async (done) => {
+    await SkyHostBrowser.setWindowBreakpoint('xs');
+    await element(
       by.css('#screenshot-list-toolbar .sky-list-secondary-actions .sky-dropdown-button')
     ).click();
 
@@ -50,17 +50,17 @@ describe('list-toolbar component', () => {
     });
   });
 
-  it('should display inline filters correctly when opened', (done) => {
-    element(by.css('#screenshot-list-toolbar .sky-filter-btn')).click();
+  it('should display inline filters correctly when opened', async (done) => {
+    await element(by.css('#screenshot-list-toolbar .sky-filter-btn')).click();
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
       screenshotName: 'list-toolbar-with-inline-filters'
     });
   });
 
-  it('should display inline filters correctly when opened (xs screen)', (done) => {
-    SkyHostBrowser.setWindowBreakpoint('xs');
-    element(by.css('#screenshot-list-toolbar .sky-filter-btn')).click();
+  it('should display inline filters correctly when opened (xs screen)', async (done) => {
+    await SkyHostBrowser.setWindowBreakpoint('xs');
+    await element(by.css('#screenshot-list-toolbar .sky-filter-btn')).click();
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
       screenshotName: 'list-toolbar-with-inline-filters-xs'
@@ -73,23 +73,23 @@ describe('list-toolbar component', () => {
     });
   });
 
-  it('should display multiselect action bar (xs screen)', (done) => {
-    SkyHostBrowser.setWindowBreakpoint('xs');
+  it('should display multiselect action bar (xs screen)', async (done) => {
+    await SkyHostBrowser.setWindowBreakpoint('xs');
     expect('#screenshot-list-toolbar-with-multiselect').toMatchBaselineScreenshot(done, {
       screenshotName: 'list-toolbar-with-multiselect'
     });
   });
 
-  it('should display toolbar with type search', (done) => {
-    SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
+  it('should display toolbar with type search', async (done) => {
+    await SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
     expect('#screenshot-list-toolbar-search').toMatchBaselineScreenshot(done, {
       screenshotName: 'list-toolbar-type-search'
     });
   });
 
-  it('should display toolbar with type search (xs screen)', (done) => {
-    SkyHostBrowser.setWindowBreakpoint('xs');
-    SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
+  it('should display toolbar with type search (xs screen)', async (done) => {
+    await SkyHostBrowser.setWindowBreakpoint('xs');
+    await SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
     expect('#screenshot-list-toolbar-search').toMatchBaselineScreenshot(done, {
       screenshotName: 'list-toolbar-type-search-xs'
     });

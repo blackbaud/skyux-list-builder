@@ -137,6 +137,7 @@ export class SkyListInMemoryDataProvider extends ListDataProvider {
       }
 
       // Apply search.
+      /* istanbul ignore next */
       if (!dataChanged && !searchChanged && this.lastSearchResults !== undefined && !filtersChanged) {
         result = this.lastSearchResults;
       } else if (search && search.searchText !== undefined && search.searchText.length > 0) {

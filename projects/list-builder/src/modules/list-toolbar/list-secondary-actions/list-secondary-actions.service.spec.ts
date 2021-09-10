@@ -2,6 +2,7 @@ import {
   inject,
   TestBed
 } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SkyListSecondaryAction } from './list-secondary-action';
 
@@ -12,6 +13,9 @@ describe('List secondary actions service', () => {
     TestBed.configureTestingModule({
       providers: [
         SkyListSecondaryActionsService
+      ],
+      imports: [
+        NoopAnimationsModule
       ]
     });
   });

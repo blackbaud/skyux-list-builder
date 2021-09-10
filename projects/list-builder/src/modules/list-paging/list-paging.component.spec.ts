@@ -48,6 +48,7 @@ import {
 import {
   ListPagingSetPageNumberAction
 } from '../list/state/paging/set-page-number.action';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('List Paging Component', () => {
   let state: ListState,
@@ -64,7 +65,8 @@ describe('List Paging Component', () => {
         ListPagingTestComponent
       ],
       imports: [
-        SkyListPagingModule
+        SkyListPagingModule,
+        NoopAnimationsModule
       ],
       providers: [
         { provide: ListState, useValue: state },

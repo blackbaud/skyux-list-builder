@@ -131,6 +131,7 @@ export class ListStateDispatcher extends StateDispatcher<ListStateAction> {
     this.next(new ListSearchSetFunctionsAction(sortFunctions));
   }
 
+  /* istanbul ignore next */
   public searchSetFieldSelectors(fieldSelectors: Array<string>): void {
     this.next(new ListSearchSetFieldSelectorsAction(fieldSelectors));
   }

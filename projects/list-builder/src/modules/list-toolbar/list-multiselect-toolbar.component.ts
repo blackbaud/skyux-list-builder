@@ -208,6 +208,7 @@ export class SkyListMultiselectToolbarComponent implements OnInit, OnDestroy {
     for (let i = 0; i < next.selectedIdMap.size; i++) {
       const key = Array.from(next.selectedIdMap.keys())[i];
       const value = next.selectedIdMap.get(key);
+      /* istanbul ignore next */
       if (value !== prev.selectedIdMap.get(key)) {
         return false;
       }

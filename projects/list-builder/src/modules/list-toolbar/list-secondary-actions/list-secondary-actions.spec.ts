@@ -28,6 +28,7 @@ import {
 import {
   SkyListSecondaryActionsModule
 } from './list-secondary-actions.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('List Secondary Actions Component', () => {
   let state: ListState;
@@ -46,7 +47,8 @@ describe('List Secondary Actions Component', () => {
       ],
       imports: [
         SkyListToolbarModule,
-        SkyListSecondaryActionsModule
+        SkyListSecondaryActionsModule,
+        NoopAnimationsModule
       ],
       providers: [
         { provide: ListState, useValue: state },

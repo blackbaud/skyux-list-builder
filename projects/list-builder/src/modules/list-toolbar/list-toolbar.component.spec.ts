@@ -79,6 +79,7 @@ import {
 import {
   ListViewsSetActiveAction
 } from '../list/state/views/set-active.action';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('List Toolbar Component', () => {
   let state: ListState,
@@ -97,7 +98,8 @@ describe('List Toolbar Component', () => {
         ListToolbarTestComponent
       ],
       imports: [
-        SkyListToolbarModule
+        SkyListToolbarModule,
+        NoopAnimationsModule
       ],
       providers: [
         { provide: ListState, useValue: state },

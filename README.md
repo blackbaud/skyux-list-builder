@@ -1,5 +1,3 @@
-# @skyux/list-builder
+# @skyux/list-builder Workspace
 
-[![npm](https://img.shields.io/npm/v/@skyux/list-builder.svg)](https://www.npmjs.com/package/@skyux/list-builder)
-![SKY UX CI](https://github.com/blackbaud/skyux-list-builder/workflows/SKY%20UX%20CI/badge.svg)
-[![coverage](https://codecov.io/gh/blackbaud/skyux-list-builder/branch/master/graphs/badge.svg?branch=master)](https://codecov.io/gh/blackbaud/skyux-list-builder/branch/master)
+For information about `@skyux/list-builder` please visit the library's README file, located at `projects/list-builder/README.md`.

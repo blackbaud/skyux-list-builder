@@ -1,3 +1,7 @@
+# 5.0.0-beta.1 (2021-09-13)
+
+- Migrated to Angular CLI. [#134](https://github.com/blackbaud/skyux-list-builder/pull/134)
+
 # 5.0.0-beta.0 (2021-07-12)
 
 - Initial beta release.

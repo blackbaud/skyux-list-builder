@@ -35,7 +35,7 @@
     "@skyux/layout": "^5.0.0-beta.7",
     "@skyux/list-builder-common": "^5.0.0-beta.1",
     "@skyux/lists": "^5.0.0-beta.3",
-    "@skyux/lookup": "^5.0.0-beta.1",
+    "@skyux/lookup": "^5.0.0-beta.2",
     "@skyux/modals": "^5.0.0-beta.5",
     "@skyux/packages": "^5.0.0-beta.94",
     "@skyux/popovers": "^5.0.0-beta.2",

@@ -12,10 +12,6 @@ import {
 } from 'projects/list-builder/src/public-api';
 
 import {
-  SkyListViewGridModule
-} from '@skyux/list-builder-view-grids';
-
-import {
   ListPagingDemoComponent
 } from './list-paging-demo.component';
 
@@ -23,8 +19,7 @@ import {
   imports: [
     CommonModule,
     SkyListModule,
-    SkyListPagingModule,
-    SkyListViewGridModule
+    SkyListPagingModule
   ],
   declarations: [
     ListPagingDemoComponent

@@ -9,7 +9,6 @@ import { SkyDropdownModule } from '@skyux/popovers';
 import { SkyFilterModule } from '@skyux/lists';
 import { SkyIdModule } from '@skyux/core';
 import { SkyModalModule } from '@skyux/modals';
-import { SkyListViewGridModule } from '@skyux/list-builder-view-grids';
 import { SkyListSecondaryActionsModule, SkyListToolbarModule, SkyListFiltersModule, SkyListModule, SkyListPagingModule } from 'projects/list-builder/src/public-api';
 import { ListSecondaryActionsVisualComponent } from './list-secondary-actions/list-secondary-actions-visual.component';
 import { ListToolbarVisualComponent } from './list-toolbar/list-toolbar-visual.component';
@@ -40,7 +39,6 @@ import { ListViewTestComponent } from './list-toolbar/list-view-visual.component
     SkyListPagingModule,
     SkyListSecondaryActionsModule,
     SkyListToolbarModule,
-    SkyListViewGridModule,
     SkyRadioModule
   ]
 })

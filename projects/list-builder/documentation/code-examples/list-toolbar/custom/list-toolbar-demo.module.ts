@@ -12,10 +12,6 @@ import {
 } from 'projects/list-builder/src/public-api';
 
 import {
-  SkyListViewGridModule
-} from '@skyux/list-builder-view-grids';
-
-import {
   ListToolbarDemoComponent
 } from './list-toolbar-demo.component';
 
@@ -23,8 +19,7 @@ import {
   imports: [
     CommonModule,
     SkyListModule,
-    SkyListToolbarModule,
-    SkyListViewGridModule
+    SkyListToolbarModule
   ],
   declarations: [
     ListToolbarDemoComponent

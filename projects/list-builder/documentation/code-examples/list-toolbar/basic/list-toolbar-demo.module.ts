@@ -27,10 +27,6 @@ import {
 } from 'projects/list-builder/src/public-api';
 
 import {
-  SkyListViewGridModule
-} from '@skyux/list-builder-view-grids';
-
-import {
   SkyFilterModule
 } from '@skyux/lists';
 
@@ -53,7 +49,6 @@ import {
     SkyListModule,
     SkyListSecondaryActionsModule,
     SkyListToolbarModule,
-    SkyListViewGridModule,
     SkyRadioModule,
     ReactiveFormsModule
   ],

@@ -12,6 +12,9 @@
       "list-builder": [
         "dist/list-builder/list-builder",
         "dist/list-builder"
+      ],
+      "@skyux/list-builder": [
+        "projects/list-builder/src/public-api.ts"
       ]
     },
     "moduleResolution": "node",

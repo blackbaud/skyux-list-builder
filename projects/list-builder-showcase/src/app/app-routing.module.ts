@@ -7,20 +7,20 @@ import { VisualComponent } from './visual/visual.component';
 const routes: Routes = [
   {
     path: '',
-    component: VisualComponent
+    component: VisualComponent,
   },
   {
     path: 'visual/list-secondary-actions',
-    component: ListSecondaryActionsVisualComponent
+    component: ListSecondaryActionsVisualComponent,
   },
   {
     path: 'visual/list-toolbar',
-    component: ListToolbarVisualComponent
-  }
+    component: ListToolbarVisualComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

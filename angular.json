@@ -10,7 +10,7 @@
       "prefix": "sky",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@skyux-sdk/angular-builders:ng-packagr",
           "options": {
             "project": "projects/list-builder/ng-package.json"
           },
@@ -168,9 +168,7 @@
               "projects/list-builder-showcase/src/favicon.ico",
               "projects/list-builder-showcase/src/assets"
             ],
-            "styles": [
-              "projects/list-builder-showcase/src/styles.scss"
-            ],
+            "styles": ["projects/list-builder-showcase/src/styles.scss"],
             "scripts": []
           }
         },

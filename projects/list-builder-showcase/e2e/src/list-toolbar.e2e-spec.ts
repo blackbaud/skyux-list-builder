@@ -1,15 +1,8 @@
-import {
-  by,
-  element
-} from 'protractor';
+import { by, element } from 'protractor';
 
-import {
-  expect,
-  SkyHostBrowser
-} from '@skyux-sdk/e2e';
+import { expect, SkyHostBrowser } from '@skyux-sdk/e2e';
 
 describe('list-toolbar component', () => {
-
   beforeEach(async () => {
     await SkyHostBrowser.get('visual/list-toolbar');
     await SkyHostBrowser.setWindowBreakpoint('lg');
@@ -17,7 +10,7 @@ describe('list-toolbar component', () => {
 
   it('should display toolbar correctly', async (done) => {
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar'
+      screenshotName: 'list-toolbar',
     });
   });
 
@@ -25,28 +18,32 @@ describe('list-toolbar component', () => {
     await SkyHostBrowser.setWindowBreakpoint('xs');
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-xs'
+      screenshotName: 'list-toolbar-xs',
     });
   });
 
   it('should display toolbar with the column chooser', async (done) => {
     await element(
-      by.css('#screenshot-list-toolbar .sky-list-secondary-actions .sky-dropdown-button')
+      by.css(
+        '#screenshot-list-toolbar .sky-list-secondary-actions .sky-dropdown-button'
+      )
     ).click();
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-with-column-chooser'
+      screenshotName: 'list-toolbar-with-column-chooser',
     });
   });
 
   it('should display toolbar with the column chooser (xs screen)', async (done) => {
     await SkyHostBrowser.setWindowBreakpoint('xs');
     await element(
-      by.css('#screenshot-list-toolbar .sky-list-secondary-actions .sky-dropdown-button')
+      by.css(
+        '#screenshot-list-toolbar .sky-list-secondary-actions .sky-dropdown-button'
+      )
     ).click();
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-with-column-chooser-xs'
+      screenshotName: 'list-toolbar-with-column-chooser-xs',
     });
   });
 
@@ -54,7 +51,7 @@ describe('list-toolbar component', () => {
     await element(by.css('#screenshot-list-toolbar .sky-filter-btn')).click();
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-with-inline-filters'
+      screenshotName: 'list-toolbar-with-inline-filters',
     });
   });
 
@@ -63,27 +60,31 @@ describe('list-toolbar component', () => {
     await element(by.css('#screenshot-list-toolbar .sky-filter-btn')).click();
 
     expect('#screenshot-list-toolbar').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-with-inline-filters-xs'
+      screenshotName: 'list-toolbar-with-inline-filters-xs',
     });
   });
 
   it('should display multiselect action bar', (done) => {
-    expect('#screenshot-list-toolbar-with-multiselect').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-with-multiselect'
+    expect(
+      '#screenshot-list-toolbar-with-multiselect'
+    ).toMatchBaselineScreenshot(done, {
+      screenshotName: 'list-toolbar-with-multiselect',
     });
   });
 
   it('should display multiselect action bar (xs screen)', async (done) => {
     await SkyHostBrowser.setWindowBreakpoint('xs');
-    expect('#screenshot-list-toolbar-with-multiselect').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-with-multiselect'
+    expect(
+      '#screenshot-list-toolbar-with-multiselect'
+    ).toMatchBaselineScreenshot(done, {
+      screenshotName: 'list-toolbar-with-multiselect',
     });
   });
 
   it('should display toolbar with type search', async (done) => {
     await SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
     expect('#screenshot-list-toolbar-search').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-type-search'
+      screenshotName: 'list-toolbar-type-search',
     });
   });
 
@@ -91,7 +92,7 @@ describe('list-toolbar component', () => {
     await SkyHostBrowser.setWindowBreakpoint('xs');
     await SkyHostBrowser.scrollTo('#screenshot-list-toolbar-search');
     expect('#screenshot-list-toolbar-search').toMatchBaselineScreenshot(done, {
-      screenshotName: 'list-toolbar-type-search-xs'
+      screenshotName: 'list-toolbar-type-search-xs',
     });
   });
 });

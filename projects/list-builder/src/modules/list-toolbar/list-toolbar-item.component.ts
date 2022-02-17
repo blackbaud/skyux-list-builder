@@ -28,7 +28,7 @@ export class SkyListToolbarItemComponent {
   /**
    * Specifies the toolbar location of the item. The valid options are `left`,
    * `center`, and `right`.
-   * @default 'left'
+   * @default "left"
    */
   @Input() public location: string = 'left';
   @ContentChildren(TemplateRef) private templates: QueryList<TemplateRef<any>>;

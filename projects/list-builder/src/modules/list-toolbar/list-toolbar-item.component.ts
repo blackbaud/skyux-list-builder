@@ -26,8 +26,8 @@ export class SkyListToolbarItemComponent {
    */
   @Input() public index: number = -1;
   /**
-   * Specifies the toolbar location of the item. The valid options are `left`,
-   * `center`, and `right`.
+   * Specifies the toolbar location of the item. The valid options are `"left"`,
+   * `"center"`, and `"right"`.
    * @default "left"
    */
   @Input() public location: string = 'left';

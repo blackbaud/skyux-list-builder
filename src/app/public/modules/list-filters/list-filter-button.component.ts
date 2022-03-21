@@ -15,10 +15,10 @@ import {
 
 /**
  * Contains a filter button for the list toolbar. Place a
- * [`sky-filter-button`](https://developer.blackbaud.com/skyux/components/filter)
+ * [`sky-filter-button`](https://developer.blackbaud.com/skyux-v4/components/filter)
  * component inside this component to open a modal with filtering options.
  * To apply filter options, use the
- * [list component's](https://developer.blackbaud.com/skyux/components/list/overview#list-properties)
+ * [list component's](https://developer.blackbaud.com/skyux-v4/components/list/overview#list-properties)
  * `appliedFilters` property.
  */
 @Component({

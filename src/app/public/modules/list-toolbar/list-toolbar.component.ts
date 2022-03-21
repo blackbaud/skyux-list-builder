@@ -143,7 +143,7 @@ export class SkyListToolbarComponent implements OnInit, AfterContentInit, OnDest
 
   /**
    * Specifies placeholder text for the search bar that the list toolbar creates with
-   * a [search component](https://developer.blackbaud.com/skyux/components/search).
+   * a [search component](https://developer.blackbaud.com/skyux-v4/components/search).
    * @default 'Find in this list'
    */
   @Input()

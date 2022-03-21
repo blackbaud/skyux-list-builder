@@ -28,9 +28,9 @@ import {
 
 /**
  * Creates a filter summary based on the
- * [list component's](https://developer.blackbaud.com/skyux/components/list/overview#list-properties)
+ * [list component's](https://developer.blackbaud.com/skyux-v4/components/list/overview#list-properties)
  * `appliedFilters` property. Place this component within the
- * [`sky-list-toolbar`](https://developer.blackbaud.com/skyux/components/list/toolbar) component.
+ * [`sky-list-toolbar`](https://developer.blackbaud.com/skyux-v4/components/list/toolbar) component.
  */
 @Component({
   selector: 'sky-list-filter-summary',
